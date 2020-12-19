@@ -1,0 +1,40 @@
+.slider {
+    display: grid;
+
+    grid-template-columns: var(--label-width) calc(100% - var(--label-width));
+    align-items: center;
+
+    padding: 10px;
+
+    background-color: var(--input-background-color);
+
+    transition: background-color 0.15s;
+}
+
+.slider:hover {
+    background-color: var(--input-background-color-hover);
+}
+
+span {
+    font-family: sans-serif;
+    color: var(--text-color);
+}
+
+.container {
+    position: relative;
+
+    padding: 10px;
+
+    background-color: white;
+}
+
+.scrubber {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 3px;
+    height: 100%;
+
+    background: red;
+}
