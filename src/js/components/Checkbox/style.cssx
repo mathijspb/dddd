@@ -1,0 +1,65 @@
+.component {
+    display: grid;
+
+    grid-template-columns: var(--label-width) calc(100% - var(--label-width));
+    align-items: center;
+
+    padding: 10px;
+
+    background-color: var(--input-background-color);
+
+    transition: background-color 0.15s;
+}
+
+.component:hover {
+    background-color: var(--input-background-color-hover);
+}
+
+.label {
+    font-family: sans-serif;
+    color: var(--text-color);
+}
+
+.input-container {
+    position: relative;
+
+    width: var(--input-height);
+    height: var(--input-height);
+
+    background-color: white;
+}
+
+.checkbox {
+    appearance: none;
+
+    display: block;
+    position: relative;
+    
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+.checkbox:checked:after {
+    content: '';
+
+    display: block;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    width: 24px;
+    height: 24px;
+
+    margin: auto;
+
+    background: black;
+}
