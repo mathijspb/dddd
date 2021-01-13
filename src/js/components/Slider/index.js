@@ -15,11 +15,11 @@ export default class Slider extends Component {
         this._max = options.max;
         this._scrubberOffset = 0;
         this._onChangeCallback = options.onChange;
-        this._container = { x: 0, width: 0 };
+        this._inputContainer = { x: 0, width: 0 };
         this._scrubber = { width: 0 };
         this._mouseStartPosition = { x: 0, y: 0 };
         this._mousePosition = { x: 0, y: 0 };
-        this._progressWidth = null;
+        this._inputContainerWidth = null;
         this._isMouseDown = false;
         this._isShiftDown = false;
 
@@ -50,9 +50,8 @@ export default class Slider extends Component {
         this._scrubberMouseDownHandler = this._scrubberMouseDownHandler.bind(this);
         this._scrubberMouseMoveHandler = this._scrubberMouseMoveHandler.bind(this);
         this._scrubberMouseUpHandler = this._scrubberMouseUpHandler.bind(this);
-        this._containerMouseDownHandler = this._containerMouseDownHandler.bind(this);
-        this._containerDoubleClickHandler = this._containerDoubleClickHandler.bind(this);
-        this._windowClickHandler = this._windowClickHandler.bind(this);
+        this._inputContainerMouseDownHandler = this._inputContainerMouseDownHandler.bind(this);
+        this._inputContainerDoubleClickHandler = this._inputContainerDoubleClickHandler.bind(this);
         this._inputChangeHandler = this._inputChangeHandler.bind(this);
         this._inputBlurHandler = this._inputBlurHandler.bind(this);
         this._windowKeyDownHandler = this._windowKeyDownHandler.bind(this);
@@ -61,33 +60,31 @@ export default class Slider extends Component {
 
     _setupEventListeners() {
         this.$refs.scrubber.addEventListener('mousedown', this._scrubberMouseDownHandler);
-        this.$refs.container.addEventListener('mousedown', this._containerMouseDownHandler);
-        this.$refs.container.addEventListener('dblclick', this._containerDoubleClickHandler);
+        this.$refs.inputContainer.addEventListener('mousedown', this._inputContainerMouseDownHandler);
+        this.$refs.inputContainer.addEventListener('dblclick', this._inputContainerDoubleClickHandler);
         this.$refs.input.addEventListener('change', this._inputChangeHandler);
         this.$refs.input.addEventListener('blur', this._inputBlurHandler);
         window.addEventListener('mousemove', this._scrubberMouseMoveHandler);
         window.addEventListener('mouseup', this._scrubberMouseUpHandler);
-        window.addEventListener('click', this._windowClickHandler);
         window.addEventListener('keydown', this._windowKeyDownHandler);
         window.addEventListener('keyup', this._windowKeyUpHandler);
     }
 
     _removeEventListeners() {
         this.$refs.scrubber.removeEventListener('mousedown', this._scrubberMouseDownHandler);
-        this.$refs.container.removeEventListener('mousedown', this._containerMouseDownHandler);
-        this.$refs.container.removeEventListener('dblclick', this._containerDoubleClickHandler);
+        this.$refs.inputContainer.removeEventListener('mousedown', this._inputContainerMouseDownHandler);
+        this.$refs.inputContainer.removeEventListener('dblclick', this._inputContainerDoubleClickHandler);
         this.$refs.input.removeEventListener('change', this._inputChangeHandler);
         this.$refs.input.removeEventListener('blur', this._inputBlurHandler);
         window.removeEventListener('mousemove', this._scrubberMouseMoveHandler);
         window.removeEventListener('mouseup', this._scrubberMouseUpHandler);
-        window.removeEventListener('click', this._windowClickHandler);
         window.removeEventListener('keydown', this._windowKeyDownHandler);
         window.removeEventListener('keyup', this._windowKeyUpHandler);
     }
 
     _updateValue(value) {
         this._value = Math.max(Math.min(value, this._max), this._min);
-        this._translateScrubber(this._value);
+        this._scaleScrubber(this._value);
         this._updateInputValue(this._value);
         this._triggerOnChangeCallback(this._value);
         this._object[this._property] = this._value;
@@ -100,23 +97,22 @@ export default class Slider extends Component {
     }
 
     _calcValue(mouseX) {
+        // TODO: Add modifier to constants
         const modifier = this._isShiftDown ? 0.3 : 1;
         const delta = (mouseX - this._mouseStartPosition.x) * modifier;
-        const x = this._mouseStartPosition.x - this._container.x + delta - this._scrubberOffset;
-        const value = x / this._progressWidth;
+        const x = this._mouseStartPosition.x - this._inputContainer.x + delta;
+        const value = x / this._inputContainerWidth;
         return value;
     }
 
     _getScrubberOffset(mouseX) {
-        const position = this._progressWidth * this._value;
-        const offset = mouseX - (this._container.x + position);
+        const position = this._inputContainerWidth * this._value;
+        const offset = mouseX - (this._inputContainer.x + position);
         return offset;
-    }   
+    }
 
-    // TODO: Translate on tick
-    _translateScrubber(value) {
-        const x = this._progressWidth * value;
-        this.$refs.scrubber.style.transform = `translateX(${x}px)`;
+    _scaleScrubber(value) {
+        this.$refs.scrubber.style.transform = `scaleX(${value})`;
     }
 
     _updateInputValue(value) {
@@ -128,15 +124,15 @@ export default class Slider extends Component {
      * Resize
      */
     _resize() {
-        this._container = this._getContainerData();
+        this._inputContainer = this._getContainerData();
         this._scrubber = this._getScrubberData();
-        this._progressWidth = this._container.width - this._scrubber.width;
-        this._translateScrubber(this._value);
+        this._inputContainerWidth = this._inputContainer.width;
+        this._scaleScrubber(this._value);
     }
 
     _getContainerData() {
-        const bcr = this.$refs.container.getBoundingClientRect();
-        const x = bcr.left; 
+        const bcr = this.$refs.inputContainer.getBoundingClientRect();
+        const x = bcr.left;
         const width = bcr.width;
         return { x, width };
     }
@@ -145,16 +141,6 @@ export default class Slider extends Component {
         const bcr = this.$refs.scrubber.getBoundingClientRect();
         const width = bcr.width;
         return { width };
-    }
-
-    _hideScrubber() {
-        this.$refs.scrubber.style.opacity = 0;
-        this.$refs.scrubber.style.visibility = 'hidden';
-    }
-
-    _showScrubber() {
-        this.$refs.scrubber.style.opacity = 1;
-        this.$refs.scrubber.style.visibility = 'visible';
     }
 
     _selectInput() {
@@ -182,13 +168,13 @@ export default class Slider extends Component {
             this._updateValue(value);
         }
     }
-    
+
     _scrubberMouseUpHandler(e) {
         this._isMouseDown = false;
         clearTimeout(this._mouseDownClickTimeout);
     }
 
-    _containerMouseDownHandler(e) {
+    _inputContainerMouseDownHandler(e) {
         if (this._isMouseDown || this._isInputSelected) return;
         clearTimeout(this._mouseDownClickTimeout);
         this._mouseStartPosition.x = e.clientX;
@@ -201,32 +187,23 @@ export default class Slider extends Component {
         }, 150);
     }
 
-    _containerDoubleClickHandler(e) {
+    _inputContainerDoubleClickHandler(e) {
         clearTimeout(this._mouseDownClickTimeout);
-        this._hideScrubber();
         this._selectInput();
-    }
-
-    _windowClickHandler(e) {
-        if (e.target !== this) {
-            // this._showScrubber();
-        }
     }
 
     _inputChangeHandler(e) {
         const value = parseFloat(this.$refs.input.value);
         this._updateValue(value);
         this._deselectInput();
-        this._showScrubber();
     }
 
     _inputBlurHandler() {
         this._isInputSelected = false;
-        this._showScrubber();
     }
 
     _windowKeyDownHandler(e) {
-        switch(e.keyCode) {
+        switch (e.keyCode) {
             case 16:
                 if (!this._isShiftDown) {
                     this._isShiftDown = true;

@@ -3,26 +3,20 @@
 
     grid-template-columns: var(--label-width) calc(100% - var(--label-width));
     align-items: start;
-
-    padding: 10px;
-
-    background-color: var(--input-background-color);
-
-    transition: background-color 0.15s;
-}
-
-.component:hover,
-.component.drop-area {
-    background-color: var(--input-background-color-hover);
 }
 
 .label {
-    display: block;
+    height: var(--input-height);
+    overflow: hidden;
 
-    margin-bottom: 10px;
-    
-    font-family: sans-serif;
-    color: var(--text-color);
+    padding: var(--label-padding);
+
+    font-size: var(--label-font-size);
+    font-weight: var(--label-font-weight);
+    line-height: var(--input-height);
+    color: var(--label-color);
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .image-container {
@@ -33,7 +27,16 @@
 
     overflow: hidden;
 
-    background-color: grey;
+    background-color: var(--input-background-color);
+
+    border-radius: var(--input-border-radius);
+
+    transition: var(--input-background-color-transition);
+}
+
+.image-container:hover,
+.image-container.drop-area {
+    background-color: var(--input-background-color-hover);
 }
 
 .image-container img {

@@ -12,21 +12,41 @@
     --panel-background-color: #1B1B1B;
     --panel-spacing: 25px;
 
-    // Colors
-    --color-white: #ffffff;
+    // Groups
 
-    --text-color: black;
-    
-    --input-background-color: #c4c4c4;
-    --input-background-color-hover: #a3a3a3;
-    --input-height: 34px;
+    // Components
+    --component-height: 34px;
 
+    // Label
     --label-width: 20%;
+    --label-padding: 0 20px 0 0;
+    --label-color: rgba(255, 255, 255, 0.75);
+    --label-font-size: 13px;
+    --label-font-weight: 500;
+    
+    // Input
+    --input-background-color: #242424;
+    --input-background-color-hover: #383838;
+    --input-background-color-transition: background-color 0.35s ease-out;
+    --input-highlight-color: rgba(77, 83, 217, 0.64);
+    --input-text-color: rgba(255, 255, 255, 0.75);
+    --input-border-radius: 10px;
+    --input-padding: 16px;
+    --input-height: 40px;
 }
 
 body {
-    background-color: var(--background-color);
     margin: 0;
+
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+
+    background-color: var(--background-color);
+}
+
+button, input {
+    font-family: inherit;
 }
 
 .output {

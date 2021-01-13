@@ -79,11 +79,11 @@ export default class Image extends Component {
     }
 
     _showDropArea() {
-        this.$el.classList.add(CLASS_DROP_AREA);
+        this.$refs.imageContainer.classList.add(CLASS_DROP_AREA);
     }
 
     _hideDropArea() {
-        this.$el.classList.remove(CLASS_DROP_AREA);
+        this.$refs.imageContainer.classList.remove(CLASS_DROP_AREA);
     }
 
     /**

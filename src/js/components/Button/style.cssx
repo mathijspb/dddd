@@ -1,0 +1,27 @@
+.component {
+    transition: background-color 0.15s;
+}
+
+.button {
+    width: calc(100% - var(--label-width));
+    height: var(--input-height);
+
+    padding: 0 var(--input-padding);
+    margin-left: var(--label-width);
+
+    color: var(--input-text-color);
+    
+    background-color: var(--input-highlight-color);
+
+    border: 0;
+    border-radius: var(--input-border-radius);
+    outline: none;
+
+    transition: var(--input-background-color-transition);
+
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: rgba(77, 83, 217, 1);
+}

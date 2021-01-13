@@ -3,11 +3,11 @@ import Components from './Components';
 
 // Components
 import Slider from './components/Slider';
-import Input from './components/Input';
+import Text from './components/Text';
 import Image from './components/Image';
 import Dropdown from './components/Dropdown';
 import Checkbox from './components/Checkbox';
-// import Button from './components/Button';
+import Button from './components/Button';
 
 export default class dddd {
     constructor() {
@@ -25,7 +25,8 @@ export default class dddd {
     }
 
     addButton(options) {
-        // this._components
+        options.type = Button;
+        this._components.create(null, null, options);
     }
 
     createLayer(label) {
@@ -33,4 +34,4 @@ export default class dddd {
     }
 }
 
-export { Input, Slider, Image, Dropdown, Checkbox };
+export { Text, Slider, Image, Dropdown, Checkbox, Button };
