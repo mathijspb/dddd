@@ -24,4 +24,5 @@
 
 .button:hover {
     background-color: rgba(77, 83, 217, 1);
+    background-color: var(--input-highlight-color-hover);
 }

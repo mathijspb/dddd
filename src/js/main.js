@@ -1,4 +1,4 @@
-import Dddd, { Text, Slider, Image, Dropdown, Checkbox } from './dddd';
+import Dddd, { Text, Slider, Image, Dropdown, Checkbox, Color } from './dddd';
 import { Scene, PerspectiveCamera, WebGLRenderer, BoxGeometry, MeshBasicMaterial, Mesh, Texture, SphereGeometry, TorusGeometry, BackSide, FrontSide } from 'three';
 
 class Main {
@@ -9,6 +9,7 @@ class Main {
             image: null,
             shape: 'box',
             backside: false,
+            color: '#d4d4d4'
         };
 
         // const output = document.querySelector('.output');
@@ -43,6 +44,12 @@ class Main {
         dddd.createLayer('Layer #1');
         dddd.createLayer('Layer #2');
         dddd.createLayer('Layer #3');
+
+        dddd.createGroup('Shape #1', {
+            container: 'Layer #1'
+        });
+
+        const group = dddd.createGroup('Shape #2');
 
         dddd.add(settings, 'shape', {
             container: 'Layer #1',
@@ -102,6 +109,11 @@ class Main {
             //     cube.material.map = texture;
             //     cube.material.needsUpdate = true;
             // },
+        });
+
+        dddd.add(settings, 'color', {
+            container: 'Layer #1',
+            type: Color,
         });
 
         dddd.addButton({
