@@ -1,0 +1,18 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.layers {
+    position: relative;
+
+    width: 100%;
+
+    padding: var(--panel-spacing) var(--panel-spacing) 0 var(--panel-spacing);
+
+    -webkit-font-smoothing: antialiased;
+    font-family: var(--font);
+    font-weight: 300;
+    font-size: 13px;
+}

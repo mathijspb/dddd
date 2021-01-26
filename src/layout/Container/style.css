@@ -1,0 +1,45 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.dddd {
+    /* Layout */
+    --font: 'Arial', sans-serif;
+    --background-color: #161616;
+
+    /* Panels */
+    --panel-background-color: #1B1B1B;
+    --panel-spacing: 15px;
+
+    /* Groups */
+    --group-width: 400px;
+    --group-padding: 30px;
+    --group-border-radius: 25px;
+
+    /* Components */
+    --component-row-gap: 7px;
+
+    /* Label */
+    --label-width: 30%;
+    --label-padding: 0 20px 0 0;
+    --label-color: rgba(255, 255, 255, 0.75);
+    --label-font-size: 14px;
+    --label-font-weight: 400;
+    
+    /* Input */
+    --input-background-color: rgba(255, 255, 255, 0.03);
+    --input-background-color-hover: rgba(255, 255, 255, 0.08);
+    --input-background-color-transition: background-color 0.35s ease-out;
+    --input-highlight-color: rgba(77, 83, 217, 0.64);
+    --input-highlight-color-hover: rgba(77, 83, 217, 1);
+    --input-text-color: rgba(255, 255, 255, 0.75);
+    --input-font-size: 14px;
+    --input-font-weight: 300;
+    --input-border-radius: 10px;
+    --input-padding: 16px;
+    --input-height: 40px;
+
+    background: var(--background-color);
+}

@@ -1,0 +1,69 @@
+.component {
+    display: grid;
+
+    grid-template-columns: var(--label-width) calc(100% - var(--label-width));
+    align-items: center;
+}
+
+.label {
+    overflow: hidden;
+
+    padding: var(--label-padding);
+
+    font-size: var(--label-font-size);
+    font-weight: var(--label-font-weight);
+    color: var(--label-color);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.input-container {
+    position: relative;
+
+    height: var(--input-height);
+    overflow: hidden;
+
+    background-color: var(--input-background-color);
+
+    border-radius: var(--input-border-radius);
+
+    user-select: none;
+
+    transition: var(--input-background-color-transition);
+}
+
+.input-container:hover {
+    background-color: var(--input-background-color-hover);
+}
+
+.select {
+    width: 100%;
+    height: 100%;
+
+    border: 0;
+    outline: 0;
+
+    padding: 0 var(--input-padding);
+
+    background: transparent;
+
+    font-family: var(--font);
+    font-size: var(--input-font-size);
+    font-weight: var(--input-font-weight);
+    color: var(--input-text-color);
+
+    appearance: none;
+}
+
+.select option {
+    color: black;
+}
+
+.arrow {
+    position: absolute;
+    top: 0;
+    right: var(--input-padding);
+    bottom: 0;
+
+    margin: auto 0;
+}

@@ -1,0 +1,17 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.layer {
+    display: none;
+
+    position: relative;
+
+    width: 100%;
+}
+
+.layer.active {
+    display: block;
+}

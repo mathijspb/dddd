@@ -1,0 +1,61 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.component {
+    display: grid;
+
+    grid-template-columns: var(--label-width) calc(100% - var(--label-width));
+    align-items: start;
+
+    transition: background-color 0.15s;
+}
+
+.label {
+    height: var(--input-height);
+    overflow: hidden;
+
+    padding: var(--label-padding);
+
+    font-size: var(--label-font-size);
+    line-height: var(--input-height);
+    font-weight: var(--label-font-weight);
+    color: var(--label-color);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.input-container {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--component-row-gap);
+}
+
+.input {
+    width: 100%;
+    height: var(--input-height);
+
+    padding: 0 var(--input-padding);
+
+    font-family: var(--font);
+    font-size: var(--input-font-size);
+    font-weight: var(--input-font-weight);
+    color: var(--input-text-color);
+    
+    background-color: var(--input-background-color);
+
+    border: 0;
+    border-radius: var(--input-border-radius);
+    outline: none;
+
+    transition: var(--input-background-color-transition);
+
+    cursor: ew-resize;
+}
+
+.input:hover {
+    background-color: var(--input-background-color-hover);
+}

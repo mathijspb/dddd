@@ -1,0 +1,35 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.group {
+    /* width: var(--group-width); */
+
+    padding: calc(var(--group-padding) - 3px) var(--group-padding) var(--group-padding);
+    margin: 0 var(--panel-spacing) var(--panel-spacing) 0;
+
+    background-color: var(--panel-background-color);
+    
+    border-radius: var(--group-border-radius);
+
+    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);
+}
+
+.label {
+    display: block;
+
+    margin-bottom: 20px;
+
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    letter-spacing: 0.025em;
+}
+
+.content {
+    display: grid;
+
+    row-gap: var(--component-row-gap);
+}
