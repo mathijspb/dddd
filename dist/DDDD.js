@@ -1394,6 +1394,10 @@
 	        return this.$root.add(object, property, options);
 	    }
 
+	    addButton(options) {
+	        return this.$root.addButton(options);
+	    }
+
 	    /**
 	     * Private
 	     */
