@@ -1,51 +1,57 @@
-// Misc
+// Layout
 import Layout from './Layout';
-import Components from './Components';
-
 import LayoutModel from './LayoutModel';
-import ComponentModel from './ComponentModel';
 
 export default class DDDD {
-    constructor({ onChange } = {}) {
-        this._layout = new Layout();
-        this._components = new Components({
-            layout: this._layout,
-        });
-
+    constructor({ devtools, onChange } = {}) {
+        // Props
+        this._isDevtools = devtools;
         this._onChangeCallback = onChange;
 
         // Setup
+        this._layout = new Layout({ root: this });
         this._bindHandlers();
         this._setupEventListeners();
     }
 
     destroy() {
         this._layout.destroy();
+        this._removeEventListeners();
+    }
+
+    /**
+     * Getters & Setters
+     */
+    get isDevtools() {
+        return this._isDevtools;
+    }
+
+    get layout() {
+        return this._layout;
     }
 
     /**
      * Public
      */
     add(object, property, options) {
-        const model = new ComponentModel({ object, property, options });
-        return this._components.create(model);
+        return this._layout.createComponent({ object, property, options });
     }
 
+    // TODO: Fix
     remove(component) {
-        this._components.remove(component);
+        // this._components.remove(component);
     }
 
     addButton(options) {
-        const model = new ComponentModel({ options, type: 'button' });
-        return this._components.create(model);
+        return this._layout.createComponent({ options, type: 'button' });
     }
 
     createLayer(label) {
-        this._layout.createLayer(label);
+        return this._layout.createLayer(label);
     }
 
     createGroup(label, options) {
-        this._layout.createGroup(label, options);
+        return this._layout.createGroup(label, options);
     }
 
     createLayoutFromModel(model, onCompleteCallback) {
@@ -61,20 +67,23 @@ export default class DDDD {
 
         const components = model.components;
         for (const modelData of components) {
-            const model = new ComponentModel({
+            this._layout.createComponent({
                 object: modelData.object,
                 property: modelData.property,
                 options: modelData.options,
                 id: modelData.id,
                 type: modelData.type,
-                onChangeCallback: this._onChangeCallback
+                onChangeCallback: this._onChangeCallback,
             });
-            this._components.create(model)
         }
 
         if (typeof onCompleteCallback === 'function') {
             onCompleteCallback();
         }
+    }
+
+    isLayoutSidebar() {
+        return !this._isDevtools;
     }
 
     /**
@@ -98,8 +107,8 @@ export default class DDDD {
             source: 'dddd-page',
             payload: {
                 action: 'setup',
-                layoutModel
-            }
+                layoutModel,
+            },
         });
     }
 
@@ -109,20 +118,29 @@ export default class DDDD {
     _messageHandler(e) {
         const source = e.data.source;
         const payload = e.data.payload;
+
         if (source === 'dddd-devtools-proxy' && payload) {
             switch (payload.action) {
-                case 'init': {
+                case 'init':
                     this._sendLayoutModel();
                     break;
-                }
-                case 'setup-complete': {
+                case 'setup-complete':
                     this._layout.remove();
                     break;
-                }
-                case 'change': {
-                    this._components.update(payload.modelData);
+                case 'change':
+                    this._layout.components.update(payload.modelData);
                     break;
-                }
+            }
+        }
+
+        if (this._isDevtools && source === 'dddd-page' && payload) {
+            switch (payload.action) {
+                case 'update-objects':
+                    if (payload.models[0]) {
+                        // console.log(payload.models[0].value);
+                    }
+                    // this._layout.components.updateObjects(payload.models);
+                    break;
             }
         }
     }

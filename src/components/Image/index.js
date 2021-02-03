@@ -11,8 +11,8 @@ import template from './template.html';
 const CLASS_DROP_AREA = 'drop-area';
 
 export default class ImageComponent extends Component {
-    constructor(model) {
-        super({ style, template, model });
+    constructor(root, model) {
+        super({ root, style, template, model });
 
         // Data
         this._previewImage = null;
@@ -56,7 +56,7 @@ export default class ImageComponent extends Component {
         this.$el.removeEventListener('dragover', this._dragOverHandler);
         this.$el.removeEventListener('dragleave', this._dragLeaveHandler);
     }
-    
+
     _handleFile(file) {
         const reader = new FileReader();
         reader.onloadend = this._fileLoadedHandler;

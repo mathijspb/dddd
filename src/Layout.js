@@ -2,17 +2,24 @@ import Container from './layout/Container/index';
 import Navigation from './layout/Navigation/index';
 import Layers from './layout/Layers/index';
 import Group from './layout/Group/index';
+import Components from './Components';
 
 import LayoutModel from './LayoutModel';
-window.LayoutModel = LayoutModel;
+import ComponentModel from './ComponentModel';
 
 export default class Layout {
-    constructor() {
+    constructor({ root }) {
+        // Props
+        this._root = root;
+
         this._container = this._createContainer();
         this._navigation = this._createNavigation();
         this._layers = this._createLayers();
-        this._groups = {};
+        this._components = this._createComponents();
 
+        this._isVisible = true;
+
+        this._groups = {};
         this._elements = [];
 
         this._bindHandlers();
@@ -21,9 +28,16 @@ export default class Layout {
 
     destroy() {
         // TODO: Quick and dirty
-        document.body.removeChild(this._container)
-        
+        document.body.removeChild(this._container);
+
         this._removeEventListeners();
+    }
+
+    /**
+     * Getters & Setters
+     */
+    get components() {
+        return this._components;
     }
 
     /**
@@ -31,19 +45,26 @@ export default class Layout {
      */
     createLayer(label) {
         this._navigation.add(label);
-        this._layers.add(label);
+        const layer = this._layers.add(label);
         this._layers.resize();
         LayoutModel.addLayer(label);
+        return layer;
     }
 
-    createGroup(label, options) {
-        const group = new Group({ label });
+    createGroup(label, options = {}) {
+        const group = new Group({ root: this._root, layout: this, label });
         const container = this._getGroupContainer(label, options.container);
         container.appendChild(group);
         this._groups[label] = group;
         this._layers.resize();
         LayoutModel.addGroup(label, options);
         return group;
+    }
+
+    createComponent({ object, property, options, id, type, onChangeCallback }) {
+        const model = new ComponentModel({ root: this._root, object, property, options, id, type, onChangeCallback });
+        const component = this._components.create(model);
+        return component;
     }
 
     getLayer(label) {
@@ -55,15 +76,27 @@ export default class Layout {
         if (layer) return layer;
 
         const group = this._groups[label];
-        // TODO: Refactor
-        if (group) return group._contentElement;
+        if (group) return group.content;
     }
 
     remove() {
-        document.body.removeChild(this._container)
+        document.body.removeChild(this._container);
     }
 
     resize() {
+        this._layers.resize();
+    }
+
+    toggleVisibility() {
+        if (this._isVisible) {
+            this._layers.hide();
+            this._navigation.hide();
+            this._isVisible = false;
+        } else {
+            this._layers.show();
+            this._navigation.show();
+            this._isVisible = true;
+        }
         this._layers.resize();
     }
 
@@ -83,39 +116,52 @@ export default class Layout {
     }
 
     _createContainer() {
-        const container = new Container();
+        const container = new Container({
+            root: this._root,
+        });
         document.body.appendChild(container);
         return container;
     }
 
     _createNavigation() {
-        const navigation = new Navigation();
-        this._container.element.appendChild(navigation);
+        const navigation = new Navigation({
+            root: this._root,
+        });
+        this._container.content.appendChild(navigation);
         return navigation;
     }
 
     _createLayers() {
-        const layers = new Layers();
-        this._container.element.appendChild(layers);
+        const layers = new Layers({
+            root: this._root,
+        });
+        this._container.content.appendChild(layers);
         return layers;
     }
 
-    _getGroupContainer(label, containerLabel) {
-        let container;
-        if (containerLabel) {
-            container = this._layers.get(containerLabel);
-            if (!container){
-                throw new Error(`Layer '${containerLabel}' not found`);
+    _createComponents() {
+        const componenents = new Components({
+            root: this._root,
+            layout: this,
+        });
+        return componenents;
+    }
+
+    _getGroupContainer(label, container) {
+        let groupContainer;
+        if (container) {
+            groupContainer = this._layers.get(container);
+            if (!groupContainer) {
+                throw new Error(`Layer '${container}' not found`);
             }
         } else {
             if (this._layers.isEmpty()) {
-                container = this._layers.add();
+                groupContainer = this._layers.add();
             } else {
                 throw new Error(`No 'container' defined for group '${label}'`);
             }
-            
         }
-        return container;
+        return groupContainer;
     }
 
     /**

@@ -1,26 +1,37 @@
+// Base class
+import LayoutElement from '../../LayoutElement';
+
 // Style
-import style from './style.css';
+import styleSidebar from './style-sidebar.css';
+import styleDevtools from './style-devtools.css';
 
 // Template
-import template from './template.html';
+import templateSidebar from './template-sidebar.html';
+import templateDevtools from './template-devtools.html';
 
+// Constants
 const NAVIGATION_BUTTON_CLASS = 'navigation-button';
 const ACTIVE_CLASS = 'active';
 
-export default class Navigation extends HTMLElement {
-    constructor() {
-        super();
-
-        // Attach
-        this.attachShadow({ mode: 'open' });
+export default class Navigation extends LayoutElement {
+    constructor({ root }) {
+        super({
+            root,
+            style: {
+                styleSidebar,
+                styleDevtools,
+            },
+            template: {
+                templateSidebar,
+                templateDevtools,
+            },
+        });
 
         // Data
         this._activeIndex = 0;
         this._elements = [];
 
         // Setup
-        this._element = this._addTemplate(template);
-        this._addStyle(style);
         this._bindHandlers();
         this._setupEventListeners();
     }
@@ -37,18 +48,34 @@ export default class Navigation extends HTMLElement {
             this._show();
         }
 
-        const button = document.createElement('button');
-        button.classList.add(NAVIGATION_BUTTON_CLASS);
-        if (this._element.children.length === this._activeIndex) {
-            button.classList.add(ACTIVE_CLASS);
+        if (this.$root.isLayoutSidebar()) {
+            const option = document.createElement('option');
+            option.innerText = label;
+            option.value = this._elements.length;
+            this._elements.push(option);
+            this.$refs.select.appendChild(option);
+        } else {
+            const button = document.createElement('button');
+            button.classList.add(NAVIGATION_BUTTON_CLASS);
+            if (this.$el.children.length === this._activeIndex) {
+                button.classList.add(ACTIVE_CLASS);
+            }
+            button.innerText = label;
+
+            const li = document.createElement('li');
+            li.appendChild(button);
+
+            this._elements.push(li);
+            this.$el.appendChild(li);
         }
-        button.innerText = label;
+    }
 
-        const li = document.createElement('li');
-        li.appendChild(button);
+    show() {
+        this.$refs.selectContainer.style.display = 'block';
+    }
 
-        this._elements.push(li);
-        this._element.appendChild(li);
+    hide() {
+        this.$refs.selectContainer.style.display = 'none';
     }
 
     /**
@@ -56,49 +83,43 @@ export default class Navigation extends HTMLElement {
      */
     _bindHandlers() {
         this._clickHandler = this._clickHandler.bind(this);
+        this._selectChangeHandler = this._selectChangeHandler.bind(this);
+        this._clickButtonToggle = this._clickButtonToggle.bind(this);
     }
 
     _setupEventListeners() {
-        this._element.addEventListener('click', this._clickHandler);
+        this.$el.addEventListener('click', this._clickHandler);
+        if (this.$refs.select) this.$refs.select.addEventListener('change', this._selectChangeHandler);
+        if (this.$refs.buttonToggle) this.$refs.buttonToggle.addEventListener('click', this._clickButtonToggle);
     }
 
     _removeEventListeners() {
-        this._element.removeEventListener('click', this._clickHandler);
-    }
-
-    _addTemplate(template) {
-        this.shadowRoot.innerHTML = template;
-        return this.shadowRoot.firstChild;
-    }
-
-    _addStyle(style) {
-        const element = document.createElement('style');
-        const node = document.createTextNode(style);
-        element.appendChild(node);
-        this.shadowRoot.appendChild(element);
+        this.$el.removeEventListener('click', this._clickHandler);
+        if (this.$refs.select) this.$refs.select.removeEventListener('change', this._selectChangeHandler);
+        if (this.$refs.buttonToggle) this.$refs.buttonToggle.removeEventListener('click', this._clickButtonToggle);
     }
 
     _show() {
-        this._element.style.display = 'block';
+        this.$el.style.display = 'grid';
     }
 
     _getNavigationButtonIndex(element) {
-        return Array.prototype.indexOf.call(this._element.children, element);
+        return Array.prototype.indexOf.call(this.$el.children, element);
     }
 
     _switch(index) {
-        this._element.children[this._activeIndex].firstChild.classList.remove(ACTIVE_CLASS);
+        this.$el.children[this._activeIndex].firstChild.classList.remove(ACTIVE_CLASS);
         this._activeIndex = index;
-        this._element.children[this._activeIndex].firstChild.classList.add(ACTIVE_CLASS);
+        this.$el.children[this._activeIndex].firstChild.classList.add(ACTIVE_CLASS);
         this._triggerSwitchEvent(this._activeIndex);
     }
 
     _triggerSwitchEvent(index) {
         this._activeIndex = index;
         const event = new CustomEvent('switch', {
-            detail: { 
-                index: this._activeIndex
-            }
+            detail: {
+                index: this._activeIndex,
+            },
         });
         this.dispatchEvent(event);
     }
@@ -111,6 +132,15 @@ export default class Navigation extends HTMLElement {
             const index = this._getNavigationButtonIndex(e.target.parentElement);
             this._switch(index);
         }
+    }
+
+    _selectChangeHandler() {
+        const index = parseInt(this.$refs.select.value);
+        this._triggerSwitchEvent(index);
+    }
+
+    _clickButtonToggle() {
+        this.$root.layout.toggleVisibility();
     }
 }
 

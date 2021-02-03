@@ -4,20 +4,27 @@ import style from './style.css';
 import template from './template.html';
 
 export default class Text extends Component {
-    constructor(model) {
-        super({ style, template, model });
+    constructor(root, model) {
+        super({ root, style, template, model });
 
         // Setup
         this._bindHandlers();
     }
 
     connected() {
-        this._setStartValue();
+        this._updateInputValue(this.model.value);
         this._setupEventListeners();
     }
 
     destroyed() {
         this._removeEventListeners();
+    }
+
+    /**
+     * Hooks
+     */
+    onListen() {
+        this._updateInputValue(this.model.value);
     }
 
     /**
@@ -35,8 +42,8 @@ export default class Text extends Component {
         this.$refs.input.removeEventListener('keyup', this._keyUpHandler);
     }
 
-    _setStartValue() {
-        this.$refs.input.value = this.model.value;
+    _updateInputValue(value) {
+        this.$refs.input.value = value;
     }
 
     /**

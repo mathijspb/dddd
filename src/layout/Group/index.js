@@ -1,49 +1,91 @@
-// Vendor
-import Mustache from 'mustache';
+// Base class
+import LayoutElement from '../../LayoutElement';
 
-import style from './style.css';
-import template from './template.html';
+// Style
+import styleSidebar from './style-sidebar.css';
+import styleDevtools from './style-devtools.css';
 
-// Constants
-const CONTENT_CLASS = 'content';
+// Template
+import templateSidebar from './template-sidebar.html';
+import templateDevtools from './template-devtools.html';
 
-export default class Group extends HTMLElement {
-    constructor({ label }) {
-        super();
+export default class Group extends LayoutElement {
+    constructor({ root, label }) {
+        super({
+            root,
+            style: {
+                styleSidebar,
+                styleDevtools,
+            },
+            template: {
+                templateSidebar,
+                templateDevtools,
+            },
+            templateData: {
+                label,
+            },
+        });
 
-        this.attachShadow({ mode: 'open' });
+        // Props
+        this._label = label;
 
-        this._element = this._addTemplate(template, label);
-        this._addStyle(style);
-        this._contentElement = this._getContentElement();
+        // Data
+        this._isContentVisible = true;
+
+        // Setup
+        this._bindHandlers();
+        this._setupEventListeners();
+    }
+
+    destroyed() {
+        this._removeEventListeners();
+    }
+
+    /**
+     * Getters & Setters
+     */
+    get label() {
+        return this._label;
+    }
+
+    get content() {
+        return this.$refs.content;
     }
 
     /**
      * Public
      */
-    get element() {
-        return this._element;
+    add(object, property, options = {}) {
+        options.container = this;
+        return this.$root.add(object, property, options);
     }
 
     /**
      * Private
      */
-    _addTemplate(template, label) {
-        const templateData = { label };
-        const render = Mustache.render(template, templateData);
-        this.shadowRoot.innerHTML = render;
-        return this.shadowRoot.firstChild;
+    _bindHandlers() {
+        this._clickHandler = this._clickHandler.bind(this);
     }
 
-    _addStyle(style) {
-        const element = document.createElement('style');
-        const node = document.createTextNode(style);
-        element.appendChild(node);
-        this.shadowRoot.appendChild(element);
+    _setupEventListeners() {
+        if (this.$refs.buttonHeader) this.$refs.buttonHeader.addEventListener('click', this._clickHandler);
     }
 
-    _getContentElement() {
-        return this.shadowRoot.querySelector(`.${CONTENT_CLASS}`);
+    _removeEventListeners() {
+        if (this.$refs.buttonHeader) this.$refs.buttonHeader.removeEventListener('click', this._clickHandler);
+    }
+
+    _toggleContent() {
+        this._isContentVisible = !this._isContentVisible;
+        this.$refs.content.style.display = this._isContentVisible ? 'grid' : 'none';
+        this.$root.layout.resize();
+    }
+
+    /**
+     * Handlers
+     */
+    _clickHandler() {
+        this._toggleContent();
     }
 }
 

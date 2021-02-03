@@ -4,8 +4,8 @@ import style from './style.css';
 import template from './template.html';
 
 export default class Dropdown extends Component {
-    constructor(model) {
-        super({ style, template, model });
+    constructor(root, model) {
+        super({ root, style, template, model });
 
         // Setup
         this._bindHandlers();
@@ -18,6 +18,13 @@ export default class Dropdown extends Component {
 
     destroyed() {
         this._removeEventListeners();
+    }
+
+    /**
+     * Hooks
+     */
+    onListen() {
+        this._updateSelectValue(this.model.value);
     }
 
     /**
@@ -45,6 +52,10 @@ export default class Dropdown extends Component {
             element.selected = item === this._value;
             this.$refs.select.appendChild(element);
         }
+    }
+
+    _updateSelectValue(value) {
+        this.$refs.select.value = value; // TODO: Fix precision;
     }
 
     /**

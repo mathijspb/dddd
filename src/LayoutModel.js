@@ -9,7 +9,7 @@ class LayoutModel {
      * Public
      */
     addLayer(label) {
-        this._layers.push(label)
+        this._layers.push(label);
     }
 
     addGroup(label, options = {}) {
@@ -24,8 +24,7 @@ class LayoutModel {
         const structure = {
             layers: this._layers,
             groups: this._groups,
-            components: this._getComponents()
-            // components: this._components
+            components: this._getComponents(),
         };
         return structure;
     }
@@ -36,27 +35,9 @@ class LayoutModel {
     _getComponents() {
         const components = [];
         for (const model of this._components) {
-            let data = model.getData();
-            data = this._removeFunctions(data);
-            components.push(data);
+            components.push(model.getData());
         }
-
         return components;
-    }
-
-    _removeFunctions(data) {
-        const object = JSON.parse(JSON.stringify(data));
-        function eachRecursive(object) {
-            for (var key in object) {
-                if (typeof object[key] === "object" && object[key] !== null) {
-                    eachRecursive(object[key]);
-                } else if (typeof object[key] === 'function') {
-                    delete object[key];
-                }
-            }
-        }
-        eachRecursive(object);
-        return object;
     }
 }
 

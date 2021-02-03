@@ -1,11 +1,15 @@
+// Base component
 import Component from '../../Component';
 
+// Style
 import style from './style.css';
+
+// Template
 import template from './template.html';
 
 export default class Button extends Component {
-    constructor(model) {
-        super({ style, template, model });
+    constructor(root, model) {
+        super({ root, style, template, model });
 
         // Setup
         this._bindHandlers();

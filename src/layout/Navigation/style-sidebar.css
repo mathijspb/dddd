@@ -1,0 +1,99 @@
+.navigation {
+    display: none;
+
+    grid-template-columns: 1fr var(--input-height);
+    column-gap: var(--panel-spacing);
+
+    padding: var(--panel-spacing);
+
+    background-color: var(--panel-background-color);
+
+    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);
+}
+
+.select-container {
+    position: relative;
+
+    height: var(--input-height);
+    overflow: hidden;
+
+    background-color: var(--input-background-color);
+
+    border-radius: var(--input-border-radius);
+
+    user-select: none;
+
+    transition: var(--input-background-color-transition);
+}
+
+.select-container:hover {
+    background-color: var(--input-background-color-hover);
+}
+
+.select {
+    width: 100%;
+    height: 100%;
+
+    border: 0;
+    outline: 0;
+
+    padding: 0 var(--input-padding);
+
+    background: transparent;
+
+    font-family: var(--font);
+    font-size: var(--input-font-size);
+    font-weight: var(--input-font-weight);
+    color: var(--input-text-color);
+
+    appearance: none;
+}
+
+.select option {
+    color: black;
+}
+
+.arrow {
+    position: absolute;
+    top: 0;
+    right: var(--input-padding);
+    bottom: 0;
+
+    margin: auto 0;
+}
+
+.button-toggle {
+    position: relative;
+
+    width: var(--input-height);
+    height: var(--input-height);
+
+    background-color: var(--input-background-color);
+
+    border: 0;
+    border-radius: var(--input-border-radius);
+    outline: 0;
+
+    cursor: pointer;
+
+    transition: var(--input-background-color-transition);
+}
+
+.button-toggle:hover {
+    background-color: var(--input-background-color-hover);
+}
+
+.button-toggle__line {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    width: 12px;
+    height: 2px;
+
+    margin: auto;
+
+    background: var(--input-text-color);
+}

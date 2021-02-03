@@ -2,23 +2,22 @@
 import Mustache from 'mustache';
 
 export default class Component extends HTMLElement {
-    constructor({ model, style, template }) {
+    constructor({ root, model, style, template }) {
         super();
-        
+
         // Props
+        this.__root = root;
         this.__model = model;
 
         // Attach
         this.attachShadow({ mode: 'open' });
 
         // Setup
-        this.__addTemplate(template);
+        this.$el = this.__addTemplate(template);
+        this.$refs = this.__getReferences(this.$el);
         this.__addStyle(style);
+        this.__addLockedClass();
         this.__bindHandlers();
-
-        // Elements
-        this.$el = this.__getRootElement();
-        this.$refs = this.__getReferences();
     }
 
     connectedCallback() {
@@ -35,6 +34,10 @@ export default class Component extends HTMLElement {
     /**
      * Getters & Setters
      */
+    get $root() {
+        return this.__root;
+    }
+
     get model() {
         return this.__model;
     }
@@ -44,16 +47,25 @@ export default class Component extends HTMLElement {
     }
 
     /**
+     * Public
+     */
+    tick() {
+        this.__triggerTick();
+        if (this.model.options.listen) {
+            this.model.updateValueFromObject(); // !this.__root.isDevtools
+            this.__triggerOnListen();
+        }
+    }
+
+    /**
      * Private
      */
     __bindHandlers() {
         this.__resizeHandler = this.__resizeHandler.bind(this);
-        this.__update = this.__update.bind(this);
     }
 
     __setupEventListeners() {
         window.addEventListener('resize', this.__resizeHandler);
-        window.requestAnimationFrame(this.__update);
     }
 
     __removeEventListeners() {
@@ -66,6 +78,7 @@ export default class Component extends HTMLElement {
         };
         const render = Mustache.render(template, templateData);
         this.shadowRoot.innerHTML = render;
+        return this.shadowRoot.firstChild;
     }
 
     __addStyle(style) {
@@ -79,14 +92,9 @@ export default class Component extends HTMLElement {
         return this.__model.options.label ? this.__model.options.label : this.__model.property;
     }
 
-    __getRootElement() {
-        const element = this.shadowRoot.querySelector('div');
-        return element;
-    }
-
-    __getReferences() {
+    __getReferences(element) {
         const refs = {};
-        const elements = this.shadowRoot.querySelectorAll('[ref]');
+        const elements = element.querySelectorAll('[ref]');
 
         let item;
         let name;
@@ -96,6 +104,12 @@ export default class Component extends HTMLElement {
             refs[name] = item;
         }
         return refs;
+    }
+
+    __addLockedClass() {
+        if (this.model.options.locked) {
+            this.$el.classList.add('locked');
+        }
     }
 
     __triggerConnected() {
@@ -116,18 +130,16 @@ export default class Component extends HTMLElement {
         }
     }
 
-    __triggerUpdate() {
-        if (typeof this.onUpdate === 'function') {
-            this.onUpdate();
+    __triggerTick() {
+        if (typeof this.onTick === 'function') {
+            this.onTick();
         }
     }
 
-    /**
-     * Update
-     */
-    __update() {
-        window.requestAnimationFrame(this.__update);
-        this.__triggerUpdate();
+    __triggerOnListen() {
+        if (typeof this.onListen === 'function') {
+            this.onListen();
+        }
     }
 
     /**

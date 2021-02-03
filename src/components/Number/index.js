@@ -10,7 +10,7 @@ import template from './template.html';
 // Constants
 const DEFAULT_STEP_SIZE = 0.01;
 
-export default class MultiInput extends Component {
+export default class Number extends Component {
     constructor(root, model) {
         super({ root, style, template, model });
 
@@ -21,14 +21,13 @@ export default class MultiInput extends Component {
         // Data
         this._activeInput = null;
         this._isPointerLockActive = false;
-        this._inputs = [];
 
         // Setup
         this._bindHandlers();
     }
 
     connected() {
-        this._createInputs();
+        this._updateInputValue(this.model.value);
         this._setupEventListeners();
     }
 
@@ -40,7 +39,7 @@ export default class MultiInput extends Component {
      * Hooks
      */
     onListen() {
-        this._updateAllInputValues(this.model.value);
+        this._updateInputValue(this.model.value);
     }
 
     /**
@@ -55,55 +54,31 @@ export default class MultiInput extends Component {
     }
 
     _setupEventListeners() {
-        this.$el.addEventListener('mousedown', this._mouseDownHandler);
-        this.$el.addEventListener('mouseup', this._mouseUpHandler);
-        this.$el.addEventListener('change', this._changeHandler);
-        document.addEventListener('pointerlockchange', this._pointerLockHanderHandler);
+        this.$refs.input.addEventListener('mousedown', this._mouseDownHandler);
+        this.$refs.input.addEventListener('mouseup', this._mouseUpHandler);
+        this.$refs.input.addEventListener('change', this._changeHandler);
+        this.$refs.input.addEventListener('pointerlockchange', this._pointerLockHanderHandler);
         document.addEventListener('mousemove', this._mouseMoveHandler);
     }
 
     _removeEventListeners() {
-        this.$el.removeEventListener('mousedown', this._mouseDownHandler);
-        this.$el.removeEventListener('mouseup', this._mouseUpHandler);
-        this.$el.removeEventListener('change', this._changeHandler);
-        document.removeEventListener('pointerlockchange', this._pointerLockHanderHandler);
+        this.$refs.input.removeEventListener('mousedown', this._mouseDownHandler);
+        this.$refs.input.removeEventListener('mouseup', this._mouseUpHandler);
+        this.$refs.input.removeEventListener('change', this._changeHandler);
+        this.$refs.input.removeEventListener('pointerlockchange', this._pointerLockHanderHandler);
         document.removeEventListener('mousemove', this._mouseMoveHandler);
     }
 
-    _createInputs() {
-        for (const key in this.model.value) {
-            const input = document.createElement('input');
-            input.classList.add('input');
-            input.value = this.model.value[key];
-            this._inputs.push(input);
-            this.$refs.inputContainer.appendChild(input);
-        }
-    }
-
-    _updateModelValue() {
-        const value = {};
-        for (const [index, [key]] of Object.entries(Object.entries(this.model.value))) {
-            value[key] = parseInt(this._inputs[index].value);
-        }
+    _updateModelValue(value) {
         this.model.value = value;
     }
 
     _getInputValueBasedOnMouseMovement(movementX) {
-        if (!this._activeInput) return;
-        const currentValue = parseFloat(this._activeInput.value);
-        return currentValue + movementX * this._stepSize;
+        return this.model.value + movementX * this._stepSize;
     }
 
     _updateInputValue(value) {
-        if (this._activeInput) {
-            this._activeInput.value = value.toFixed(this._decimalPlaces); // TODO: Fix precision
-        }
-    }
-
-    _updateAllInputValues() {
-        for (const [index, [key]] of Object.entries(Object.entries(this.model.value))) {
-            this._inputs[index].value = this.model.value[key];
-        }
+        this.$refs.input.value = value.toFixed(this._decimalPlaces); // TODO: Fix precision;
     }
 
     _getDecimalPlaces(value) {
@@ -115,19 +90,15 @@ export default class MultiInput extends Component {
      * Handlers
      */
     _mouseDownHandler(e) {
-        if (e.target.tagName === 'INPUT') {
-            this._activeInput = e.target;
-            this.$el.requestPointerLock();
-        }
+        this.$refs.input.requestPointerLock();
     }
 
     _mouseUpHandler() {
-        this._activeInput = null;
         document.exitPointerLock();
     }
 
     _changeHandler() {
-        this._updateInputValue();
+        this._updateModelValue(this.$refs.input.value);
     }
 
     _pointerLockHanderHandler(e) {
@@ -142,9 +113,9 @@ export default class MultiInput extends Component {
         if (this._isPointerLockActive) {
             const value = this._getInputValueBasedOnMouseMovement(e.movementX);
             this._updateInputValue(value);
-            this._updateModelValue();
+            this._updateModelValue(value);
         }
     }
 }
 
-window.customElements.define('dddd-multi-input', MultiInput);
+window.customElements.define('dddd-number', Number);

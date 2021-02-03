@@ -1,3 +1,6 @@
+// Base class
+import LayoutElement from '../../LayoutElement';
+
 // Layout
 import Layer from '../Layer/index';
 
@@ -7,33 +10,26 @@ import style from './style.css';
 // Template
 import template from './template.html';
 
-export default class Layers extends HTMLElement {
-    constructor() {
-        super();
-
-        // Attach
-        this.attachShadow({ mode: 'open' });
+export default class Layers extends LayoutElement {
+    constructor({ root }) {
+        super({ root, style, template });
 
         // Options
         this._activeIndex = 0;
         this._layers = [];
-
-        // Setup
-        this._element = this._addTemplate(template);
-        this._addStyle(style);
     }
 
     /**
      * Public
      */
     add(label) {
-        const layer = new Layer({ label });
+        const layer = new Layer({ root: this.$root, label });
         if (this._layers.length === this._activeIndex) {
             layer.activate();
         }
         this._layers.push(layer);
-        this._element.appendChild(layer);
-        return layer.element;
+        this.$el.appendChild(layer);
+        return layer;
     }
 
     goto(index) {
@@ -42,11 +38,12 @@ export default class Layers extends HTMLElement {
         this._layers[currentIndex].deactivate();
         this._layers[newIndex].activate();
         this._activeIndex = newIndex;
+        this._resizeLayers();
     }
 
-    get(label) {
+    get(container) {
         for (const layer of this._layers) {
-            if (layer.label === label) return layer.element;
+            if (layer.label === container) return layer.element;
         }
         return null;
     }
@@ -59,21 +56,17 @@ export default class Layers extends HTMLElement {
         this._resizeLayers();
     }
 
+    show() {
+        this.$el.style.display = 'block';
+    }
+
+    hide() {
+        this.$el.style.display = 'none';
+    }
+
     /**
      * Private
      */
-    _addTemplate(template) {
-        this.shadowRoot.innerHTML = template;
-        return this.shadowRoot.firstChild;
-    }
-
-    _addStyle(style) {
-        const element = document.createElement('style');
-        const node = document.createTextNode(style);
-        element.appendChild(node);
-        this.shadowRoot.appendChild(element);
-    }
-
     _resizeLayers() {
         for (const layer of this._layers) {
             layer.resize();

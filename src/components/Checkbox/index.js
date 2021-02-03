@@ -8,8 +8,8 @@ import style from './style.css';
 import template from './template.html';
 
 export default class Checkbox extends Component {
-    constructor(model) {
-        super({ style, template, model });
+    constructor(root, model) {
+        super({ root, style, template, model });
 
         // Setup
         this._bindHandlers();
@@ -22,6 +22,13 @@ export default class Checkbox extends Component {
 
     destroyed() {
         this._removeEventListeners();
+    }
+
+    /**
+     * Hooks
+     */
+    onListen() {
+        this._updateChecked();
     }
 
     /**

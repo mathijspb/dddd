@@ -36,12 +36,18 @@
     background-color: var(--input-background-color-hover);
 }
 
+.locked .input-container {
+    opacity: 0.6;
+
+    pointer-events: none;
+}
+
 .checkbox {
     appearance: none;
 
     display: block;
     position: relative;
-    
+
     width: 100%;
     height: 100%;
 

@@ -2,11 +2,9 @@
 
 const connections = {};
 
-chrome.runtime.onConnect.addListener((port) => {
+window.chrome.runtime.onConnect.addListener((port) => {
     const data = JSON.parse(port.name);
     let tabId = null;
-
-    console.log(port);
 
     if (data.type === 'devtools-tab') {
         tabId = data.tabId;
@@ -17,29 +15,29 @@ chrome.runtime.onConnect.addListener((port) => {
 
     if (data.type === 'page') {
         tabId = port.sender.tab.id;
-        connections[tabId]['page'] = port;
+        connections[tabId].page = port;
     }
 
-    if (connections[tabId]['devtools-tab'] && connections[tabId]['page']) {
+    if (connections[tabId]['devtools-tab'] && connections[tabId].page) {
         const devtoolsTab = connections[tabId]['devtools-tab'];
-        const page = connections[tabId]['page'];
+        const page = connections[tabId].page;
         doublePipe(tabId, devtoolsTab, page);
     }
 });
 
 function installProxy(tabId) {
-    chrome.tabs.executeScript(
+    window.chrome.tabs.executeScript(
         tabId,
         {
             file: 'utils/proxy.js',
         },
-        function (res) {
+        function(res) {
             if (!res) {
-                ports[tabId].devtools.postMessage('proxy-fail');
+                // ports[tabId].devtools.postMessage('proxy-fail');
             } else {
                 console.log('injected proxy to tab ' + tabId);
             }
-        }
+        },
     );
 }
 

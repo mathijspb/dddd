@@ -1,36 +1,110 @@
-import style from './style.css';
-import template from './template.html';
+// Base class
+import LayoutElement from '../../LayoutElement';
 
-export default class Container extends HTMLElement {
-    constructor() {
-        super();
+// Style
+import styleSidebar from './style-sidebar.css';
+import styleDevtools from './style-devtools.css';
 
-        this.attachShadow({ mode: 'open' });
+// Template
+import templateSidebar from './template-sidebar.html';
+import templateDevtools from './template-devtools.html';
 
-        this._element = this._addTemplate(template);
-        this._addStyle(style);
+export default class Container extends LayoutElement {
+    constructor({ root }) {
+        super({ root, style: { styleSidebar, styleDevtools }, template: { templateSidebar, templateDevtools } });
+
+        // Data
+        this._isMouseDown = false;
+        this._axis = { x: 0, y: 0 };
+
+        // Setup
+        this._bindHandlers();
+        this._setupEventListeners();
+    }
+
+    destroyed() {
+        this._removeEventListeners();
     }
 
     /**
-     * Public
+     * Getters & Setters
      */
-    get element() {
-        return this._element;
+    get content() {
+        return this.$refs.content;
     }
 
     /**
      * Private
      */
-    _addTemplate(template) {
-        this.shadowRoot.innerHTML = template;
-        return this.shadowRoot.firstChild;
+    _bindHandlers() {
+        this._resizeHandleSideMouseDownHandler = this._resizeHandleSideMouseDownHandler.bind(this);
+        this._resizeHandleBottomMouseDownHandler = this._resizeHandleBottomMouseDownHandler.bind(this);
+        this._resizeHandleCornerMouseDownHandler = this._resizeHandleCornerMouseDownHandler.bind(this);
+        this._windowMouseUpHandler = this._windowMouseUpHandler.bind(this);
+        this._windowMouseMoveHandler = this._windowMouseMoveHandler.bind(this);
     }
 
-    _addStyle(style) {
-        const element = document.createElement('style');
-        const node = document.createTextNode(style);
-        element.appendChild(node);
-        this.shadowRoot.appendChild(element);
+    _setupEventListeners() {
+        if (!this.$root.isDevtools) {
+            this.$refs.resizeHandleSide.addEventListener('mousedown', this._resizeHandleSideMouseDownHandler);
+            this.$refs.resizeHandleBottom.addEventListener('mousedown', this._resizeHandleBottomMouseDownHandler);
+            this.$refs.resizeHandleCorner.addEventListener('mousedown', this._resizeHandleCornerMouseDownHandler);
+            window.addEventListener('mouseup', this._windowMouseUpHandler);
+            window.addEventListener('mousemove', this._windowMouseMoveHandler);
+        }
+    }
+
+    _removeEventListeners() {
+        if (!this.$root.isDevtools) {
+            this.$refs.resizeHandleCorner.removeEventListener('mousedown', this._resizeHandleCornerMouseDownHandler);
+            window.removeEventListener('mouseup', this._windowMouseUpHandler);
+            window.removeEventListener('mousemove', this._windowMouseMoveHandler);
+        }
+    }
+
+    _resize(x, y) {
+        if (this._axis.x) {
+            const width = window.innerWidth - x;
+            this.$el.style.width = `${width}px`;
+        }
+
+        if (this._axis.y) {
+            const height = y;
+            this.$el.style.height = `${height}px`;
+        }
+
+        this.$root.layout.resize();
+    }
+
+    /**
+     * Handlers
+     */
+    _resizeHandleSideMouseDownHandler() {
+        this._isMouseDown = true;
+        this._axis.x = 1;
+        this._axis.y = 0;
+    }
+
+    _resizeHandleBottomMouseDownHandler() {
+        this._isMouseDown = true;
+        this._axis.x = 0;
+        this._axis.y = 1;
+    }
+
+    _resizeHandleCornerMouseDownHandler() {
+        this._isMouseDown = true;
+        this._axis.x = 1;
+        this._axis.y = 1;
+    }
+
+    _windowMouseUpHandler() {
+        this._isMouseDown = false;
+    }
+
+    _windowMouseMoveHandler(e) {
+        if (this._isMouseDown) {
+            this._resize(e.clientX, e.clientY);
+        }
     }
 }
 

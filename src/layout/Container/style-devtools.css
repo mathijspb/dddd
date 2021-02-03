@@ -14,9 +14,10 @@
     --panel-spacing: 15px;
 
     /* Groups */
-    --group-width: 400px;
+    --group-header-font-size: 15px;
+    --group-header-background-color: rgba(255, 255, 255, 0.03);
     --group-padding: 30px;
-    --group-border-radius: 25px;
+    --group-border-radius: 10px;
 
     /* Components */
     --component-row-gap: 7px;

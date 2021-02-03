@@ -8,8 +8,8 @@ import style from './style.css';
 import template from './template.html';
 
 export default class Color extends Component {
-    constructor(model) {
-        super({ style, template, model });
+    constructor(root, model) {
+        super({ root, style, template, model });
 
         // Setup
         this._bindHandlers();

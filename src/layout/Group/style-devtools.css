@@ -5,8 +5,6 @@
 }
 
 .group {
-    /* width: var(--group-width); */
-
     padding: calc(var(--group-padding) - 3px) var(--group-padding) var(--group-padding);
     margin: 0 var(--panel-spacing) var(--panel-spacing) 0;
 
@@ -22,7 +20,7 @@
 
     margin-bottom: 20px;
 
-    font-size: 15px;
+    font-size: var(--group-header-font-size);
     font-weight: 600;
     color: white;
     letter-spacing: 0.025em;
