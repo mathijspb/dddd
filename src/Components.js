@@ -93,7 +93,7 @@ export default class Components {
     _tick() {
         window.requestAnimationFrame(this._tick);
         this._tickComponents();
-        this._sendModelsToDevtools();
+        // this._sendModelsToDevtools();
     }
 
     _tickComponents() {
