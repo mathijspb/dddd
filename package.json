@@ -2,6 +2,7 @@
     "name": "dddd",
     "version": "1.0.0",
     "description": "",
+    "main": "dist/DDDD.js",
     "scripts": {
         "dev": "rollup -c rollup.dev.config.js -w",
         "ext": "rollup -c rollup.ext.config.js -w",
