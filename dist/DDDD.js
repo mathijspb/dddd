@@ -1395,6 +1395,7 @@
 	    }
 
 	    addButton(options) {
+	        options.container = this;
 	        return this.$root.addButton(options);
 	    }
 
