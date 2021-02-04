@@ -42,8 +42,8 @@ export default class Layer extends LayoutElement {
     /**
      * Public
      */
-    createGroup(label) {
-        return this.$root.createGroup(label, {
+    addGroup(label) {
+        return this.$root.addGroup(label, {
             container: this._label,
         });
     }

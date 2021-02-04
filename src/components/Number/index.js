@@ -57,7 +57,7 @@ export default class Number extends Component {
         this.$refs.input.addEventListener('mousedown', this._mouseDownHandler);
         this.$refs.input.addEventListener('mouseup', this._mouseUpHandler);
         this.$refs.input.addEventListener('change', this._changeHandler);
-        this.$refs.input.addEventListener('pointerlockchange', this._pointerLockHanderHandler);
+        document.addEventListener('pointerlockchange', this._pointerLockHanderHandler);
         document.addEventListener('mousemove', this._mouseMoveHandler);
     }
 
@@ -65,7 +65,7 @@ export default class Number extends Component {
         this.$refs.input.removeEventListener('mousedown', this._mouseDownHandler);
         this.$refs.input.removeEventListener('mouseup', this._mouseUpHandler);
         this.$refs.input.removeEventListener('change', this._changeHandler);
-        this.$refs.input.removeEventListener('pointerlockchange', this._pointerLockHanderHandler);
+        document.removeEventListener('pointerlockchange', this._pointerLockHanderHandler);
         document.removeEventListener('mousemove', this._mouseMoveHandler);
     }
 
@@ -101,7 +101,7 @@ export default class Number extends Component {
         this._updateModelValue(this.$refs.input.value);
     }
 
-    _pointerLockHanderHandler(e) {
+    _pointerLockHanderHandler() {
         if (document.pointerLockElement) {
             this._isPointerLockActive = true;
         } else {

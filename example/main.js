@@ -74,57 +74,55 @@ loadImage(settings.image);
 
 const dddd = new DDDD();
 
-dddd.createLayer('Layer #1');
-const layer2 = dddd.createLayer('Layer #2');
+dddd.addLayer('Layer #1');
+const layer2 = dddd.addLayer('Layer #2');
 
-// TODO: Should it be 'addGroup' or 'createGroup' it's mixed now..
-const shape1 = dddd.createGroup('Shape #1', {
+const shape1 = dddd.addGroup('Shape #1', {
     container: 'Layer #1',
 });
-shape1.add(settings, 'time', {
-    listen: true,
-    locked: true,
-});
 
-const shape2 = dddd.createGroup('Shape #2', {
-    container: 'Layer #1',
-});
-shape2.add(settings, 'text');
-shape2.add(settings, 'font', {
+const subgroup = shape1.addGroup('Subgroup');
+subgroup.add(settings, 'text');
+subgroup.add(settings, 'font', {
     container: 'Shape #1',
     options: [
         'Arial',
         'Verdana',
         'Times New Roman',
     ],
-    listen: true,
-    locked: true,
 });
+
+const subsubgroup = subgroup.addGroup('sub-subgroup');
+subsubgroup.add(settings, 'fontSize', {
+    container: 'Shape #1',
+    min: 30,
+    max: 100,
+});
+
+shape1.add(settings, 'time');
+
+const shape2 = dddd.addGroup('Shape #2', {
+    container: 'Layer #1',
+});
+
 dddd.add(settings, 'fontSize', {
     container: 'Shape #1',
     min: 30,
     max: 100,
-    listen: true,
-    locked: true,
 });
 dddd.add(settings, 'position', {
     container: 'Shape #1',
     stepSize: 1,
-    listen: true,
-    locked: true,
 });
 dddd.add(settings, 'color', {
     container: 'Shape #1',
 });
 dddd.add(settings, 'capitals', {
     container: 'Shape #1',
-    listen: true,
-    locked: true,
 });
 dddd.add(settings, 'image', {
     type: 'image',
     container: 'Shape #1',
-    locked: true,
     onChange() {
         loadImage(settings.image);
     },

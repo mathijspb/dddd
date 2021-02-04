@@ -46,12 +46,12 @@ export default class DDDD {
         return this._layout.createComponent({ options, type: 'button' });
     }
 
-    createLayer(label) {
-        return this._layout.createLayer(label);
+    addLayer(label) {
+        return this._layout.addLayer(label);
     }
 
-    createGroup(label, options) {
-        return this._layout.createGroup(label, options);
+    addGroup(label, options) {
+        return this._layout.addGroup(label, options);
     }
 
     createLayoutFromModel(model, onCompleteCallback) {

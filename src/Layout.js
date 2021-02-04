@@ -43,7 +43,7 @@ export default class Layout {
     /**
      * Public
      */
-    createLayer(label) {
+    addLayer(label) {
         this._navigation.add(label);
         const layer = this._layers.add(label);
         this._layers.resize();
@@ -51,9 +51,9 @@ export default class Layout {
         return layer;
     }
 
-    createGroup(label, options = {}) {
-        const group = new Group({ root: this._root, layout: this, label });
-        const container = this._getGroupContainer(label, options.container);
+    addGroup(label, options = {}) {
+        const group = new Group({ root: this._root, layout: this, label, options });
+        const container = this.getContainer(options.container);
         container.appendChild(group);
         this._groups[label] = group;
         this._layers.resize();

@@ -10,7 +10,7 @@ import templateSidebar from './template-sidebar.html';
 import templateDevtools from './template-devtools.html';
 
 export default class Group extends LayoutElement {
-    constructor({ root, label }) {
+    constructor({ root, label, options }) {
         super({
             root,
             style: {
@@ -28,6 +28,8 @@ export default class Group extends LayoutElement {
 
         // Props
         this._label = label;
+        this._options = options;
+        this._parent = options.parent;
 
         // Data
         this._isContentVisible = true;
@@ -35,6 +37,7 @@ export default class Group extends LayoutElement {
         // Setup
         this._bindHandlers();
         this._setupEventListeners();
+        this._addLevelClass();
     }
 
     destroyed() {
@@ -65,6 +68,13 @@ export default class Group extends LayoutElement {
         return this.$root.addButton(options);
     }
 
+    addGroup(label) {
+        return this.$root.addGroup(label, {
+            container: this._label,
+            parent: this,
+        });
+    }
+
     /**
      * Private
      */
@@ -78,6 +88,20 @@ export default class Group extends LayoutElement {
 
     _removeEventListeners() {
         if (this.$refs.buttonHeader) this.$refs.buttonHeader.removeEventListener('click', this._clickHandler);
+    }
+
+    _addLevelClass() {
+        let level = 0;
+
+        function countLevel(group) {
+            if (group._parent) {
+                level++;
+                countLevel(group._parent);
+            }
+        }
+        countLevel(this);
+
+        this.$el.dataset.level = level;
     }
 
     _toggleContent() {
