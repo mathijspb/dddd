@@ -5,7 +5,6 @@ export default class Components {
     constructor({ root, layout }) {
         // Props
         this._root = root;
-        this._layout = layout;
 
         // Data
         this._components = [];
@@ -74,9 +73,9 @@ export default class Components {
 
     _addComponentToContainer(component) {
         const container = component.model.options.container;
-        const element = this._layout.getContainer(container);
+        const element = this._root.layout.getContainer(container);
         element.appendChild(component);
-        this._layout.resize();
+        this._root.layout.resize();
     }
 
     _getById(id) {

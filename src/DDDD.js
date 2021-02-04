@@ -34,7 +34,7 @@ export default class DDDD {
      * Public
      */
     add(object, property, options) {
-        return this._layout.createComponent({ object, property, options });
+        return this._layout.addComponent({ object, property, options });
     }
 
     // TODO: Fix
@@ -43,7 +43,7 @@ export default class DDDD {
     }
 
     addButton(options) {
-        return this._layout.createComponent({ options, type: 'button' });
+        return this._layout.addComponent({ options, type: 'button' });
     }
 
     addLayer(label) {

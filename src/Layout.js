@@ -61,7 +61,7 @@ export default class Layout {
         return group;
     }
 
-    createComponent({ object, property, options, id, type, onChangeCallback }) {
+    addComponent({ object, property, options, id, type, onChangeCallback }) {
         const model = new ComponentModel({ root: this._root, object, property, options, id, type, onChangeCallback });
         const component = this._components.create(model);
         return component;

@@ -70,7 +70,7 @@ function loadImage(url) {
     image.src = url;
     imageElement = image;
 }
-loadImage(settings.image);
+// loadImage(settings.image);
 
 const dddd = new DDDD();
 
