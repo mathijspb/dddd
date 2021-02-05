@@ -1143,8 +1143,8 @@
 	    /**
 	     * Public
 	     */
-	    createGroup(label) {
-	        return this.$root.createGroup(label, {
+	    addGroup(label) {
+	        return this.$root.addGroup(label, {
 	            container: this._label,
 	        });
 	    }
@@ -1333,7 +1333,7 @@
 
 	window.customElements.define('dddd-layers', Layers);
 
-	var styleSidebar$2 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.group {\n    overflow: hidden;\n\n    margin: 0 var(--panel-spacing) var(--panel-spacing) 0;\n\n    background-color: var(--panel-background-color);\n\n    border-radius: var(--group-border-radius);\n\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\n}\n\n.button-header {\n    position: relative;\n\n    width: 100%;\n\n    padding: 0;\n\n    text-align: left;\n\n    background-color: var(--group-header-background-color);\n\n    border: 0;\n    outline: 0;\n    cursor: pointer;\n}\n\n.label {\n    display: block;\n\n    padding: var(--group-header-padding);\n\n    font-size: var(--group-header-font-size);\n    font-weight: 600;\n    color: white;\n    letter-spacing: 0.025em;\n}\n\n.arrow {\n    position: absolute;\n    top: 0;\n    right: calc(var(--panel-spacing) + 7px);\n    bottom: 0;\n\n    margin: auto 0;\n}\n\n.content {\n    display: grid;\n\n    row-gap: var(--component-row-gap);\n\n    padding: calc(var(--group-padding) - 3px) var(--group-padding) var(--group-padding);\n}\n";
+	var styleSidebar$2 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.group {\n    overflow: hidden;\n\n    /* margin: 0 var(--panel-spacing) var(--panel-spacing) 0; */\n\n    background-color: var(--panel-background-color);\n\n    border-radius: var(--group-border-radius);\n\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\n}\n\n[data-level=\"1\"].group {\n    border-radius: 0;\n    margin: 0 calc(var(--group-padding) * -1);\n    box-shadow: 0;\n}\n\n[data-level=\"1\"] .button-header {\n    background: rgba(255, 255, 255, 0.01);\n}\n\n[data-level=\"1\"] .label {\n    font-size: 12px;\n}\n\n[data-level=\"1\"] .content {\n    background: rgba(255, 255, 255, 0.01);\n}\n\n.button-header {\n    position: relative;\n\n    width: 100%;\n\n    padding: 0;\n\n    text-align: left;\n\n    background-color: var(--group-header-background-color);\n\n    border: 0;\n    outline: 0;\n    cursor: pointer;\n}\n\n.label {\n    display: block;\n\n    padding: var(--group-header-padding);\n\n    font-size: var(--group-header-font-size);\n    font-weight: 600;\n    color: white;\n    letter-spacing: 0.025em;\n}\n\n.arrow {\n    position: absolute;\n    top: 0;\n    right: calc(var(--panel-spacing) + 7px);\n    bottom: 0;\n\n    margin: auto 0;\n}\n\n.content {\n    display: grid;\n\n    row-gap: var(--component-row-gap);\n\n    padding: 0 var(--group-padding) var(--group-padding);\n}\n";
 
 	var styleDevtools$2 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.group {\n    padding: calc(var(--group-padding) - 3px) var(--group-padding) var(--group-padding);\n    margin: 0 var(--panel-spacing) var(--panel-spacing) 0;\n\n    background-color: var(--panel-background-color);\n    \n    border-radius: var(--group-border-radius);\n\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\n}\n\n.label {\n    display: block;\n\n    margin-bottom: 20px;\n\n    font-size: var(--group-header-font-size);\n    font-weight: 600;\n    color: white;\n    letter-spacing: 0.025em;\n}\n\n.content {\n    display: grid;\n\n    row-gap: var(--component-row-gap);\n}";
 
@@ -1344,7 +1344,7 @@
 	// Base class
 
 	class Group extends LayoutElement {
-	    constructor({ root, label }) {
+	    constructor({ root, label, options }) {
 	        super({
 	            root,
 	            style: {
@@ -1362,6 +1362,8 @@
 
 	        // Props
 	        this._label = label;
+	        this._options = options;
+	        this._parent = options.parent;
 
 	        // Data
 	        this._isContentVisible = true;
@@ -1369,6 +1371,7 @@
 	        // Setup
 	        this._bindHandlers();
 	        this._setupEventListeners();
+	        this._addLevelClass();
 	    }
 
 	    destroyed() {
@@ -1399,6 +1402,13 @@
 	        return this.$root.addButton(options);
 	    }
 
+	    addGroup(label) {
+	        return this.$root.addGroup(label, {
+	            container: this._label,
+	            parent: this,
+	        });
+	    }
+
 	    /**
 	     * Private
 	     */
@@ -1412,6 +1422,20 @@
 
 	    _removeEventListeners() {
 	        if (this.$refs.buttonHeader) this.$refs.buttonHeader.removeEventListener('click', this._clickHandler);
+	    }
+
+	    _addLevelClass() {
+	        let level = 0;
+
+	        function countLevel(group) {
+	            if (group._parent) {
+	                level++;
+	                countLevel(group._parent);
+	            }
+	        }
+	        countLevel(this);
+
+	        this.$el.dataset.level = level;
 	    }
 
 	    _toggleContent() {
@@ -1953,7 +1977,7 @@
 	        this.$refs.input.addEventListener('mousedown', this._mouseDownHandler);
 	        this.$refs.input.addEventListener('mouseup', this._mouseUpHandler);
 	        this.$refs.input.addEventListener('change', this._changeHandler);
-	        this.$refs.input.addEventListener('pointerlockchange', this._pointerLockHanderHandler);
+	        document.addEventListener('pointerlockchange', this._pointerLockHanderHandler);
 	        document.addEventListener('mousemove', this._mouseMoveHandler);
 	    }
 
@@ -1961,7 +1985,7 @@
 	        this.$refs.input.removeEventListener('mousedown', this._mouseDownHandler);
 	        this.$refs.input.removeEventListener('mouseup', this._mouseUpHandler);
 	        this.$refs.input.removeEventListener('change', this._changeHandler);
-	        this.$refs.input.removeEventListener('pointerlockchange', this._pointerLockHanderHandler);
+	        document.removeEventListener('pointerlockchange', this._pointerLockHanderHandler);
 	        document.removeEventListener('mousemove', this._mouseMoveHandler);
 	    }
 
@@ -1997,7 +2021,7 @@
 	        this._updateModelValue(this.$refs.input.value);
 	    }
 
-	    _pointerLockHanderHandler(e) {
+	    _pointerLockHanderHandler() {
 	        if (document.pointerLockElement) {
 	            this._isPointerLockActive = true;
 	        } else {
@@ -2545,7 +2569,6 @@
 	    constructor({ root, layout }) {
 	        // Props
 	        this._root = root;
-	        this._layout = layout;
 
 	        // Data
 	        this._components = [];
@@ -2614,9 +2637,9 @@
 
 	    _addComponentToContainer(component) {
 	        const container = component.model.options.container;
-	        const element = this._layout.getContainer(container);
+	        const element = this._root.layout.getContainer(container);
 	        element.appendChild(component);
-	        this._layout.resize();
+	        this._root.layout.resize();
 	    }
 
 	    _getById(id) {
@@ -2870,7 +2893,7 @@
 	    /**
 	     * Public
 	     */
-	    createLayer(label) {
+	    addLayer(label) {
 	        this._navigation.add(label);
 	        const layer = this._layers.add(label);
 	        this._layers.resize();
@@ -2878,9 +2901,9 @@
 	        return layer;
 	    }
 
-	    createGroup(label, options = {}) {
-	        const group = new Group({ root: this._root, layout: this, label });
-	        const container = this._getGroupContainer(label, options.container);
+	    addGroup(label, options = {}) {
+	        const group = new Group({ root: this._root, layout: this, label, options });
+	        const container = this.getContainer(options.container);
 	        container.appendChild(group);
 	        this._groups[label] = group;
 	        this._layers.resize();
@@ -2888,7 +2911,7 @@
 	        return group;
 	    }
 
-	    createComponent({ object, property, options, id, type, onChangeCallback }) {
+	    addComponent({ object, property, options, id, type, onChangeCallback }) {
 	        const model = new ComponentModel({ root: this._root, object, property, options, id, type, onChangeCallback });
 	        const component = this._components.create(model);
 	        return component;
@@ -3033,7 +3056,7 @@
 	     * Public
 	     */
 	    add(object, property, options) {
-	        return this._layout.createComponent({ object, property, options });
+	        return this._layout.addComponent({ object, property, options });
 	    }
 
 	    // TODO: Fix
@@ -3042,15 +3065,15 @@
 	    }
 
 	    addButton(options) {
-	        return this._layout.createComponent({ options, type: 'button' });
+	        return this._layout.addComponent({ options, type: 'button' });
 	    }
 
-	    createLayer(label) {
-	        return this._layout.createLayer(label);
+	    addLayer(label) {
+	        return this._layout.addLayer(label);
 	    }
 
-	    createGroup(label, options) {
-	        return this._layout.createGroup(label, options);
+	    addGroup(label, options) {
+	        return this._layout.addGroup(label, options);
 	    }
 
 	    createLayoutFromModel(model, onCompleteCallback) {
