@@ -92,8 +92,8 @@ subgroup.add(settings, 'font', {
     ],
 });
 
-const subsubgroup = subgroup.addGroup('sub-subgroup');
-subsubgroup.add(settings, 'fontSize', {
+const subgroup2 = shape1.addGroup('Subgroup2');
+subgroup2.add(settings, 'fontSize', {
     container: 'Shape #1',
     min: 30,
     max: 100,
@@ -114,12 +114,15 @@ dddd.add(settings, 'position', {
     container: 'Shape #1',
     stepSize: 1,
 });
-dddd.add(settings, 'color', {
+
+const subgroup3 = shape1.addGroup('Subgroup3');
+subgroup3.add(settings, 'color', {
     container: 'Shape #1',
 });
-dddd.add(settings, 'capitals', {
+subgroup3.add(settings, 'capitals', {
     container: 'Shape #1',
 });
+
 dddd.add(settings, 'image', {
     type: 'image',
     container: 'Shape #1',
