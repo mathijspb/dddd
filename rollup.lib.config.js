@@ -21,7 +21,7 @@ export default {
         }),
         nodeResolve(),
         commonjs(),
-        // terser(),
+        terser(),
         babel({
             exclude: ['node_modules/**']
         }),
