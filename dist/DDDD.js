@@ -844,7 +844,7 @@
 	    }
 	}
 
-	var styleSidebar = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.dddd {\n    /* Layout */\n    --font: 'Arial', sans-serif;\n    --background-color: #161616;\n\n    /* Panels */\n    --panel-background-color: #1B1B1B;\n    --panel-spacing: 10px;\n\n    /* Groups */\n    --group-header-padding: 14px;\n    --group-header-font-size: 13px;\n    --group-header-background-color: rgba(255, 255, 255, 0.03);\n    --group-padding: 15px;\n    --group-border-radius: 10px;\n\n    /* Components */\n    --component-row-gap: 7px;\n\n    /* Label */\n    --label-width: 35%;\n    --label-padding: 0 20px 0 0;\n    --label-color: rgba(255, 255, 255, 0.75);\n    --label-font-size: 12px;\n    --label-font-weight: 400;\n\n    /* Input */\n    --input-background-color: rgba(255, 255, 255, 0.03);\n    --input-background-color-hover: rgba(255, 255, 255, 0.08);\n    --input-background-color-transition: background-color 0.35s ease-out;\n    --input-highlight-color: rgba(77, 83, 217, 0.64);\n    --input-highlight-color-hover: rgba(77, 83, 217, 1);\n    --input-text-color: rgba(255, 255, 255, 0.75);\n    --input-font-size: 12px;\n    --input-font-weight: 300;\n    --input-border-radius: 6px;\n    --input-padding: 14px;\n    --input-height: 34px;\n\n    position: fixed;\n    top: 0;\n    right: 0;\n\n    width: 300px;\n    max-height: 100vh;\n\n    background: var(--background-color);\n}\n\n.content {\n    width: 100%;\n    height: 100%;\n    overflow: auto;\n}\n\n.resize-handle {\n    position: absolute;\n\n    padding: 0;\n\n    background-color: transparent;\n\n    border: 0;\n    outline: 0;\n}\n\n.resize-handle.side {\n    top: 0;\n    left: 0;\n\n    width: 6px;\n    height: 100%;\n\n    cursor: ew-resize;\n}\n\n.resize-handle.bottom {\n    bottom: 0;\n    left: 0;\n\n    width: 100%;\n    height: 6px;\n\n    cursor: ns-resize;\n}\n\n.resize-handle.corner {\n    bottom: 0;\n    left: 0;\n\n    width: 10px;\n    height: 10px;\n\n    cursor: nesw-resize;\n}\n";
+	var styleSidebar = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.dddd {\n    /* Layout */\n    --font: 'Arial', sans-serif;\n    --background-color: #161616;\n\n    /* Panels */\n    --panel-background-color: #1B1B1B;\n    --panel-spacing: 10px;\n\n    /* Groups */\n    --group-header-padding: 14px;\n    --group-header-font-size: 13px;\n    --group-header-background-color: rgba(255, 255, 255, 0.03);\n    --group-padding: 15px;\n    --group-border-radius: 10px;\n\n    /* Components */\n    --component-row-gap: 7px;\n\n    /* Label */\n    --label-width: 35%;\n    --label-padding: 0 20px 0 0;\n    --label-color: rgba(255, 255, 255, 0.75);\n    --label-font-size: 12px;\n    --label-font-weight: 400;\n\n    /* Input */\n    --input-background-color: rgba(255, 255, 255, 0.03);\n    --input-background-color-hover: rgba(255, 255, 255, 0.08);\n    --input-background-color-transition: background-color 0.35s ease-out;\n    --input-highlight-color: rgba(77, 83, 217, 0.64);\n    --input-highlight-color-hover: rgba(77, 83, 217, 1);\n    --input-text-color: rgba(255, 255, 255, 0.75);\n    --input-font-size: 12px;\n    --input-font-weight: 300;\n    --input-border-radius: 6px;\n    --input-padding: 14px;\n    --input-height: 34px;\n\n    position: fixed;\n    top: 0;\n    right: 0;\n\n    width: 300px;\n    height: 100%;\n    max-height: 100vh;\n\n    background: var(--background-color);\n}\n\n.content {\n    width: 100%;\n    height: 100%;\n    overflow: auto;\n}\n\n.resize-handle {\n    position: absolute;\n\n    padding: 0;\n\n    background-color: transparent;\n\n    border: 0;\n    outline: 0;\n}\n\n.resize-handle.side {\n    top: 0;\n    left: 0;\n\n    width: 6px;\n    height: 100%;\n\n    cursor: ew-resize;\n}\n\n.resize-handle.bottom {\n    bottom: 0;\n    left: 0;\n\n    width: 100%;\n    height: 6px;\n\n    cursor: ns-resize;\n}\n\n.resize-handle.corner {\n    bottom: 0;\n    left: 0;\n\n    width: 10px;\n    height: 10px;\n\n    cursor: nesw-resize;\n}\n";
 
 	var styleDevtools = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.dddd {\n    /* Layout */\n    --font: 'Arial', sans-serif;\n    --background-color: #161616;\n\n    /* Panels */\n    --panel-background-color: #1B1B1B;\n    --panel-spacing: 15px;\n\n    /* Groups */\n    --group-header-font-size: 15px;\n    --group-header-background-color: rgba(255, 255, 255, 0.03);\n    --group-padding: 30px;\n    --group-border-radius: 10px;\n\n    /* Components */\n    --component-row-gap: 7px;\n\n    /* Label */\n    --label-width: 30%;\n    --label-padding: 0 20px 0 0;\n    --label-color: rgba(255, 255, 255, 0.75);\n    --label-font-size: 14px;\n    --label-font-weight: 400;\n    \n    /* Input */\n    --input-background-color: rgba(255, 255, 255, 0.03);\n    --input-background-color-hover: rgba(255, 255, 255, 0.08);\n    --input-background-color-transition: background-color 0.35s ease-out;\n    --input-highlight-color: rgba(77, 83, 217, 0.64);\n    --input-highlight-color-hover: rgba(77, 83, 217, 1);\n    --input-text-color: rgba(255, 255, 255, 0.75);\n    --input-font-size: 14px;\n    --input-font-weight: 300;\n    --input-border-radius: 10px;\n    --input-padding: 16px;\n    --input-height: 40px;\n\n    background: var(--background-color);\n}\n";
 
@@ -860,6 +860,8 @@
 
 	        // Data
 	        this._isMouseDown = false;
+	        this._width = 0;
+	        this._height = 0;
 	        this._axis = { x: 0, y: 0 };
 
 	        // Setup
@@ -876,6 +878,24 @@
 	     */
 	    get content() {
 	        return this.$refs.content;
+	    }
+
+	    /**
+	     * Public
+	     */
+	    show() {
+	        this.$el.style.width = `${this._width}px`;
+	        if (this._height) {
+	            this.$el.style.height = `${this._height}px`;
+	        } else {
+	            this.$el.style.height = '100%';
+	        }
+	    }
+
+	    hide() {
+	        this._width = this.$el.offsetWidth;
+	        this.$el.style.width = 'auto';
+	        this.$el.style.height = 'auto';
 	    }
 
 	    /**
@@ -909,13 +929,13 @@
 
 	    _resize(x, y) {
 	        if (this._axis.x) {
-	            const width = window.innerWidth - x;
-	            this.$el.style.width = `${width}px`;
+	            this._width = window.innerWidth - x;
+	            this.$el.style.width = `${this._width}px`;
 	        }
 
 	        if (this._axis.y) {
-	            const height = y;
-	            this.$el.style.height = `${height}px`;
+	            this._height = y;
+	            this.$el.style.height = `${this._height}px`;
 	        }
 
 	        this.$root.layout.resize();
@@ -1028,10 +1048,12 @@
 
 	    show() {
 	        this.$refs.selectContainer.style.display = 'block';
+	        this.$el.style.display = 'grid';
 	    }
 
 	    hide() {
 	        this.$refs.selectContainer.style.display = 'none';
+	        this.$el.style.display = 'block';
 	    }
 
 	    /**
@@ -1102,7 +1124,7 @@
 
 	window.customElements.define('dddd-navigation', Navigation);
 
-	var style = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.layer {\n    display: none;\n\n    position: relative;\n\n    width: 100%;\n}\n\n.layer.active {\n    display: block;\n}";
+	var style = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.layer {\n    display: none;\n\n    position: relative;\n\n    width: 100%;\n    overflow: hidden;\n}\n\n.layer.active {\n    display: block;\n}\n";
 
 	var template = "<div class=\"layer\"></div>";
 
@@ -1186,10 +1208,10 @@
 	        this._itemGap = this._getItemGap();
 	        this._itemWidth = this._getItemWidth();
 	        this._resetColumnHeight();
-	        // if (!this.$root.isLayoutSidebar()) {
-	        this._positionGroups();
-	        this._updateHeight();
-	        // }
+	        if (!this.$root.isLayoutSidebar()) {
+	            this._positionGroups();
+	            this._updateHeight();
+	        }
 	    }
 
 	    _getColumCount() {
@@ -1261,7 +1283,7 @@
 
 	window.customElements.define('dddd-layer', Layer);
 
-	var style$1 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.layers {\n    position: relative;\n\n    width: 100%;\n\n    padding: var(--panel-spacing) var(--panel-spacing) 0 var(--panel-spacing);\n\n    -webkit-font-smoothing: antialiased;\n    font-family: var(--font);\n    font-weight: 300;\n    font-size: 13px;\n}\n";
+	var style$1 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.layers {\n    position: relative;\n\n    width: 100%;\n\n    /* padding: var(--panel-spacing) var(--panel-spacing) 0 var(--panel-spacing); */\n    padding: var(--panel-spacing);\n\n    -webkit-font-smoothing: antialiased;\n    font-family: var(--font);\n    font-weight: 300;\n    font-size: 13px;\n}\n";
 
 	var template$1 = "<div class=\"layers\"></div>";
 
@@ -1441,7 +1463,6 @@
 	    _toggleContent() {
 	        this._isContentVisible = !this._isContentVisible;
 	        this.$refs.content.style.display = this._isContentVisible ? 'grid' : 'none';
-	        this.$root.layout.resize();
 	    }
 
 	    /**
@@ -1711,6 +1732,7 @@
 	        this._windowMouseMoveHandler = this._windowMouseMoveHandler.bind(this);
 	        this._windowMouseUpHandler = this._windowMouseUpHandler.bind(this);
 	        this._inputContainerMouseDownHandler = this._inputContainerMouseDownHandler.bind(this);
+	        this._inputContainerMouseUpHandler = this._inputContainerMouseUpHandler.bind(this);
 	        this._inputContainerDoubleClickHandler = this._inputContainerDoubleClickHandler.bind(this);
 	        this._inputChangeHandler = this._inputChangeHandler.bind(this);
 	        this._inputBlurHandler = this._inputBlurHandler.bind(this);
@@ -1720,6 +1742,7 @@
 
 	    _setupEventListeners() {
 	        this.$refs.inputContainer.addEventListener('mousedown', this._inputContainerMouseDownHandler);
+	        this.$refs.inputContainer.addEventListener('mouseup', this._inputContainerMouseUpHandler);
 	        this.$refs.inputContainer.addEventListener('dblclick', this._inputContainerDoubleClickHandler);
 	        this.$refs.input.addEventListener('change', this._inputChangeHandler);
 	        this.$refs.input.addEventListener('blur', this._inputBlurHandler);
@@ -1731,6 +1754,7 @@
 
 	    _removeEventListeners() {
 	        this.$refs.inputContainer.removeEventListener('mousedown', this._inputContainerMouseDownHandler);
+	        this.$refs.inputContainer.removeEventListener('mouseup', this._inputContainerMouseUpHandler);
 	        this.$refs.inputContainer.removeEventListener('dblclick', this._inputContainerDoubleClickHandler);
 	        this.$refs.input.removeEventListener('change', this._inputChangeHandler);
 	        this.$refs.input.removeEventListener('blur', this._inputBlurHandler);
@@ -1757,6 +1781,14 @@
 	    _scaleScrubber(value) {
 	        const scaleX = this._map(value, this.model.options.min, this.model.options.max, 0, 1);
 	        this.$refs.scrubber.style.transform = `scaleX(${scaleX})`;
+	    }
+
+	    _showScrubber() {
+	        this.$refs.scrubber.style.display = 'block';
+	    }
+
+	    _hideScrubber() {
+	        this.$refs.scrubber.style.display = 'none';
 	    }
 
 	    _updateInputValue(value) {
@@ -1819,6 +1851,11 @@
 	        clearTimeout(this._mouseDownClickTimeout);
 	    }
 
+	    _inputContainerMouseUpHandler() {
+	        this._selectInput();
+	        this._hideScrubber();
+	    }
+
 	    _inputContainerMouseDownHandler(e) {
 	        if (this._isMouseDown || this._isInputSelected) return;
 	        this._addActiveClass();
@@ -1832,7 +1869,7 @@
 	    }
 
 	    _inputContainerDoubleClickHandler(e) {
-	        clearTimeout(this._mouseDownClickTimeout);
+	        // clearTimeout(this._mouseDownClickTimeout);
 	        this._selectInput();
 	    }
 
@@ -1840,10 +1877,12 @@
 	        const value = parseFloat(this.$refs.input.value);
 	        this._updateValue(value);
 	        this._deselectInput();
+	        this._showScrubber();
 	    }
 
 	    _inputBlurHandler() {
 	        this._isInputSelected = false;
+	        this._showScrubber();
 	    }
 
 	    _windowKeyDownHandler(e) {
@@ -2011,6 +2050,7 @@
 	     */
 	    _mouseDownHandler(e) {
 	        this.$refs.input.requestPointerLock();
+	        this._isPointerLockActive = true;
 	    }
 
 	    _mouseUpHandler() {
@@ -2022,9 +2062,7 @@
 	    }
 
 	    _pointerLockHanderHandler() {
-	        if (document.pointerLockElement) {
-	            this._isPointerLockActive = true;
-	        } else {
+	        if (document.pointerLockElement) ; else {
 	            this._isPointerLockActive = false;
 	        }
 	    }
@@ -2939,10 +2977,12 @@
 
 	    toggleVisibility() {
 	        if (this._isVisible) {
+	            this._container.hide();
 	            this._layers.hide();
 	            this._navigation.hide();
 	            this._isVisible = false;
 	        } else {
+	            this._container.show();
 	            this._layers.show();
 	            this._navigation.show();
 	            this._isVisible = true;
