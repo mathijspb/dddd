@@ -72,10 +72,12 @@ export default class Navigation extends LayoutElement {
 
     show() {
         this.$refs.selectContainer.style.display = 'block';
+        this.$el.style.display = 'grid';
     }
 
     hide() {
         this.$refs.selectContainer.style.display = 'none';
+        this.$el.style.display = 'block';
     }
 
     /**

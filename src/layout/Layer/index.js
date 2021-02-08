@@ -85,10 +85,10 @@ export default class Layer extends LayoutElement {
         this._itemGap = this._getItemGap();
         this._itemWidth = this._getItemWidth();
         this._resetColumnHeight();
-        // if (!this.$root.isLayoutSidebar()) {
-        this._positionGroups();
-        this._updateHeight();
-        // }
+        if (!this.$root.isLayoutSidebar()) {
+            this._positionGroups();
+            this._updateHeight();
+        }
     }
 
     _getColumCount() {

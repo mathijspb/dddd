@@ -91,6 +91,7 @@ export default class Number extends Component {
      */
     _mouseDownHandler(e) {
         this.$refs.input.requestPointerLock();
+        this._isPointerLockActive = true;
     }
 
     _mouseUpHandler() {
@@ -103,7 +104,7 @@ export default class Number extends Component {
 
     _pointerLockHanderHandler() {
         if (document.pointerLockElement) {
-            this._isPointerLockActive = true;
+            // this._isPointerLockActive = true;
         } else {
             this._isPointerLockActive = false;
         }

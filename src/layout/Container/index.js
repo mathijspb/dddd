@@ -15,6 +15,8 @@ export default class Container extends LayoutElement {
 
         // Data
         this._isMouseDown = false;
+        this._width = 0;
+        this._height = 0;
         this._axis = { x: 0, y: 0 };
 
         // Setup
@@ -31,6 +33,24 @@ export default class Container extends LayoutElement {
      */
     get content() {
         return this.$refs.content;
+    }
+
+    /**
+     * Public
+     */
+    show() {
+        this.$el.style.width = `${this._width}px`;
+        if (this._height) {
+            this.$el.style.height = `${this._height}px`;
+        } else {
+            this.$el.style.height = '100%';
+        }
+    }
+
+    hide() {
+        this._width = this.$el.offsetWidth;
+        this.$el.style.width = 'auto';
+        this.$el.style.height = 'auto';
     }
 
     /**
@@ -64,13 +84,13 @@ export default class Container extends LayoutElement {
 
     _resize(x, y) {
         if (this._axis.x) {
-            const width = window.innerWidth - x;
-            this.$el.style.width = `${width}px`;
+            this._width = window.innerWidth - x;
+            this.$el.style.width = `${this._width}px`;
         }
 
         if (this._axis.y) {
-            const height = y;
-            this.$el.style.height = `${height}px`;
+            this._height = y;
+            this.$el.style.height = `${this._height}px`;
         }
 
         this.$root.layout.resize();

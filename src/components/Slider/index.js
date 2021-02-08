@@ -62,6 +62,7 @@ export default class Slider extends Component {
         this._windowMouseMoveHandler = this._windowMouseMoveHandler.bind(this);
         this._windowMouseUpHandler = this._windowMouseUpHandler.bind(this);
         this._inputContainerMouseDownHandler = this._inputContainerMouseDownHandler.bind(this);
+        this._inputContainerMouseUpHandler = this._inputContainerMouseUpHandler.bind(this);
         this._inputContainerDoubleClickHandler = this._inputContainerDoubleClickHandler.bind(this);
         this._inputChangeHandler = this._inputChangeHandler.bind(this);
         this._inputBlurHandler = this._inputBlurHandler.bind(this);
@@ -71,6 +72,7 @@ export default class Slider extends Component {
 
     _setupEventListeners() {
         this.$refs.inputContainer.addEventListener('mousedown', this._inputContainerMouseDownHandler);
+        this.$refs.inputContainer.addEventListener('mouseup', this._inputContainerMouseUpHandler);
         this.$refs.inputContainer.addEventListener('dblclick', this._inputContainerDoubleClickHandler);
         this.$refs.input.addEventListener('change', this._inputChangeHandler);
         this.$refs.input.addEventListener('blur', this._inputBlurHandler);
@@ -82,6 +84,7 @@ export default class Slider extends Component {
 
     _removeEventListeners() {
         this.$refs.inputContainer.removeEventListener('mousedown', this._inputContainerMouseDownHandler);
+        this.$refs.inputContainer.removeEventListener('mouseup', this._inputContainerMouseUpHandler);
         this.$refs.inputContainer.removeEventListener('dblclick', this._inputContainerDoubleClickHandler);
         this.$refs.input.removeEventListener('change', this._inputChangeHandler);
         this.$refs.input.removeEventListener('blur', this._inputBlurHandler);
@@ -108,6 +111,14 @@ export default class Slider extends Component {
     _scaleScrubber(value) {
         const scaleX = this._map(value, this.model.options.min, this.model.options.max, 0, 1);
         this.$refs.scrubber.style.transform = `scaleX(${scaleX})`;
+    }
+
+    _showScrubber() {
+        this.$refs.scrubber.style.display = 'block';
+    }
+
+    _hideScrubber() {
+        this.$refs.scrubber.style.display = 'none';
     }
 
     _updateInputValue(value) {
@@ -170,6 +181,11 @@ export default class Slider extends Component {
         clearTimeout(this._mouseDownClickTimeout);
     }
 
+    _inputContainerMouseUpHandler() {
+        this._selectInput();
+        this._hideScrubber();
+    }
+
     _inputContainerMouseDownHandler(e) {
         if (this._isMouseDown || this._isInputSelected) return;
         this._addActiveClass();
@@ -183,7 +199,7 @@ export default class Slider extends Component {
     }
 
     _inputContainerDoubleClickHandler(e) {
-        clearTimeout(this._mouseDownClickTimeout);
+        // clearTimeout(this._mouseDownClickTimeout);
         this._selectInput();
     }
 
@@ -191,10 +207,12 @@ export default class Slider extends Component {
         const value = parseFloat(this.$refs.input.value);
         this._updateValue(value);
         this._deselectInput();
+        this._showScrubber();
     }
 
     _inputBlurHandler() {
         this._isInputSelected = false;
+        this._showScrubber();
     }
 
     _windowKeyDownHandler(e) {

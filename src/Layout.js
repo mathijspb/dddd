@@ -89,10 +89,12 @@ export default class Layout {
 
     toggleVisibility() {
         if (this._isVisible) {
+            this._container.hide();
             this._layers.hide();
             this._navigation.hide();
             this._isVisible = false;
         } else {
+            this._container.show();
             this._layers.show();
             this._navigation.show();
             this._isVisible = true;

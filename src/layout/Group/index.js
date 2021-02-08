@@ -107,7 +107,6 @@ export default class Group extends LayoutElement {
     _toggleContent() {
         this._isContentVisible = !this._isContentVisible;
         this.$refs.content.style.display = this._isContentVisible ? 'grid' : 'none';
-        this.$root.layout.resize();
     }
 
     /**

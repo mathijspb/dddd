@@ -101,9 +101,9 @@ subgroup2.add(settings, 'fontSize', {
 
 shape1.add(settings, 'time');
 
-const shape2 = dddd.addGroup('Shape #2', {
-    container: 'Layer #1',
-});
+// const shape2 = dddd.addGroup('Shape #2', {
+//     container: 'Layer #1',
+// });
 
 dddd.add(settings, 'fontSize', {
     container: 'Shape #1',
@@ -115,25 +115,25 @@ dddd.add(settings, 'position', {
     stepSize: 1,
 });
 
-const subgroup3 = shape1.addGroup('Subgroup3');
-subgroup3.add(settings, 'color', {
-    container: 'Shape #1',
-});
-subgroup3.add(settings, 'capitals', {
-    container: 'Shape #1',
-});
+// const subgroup3 = shape1.addGroup('Subgroup3');
+// subgroup3.add(settings, 'color', {
+//     container: 'Shape #1',
+// });
+// subgroup3.add(settings, 'capitals', {
+//     container: 'Shape #1',
+// });
 
-dddd.add(settings, 'image', {
-    type: 'image',
-    container: 'Shape #1',
-    onChange() {
-        loadImage(settings.image);
-    },
-});
-dddd.addButton({
-    container: 'Shape #1',
-    label: 'Log text',
-    onClick: () => {
-        console.log(settings.text);
-    },
-});
+// dddd.add(settings, 'image', {
+//     type: 'image',
+//     container: 'Shape #1',
+//     onChange() {
+//         loadImage(settings.image);
+//     },
+// });
+// dddd.addButton({
+//     container: 'Shape #1',
+//     label: 'Log text',
+//     onClick: () => {
+//         console.log(settings.text);
+//     },
+// });
