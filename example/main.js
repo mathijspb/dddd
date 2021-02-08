@@ -81,6 +81,8 @@ const shape1 = dddd.addGroup('Shape #1', {
     container: 'Layer #1',
 });
 
+shape1.add(settings, 'time');
+
 const subgroup = shape1.addGroup('Subgroup');
 subgroup.add(settings, 'text');
 subgroup.add(settings, 'font', {
@@ -98,8 +100,6 @@ subgroup2.add(settings, 'fontSize', {
     min: 30,
     max: 100,
 });
-
-shape1.add(settings, 'time');
 
 // const shape2 = dddd.addGroup('Shape #2', {
 //     container: 'Layer #1',

@@ -1355,7 +1355,7 @@
 
 	window.customElements.define('dddd-layers', Layers);
 
-	var styleSidebar$2 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.group {\n    overflow: hidden;\n\n    /* margin: 0 var(--panel-spacing) var(--panel-spacing) 0; */\n\n    background-color: var(--panel-background-color);\n\n    border-radius: var(--group-border-radius);\n\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\n}\n\n[data-level=\"1\"].group {\n    border-radius: 0;\n    margin: 0 calc(var(--group-padding) * -1);\n    box-shadow: 0;\n}\n\n[data-level=\"1\"] .button-header {\n    background: rgba(255, 255, 255, 0.01);\n}\n\n[data-level=\"1\"] .label {\n    font-size: 12px;\n}\n\n[data-level=\"1\"] .content {\n    background: rgba(255, 255, 255, 0.01);\n}\n\n.button-header {\n    position: relative;\n\n    width: 100%;\n\n    padding: 0;\n\n    text-align: left;\n\n    background-color: var(--group-header-background-color);\n\n    border: 0;\n    outline: 0;\n    cursor: pointer;\n}\n\n.label {\n    display: block;\n\n    padding: var(--group-header-padding);\n\n    font-size: var(--group-header-font-size);\n    font-weight: 600;\n    color: white;\n    letter-spacing: 0.025em;\n}\n\n.arrow {\n    position: absolute;\n    top: 0;\n    right: calc(var(--panel-spacing) + 7px);\n    bottom: 0;\n\n    margin: auto 0;\n}\n\n.content {\n    display: grid;\n\n    row-gap: var(--component-row-gap);\n\n    padding: 0 var(--group-padding) var(--group-padding);\n}\n";
+	var styleSidebar$2 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.group {\n    overflow: hidden;\n\n    /* margin: 0 var(--panel-spacing) var(--panel-spacing) 0; */\n\n    background-color: var(--panel-background-color);\n\n    border-radius: var(--group-border-radius);\n\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\n}\n\n[data-level=\"1\"].group {\n    border-radius: 0;\n    margin: 0 calc(var(--group-padding) * -1);\n    box-shadow: 0;\n}\n\n[data-level=\"1\"] .button-header {\n    margin-bottom: 0;\n\n    background: rgba(255, 255, 255, 0.01);\n}\n\n[data-level=\"1\"] .label {\n    font-size: 12px;\n}\n\n[data-level=\"1\"] .content {\n    background: rgba(255, 255, 255, 0.01);\n}\n\n.button-header {\n    position: relative;\n\n    width: 100%;\n\n    padding: 0;\n    margin-bottom: var(--group-padding);\n\n    text-align: left;\n\n    background-color: var(--group-header-background-color);\n\n    border: 0;\n    outline: 0;\n    cursor: pointer;\n}\n\n.label {\n    display: block;\n\n    padding: var(--group-header-padding);\n\n    font-size: var(--group-header-font-size);\n    font-weight: 600;\n    color: white;\n    letter-spacing: 0.025em;\n}\n\n.arrow {\n    position: absolute;\n    top: 0;\n    right: calc(var(--panel-spacing) + 7px);\n    bottom: 0;\n\n    margin: auto 0;\n}\n\n.content {\n    display: grid;\n\n    row-gap: var(--component-row-gap);\n\n    padding: 0 var(--group-padding) var(--group-padding);\n}\n";
 
 	var styleDevtools$2 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.group {\n    padding: calc(var(--group-padding) - 3px) var(--group-padding) var(--group-padding);\n    margin: 0 var(--panel-spacing) var(--panel-spacing) 0;\n\n    background-color: var(--panel-background-color);\n    \n    border-radius: var(--group-border-radius);\n\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\n}\n\n.label {\n    display: block;\n\n    margin-bottom: 20px;\n\n    font-size: var(--group-header-font-size);\n    font-weight: 600;\n    color: white;\n    letter-spacing: 0.025em;\n}\n\n.content {\n    display: grid;\n\n    row-gap: var(--component-row-gap);\n}";
 
@@ -1695,6 +1695,7 @@
 	        this._inputContainerWidth = null;
 	        this._isMouseDown = false;
 	        this._isShiftDown = false;
+	        this._isSlideStarted = false;
 
 	        // Setup
 	        this._bindHandlers();
@@ -1840,6 +1841,9 @@
 	    _windowMouseMoveHandler(e) {
 	        if (this._isMouseDown) {
 	            this._mousePosition.x = e.clientX;
+	            if (Math.abs(this._mouseStartPosition.x - e.clientX) > 2) {
+	                this._isSlideStarted = true;
+	            }
 	            const value = this._calcValue(e.clientX);
 	            this._updateValue(value);
 	        }
@@ -1847,11 +1851,13 @@
 
 	    _windowMouseUpHandler(e) {
 	        this._isMouseDown = false;
+	        this._isSlideStarted = false;
 	        this._removeActiveClass();
-	        clearTimeout(this._mouseDownClickTimeout);
+	        // clearTimeout(this._mouseDownClickTimeout);
 	    }
 
 	    _inputContainerMouseUpHandler() {
+	        if (this._isSlideStarted) return;
 	        this._selectInput();
 	        this._hideScrubber();
 	    }
@@ -1860,12 +1866,14 @@
 	        if (this._isMouseDown || this._isInputSelected) return;
 	        this._addActiveClass();
 	        this._mouseStartPosition.x = e.clientX;
-	        clearTimeout(this._mouseDownClickTimeout);
-	        this._mouseDownClickTimeout = setTimeout(() => {
-	            this._isMouseDown = true;
-	            const value = this._calcValue(e.clientX);
-	            this._updateValue(value);
-	        }, 150);
+	        // clearTimeout(this._mouseDownClickTimeout);
+
+	        this._isMouseDown = true;
+	        // this._mouseDownClickTimeout = setTimeout(() => {
+	        //     this._isMouseDown = true;
+	        //     const value = this._calcValue(e.clientX);
+	        //     this._updateValue(value);
+	        // }, 150);
 	    }
 
 	    _inputContainerDoubleClickHandler(e) {

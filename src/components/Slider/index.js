@@ -25,6 +25,7 @@ export default class Slider extends Component {
         this._inputContainerWidth = null;
         this._isMouseDown = false;
         this._isShiftDown = false;
+        this._isSlideStarted = false;
 
         // Setup
         this._bindHandlers();
@@ -170,6 +171,9 @@ export default class Slider extends Component {
     _windowMouseMoveHandler(e) {
         if (this._isMouseDown) {
             this._mousePosition.x = e.clientX;
+            if (Math.abs(this._mouseStartPosition.x - e.clientX) > 2) {
+                this._isSlideStarted = true;
+            }
             const value = this._calcValue(e.clientX);
             this._updateValue(value);
         }
@@ -177,11 +181,13 @@ export default class Slider extends Component {
 
     _windowMouseUpHandler(e) {
         this._isMouseDown = false;
+        this._isSlideStarted = false;
         this._removeActiveClass();
-        clearTimeout(this._mouseDownClickTimeout);
+        // clearTimeout(this._mouseDownClickTimeout);
     }
 
     _inputContainerMouseUpHandler() {
+        if (this._isSlideStarted) return;
         this._selectInput();
         this._hideScrubber();
     }
@@ -190,12 +196,14 @@ export default class Slider extends Component {
         if (this._isMouseDown || this._isInputSelected) return;
         this._addActiveClass();
         this._mouseStartPosition.x = e.clientX;
-        clearTimeout(this._mouseDownClickTimeout);
-        this._mouseDownClickTimeout = setTimeout(() => {
-            this._isMouseDown = true;
-            const value = this._calcValue(e.clientX);
-            this._updateValue(value);
-        }, 150);
+        // clearTimeout(this._mouseDownClickTimeout);
+
+        this._isMouseDown = true;
+        // this._mouseDownClickTimeout = setTimeout(() => {
+        //     this._isMouseDown = true;
+        //     const value = this._calcValue(e.clientX);
+        //     this._updateValue(value);
+        // }, 150);
     }
 
     _inputContainerDoubleClickHandler(e) {

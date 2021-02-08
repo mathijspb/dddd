@@ -23,6 +23,8 @@
 }
 
 [data-level="1"] .button-header {
+    margin-bottom: 0;
+
     background: rgba(255, 255, 255, 0.01);
 }
 
@@ -40,6 +42,7 @@
     width: 100%;
 
     padding: 0;
+    margin-bottom: var(--group-padding);
 
     text-align: left;
 
