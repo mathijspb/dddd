@@ -8,9 +8,10 @@ import LayoutModel from './LayoutModel';
 import ComponentModel from './ComponentModel';
 
 export default class Layout {
-    constructor({ root }) {
+    constructor({ root, onLayerChange }) {
         // Props
         this._root = root;
+        this._onLayerChangeCallback = onLayerChange;
 
         this._container = this._createContainer();
         this._navigation = this._createNavigation();
@@ -20,7 +21,6 @@ export default class Layout {
         this._isVisible = true;
 
         this._groups = {};
-        this._elements = [];
 
         this._bindHandlers();
         this._setupEventListeners();
@@ -49,6 +49,12 @@ export default class Layout {
         this._layers.resize();
         LayoutModel.addLayer(label);
         return layer;
+    }
+
+    gotoLayer(label) {
+        const index = this._layers.getIndexByLabel(label);
+        this._navigation.goto(index);
+        this._layers.goto(index);
     }
 
     addGroup(label, options = {}) {
@@ -171,5 +177,9 @@ export default class Layout {
      */
     _navigationSwitchHandler(e) {
         this._layers.goto(e.detail.index);
+        if (typeof this._onLayerChangeCallback === 'function') {
+            const label = this._layers.getByIndex(e.detail.index).label;
+            this._onLayerChangeCallback(label);
+        }
     }
 }

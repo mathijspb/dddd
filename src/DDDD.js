@@ -3,13 +3,13 @@ import Layout from './Layout';
 import LayoutModel from './LayoutModel';
 
 export default class DDDD {
-    constructor({ devtools, onChange } = {}) {
+    constructor({ devtools, onChange, onLayerChange } = {}) {
         // Props
         this._isDevtools = devtools;
         this._onChangeCallback = onChange;
 
         // Setup
-        this._layout = new Layout({ root: this });
+        this._layout = new Layout({ root: this, onLayerChange });
         this._bindHandlers();
         this._setupEventListeners();
     }
@@ -48,6 +48,10 @@ export default class DDDD {
 
     addLayer(label) {
         return this._layout.addLayer(label);
+    }
+
+    gotoLayer(label) {
+        this._layout.gotoLayer(label);
     }
 
     addGroup(label, options) {

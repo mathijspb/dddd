@@ -43,7 +43,7 @@ export default class Navigation extends LayoutElement {
     /**
      * Public
      */
-    add(label) {
+    add(label, options) {
         if (this._elements.length === 0) {
             this._show();
         }
@@ -68,6 +68,10 @@ export default class Navigation extends LayoutElement {
             this._elements.push(li);
             this.$el.appendChild(li);
         }
+    }
+
+    goto(label) {
+        this.$refs.select.value = label;
     }
 
     show() {

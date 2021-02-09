@@ -48,6 +48,19 @@ export default class Layers extends LayoutElement {
         return null;
     }
 
+    getByIndex(index) {
+        return this._layers[index];
+    }
+
+    // TODO: Refactor..
+    getIndexByLabel(label) {
+        for (let i = 0, len = this._layers.length; i < len; i++) {
+            if (this._layers[i].label === label) return i;
+
+        }
+        return null;
+    }
+
     isEmpty() {
         return this._layers.length === 0;
     }

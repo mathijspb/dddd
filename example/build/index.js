@@ -1020,7 +1020,7 @@
 	    /**
 	     * Public
 	     */
-	    add(label) {
+	    add(label, options) {
 	        if (this._elements.length === 0) {
 	            this._show();
 	        }
@@ -1045,6 +1045,10 @@
 	            this._elements.push(li);
 	            this.$el.appendChild(li);
 	        }
+	    }
+
+	    goto(label) {
+	        this.$refs.select.value = label;
 	    }
 
 	    show() {
@@ -1324,6 +1328,19 @@
 	    get(container) {
 	        for (const layer of this._layers) {
 	            if (layer.label === container) return layer.element;
+	        }
+	        return null;
+	    }
+
+	    getByIndex(index) {
+	        return this._layers[index];
+	    }
+
+	    // TODO: Refactor..
+	    getIndexByLabel(label) {
+	        for (let i = 0, len = this._layers.length; i < len; i++) {
+	            if (this._layers[i].label === label) return i;
+
 	        }
 	        return null;
 	    }
@@ -2905,9 +2922,10 @@
 	}
 
 	class Layout {
-	    constructor({ root }) {
+	    constructor({ root, onLayerChange }) {
 	        // Props
 	        this._root = root;
+	        this._onLayerChangeCallback = onLayerChange;
 
 	        this._container = this._createContainer();
 	        this._navigation = this._createNavigation();
@@ -2917,7 +2935,6 @@
 	        this._isVisible = true;
 
 	        this._groups = {};
-	        this._elements = [];
 
 	        this._bindHandlers();
 	        this._setupEventListeners();
@@ -2946,6 +2963,12 @@
 	        this._layers.resize();
 	        LayoutModel$1.addLayer(label);
 	        return layer;
+	    }
+
+	    gotoLayer(label) {
+	        const index = this._layers.getIndexByLabel(label);
+	        this._navigation.goto(index);
+	        this._layers.goto(index);
 	    }
 
 	    addGroup(label, options = {}) {
@@ -3068,19 +3091,23 @@
 	     */
 	    _navigationSwitchHandler(e) {
 	        this._layers.goto(e.detail.index);
+	        if (typeof this._onLayerChangeCallback === 'function') {
+	            const label = this._layers.getByIndex(e.detail.index).label;
+	            this._onLayerChangeCallback(label);
+	        }
 	    }
 	}
 
 	// Layout
 
 	class DDDD {
-	    constructor({ devtools, onChange } = {}) {
+	    constructor({ devtools, onChange, onLayerChange } = {}) {
 	        // Props
 	        this._isDevtools = devtools;
 	        this._onChangeCallback = onChange;
 
 	        // Setup
-	        this._layout = new Layout({ root: this });
+	        this._layout = new Layout({ root: this, onLayerChange });
 	        this._bindHandlers();
 	        this._setupEventListeners();
 	    }
@@ -3119,6 +3146,10 @@
 
 	    addLayer(label) {
 	        return this._layout.addLayer(label);
+	    }
+
+	    gotoLayer(label) {
+	        this._layout.gotoLayer(label);
 	    }
 
 	    addGroup(label, options) {
@@ -3275,7 +3306,13 @@
 	window.requestAnimationFrame(update);
 	// loadImage(settings.image);
 
-	const dddd = new DDDD();
+	const dddd = new DDDD({
+	    onLayerChange: (label) => {
+	        console.log('change layer', label);
+	    }
+	});
+
+	window.dddd = dddd;
 
 	dddd.addLayer('Layer #1');
 	const layer2 = dddd.addLayer('Layer #2');

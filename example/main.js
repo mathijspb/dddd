@@ -72,7 +72,13 @@ function loadImage(url) {
 }
 // loadImage(settings.image);
 
-const dddd = new DDDD();
+const dddd = new DDDD({
+    onLayerChange: (label) => {
+        console.log('change layer', label);
+    }
+});
+
+window.dddd = dddd;
 
 dddd.addLayer('Layer #1');
 const layer2 = dddd.addLayer('Layer #2');
