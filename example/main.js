@@ -75,7 +75,7 @@ function loadImage(url) {
 const dddd = new DDDD({
     onLayerChange: (label) => {
         console.log('change layer', label);
-    }
+    },
 });
 
 window.dddd = dddd;
@@ -88,6 +88,16 @@ const shape1 = dddd.addGroup('Shape #1', {
 });
 
 shape1.add(settings, 'time');
+dddd.add(settings, 'fontSize', {
+    container: 'Shape #1',
+    min: 30,
+    max: 100,
+});
+
+dddd.add(settings, 'position', {
+    container: 'Shape #1',
+    stepSize: 1,
+});
 
 const subgroup = shape1.addGroup('Subgroup');
 subgroup.add(settings, 'text');
@@ -100,7 +110,7 @@ subgroup.add(settings, 'font', {
     ],
 });
 
-const subgroup2 = shape1.addGroup('Subgroup2');
+const subgroup2 = subgroup.addGroup('Subgroup2');
 subgroup2.add(settings, 'fontSize', {
     container: 'Shape #1',
     min: 30,
@@ -110,16 +120,6 @@ subgroup2.add(settings, 'fontSize', {
 // const shape2 = dddd.addGroup('Shape #2', {
 //     container: 'Layer #1',
 // });
-
-dddd.add(settings, 'fontSize', {
-    container: 'Shape #1',
-    min: 30,
-    max: 100,
-});
-dddd.add(settings, 'position', {
-    container: 'Shape #1',
-    stepSize: 1,
-});
 
 // const subgroup3 = shape1.addGroup('Subgroup3');
 // subgroup3.add(settings, 'color', {

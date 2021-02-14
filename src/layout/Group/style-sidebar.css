@@ -16,33 +16,12 @@
     box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);
 }
 
-[data-level="1"].group {
-    border-radius: 0;
-    margin: 0 calc(var(--group-padding) * -1);
-    box-shadow: 0;
-}
-
-[data-level="1"] .button-header {
-    margin-bottom: 0;
-
-    background: rgba(255, 255, 255, 0.01);
-}
-
-[data-level="1"] .label {
-    font-size: 12px;
-}
-
-[data-level="1"] .content {
-    background: rgba(255, 255, 255, 0.01);
-}
-
 .button-header {
     position: relative;
 
     width: 100%;
 
     padding: 0;
-    margin-bottom: var(--group-padding);
 
     text-align: left;
 
@@ -59,7 +38,7 @@
     padding: var(--group-header-padding);
 
     font-size: var(--group-header-font-size);
-    font-weight: 600;
+    font-weight: 400;
     color: white;
     letter-spacing: 0.025em;
 }
@@ -75,8 +54,70 @@
 
 .content {
     display: grid;
+    position: relative;
 
     row-gap: var(--component-row-gap);
 
-    padding: 0 var(--group-padding) var(--group-padding);
+    padding: var(--group-padding);
+}
+
+.hidden .content {
+    display: none
+}
+
+/* Subgroup */
+.group.subgroup {
+    padding: 8px 0 0 0;
+
+    border-radius: 0;
+
+    box-shadow: initial;
+}
+
+.subgroup .button-header {
+    margin-bottom: 0;
+
+    background: transparent;
+}
+
+.subgroup .label {
+    padding: 0 0 0 21px;
+
+    font-size: 11px;
+}
+
+.subgroup .arrow {
+    position: absolute;
+    top: 3px;
+    right: 0;
+    bottom: 0;
+    left: 2px;
+
+    width: 10px;
+
+    margin: 0;
+}
+
+.hidden.subgroup .arrow {
+    transform: rotate(-90deg);
+}
+
+.subgroup .content {
+    margin: 10px 0 5px 0;
+    padding: 0 0 0 19px;
+}
+
+.subgroup .content:before {
+    content: '';
+
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 6px;
+
+    width: 1px;
+    height: 100%;
+
+    background: rgba(255, 255, 255, 0.1);
 }

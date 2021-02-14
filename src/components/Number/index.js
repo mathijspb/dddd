@@ -21,6 +21,7 @@ export default class Number extends Component {
         // Data
         this._activeInput = null;
         this._isPointerLockActive = false;
+        this._mouseCurrentPositionX = 0;
 
         // Setup
         this._bindHandlers();
@@ -92,6 +93,7 @@ export default class Number extends Component {
     _mouseDownHandler(e) {
         this.$refs.input.requestPointerLock();
         this._isPointerLockActive = true;
+        this._mouseCurrentPositionX = e.clientX;
     }
 
     _mouseUpHandler() {
@@ -111,11 +113,15 @@ export default class Number extends Component {
     }
 
     _mouseMoveHandler(e) {
-        if (this._isPointerLockActive) {
-            const value = this._getInputValueBasedOnMouseMovement(e.movementX);
-            this._updateInputValue(value);
-            this._updateModelValue(value);
-        }
+        if (!this._isPointerLockActive) return;
+
+        const delta = e.movementX;
+        if (Math.abs(delta) > 10) return; // NOTE: Prevents bug in chrome where movementX spikes to high value
+
+        const value = this._getInputValueBasedOnMouseMovement(delta);
+        this._mouseCurrentPositionX = e.clientX;
+        this._updateInputValue(value);
+        this._updateModelValue(value);
     }
 }
 

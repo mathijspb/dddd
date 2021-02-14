@@ -37,7 +37,7 @@ export default class Group extends LayoutElement {
         // Setup
         this._bindHandlers();
         this._setupEventListeners();
-        this._addLevelClass();
+        this._addSubgroupClass();
     }
 
     destroyed() {
@@ -53,6 +53,10 @@ export default class Group extends LayoutElement {
 
     get content() {
         return this.$refs.content;
+    }
+
+    get parent() {
+        return this._parent;
     }
 
     /**
@@ -90,23 +94,18 @@ export default class Group extends LayoutElement {
         if (this.$refs.buttonHeader) this.$refs.buttonHeader.removeEventListener('click', this._clickHandler);
     }
 
-    _addLevelClass() {
-        let level = 0;
-
-        function countLevel(group) {
-            if (group._parent) {
-                level++;
-                countLevel(group._parent);
-            }
-        }
-        countLevel(this);
-
-        this.$el.dataset.level = level;
+    _addSubgroupClass() {
+        if (this.parent) this.$el.classList.add('subgroup');
     }
 
     _toggleContent() {
         this._isContentVisible = !this._isContentVisible;
-        this.$refs.content.style.display = this._isContentVisible ? 'grid' : 'none';
+        if (this._isContentVisible) {
+            this.$el.classList.remove('hidden');
+        } else {
+            this.$el.classList.add('hidden');
+        }
+        // this.$refs.content.style.display = this._isContentVisible ? 'grid' : 'none';
     }
 
     /**
