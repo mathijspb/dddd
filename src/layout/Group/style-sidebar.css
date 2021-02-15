@@ -7,7 +7,7 @@
 .group {
     overflow: hidden;
 
-    /* margin: 0 var(--panel-spacing) var(--panel-spacing) 0; */
+    margin: 0 0 var(--panel-spacing) 0;
 
     background-color: var(--panel-background-color);
 

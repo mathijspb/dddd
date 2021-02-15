@@ -1372,7 +1372,7 @@
 
 	window.customElements.define('dddd-layers', Layers);
 
-	var styleSidebar$2 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.group {\n    overflow: hidden;\n\n    /* margin: 0 var(--panel-spacing) var(--panel-spacing) 0; */\n\n    background-color: var(--panel-background-color);\n\n    border-radius: var(--group-border-radius);\n\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\n}\n\n.button-header {\n    position: relative;\n\n    width: 100%;\n\n    padding: 0;\n\n    text-align: left;\n\n    background-color: var(--group-header-background-color);\n\n    border: 0;\n    outline: 0;\n    cursor: pointer;\n}\n\n.label {\n    display: block;\n\n    padding: var(--group-header-padding);\n\n    font-size: var(--group-header-font-size);\n    font-weight: 400;\n    color: white;\n    letter-spacing: 0.025em;\n}\n\n.arrow {\n    position: absolute;\n    top: 0;\n    right: calc(var(--panel-spacing) + 7px);\n    bottom: 0;\n\n    margin: auto 0;\n}\n\n.content {\n    display: grid;\n    position: relative;\n\n    row-gap: var(--component-row-gap);\n\n    padding: var(--group-padding);\n}\n\n.hidden .content {\n    display: none\n}\n\n/* Subgroup */\n.group.subgroup {\n    padding: 8px 0 0 0;\n\n    border-radius: 0;\n\n    box-shadow: initial;\n}\n\n.subgroup .button-header {\n    margin-bottom: 0;\n\n    background: transparent;\n}\n\n.subgroup .label {\n    padding: 0 0 0 21px;\n\n    font-size: 11px;\n}\n\n.subgroup .arrow {\n    position: absolute;\n    top: 3px;\n    right: 0;\n    bottom: 0;\n    left: 2px;\n\n    width: 10px;\n\n    margin: 0;\n}\n\n.hidden.subgroup .arrow {\n    transform: rotate(-90deg);\n}\n\n.subgroup .content {\n    margin: 10px 0 5px 0;\n    padding: 0 0 0 19px;\n}\n\n.subgroup .content:before {\n    content: '';\n\n    display: block;\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 6px;\n\n    width: 1px;\n    height: 100%;\n\n    background: rgba(255, 255, 255, 0.1);\n}\n";
+	var styleSidebar$2 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.group {\n    overflow: hidden;\n\n    margin: 0 0 var(--panel-spacing) 0;\n\n    background-color: var(--panel-background-color);\n\n    border-radius: var(--group-border-radius);\n\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\n}\n\n.button-header {\n    position: relative;\n\n    width: 100%;\n\n    padding: 0;\n\n    text-align: left;\n\n    background-color: var(--group-header-background-color);\n\n    border: 0;\n    outline: 0;\n    cursor: pointer;\n}\n\n.label {\n    display: block;\n\n    padding: var(--group-header-padding);\n\n    font-size: var(--group-header-font-size);\n    font-weight: 400;\n    color: white;\n    letter-spacing: 0.025em;\n}\n\n.arrow {\n    position: absolute;\n    top: 0;\n    right: calc(var(--panel-spacing) + 7px);\n    bottom: 0;\n\n    margin: auto 0;\n}\n\n.content {\n    display: grid;\n    position: relative;\n\n    row-gap: var(--component-row-gap);\n\n    padding: var(--group-padding);\n}\n\n.hidden .content {\n    display: none\n}\n\n/* Subgroup */\n.group.subgroup {\n    padding: 8px 0 0 0;\n\n    border-radius: 0;\n\n    box-shadow: initial;\n}\n\n.subgroup .button-header {\n    margin-bottom: 0;\n\n    background: transparent;\n}\n\n.subgroup .label {\n    padding: 0 0 0 21px;\n\n    font-size: 11px;\n}\n\n.subgroup .arrow {\n    position: absolute;\n    top: 3px;\n    right: 0;\n    bottom: 0;\n    left: 2px;\n\n    width: 10px;\n\n    margin: 0;\n}\n\n.hidden.subgroup .arrow {\n    transform: rotate(-90deg);\n}\n\n.subgroup .content {\n    margin: 10px 0 5px 0;\n    padding: 0 0 0 19px;\n}\n\n.subgroup .content:before {\n    content: '';\n\n    display: block;\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 6px;\n\n    width: 1px;\n    height: 100%;\n\n    background: rgba(255, 255, 255, 0.1);\n}\n";
 
 	var styleDevtools$2 = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.group {\r\n    padding: calc(var(--group-padding) - 3px) var(--group-padding) var(--group-padding);\r\n    margin: 0 var(--panel-spacing) var(--panel-spacing) 0;\r\n\r\n    background-color: var(--panel-background-color);\r\n    \r\n    border-radius: var(--group-border-radius);\r\n\r\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\r\n}\r\n\r\n.label {\r\n    display: block;\r\n\r\n    margin-bottom: 20px;\r\n\r\n    font-size: var(--group-header-font-size);\r\n    font-weight: 600;\r\n    color: white;\r\n    letter-spacing: 0.025em;\r\n}\r\n\r\n.content {\r\n    display: grid;\r\n\r\n    row-gap: var(--component-row-gap);\r\n}";
 
@@ -1826,7 +1826,6 @@
 	     * Resize
 	     */
 	    _resize() {
-	        console.log('resize');
 	        this._inputContainer = this._getContainerData();
 	        this._inputContainerWidth = this._inputContainer.width;
 	        this._scaleScrubber(this.model.value);
@@ -2307,7 +2306,7 @@
 
 	window.customElements.define('dddd-dropdown', Dropdown);
 
-	var style$7 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    position: relative;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    user-select: none;\n\n    transition: var(--input-background-color-transition);\n}\n\n.input-container:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.checkbox {\n    appearance: none;\n\n    display: block;\n    position: relative;\n\n    width: 100%;\n    height: 100%;\n\n    margin: 0;\n    padding: 0 var(--input-padding);\n\n    outline: none;\n\n    cursor: pointer;\n}\n\n.checkbox:after {\n    content: '';\n\n    display: block;\n    box-sizing: border-box;\n\n    position: absolute;\n    top: 0;\n    bottom: 0;\n\n    width: 17px;\n    height: 17px;\n\n    margin: auto 0 ;\n\n    border-radius: 50%;\n    border: 2px solid var(--input-highlight-color);\n}\n\n.checkbox:checked:after {\n    background: var(--input-highlight-color);\n\n    border: 0;\n}\n";
+	var style$7 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    position: relative;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    user-select: none;\n\n    transition: var(--input-background-color-transition);\n}\n\n.input-container:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.checkbox {\n    appearance: none;\n\n    display: block;\n    position: relative;\n\n    width: 100%;\n    height: 100%;\n\n    margin: 0;\n    padding: 0 var(--input-padding);\n\n    outline: none;\n\n    cursor: pointer;\n}\n\n.checkbox:after {\n    content: '';\n\n    display: block;\n    box-sizing: border-box;\n\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 10px;\n\n    width: 16px;\n    height: 16px;\n\n    margin: auto 0;\n\n    border-radius: 50%;\n    border: 1px solid var(--input-highlight-color);\n}\n\n.checkbox:checked:after {\n    background: var(--input-highlight-color);\n\n    border: 0;\n}\n";
 
 	var template$7 = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input container  -->\r\n    <div class=\"input-container\">\r\n\r\n        <!-- Checkbox -->\r\n        <input type=\"checkbox\" class=\"checkbox\" ref=\"checkbox\">\r\n\r\n    </div>\r\n\r\n</div>";
 
@@ -3292,6 +3291,8 @@
 	    time: 0,
 	};
 
+	let imageElement = null;
+
 	function update() {
 	    window.requestAnimationFrame(update);
 
@@ -3299,6 +3300,10 @@
 
 	    context.fillStyle = 'red';
 	    context.fillRect(0, 0, width, height);
+
+	    if (imageElement) {
+	        context.drawImage(imageElement, 0, 0, width, height);
+	    }
 
 	    context.font = `${settings.fontSize}px ${settings.font}`;
 	    context.fillStyle = settings.color;
@@ -3327,6 +3332,12 @@
 	    // }
 	}
 	window.requestAnimationFrame(update);
+
+	function loadImage(url) {
+	    const image = new Image();
+	    image.src = url;
+	    imageElement = image;
+	}
 	// loadImage(settings.image);
 
 	const dddd = new DDDD({
@@ -3374,31 +3385,31 @@
 	    max: 100,
 	});
 
-	// const shape2 = dddd.addGroup('Shape #2', {
-	//     container: 'Layer #1',
-	// });
+	const shape2 = dddd.addGroup('Shape #2', {
+	    container: 'Layer #1',
+	});
 
-	// const subgroup3 = shape1.addGroup('Subgroup3');
-	// subgroup3.add(settings, 'color', {
-	//     container: 'Shape #1',
-	// });
-	// subgroup3.add(settings, 'capitals', {
-	//     container: 'Shape #1',
-	// });
+	const subgroup3 = shape1.addGroup('Subgroup3');
+	subgroup3.add(settings, 'color', {
+	    container: 'Shape #1',
+	});
+	subgroup3.add(settings, 'capitals', {
+	    container: 'Shape #1',
+	});
 
-	// dddd.add(settings, 'image', {
-	//     type: 'image',
-	//     container: 'Shape #1',
-	//     onChange() {
-	//         loadImage(settings.image);
-	//     },
-	// });
-	// dddd.addButton({
-	//     container: 'Shape #1',
-	//     label: 'Log text',
-	//     onClick: () => {
-	//         console.log(settings.text);
-	//     },
-	// });
+	dddd.add(settings, 'image', {
+	    type: 'image',
+	    container: 'Shape #1',
+	    onChange() {
+	        loadImage(settings.image);
+	    },
+	});
+	dddd.addButton({
+	    container: 'Shape #1',
+	    label: 'Log text',
+	    onClick: () => {
+	        console.log(settings.text);
+	    },
+	});
 
 })));
