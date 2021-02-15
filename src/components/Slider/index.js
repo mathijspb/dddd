@@ -32,6 +32,7 @@ export default class Slider extends Component {
     }
 
     connected() {
+        this._resize();
         this._updateValue(this.model.value);
         this._setupEventListeners();
     }
