@@ -55,6 +55,9 @@ export default class Layout {
         const index = this._layers.getIndexByLabel(label);
         this._navigation.goto(index);
         this._layers.goto(index);
+
+        // TODO: tmp fix..
+        this._components.resize();
     }
 
     addGroup(label, options = {}) {
@@ -177,6 +180,7 @@ export default class Layout {
      */
     _navigationSwitchHandler(e) {
         this._layers.goto(e.detail.index);
+        this._components.resize();
         if (typeof this._onLayerChangeCallback === 'function') {
             const label = this._layers.getByIndex(e.detail.index).label;
             this._onLayerChangeCallback(label);

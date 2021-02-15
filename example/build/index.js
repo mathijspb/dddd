@@ -1340,7 +1340,6 @@
 	    getIndexByLabel(label) {
 	        for (let i = 0, len = this._layers.length; i < len; i++) {
 	            if (this._layers[i].label === label) return i;
-
 	        }
 	        return null;
 	    }
@@ -1595,6 +1594,10 @@
 	        }
 	    }
 
+	    resize() {
+	        this.__triggerResize();
+	    }
+
 	    /**
 	     * Private
 	     */
@@ -1823,6 +1826,7 @@
 	     * Resize
 	     */
 	    _resize() {
+	        console.log('resize');
 	        this._inputContainer = this._getContainerData();
 	        this._inputContainerWidth = this._inputContainer.width;
 	        this._scaleScrubber(this.model.value);
@@ -2693,6 +2697,12 @@
 	        }
 	    }
 
+	    resize() {
+	        for (const component of this._components) {
+	            component.resize();
+	        }
+	    }
+
 	    /**
 	     * Private
 	     */
@@ -2978,6 +2988,9 @@
 	        const index = this._layers.getIndexByLabel(label);
 	        this._navigation.goto(index);
 	        this._layers.goto(index);
+
+	        // TODO: tmp fix..
+	        this._components.resize();
 	    }
 
 	    addGroup(label, options = {}) {
@@ -3100,6 +3113,7 @@
 	     */
 	    _navigationSwitchHandler(e) {
 	        this._layers.goto(e.detail.index);
+	        this._components.resize();
 	        if (typeof this._onLayerChangeCallback === 'function') {
 	            const label = this._layers.getByIndex(e.detail.index).label;
 	            this._onLayerChangeCallback(label);

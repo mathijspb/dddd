@@ -57,6 +57,10 @@ export default class Component extends HTMLElement {
         }
     }
 
+    resize() {
+        this.__triggerResize();
+    }
+
     /**
      * Private
      */

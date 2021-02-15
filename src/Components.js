@@ -56,6 +56,12 @@ export default class Components {
         }
     }
 
+    resize() {
+        for (const component of this._components) {
+            component.resize();
+        }
+    }
+
     /**
      * Private
      */
