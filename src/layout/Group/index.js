@@ -75,6 +75,11 @@ export default class Group extends LayoutElement {
         return this.$root.addButton(options);
     }
 
+    addCanvas(options) {
+        options.container = this;
+        return this.$root.addCanvas(options);
+    }
+
     addGroup(label) {
         return this.$root.addGroup(label, {
             container: this._label,
