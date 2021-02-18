@@ -1,3 +1,4 @@
+import { Color } from 'three';
 import DDDD from '../src/DDDD';
 
 const width = 500;
@@ -13,7 +14,7 @@ const settings = {
     text: 'test',
     font: 'Arial',
     fontSize: 48,
-    color: '#ffff00',
+    color: new Color(0xff0000),
     capitals: false,
     image: 'http://localhost:3003/image.png',
     position: {
@@ -22,6 +23,8 @@ const settings = {
     },
     time: 0,
 };
+
+window.settings = settings;
 
 let imageElement = null;
 
@@ -124,6 +127,9 @@ const shape2 = dddd.addGroup('Shape #2', {
 const subgroup3 = shape1.addGroup('Subgroup3');
 subgroup3.add(settings, 'color', {
     container: 'Shape #1',
+    onChange: () => {
+        console.log(settings.color);
+    }
 });
 subgroup3.add(settings, 'capitals', {
     container: 'Shape #1',

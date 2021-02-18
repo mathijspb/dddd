@@ -131,6 +131,16 @@ export default class ComponentModel {
             return 'slider';
         }
 
+        // Three.js Color
+        if (value.constructor.name === 'Color') {
+            return 'color';
+        }
+
+        // Color
+        if (/^#[0-9A-F]{6}$/i.test(value)) {
+            return 'color';
+        }
+
         // MultiInput
         if (typeof value === 'object') {
             return 'multiInput';
@@ -139,11 +149,6 @@ export default class ComponentModel {
         // Checkbox
         if (typeof value === 'boolean') {
             return 'checkbox';
-        }
-
-        // Color
-        if (/^#[0-9A-F]{6}$/i.test(value)) {
-            return 'color';
         }
 
         // Number
