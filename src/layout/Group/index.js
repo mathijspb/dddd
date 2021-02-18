@@ -1,6 +1,8 @@
 // Base class
 import LayoutElement from '../../LayoutElement';
 
+import LocalStorage from '../../LocalStorage';
+
 // Style
 import styleSidebar from './style-sidebar.css';
 import styleDevtools from './style-devtools.css';
@@ -32,12 +34,13 @@ export default class Group extends LayoutElement {
         this._parent = options.parent;
 
         // Data
-        this._isContentVisible = true;
+        this._isVisible = true;
 
         // Setup
         this._bindHandlers();
         this._setupEventListeners();
         this._addSubgroupClass();
+        this._updateStartupVisibility();
     }
 
     destroyed() {
@@ -98,21 +101,42 @@ export default class Group extends LayoutElement {
         if (this.parent) this.$el.classList.add('subgroup');
     }
 
-    _toggleContent() {
-        this._isContentVisible = !this._isContentVisible;
-        if (this._isContentVisible) {
-            this.$el.classList.remove('hidden');
-        } else {
-            this.$el.classList.add('hidden');
-        }
-        // this.$refs.content.style.display = this._isContentVisible ? 'grid' : 'none';
+    _updateStartupVisibility() {
+        const key = this._getLocalStorageKey();
+        const visibility = LocalStorage.get(key, 'visibility');
+        if (visibility === 'hidden') this._hide();
+    }
+
+    _toggleVisibility() {
+        this._isVisible ? this._hide() : this._show();
+    }
+
+    _show() {
+        this._isVisible = true;
+        this._updateLocalStorage('visible');
+        this.$el.classList.remove('hidden');
+    }
+
+    _hide() {
+        this._isVisible = false;
+        this._updateLocalStorage('hidden');
+        this.$el.classList.add('hidden');
+    }
+
+    _updateLocalStorage(visibility) {
+        const key = this._getLocalStorageKey();
+        LocalStorage.set(key, { visibility });
+    }
+
+    _getLocalStorageKey() {
+        return `group.${this._options.container}.${this._label}`;
     }
 
     /**
      * Handlers
      */
     _clickHandler() {
-        this._toggleContent();
+        this._toggleVisibility();
     }
 }
 

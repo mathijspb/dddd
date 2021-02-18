@@ -44188,6 +44188,24 @@
 
 	window.customElements.define('dddd-layers', Layers$1);
 
+	class LocalStorage {
+	    /**
+	     * Public
+	     */
+	    set(key, object) {
+	        const value = JSON.parse(localStorage.getItem(key)) || {};
+	        Object.assign(value, object);
+	        localStorage.setItem(key, JSON.stringify(value));
+	    }
+
+	    get(key, property) {
+	        const value = JSON.parse(localStorage.getItem(key)) || {};
+	        return value[property];
+	    }
+	}
+
+	var LocalStorage$1 = new LocalStorage();
+
 	var styleSidebar$2 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.group {\n    overflow: hidden;\n\n    margin: 0 0 var(--panel-spacing) 0;\n\n    background-color: var(--panel-background-color);\n\n    border-radius: var(--group-border-radius);\n\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\n}\n\n.button-header {\n    position: relative;\n\n    width: 100%;\n\n    padding: 0;\n\n    text-align: left;\n\n    background-color: var(--group-header-background-color);\n\n    border: 0;\n    outline: 0;\n    cursor: pointer;\n}\n\n.label {\n    display: block;\n\n    padding: var(--group-header-padding);\n\n    font-size: var(--group-header-font-size);\n    font-weight: 400;\n    color: white;\n    letter-spacing: 0.025em;\n}\n\n.arrow {\n    position: absolute;\n    top: 0;\n    right: calc(var(--panel-spacing) + 7px);\n    bottom: 0;\n\n    margin: auto 0;\n}\n\n.content {\n    display: grid;\n    position: relative;\n\n    row-gap: var(--component-row-gap);\n\n    padding: var(--group-padding);\n}\n\n.hidden .content {\n    display: none\n}\n\n/* Subgroup */\n.group.subgroup {\n    padding: 8px 0 0 0;\n\n    border-radius: 0;\n\n    box-shadow: initial;\n}\n\n.subgroup .button-header {\n    margin-bottom: 0;\n\n    background: transparent;\n}\n\n.subgroup .label {\n    padding: 0 0 0 21px;\n\n    font-size: 11px;\n}\n\n.subgroup .arrow {\n    position: absolute;\n    top: 3px;\n    right: 0;\n    bottom: 0;\n    left: 2px;\n\n    width: 10px;\n\n    margin: 0;\n}\n\n.hidden.subgroup .arrow {\n    transform: rotate(-90deg);\n}\n\n.subgroup .content {\n    margin: 10px 0 5px 0;\n    padding: 0 0 0 19px;\n}\n\n.subgroup .content:before {\n    content: '';\n\n    display: block;\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 6px;\n\n    width: 1px;\n    height: 100%;\n\n    background: rgba(255, 255, 255, 0.1);\n}\n";
 
 	var styleDevtools$2 = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.group {\r\n    padding: calc(var(--group-padding) - 3px) var(--group-padding) var(--group-padding);\r\n    margin: 0 var(--panel-spacing) var(--panel-spacing) 0;\r\n\r\n    background-color: var(--panel-background-color);\r\n    \r\n    border-radius: var(--group-border-radius);\r\n\r\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\r\n}\r\n\r\n.label {\r\n    display: block;\r\n\r\n    margin-bottom: 20px;\r\n\r\n    font-size: var(--group-header-font-size);\r\n    font-weight: 600;\r\n    color: white;\r\n    letter-spacing: 0.025em;\r\n}\r\n\r\n.content {\r\n    display: grid;\r\n\r\n    row-gap: var(--component-row-gap);\r\n}";
@@ -44221,12 +44239,13 @@
 	        this._parent = options.parent;
 
 	        // Data
-	        this._isContentVisible = true;
+	        this._isVisible = true;
 
 	        // Setup
 	        this._bindHandlers();
 	        this._setupEventListeners();
 	        this._addSubgroupClass();
+	        this._updateStartupVisibility();
 	    }
 
 	    destroyed() {
@@ -44287,21 +44306,42 @@
 	        if (this.parent) this.$el.classList.add('subgroup');
 	    }
 
-	    _toggleContent() {
-	        this._isContentVisible = !this._isContentVisible;
-	        if (this._isContentVisible) {
-	            this.$el.classList.remove('hidden');
-	        } else {
-	            this.$el.classList.add('hidden');
-	        }
-	        // this.$refs.content.style.display = this._isContentVisible ? 'grid' : 'none';
+	    _updateStartupVisibility() {
+	        const key = this._getLocalStorageKey();
+	        const visibility = LocalStorage$1.get(key, 'visibility');
+	        if (visibility === 'hidden') this._hide();
+	    }
+
+	    _toggleVisibility() {
+	        this._isVisible ? this._hide() : this._show();
+	    }
+
+	    _show() {
+	        this._isVisible = true;
+	        this._updateLocalStorage('visible');
+	        this.$el.classList.remove('hidden');
+	    }
+
+	    _hide() {
+	        this._isVisible = false;
+	        this._updateLocalStorage('hidden');
+	        this.$el.classList.add('hidden');
+	    }
+
+	    _updateLocalStorage(visibility) {
+	        const key = this._getLocalStorageKey();
+	        LocalStorage$1.set(key, { visibility });
+	    }
+
+	    _getLocalStorageKey() {
+	        return `group.${this._options.container}.${this._label}`;
 	    }
 
 	    /**
 	     * Handlers
 	     */
 	    _clickHandler() {
-	        this._toggleContent();
+	        this._toggleVisibility();
 	    }
 	}
 
