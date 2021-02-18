@@ -27,10 +27,12 @@ export default class Layout {
     }
 
     destroy() {
-        // TODO: Quick and dirty
-        document.body.removeChild(this._container);
-
-        this._removeEventListeners();
+        this._container.destroy();
+        this._navigation.destroy();
+        this._layers.destroy();
+        this._components.destroy();
+        this._removeElement();
+        this._removeContainerElement();
     }
 
     /**
@@ -173,6 +175,10 @@ export default class Layout {
             }
         }
         return groupContainer;
+    }
+
+    _removeContainerElement() {
+        document.body.removeChild(this._container);
     }
 
     /**

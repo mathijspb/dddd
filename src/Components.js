@@ -2,7 +2,7 @@ import LayoutModel from './LayoutModel';
 import componentTypes from './components/types';
 
 export default class Components {
-    constructor({ root, layout }) {
+    constructor({ root }) {
         // Props
         this._root = root;
 
@@ -15,6 +15,7 @@ export default class Components {
     }
 
     destroy() {
+        this._destroyComponents();
         this._removeEventListeners();
     }
 
@@ -89,6 +90,12 @@ export default class Components {
             if (component.model.id === id) {
                 return component;
             }
+        }
+    }
+
+    _destroyComponents() {
+        for (const component of this._components) {
+            component.destroy();
         }
     }
 

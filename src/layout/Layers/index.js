@@ -19,6 +19,10 @@ export default class Layers extends LayoutElement {
         this._layers = [];
     }
 
+    destroyed() {
+        this._destroyLayers();
+    }
+
     /**
      * Public
      */
@@ -79,6 +83,12 @@ export default class Layers extends LayoutElement {
     /**
      * Private
      */
+    _destroyLayers() {
+        for (const layer of this._layers) {
+            layer.destroy();
+        }
+    }
+
     _resizeLayers() {
         for (const layer of this._layers) {
             layer.resize();
