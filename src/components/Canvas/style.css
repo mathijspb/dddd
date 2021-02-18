@@ -1,0 +1,38 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.component {
+    display: grid;
+
+    grid-template-columns: var(--label-width) calc(100% - var(--label-width));
+    align-items: start;
+
+    transition: background-color 0.15s;
+}
+
+.label {
+    height: var(--input-height);
+    overflow: hidden;
+
+    padding: var(--label-padding);
+
+    font-size: var(--label-font-size);
+    line-height: var(--input-height);
+    font-weight: var(--label-font-weight);
+    color: var(--label-color);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.input-container {
+    overflow: hidden;
+
+    border-radius: var(--input-border-radius);
+}
+
+.input-container canvas {
+    max-width: 100%;
+}

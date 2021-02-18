@@ -129,7 +129,7 @@ subgroup3.add(settings, 'color', {
     container: 'Shape #1',
     onChange: () => {
         console.log(settings.color);
-    }
+    },
 });
 subgroup3.add(settings, 'capitals', {
     container: 'Shape #1',
@@ -148,4 +148,15 @@ dddd.addButton({
     onClick: () => {
         console.log(settings.text);
     },
+});
+
+const debugCanvas = document.createElement('canvas');
+const debugContext = debugCanvas.getContext('2d');
+debugContext.fillStyle = 'red';
+debugContext.fillRect(0, 0, 100, 100);
+
+dddd.addCanvas({
+    label: 'canvas',
+    canvas: debugCanvas,
+    container: 'Shape #1',
 });

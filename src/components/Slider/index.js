@@ -22,7 +22,6 @@ export default class Slider extends Component {
         this._scrubber = { width: 0 };
         this._mouseStartPosition = { x: 0, y: 0 };
         this._mousePosition = { x: 0, y: 0 };
-        this._inputContainerWidth = null;
         this._isMouseDown = false;
         this._isShiftDown = false;
         this._isSlideStarted = false;
@@ -105,7 +104,7 @@ export default class Slider extends Component {
         const modifier = this._isShiftDown ? PRECISION_MODIFIER : 1;
         const delta = (mouseX - this._mouseStartPosition.x) * modifier;
         const x = this._mouseStartPosition.x - this._inputContainer.x + delta;
-        const percentage = (x / this._inputContainerWidth);
+        const percentage = (x / this._inputContainer.width);
         const value = this._map(percentage, 0, 1, this.model.options.min, this.model.options.max);
         return value;
     }
@@ -137,7 +136,6 @@ export default class Slider extends Component {
      */
     _resize() {
         this._inputContainer = this._getContainerData();
-        this._inputContainerWidth = this._inputContainer.width;
         this._scaleScrubber(this.model.value);
     }
 

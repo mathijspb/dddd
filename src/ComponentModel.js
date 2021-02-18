@@ -119,6 +119,10 @@ export default class ComponentModel {
             return 'image';
         }
 
+        if (this._options.type === 'canvas') {
+            return 'canvas';
+        }
+
         if (this._options.options &&
             typeof this._options.options === 'object') {
             return 'dropdown';

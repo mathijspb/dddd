@@ -44206,7 +44206,7 @@
 
 	var LocalStorage$1 = new LocalStorage();
 
-	var styleSidebar$2 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.group {\n    overflow: hidden;\n\n    margin: 0 0 var(--panel-spacing) 0;\n\n    background-color: var(--panel-background-color);\n\n    border-radius: var(--group-border-radius);\n\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\n}\n\n.button-header {\n    position: relative;\n\n    width: 100%;\n\n    padding: 0;\n\n    text-align: left;\n\n    background-color: var(--group-header-background-color);\n\n    border: 0;\n    outline: 0;\n    cursor: pointer;\n}\n\n.label {\n    display: block;\n\n    padding: var(--group-header-padding);\n\n    font-size: var(--group-header-font-size);\n    font-weight: 400;\n    color: white;\n    letter-spacing: 0.025em;\n}\n\n.arrow {\n    position: absolute;\n    top: 0;\n    right: calc(var(--panel-spacing) + 7px);\n    bottom: 0;\n\n    margin: auto 0;\n}\n\n.content {\n    display: grid;\n    position: relative;\n\n    row-gap: var(--component-row-gap);\n\n    padding: var(--group-padding);\n}\n\n.hidden .content {\n    display: none\n}\n\n/* Subgroup */\n.group.subgroup {\n    padding: 8px 0 0 0;\n\n    border-radius: 0;\n\n    box-shadow: initial;\n}\n\n.subgroup .button-header {\n    margin-bottom: 0;\n\n    background: transparent;\n}\n\n.subgroup .label {\n    padding: 0 0 0 21px;\n\n    font-size: 11px;\n}\n\n.subgroup .arrow {\n    position: absolute;\n    top: 3px;\n    right: 0;\n    bottom: 0;\n    left: 2px;\n\n    width: 10px;\n\n    margin: 0;\n}\n\n.hidden.subgroup .arrow {\n    transform: rotate(-90deg);\n}\n\n.subgroup .content {\n    margin: 10px 0 5px 0;\n    padding: 0 0 0 19px;\n}\n\n.subgroup .content:before {\n    content: '';\n\n    display: block;\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 6px;\n\n    width: 1px;\n    height: 100%;\n\n    background: rgba(255, 255, 255, 0.1);\n}\n";
+	var styleSidebar$2 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.group {\n    overflow: hidden;\n\n    margin: 0 0 var(--panel-spacing) 0;\n\n    background-color: var(--panel-background-color);\n\n    border-radius: var(--group-border-radius);\n\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\n}\n\n.button-header {\n    position: relative;\n\n    width: 100%;\n\n    padding: 0;\n\n    text-align: left;\n\n    background-color: var(--group-header-background-color);\n\n    border: 0;\n    outline: 0;\n    cursor: pointer;\n}\n\n.label {\n    display: block;\n\n    padding: var(--group-header-padding);\n\n    font-size: var(--group-header-font-size);\n    font-weight: 400;\n    color: white;\n    letter-spacing: 0.025em;\n}\n\n.arrow {\n    position: absolute;\n    top: 0;\n    right: calc(var(--panel-spacing) + 7px);\n    bottom: 0;\n\n    margin: auto 0;\n}\n\n.content {\n    display: grid;\n    position: relative;\n\n    row-gap: var(--component-row-gap);\n\n    padding: var(--group-padding);\n}\n\n.hidden .content {\n    display: none;\n}\n\n/* Subgroup */\n.group.subgroup {\n    padding: 8px 0 0 0;\n\n    border-radius: 0;\n\n    box-shadow: initial;\n}\n\n.subgroup .button-header {\n    margin-bottom: 0;\n\n    background: transparent;\n}\n\n.subgroup .label {\n    padding: 0 0 0 21px;\n\n    font-size: 11px;\n}\n\n.subgroup .arrow {\n    position: absolute;\n    top: 3px;\n    right: 0;\n    bottom: 0;\n    left: 2px;\n\n    width: 10px;\n\n    margin: 0;\n}\n\n.hidden.subgroup .arrow {\n    transform: rotate(-90deg);\n}\n\n.subgroup .content {\n    margin: 10px 0 5px 0;\n    padding: 0 0 0 19px;\n}\n\n.subgroup .content:before {\n    content: '';\n\n    display: block;\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 6px;\n\n    width: 1px;\n    height: 100%;\n\n    background: rgba(255, 255, 255, 0.1);\n}\n";
 
 	var styleDevtools$2 = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.group {\r\n    padding: calc(var(--group-padding) - 3px) var(--group-padding) var(--group-padding);\r\n    margin: 0 var(--panel-spacing) var(--panel-spacing) 0;\r\n\r\n    background-color: var(--panel-background-color);\r\n    \r\n    border-radius: var(--group-border-radius);\r\n\r\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\r\n}\r\n\r\n.label {\r\n    display: block;\r\n\r\n    margin-bottom: 20px;\r\n\r\n    font-size: var(--group-header-font-size);\r\n    font-weight: 600;\r\n    color: white;\r\n    letter-spacing: 0.025em;\r\n}\r\n\r\n.content {\r\n    display: grid;\r\n\r\n    row-gap: var(--component-row-gap);\r\n}";
 
@@ -44320,6 +44320,10 @@
 	        this._isVisible = true;
 	        this._updateLocalStorage('visible');
 	        this.$el.classList.remove('hidden');
+
+	        // TODO: Fix - Should on resize components inside group
+	        this.$root.layout.resize();
+	        console.log('resize');
 	    }
 
 	    _hide() {
@@ -44568,7 +44572,6 @@
 	        this._scrubber = { width: 0 };
 	        this._mouseStartPosition = { x: 0, y: 0 };
 	        this._mousePosition = { x: 0, y: 0 };
-	        this._inputContainerWidth = null;
 	        this._isMouseDown = false;
 	        this._isShiftDown = false;
 	        this._isSlideStarted = false;
@@ -44651,7 +44654,7 @@
 	        const modifier = this._isShiftDown ? PRECISION_MODIFIER : 1;
 	        const delta = (mouseX - this._mouseStartPosition.x) * modifier;
 	        const x = this._mouseStartPosition.x - this._inputContainer.x + delta;
-	        const percentage = (x / this._inputContainerWidth);
+	        const percentage = (x / this._inputContainer.width);
 	        const value = this._map(percentage, 0, 1, this.model.options.min, this.model.options.max);
 	        return value;
 	    }
@@ -44683,7 +44686,6 @@
 	     */
 	    _resize() {
 	        this._inputContainer = this._getContainerData();
-	        this._inputContainerWidth = this._inputContainer.width;
 	        this._scaleScrubber(this.model.value);
 	    }
 
@@ -45518,6 +45520,62 @@
 
 	window.customElements.define('dddd-multi-input', MultiInput);
 
+	var style$b = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n\n    transition: background-color 0.15s;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    line-height: var(--input-height);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    overflow: hidden;\n\n    border-radius: var(--input-border-radius);\n}\n\n.input-container canvas {\n    max-width: 100%;\n}\n";
+
+	var template$b = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input container -->\r\n    <div class=\"input-container\" ref=\"inputContainer\"></div>\r\n\r\n</div>";
+
+	// Base component
+
+	class Canvas extends Component {
+	    constructor(root, model) {
+	        super({ root, style: style$b, template: template$b, model });
+
+	        // Options
+
+	        // Data
+
+	        // Setup
+	        this._bindHandlers();
+	    }
+
+	    connected() {
+	        this._addCanvas();
+	        this._setupEventListeners();
+	    }
+
+	    destroyed() {
+	        this._removeEventListeners();
+	    }
+
+	    /**
+	     * Hooks
+	     */
+	    onListen() {
+	    }
+
+	    /**
+	     * Private
+	     */
+	    _bindHandlers() {
+	    }
+
+	    _setupEventListeners() {
+	    }
+
+	    _removeEventListeners() {
+	    }
+
+	    _addCanvas() {
+	        this.$refs.inputContainer.appendChild(this.model.options.canvas);
+	    }
+
+	    /**
+	     * Handlers
+	     */
+	}
+
+	window.customElements.define('dddd-canvas', Canvas);
+
 	var componentTypes = {
 	    slider: Slider,
 	    text: Text,
@@ -45528,6 +45586,7 @@
 	    button: Button,
 	    color: Color$1,
 	    multiInput: MultiInput,
+	    canvas: Canvas,
 	};
 
 	class Components {
@@ -45777,6 +45836,10 @@
 	            return 'image';
 	        }
 
+	        if (this._options.type === 'canvas') {
+	            return 'canvas';
+	        }
+
 	        if (this._options.options &&
 	            typeof this._options.options === 'object') {
 	            return 'dropdown';
@@ -45929,6 +45992,7 @@
 
 	    resize() {
 	        this._layers.resize();
+	        this._components.resize();
 	    }
 
 	    toggleVisibility() {
@@ -46071,6 +46135,10 @@
 
 	    addButton(options) {
 	        return this._layout.addComponent({ options, type: 'button' });
+	    }
+
+	    addCanvas(options) {
+	        return this._layout.addComponent({ options, type: 'canvas' });
 	    }
 
 	    addLayer(label) {
@@ -46303,7 +46371,7 @@
 	    container: 'Shape #1',
 	    onChange: () => {
 	        console.log(settings.color);
-	    }
+	    },
 	});
 	subgroup3.add(settings, 'capitals', {
 	    container: 'Shape #1',
@@ -46322,6 +46390,17 @@
 	    onClick: () => {
 	        console.log(settings.text);
 	    },
+	});
+
+	const debugCanvas = document.createElement('canvas');
+	const debugContext = debugCanvas.getContext('2d');
+	debugContext.fillStyle = 'red';
+	debugContext.fillRect(0, 0, 100, 100);
+
+	dddd.addCanvas({
+	    label: 'canvas',
+	    canvas: debugCanvas,
+	    container: 'Shape #1',
 	});
 
 })));

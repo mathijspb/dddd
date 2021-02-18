@@ -7,6 +7,7 @@ import Checkbox from './Checkbox/index';
 import Button from './Button/index';
 import Color from './Color/index';
 import MultiInput from './MultiInput/index';
+import Canvas from './Canvas/index';
 
 export default {
     slider: Slider,
@@ -18,4 +19,5 @@ export default {
     button: Button,
     color: Color,
     multiInput: MultiInput,
+    canvas: Canvas,
 };

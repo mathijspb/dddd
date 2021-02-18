@@ -96,6 +96,7 @@ export default class Layout {
 
     resize() {
         this._layers.resize();
+        this._components.resize();
     }
 
     toggleVisibility() {

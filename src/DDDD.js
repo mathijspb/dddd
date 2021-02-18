@@ -46,6 +46,10 @@ export default class DDDD {
         return this._layout.addComponent({ options, type: 'button' });
     }
 
+    addCanvas(options) {
+        return this._layout.addComponent({ options, type: 'canvas' });
+    }
+
     addLayer(label) {
         return this._layout.addLayer(label);
     }

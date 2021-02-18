@@ -115,6 +115,9 @@ export default class Group extends LayoutElement {
         this._isVisible = true;
         this._updateLocalStorage('visible');
         this.$el.classList.remove('hidden');
+
+        // TODO: Fix - Should on resize components inside group
+        this.$root.layout.resize();
     }
 
     _hide() {
