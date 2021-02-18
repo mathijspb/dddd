@@ -7,10 +7,10 @@
 .dddd {
     /* Layout */
     --font: 'Arial', sans-serif;
-    --background-color: #161616;
+    --background-color: rgba(2, 22, 22, 0.9);
 
     /* Panels */
-    --panel-background-color: #1B1B1B;
+    --panel-background-color: rgb(27, 27, 27, 0.9);
     --panel-spacing: 10px;
 
     /* Groups */
