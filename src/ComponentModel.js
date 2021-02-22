@@ -114,6 +114,11 @@ export default class ComponentModel {
         const value = this._object?.[this._property];
         const type = null;
 
+        // Three.js Texture
+        if (value.constructor.name === 'Texture') {
+            return 'image';
+        }
+
         // Image
         if (this._options.type === 'image') {
             return 'image';

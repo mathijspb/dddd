@@ -9,6 +9,8 @@ import template from './template.html';
 
 // Constants
 const CLASS_DROP_AREA = 'drop-area';
+const TYPE_THREE = 'TYPE_THREE';
+const TYPE_IMAGE = 'TYPE_IMAGE';
 
 export default class ImageComponent extends Component {
     constructor(root, model) {
@@ -16,6 +18,7 @@ export default class ImageComponent extends Component {
 
         // Data
         this._previewImage = null;
+        this._type = this._getType();
 
         // Setup
         this._bindHandlers();
@@ -57,6 +60,15 @@ export default class ImageComponent extends Component {
         this.$el.removeEventListener('dragleave', this._dragLeaveHandler);
     }
 
+    _getType() {
+        const value = this.model.value;
+        if (value.constructor.name === 'Texture') {
+            return TYPE_THREE;
+        } else {
+            return TYPE_IMAGE;
+        }
+    }
+
     _handleFile(file) {
         const reader = new FileReader();
         reader.onloadend = this._fileLoadedHandler;
@@ -72,7 +84,11 @@ export default class ImageComponent extends Component {
 
     _addPreviewImage(image) {
         this._previewImage = document.createElement('img');
-        this._previewImage.src = image;
+        if (this._type === TYPE_THREE) {
+            this._previewImage.src = this.model.value.image.src;
+        } else {
+            this._previewImage.src = image;
+        }
         this.$refs.imageContainer.appendChild(this._previewImage);
     }
 
@@ -112,7 +128,12 @@ export default class ImageComponent extends Component {
 
     _fileLoadedHandler(e) {
         const image = e.target.result;
-        this.model.value = image;
+        if (this._type === TYPE_THREE) {
+            this.model.value.image.src = image;
+            this.model.value.needsUpdate = true;
+        } else {
+            this.model.value = image;
+        }
         this._removePreviewImage();
         this._addPreviewImage(image);
     }

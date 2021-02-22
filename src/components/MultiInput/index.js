@@ -72,11 +72,14 @@ export default class MultiInput extends Component {
 
     _createInputs() {
         for (const key in this.model.value) {
-            const input = document.createElement('input');
-            input.classList.add('input');
-            input.value = this.model.value[key];
-            this._inputs.push(input);
-            this.$refs.inputContainer.appendChild(input);
+            const value = this.model.value[key];
+            if (typeof value === 'number') {
+                const input = document.createElement('input');
+                input.classList.add('input');
+                input.value = value;
+                this._inputs.push(input);
+                this.$refs.inputContainer.appendChild(input);
+            }
         }
     }
 
