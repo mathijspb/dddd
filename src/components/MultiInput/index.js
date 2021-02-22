@@ -141,8 +141,8 @@ export default class MultiInput extends Component {
     _mouseMoveHandler(e) {
         if (!this._isPointerLockActive) return;
 
-        const delta = e.movementX;
-        if (Math.abs(delta) > 10) return; // NOTE: Prevents bug in chrome where movementX spikes to high value
+        let delta = e.movementX;
+        delta = Math.max(Math.min(delta, 100), -100); // NOTE: Prevents bug in chrome where movementX spikes to high value
 
         const value = this._getInputValueBasedOnMouseMovement(delta);
         this._updateInputValue(value);
