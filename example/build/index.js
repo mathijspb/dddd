@@ -44860,7 +44860,7 @@
 	// Constants
 	const DEFAULT_STEP_SIZE = 0.01;
 
-	class Number$1 extends Component {
+	class NumberComponent extends Component {
 	    constructor(root, model) {
 	        super({ root, style: style$4, template: template$4, model });
 
@@ -44951,7 +44951,8 @@
 	    }
 
 	    _changeHandler() {
-	        this._updateModelValue(this.$refs.input.value);
+	        const value = Number(this.$refs.input.value);
+	        this._updateModelValue(value);
 	    }
 
 	    _pointerLockHanderHandler() {
@@ -44973,7 +44974,7 @@
 	    }
 	}
 
-	window.customElements.define('dddd-number', Number$1);
+	window.customElements.define('dddd-number', NumberComponent);
 
 	var style$5 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    line-height: var(--input-height);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.image-container {\n    position: relative;\n\n    width: 100%;\n    aspect-ratio: 16 / 9;\n\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    transition: var(--input-background-color-transition);\n}\n\n.image-container:hover,\n.image-container.drop-area {\n    background-color: var(--input-background-color-hover);\n}\n\n.image-container img {\n    object-fit: cover;\n\n    width: 100%;\n    height: 100%;\n}\n\n.locked .image-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.file-input {\n    position: absolute;\n    top: 0;\n    left: 0;\n\n    width: 100%;\n    height: 100%;\n\n    border: 0;\n    outline: none;\n\n    cursor: pointer;\n}\n\n.file-input::-webkit-file-upload-button {\n    visibility: hidden;\n}\n\n.file-input::before {\n    content: '';\n\n    display: block;\n\n    width: 100%;\n    height: 100%;\n}\n";
 
@@ -45465,11 +45466,14 @@
 
 	    _createInputs() {
 	        for (const key in this.model.value) {
-	            const input = document.createElement('input');
-	            input.classList.add('input');
-	            input.value = this.model.value[key];
-	            this._inputs.push(input);
-	            this.$refs.inputContainer.appendChild(input);
+	            const value = this.model.value[key];
+	            if (typeof value === 'number') {
+	                const input = document.createElement('input');
+	                input.classList.add('input');
+	                input.value = value;
+	                this._inputs.push(input);
+	                this.$refs.inputContainer.appendChild(input);
+	            }
 	        }
 	    }
 
@@ -45604,7 +45608,7 @@
 	var componentTypes = {
 	    slider: Slider,
 	    text: Text,
-	    number: Number$1,
+	    number: NumberComponent,
 	    image: ImageComponent,
 	    dropdown: Dropdown,
 	    checkbox: Checkbox,

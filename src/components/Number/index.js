@@ -10,7 +10,7 @@ import template from './template.html';
 // Constants
 const DEFAULT_STEP_SIZE = 0.01;
 
-export default class Number extends Component {
+export default class NumberComponent extends Component {
     constructor(root, model) {
         super({ root, style, template, model });
 
@@ -101,7 +101,8 @@ export default class Number extends Component {
     }
 
     _changeHandler() {
-        this._updateModelValue(this.$refs.input.value);
+        const value = Number(this.$refs.input.value);
+        this._updateModelValue(value);
     }
 
     _pointerLockHanderHandler() {
@@ -125,4 +126,4 @@ export default class Number extends Component {
     }
 }
 
-window.customElements.define('dddd-number', Number);
+window.customElements.define('dddd-number', NumberComponent);
