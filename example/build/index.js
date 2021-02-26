@@ -44953,6 +44953,7 @@
 	    _changeHandler() {
 	        const value = Number(this.$refs.input.value);
 	        this._updateModelValue(value);
+	        this.$refs.input.blur();
 	    }
 
 	    _pointerLockHanderHandler() {
