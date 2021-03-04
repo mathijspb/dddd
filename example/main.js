@@ -15,7 +15,7 @@ textureImage.src = 'data:image/jpeg;base64,/9j/4R73RXhpZgAATU0AKgAAAAgABwESAAMAA
 
 const settings = {
     text: 'test',
-    font: 'Arial',
+    font: 'Verdana',
     fontSize: 48,
     color: new Color(0xff0000),
     texture: new Texture(textureImage),

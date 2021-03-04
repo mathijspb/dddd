@@ -49,7 +49,7 @@ export default class Dropdown extends Component {
             const element = document.createElement('option');
             element.value = item;
             element.textContent = item;
-            element.selected = item === this._value;
+            element.selected = item === this.model.value;
             this.$refs.select.appendChild(element);
         }
     }
