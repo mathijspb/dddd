@@ -43,6 +43,8 @@
     --input-padding: 12px;
     --input-height: 32px;
 
+    z-index: 1337;
+
     position: fixed;
     top: 0;
     right: 0;
