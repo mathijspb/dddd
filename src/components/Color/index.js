@@ -76,6 +76,9 @@ export default class Color extends Component {
     _setModelValue(value) {
         if (this._type === TYPE_THREE) {
             this.model.value.set(value);
+            if (typeof this.model.options.onChange === 'function') {
+                this.model.options.onChange(this._value);
+            }
         } else {
             this.model.value = value;
         }

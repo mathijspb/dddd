@@ -45379,6 +45379,9 @@
 	    _setModelValue(value) {
 	        if (this._type === TYPE_THREE$1) {
 	            this.model.value.set(value);
+	            if (typeof this.model.options.onChange === 'function') {
+	                this.model.options.onChange(this._value);
+	            }
 	        } else {
 	            this.model.value = value;
 	        }
