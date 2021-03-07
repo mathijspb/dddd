@@ -148,9 +148,9 @@ dddd.add(settings, 'image', {
 });
 dddd.addButton({
     container: 'Shape #1',
-    label: 'Log text',
+    label: 'Remove group',
     onClick: () => {
-        console.log(settings.text);
+        dddd.removeGroup('Subgroup3')
     },
 });
 

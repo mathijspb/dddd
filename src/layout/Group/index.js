@@ -62,6 +62,10 @@ export default class Group extends LayoutElement {
         return this._parent;
     }
 
+    get options() {
+        return this._options;
+    }
+
     /**
      * Public
      */
@@ -83,6 +87,12 @@ export default class Group extends LayoutElement {
     addGroup(label) {
         return this.$root.addGroup(label, {
             container: this._label,
+            parent: this,
+        });
+    }
+
+    removeGroup(label) {
+        return this.$root.removeGroup(label, {
             parent: this,
         });
     }

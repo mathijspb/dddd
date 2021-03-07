@@ -72,6 +72,15 @@ export default class Layout {
         return group;
     }
 
+    removeGroup(label, options) {
+        const group = this._groups[label];
+        const container = this._groups[group.options.container];
+        container.content.removeChild(group);
+        delete this._groups[label];
+        this._layers.resize();
+        LayoutModel.removeGroup(label);
+    }
+
     addComponent({ object, property, options, id, type, onChangeCallback }) {
         const model = new ComponentModel({ root: this._root, object, property, options, id, type, onChangeCallback });
         const component = this._components.create(model);

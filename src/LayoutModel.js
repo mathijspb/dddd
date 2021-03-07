@@ -16,6 +16,11 @@ class LayoutModel {
         this._groups.push({ label, options });
     }
 
+    removeGroup(label) {
+        const index = this._getGroupIndex(label);
+        this._groups.splice(index, 1);
+    }
+
     addComponent(model) {
         this._components.push(model);
     }
@@ -38,6 +43,13 @@ class LayoutModel {
             components.push(model.getData());
         }
         return components;
+    }
+
+    _getGroupIndex(label) {
+        for (let i = 0, len = this._groups.length; i < len; i++) {
+            if (this._groups[i].label === label) return i;
+        }
+        return null;
     }
 }
 

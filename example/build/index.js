@@ -43651,7 +43651,7 @@
 	    }
 	}
 
-	var styleSidebar = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.dddd {\r\n    /* Layout */\r\n    --font: 'Arial', sans-serif;\r\n    --background-color: rgba(27, 27, 27, 0.9);\r\n\r\n    /* Panels */\r\n    --panel-background-color: rgba(27, 27, 27, 0.9);\r\n    --panel-spacing: 10px;\r\n\r\n    /* Groups */\r\n    --group-header-padding: 13px 13px;\r\n    --group-header-font-size: 12px;\r\n    --group-header-background-color: rgba(255, 255, 255, 0.03);\r\n    --group-padding: 12px 11px 12px 13px;\r\n    --group-border-radius: 8px;\r\n\r\n    /* Components */\r\n    --component-row-gap: 6px;\r\n\r\n    /* Label */\r\n    --label-width: 35%;\r\n    --label-padding: 0 20px 0 0;\r\n    --label-color: rgba(255, 255, 255, 0.5);\r\n    --label-font-size: 12px;\r\n    --label-font-weight: 400;\r\n\r\n    /* Input */\r\n    --input-background-color: rgba(255, 255, 255, 0.03);\r\n    --input-background-color-hover: rgba(255, 255, 255, 0.08);\r\n    --input-background-color-transition: background-color 0.35s ease-out;\r\n    --input-highlight-color: rgba(77, 83, 217, 0.64);\r\n    --input-highlight-color-hover: rgba(77, 83, 217, 1);\r\n    --input-text-color: rgba(255, 255, 255, 0.75);\r\n    --input-font-size: 12px;\r\n    --input-font-weight: 300;\r\n    --input-border-radius: 6px;\r\n    --input-padding: 12px;\r\n    --input-height: 32px;\r\n\r\n    position: fixed;\r\n    top: 0;\r\n    right: 0;\r\n\r\n    width: 300px;\r\n    height: 100%;\r\n    max-height: 100vh;\r\n\r\n    background: var(--background-color);\r\n}\r\n\r\n.content {\r\n    width: 100%;\r\n    height: 100%;\r\n    overflow: auto;\r\n}\r\n\r\n.resize-handle {\r\n    position: absolute;\r\n\r\n    padding: 0;\r\n\r\n    background-color: transparent;\r\n\r\n    border: 0;\r\n    outline: 0;\r\n}\r\n\r\n.resize-handle.side {\r\n    top: 0;\r\n    left: 0;\r\n\r\n    width: 6px;\r\n    height: 100%;\r\n\r\n    cursor: ew-resize;\r\n}\r\n\r\n.resize-handle.bottom {\r\n    bottom: 0;\r\n    left: 0;\r\n\r\n    width: 100%;\r\n    height: 6px;\r\n\r\n    cursor: ns-resize;\r\n}\r\n\r\n.resize-handle.corner {\r\n    bottom: 0;\r\n    left: 0;\r\n\r\n    width: 10px;\r\n    height: 10px;\r\n\r\n    cursor: nesw-resize;\r\n}\r\n";
+	var styleSidebar = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.dddd {\n    /* Layout */\n    --font: 'Arial', sans-serif;\n    --background-color: rgba(27, 27, 27, 0.9);\n\n    /* Panels */\n    --panel-background-color: rgba(27, 27, 27, 0.9);\n    --panel-spacing: 10px;\n\n    /* Groups */\n    --group-header-padding: 13px 13px;\n    --group-header-font-size: 12px;\n    --group-header-background-color: rgba(255, 255, 255, 0.03);\n    --group-padding: 12px 11px 12px 13px;\n    --group-border-radius: 8px;\n\n    /* Components */\n    --component-row-gap: 6px;\n\n    /* Label */\n    --label-width: 35%;\n    --label-padding: 0 20px 0 0;\n    --label-color: rgba(255, 255, 255, 0.5);\n    --label-font-size: 12px;\n    --label-font-weight: 400;\n\n    /* Input */\n    --input-background-color: rgba(255, 255, 255, 0.03);\n    --input-background-color-hover: rgba(255, 255, 255, 0.08);\n    --input-background-color-transition: background-color 0.35s ease-out;\n    --input-highlight-color: rgba(77, 83, 217, 0.64);\n    --input-highlight-color-hover: rgba(77, 83, 217, 1);\n    --input-text-color: rgba(255, 255, 255, 0.75);\n    --input-font-size: 12px;\n    --input-font-weight: 300;\n    --input-border-radius: 6px;\n    --input-padding: 12px;\n    --input-height: 32px;\n\n    z-index: 1337;\n\n    position: fixed;\n    top: 0;\n    right: 0;\n\n    width: 300px;\n    height: 100%;\n    max-height: 100vh;\n\n    background: var(--background-color);\n}\n\n.content {\n    width: 100%;\n    height: 100%;\n    overflow: auto;\n}\n\n.resize-handle {\n    position: absolute;\n\n    padding: 0;\n\n    background-color: transparent;\n\n    border: 0;\n    outline: 0;\n}\n\n.resize-handle.side {\n    top: 0;\n    left: 0;\n\n    width: 6px;\n    height: 100%;\n\n    cursor: ew-resize;\n}\n\n.resize-handle.bottom {\n    bottom: 0;\n    left: 0;\n\n    width: 100%;\n    height: 6px;\n\n    cursor: ns-resize;\n}\n\n.resize-handle.corner {\n    bottom: 0;\n    left: 0;\n\n    width: 10px;\n    height: 10px;\n\n    cursor: nesw-resize;\n}\n";
 
 	var styleDevtools = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.dddd {\r\n    /* Layout */\r\n    --font: 'Arial', sans-serif;\r\n    --background-color: #161616;\r\n\r\n    /* Panels */\r\n    --panel-background-color: #1B1B1B;\r\n    --panel-spacing: 15px;\r\n\r\n    /* Groups */\r\n    --group-header-font-size: 15px;\r\n    --group-header-background-color: rgba(255, 255, 255, 0.03);\r\n    --group-padding: 30px;\r\n    --group-border-radius: 10px;\r\n\r\n    /* Components */\r\n    --component-row-gap: 7px;\r\n\r\n    /* Label */\r\n    --label-width: 30%;\r\n    --label-padding: 0 20px 0 0;\r\n    --label-color: rgba(255, 255, 255, 0.75);\r\n    --label-font-size: 14px;\r\n    --label-font-weight: 400;\r\n    \r\n    /* Input */\r\n    --input-background-color: rgba(255, 255, 255, 0.03);\r\n    --input-background-color-hover: rgba(255, 255, 255, 0.08);\r\n    --input-background-color-transition: background-color 0.35s ease-out;\r\n    --input-highlight-color: rgba(77, 83, 217, 0.64);\r\n    --input-highlight-color-hover: rgba(77, 83, 217, 1);\r\n    --input-text-color: rgba(255, 255, 255, 0.75);\r\n    --input-font-size: 14px;\r\n    --input-font-weight: 300;\r\n    --input-border-radius: 10px;\r\n    --input-padding: 16px;\r\n    --input-height: 40px;\r\n\r\n    background: var(--background-color);\r\n}\r\n";
 
@@ -44267,6 +44267,10 @@
 	        return this._parent;
 	    }
 
+	    get options() {
+	        return this._options;
+	    }
+
 	    /**
 	     * Public
 	     */
@@ -44288,6 +44292,12 @@
 	    addGroup(label) {
 	        return this.$root.addGroup(label, {
 	            container: this._label,
+	            parent: this,
+	        });
+	    }
+
+	    removeGroup(label) {
+	        return this.$root.removeGroup(label, {
 	            parent: this,
 	        });
 	    }
@@ -44373,6 +44383,11 @@
 	        this._groups.push({ label, options });
 	    }
 
+	    removeGroup(label) {
+	        const index = this._getGroupIndex(label);
+	        this._groups.splice(index, 1);
+	    }
+
 	    addComponent(model) {
 	        this._components.push(model);
 	    }
@@ -44395,6 +44410,13 @@
 	            components.push(model.getData());
 	        }
 	        return components;
+	    }
+
+	    _getGroupIndex(label) {
+	        for (let i = 0, len = this._groups.length; i < len; i++) {
+	            if (this._groups[i].label === label) return i;
+	        }
+	        return null;
 	    }
 	}
 
@@ -46006,6 +46028,15 @@
 	        return group;
 	    }
 
+	    removeGroup(label, options) {
+	        const group = this._groups[label];
+	        const container = this._groups[group.options.container];
+	        container.content.removeChild(group);
+	        delete this._groups[label];
+	        this._layers.resize();
+	        LayoutModel$1.removeGroup(label);
+	    }
+
 	    addComponent({ object, property, options, id, type, onChangeCallback }) {
 	        const model = new ComponentModel({ root: this._root, object, property, options, id, type, onChangeCallback });
 	        const component = this._components.create(model);
@@ -46189,6 +46220,10 @@
 
 	    addGroup(label, options) {
 	        return this._layout.addGroup(label, options);
+	    }
+
+	    removeGroup(label, options = {}) {
+	        return this._layout.removeGroup(label, options);
 	    }
 
 	    createLayoutFromModel(model, onCompleteCallback) {
@@ -46428,9 +46463,9 @@
 	});
 	dddd.addButton({
 	    container: 'Shape #1',
-	    label: 'Log text',
+	    label: 'Remove group',
 	    onClick: () => {
-	        console.log(settings.text);
+	        dddd.removeGroup('Subgroup3');
 	    },
 	});
 

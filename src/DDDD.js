@@ -62,6 +62,10 @@ export default class DDDD {
         return this._layout.addGroup(label, options);
     }
 
+    removeGroup(label, options = {}) {
+        return this._layout.removeGroup(label, options);
+    }
+
     createLayoutFromModel(model, onCompleteCallback) {
         const layers = model.layers;
         for (const layer of layers) {
