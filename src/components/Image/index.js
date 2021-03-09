@@ -83,13 +83,20 @@ export default class ImageComponent extends Component {
     }
 
     _addPreviewImage(image) {
-        this._previewImage = document.createElement('img');
+        if (!image) return;
+
         if (this._type === TYPE_THREE) {
-            this._previewImage.src = this.model.value.image.src;
+            if (this.model.value.image) {
+                this._previewImage = document.createElement('img');
+                this._previewImage.src = this.model.value.image.src;
+                this.$refs.imageContainer.appendChild(this._previewImage);
+            }
         } else {
+            this._previewImage = document.createElement('img');
             this._previewImage.src = image;
+            this.$refs.imageContainer.appendChild(this._previewImage);
         }
-        this.$refs.imageContainer.appendChild(this._previewImage);
+
     }
 
     _showDropArea() {
@@ -129,7 +136,13 @@ export default class ImageComponent extends Component {
     _fileLoadedHandler(e) {
         const image = e.target.result;
         if (this._type === TYPE_THREE) {
-            this.model.value.image.src = image;
+            if (this.model.value.image) {
+                this.model.value.image.src = image;
+            } else {
+                this.model.value.image = new Image();
+                this.model.value.image.src = image;
+            }
+
             this.model.value.needsUpdate = true;
         } else {
             this.model.value = image;

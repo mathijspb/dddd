@@ -18,9 +18,9 @@ const settings = {
     font: 'Verdana',
     fontSize: 48,
     color: new Color(0xff0000),
-    texture: new Texture(textureImage),
+    texture: new Texture(),
     capitals: false,
-    image: 'http://localhost:3003/image.png',
+    image: '',
     position: {
         x: 20,
         y: 50,
@@ -151,6 +151,16 @@ dddd.addButton({
     label: 'Remove group',
     onClick: () => {
         dddd.removeGroup('Subgroup3')
+    },
+});
+dddd.addButton({
+    container: 'Shape #1',
+    label: 'Add group',
+    onClick: () => {
+        const sub = shape1.addGroup('Subgroup3');
+        sub.add(settings, 'capitals', {
+            container: 'Shape #1',
+        });
     },
 });
 
