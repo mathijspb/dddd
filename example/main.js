@@ -1,4 +1,4 @@
-import { Color, Texture } from 'three';
+import { Color, Euler, Texture } from 'three';
 import DDDD from '../src/DDDD';
 
 const width = 500;
@@ -20,6 +20,7 @@ const settings = {
     color: new Color(0xff0000),
     texture: new Texture(),
     capitals: false,
+    rotation: new Euler(),
     image: '',
     position: {
         x: 20,
@@ -163,6 +164,10 @@ dddd.addButton({
         });
     },
 });
+dddd.add(settings, 'rotation', {
+    container: 'Shape #1',
+});
+
 
 const debugCanvas = document.createElement('canvas');
 const debugContext = debugCanvas.getContext('2d');

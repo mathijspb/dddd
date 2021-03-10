@@ -86,7 +86,7 @@ export default class MultiInput extends Component {
     _updateModelValue() {
         const value = {};
         for (const [index, [key]] of Object.entries(Object.entries(this.model.value))) {
-            value[key] = parseInt(this._inputs[index].value);
+            if (this._inputs[index]) value[key] = parseFloat(this._inputs[index].value);
         }
         this.model.value = value;
     }
