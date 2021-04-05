@@ -1,7 +1,9 @@
-import Container from './layout/Container/index';
-import Navigation from './layout/Navigation/index';
-import Layers from './layout/Layers/index';
-import Group from './layout/Group/index';
+import Container from './layout/Container';
+import Header from './layout/Header';
+import Navigation from './layout/Navigation';
+import Stats from './layout/Stats';
+import Layers from './layout/Layers';
+import Group from './layout/Group';
 import Components from './Components';
 
 import LayoutModel from './LayoutModel';
@@ -13,15 +15,15 @@ export default class Layout {
         this._root = root;
         this._onLayerChangeCallback = onLayerChange;
 
+        // Setup
+        this._isVisible = true;
+        this._groups = {};
         this._container = this._createContainer();
+        this._header = this._createHeader();
         this._navigation = this._createNavigation();
+        this._stats = this._createStats();
         this._layers = this._createLayers();
         this._components = this._createComponents();
-
-        this._isVisible = true;
-
-        this._groups = {};
-
         this._bindHandlers();
         this._setupEventListeners();
     }
@@ -40,6 +42,10 @@ export default class Layout {
      */
     get components() {
         return this._components;
+    }
+
+    get stats() {
+        return this._stats;
     }
 
     /**
@@ -63,10 +69,21 @@ export default class Layout {
     }
 
     addGroup(label, options = {}) {
-        const group = new Group({ root: this._root, layout: this, label, options });
+        const group = new Group({
+            root: this._root,
+            layout: this,
+            label,
+            options,
+        });
         const container = this.getContainer(options.container);
         container.appendChild(group);
+
+        // if (!this._groups[options.container]) {
+        //     this._groups[options.container] = {};
+        // }
+        // this._groups[options.container][label] = group;
         this._groups[label] = group;
+
         this._layers.resize();
         LayoutModel.addGroup(label, options);
         return group;
@@ -146,19 +163,35 @@ export default class Layout {
         return container;
     }
 
+    _createHeader() {
+        const header = new Header({
+            root: this._root,
+        });
+        this._container.addElement(header);
+        return header;
+    }
+
     _createNavigation() {
         const navigation = new Navigation({
             root: this._root,
         });
-        this._container.content.appendChild(navigation);
+        this._header.addElement(navigation);
         return navigation;
+    }
+
+    _createStats() {
+        const stats = new Stats({
+            root: this._root,
+        });
+        this._header.addElement(stats);
+        return stats;
     }
 
     _createLayers() {
         const layers = new Layers({
             root: this._root,
         });
-        this._container.content.appendChild(layers);
+        this._container.addElement(layers);
         return layers;
     }
 

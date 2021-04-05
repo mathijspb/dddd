@@ -1,5 +1,6 @@
 import LayoutModel from './LayoutModel';
 import componentTypes from './components/types';
+import Ticker from './utils/Ticker';
 
 export default class Components {
     constructor({ root }) {
@@ -67,15 +68,15 @@ export default class Components {
      * Private
      */
     _bindHandlers() {
-        this._tick = this._tick.bind(this);
+        this._tickHandler = this._tickHandler.bind(this);
     }
 
     _setupEventListeners() {
-        this._requestAnimationFrame = window.requestAnimationFrame(this._tick);
+        Ticker.add(this._tickHandler);
     }
 
     _removeEventListeners() {
-        window.cancelAnimationFrame(this._requestAnimationFrame);
+        Ticker.remove(this._tickHandler);
     }
 
     _addComponentToContainer(component) {
@@ -102,11 +103,6 @@ export default class Components {
     /**
      * Tick
      */
-    _tick() {
-        window.requestAnimationFrame(this._tick);
-        this._tickComponents();
-        // this._sendModelsToDevtools();
-    }
 
     _tickComponents() {
         for (let i = 0, len = this._components.length; i < len; i++) {
@@ -127,5 +123,13 @@ export default class Components {
                 models,
             },
         });
+    }
+
+    /**
+     * Handlers
+     */
+    _tickHandler() {
+        this._tickComponents();
+        // this._sendModelsToDevtools();
     }
 }

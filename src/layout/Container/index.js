@@ -29,13 +29,6 @@ export default class Container extends LayoutElement {
     }
 
     /**
-     * Getters & Setters
-     */
-    get content() {
-        return this.$refs.content;
-    }
-
-    /**
      * Public
      */
     show() {
@@ -51,6 +44,10 @@ export default class Container extends LayoutElement {
         this._width = this.$el.offsetWidth;
         this.$el.style.width = 'auto';
         this.$el.style.height = 'auto';
+    }
+
+    addElement(element) {
+        this.$refs.content.appendChild(element);
     }
 
     /**

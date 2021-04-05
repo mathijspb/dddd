@@ -1,7 +1,8 @@
 // Base class
 import LayoutElement from '../../LayoutElement';
 
-import LocalStorage from '../../LocalStorage';
+// Utils
+import LocalStorage from '../../utils/LocalStorage';
 
 // Style
 import styleSidebar from './style-sidebar.css';
@@ -31,7 +32,7 @@ export default class Group extends LayoutElement {
         // Props
         this._label = label;
         this._options = options;
-        this._parent = options.parent;
+        this._parent = options.parent || null;
 
         // Data
         this._isVisible = true;

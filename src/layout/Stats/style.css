@@ -1,0 +1,21 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.stats {
+    padding: 0 var(--panel-spacing) var(--panel-spacing) var(--panel-spacing);
+}
+
+.content {
+    height: 100px;
+
+    border-radius: var(--input-border-radius);background-color: var(--input-background-color);
+
+    background-color: var(--input-background-color);
+}
+
+.canvas {
+    width: 100%;
+}

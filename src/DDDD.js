@@ -7,9 +7,10 @@ export default class DDDD {
         // Props
         this._isDevtools = devtools;
         this._onChangeCallback = onChange;
+        this._onLayerChangeCallback = onLayerChange;
 
         // Setup
-        this._layout = new Layout({ root: this, onLayerChange });
+        this._layout = this._createLayout();
         this._bindHandlers();
         this._setupEventListeners();
     }
@@ -28,6 +29,10 @@ export default class DDDD {
 
     get layout() {
         return this._layout;
+    }
+
+    get stats() {
+        return this._layout.stats;
     }
 
     /**
@@ -98,6 +103,8 @@ export default class DDDD {
         return !this._isDevtools;
     }
 
+    showStats() {}
+
     /**
      * Private
      */
@@ -111,6 +118,14 @@ export default class DDDD {
 
     _removeEventListeners() {
         window.removeEventListener('message', this._messageHandler);
+    }
+
+    _createLayout() {
+        const layout = new Layout({
+            root: this,
+            onLayerChange: this._onLayerChangeCallback,
+        });
+        return layout;
     }
 
     _sendLayoutModel() {
