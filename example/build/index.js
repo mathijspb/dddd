@@ -46198,7 +46198,6 @@
 	        this._navigation.destroy();
 	        this._layers.destroy();
 	        this._components.destroy();
-	        this._removeElement();
 	        this._removeContainerElement();
 	    }
 

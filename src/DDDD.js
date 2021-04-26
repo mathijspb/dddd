@@ -105,6 +105,10 @@ export default class DDDD {
 
     showStats() {}
 
+    toggleVisibility() {
+        this._layout.toggleVisibility();
+    }
+
     /**
      * Private
      */

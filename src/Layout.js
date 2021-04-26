@@ -21,7 +21,7 @@ export default class Layout {
         this._container = this._createContainer();
         this._header = this._createHeader();
         this._navigation = this._createNavigation();
-        this._stats = this._createStats();
+        // this._stats = this._createStats();
         this._layers = this._createLayers();
         this._components = this._createComponents();
         this._bindHandlers();
@@ -33,7 +33,6 @@ export default class Layout {
         this._navigation.destroy();
         this._layers.destroy();
         this._components.destroy();
-        this._removeElement();
         this._removeContainerElement();
     }
 
