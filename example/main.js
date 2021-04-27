@@ -41,7 +41,7 @@ const dddd = new DDDD({
 function update() {
     window.requestAnimationFrame(update);
 
-    dddd.stats.begin();
+    // dddd.stats.begin();
 
     context.clearRect(0, 0, width, height);
 
@@ -78,7 +78,7 @@ function update() {
     //     settings.font = option;
     // }
 
-    dddd.stats.end();
+    // dddd.stats.end();
 }
 window.requestAnimationFrame(update);
 

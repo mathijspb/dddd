@@ -62,7 +62,7 @@ export default class ImageComponent extends Component {
 
     _getType() {
         const value = this.model.value;
-        if (value.constructor.name === 'Texture') {
+        if (value.isTexture) {
             return TYPE_THREE;
         } else {
             return TYPE_IMAGE;

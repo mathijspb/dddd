@@ -50,7 +50,7 @@ export default class Color extends Component {
 
     _getType() {
         const value = this.model.value;
-        if (value.constructor.name === 'Color') {
+        if (value.isColor) {
             return TYPE_THREE;
         } else {
             return TYPE_STRING;

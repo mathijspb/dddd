@@ -115,7 +115,8 @@ export default class ComponentModel {
         const type = null;
 
         // Three.js Texture
-        if (value.constructor.name === 'Texture') {
+        console.log( value);
+        if (value.isTexture) {
             return 'image';
         }
 
@@ -141,7 +142,7 @@ export default class ComponentModel {
         }
 
         // Three.js Color
-        if (value.constructor.name === 'Color') {
+        if (value.isColor) {
             return 'color';
         }
 
