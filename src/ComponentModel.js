@@ -115,7 +115,6 @@ export default class ComponentModel {
         const type = null;
 
         // Three.js Texture
-        console.log( value);
         if (value.isTexture) {
             return 'image';
         }
