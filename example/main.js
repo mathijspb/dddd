@@ -12,6 +12,13 @@ const context = canvas.getContext('2d');
 
 const textureImage = new Image();
 
+/**
+ * Colors
+ * new Color()
+ * #ff00000
+ * rgb(255, 255, 255)
+ */
+
 const settings = {
     text: 'test',
     font: 'Verdana',
@@ -188,3 +195,20 @@ dddd.add(settings, 'texture', {
 });
 
 dddd.showStats();
+
+/**
+ * Colors
+ */
+const colorValues = {
+    three: new Color(0xff0000),
+    hex: '#00ff00',
+    name: 'blue',
+};
+
+const colors = dddd.addGroup('Colors', {
+    container: 'Layer #1',
+});
+
+colors.add(colorValues, 'three');
+colors.add(colorValues, 'hex');
+colors.add(colorValues, 'name', { type: 'color' });

@@ -140,6 +140,11 @@ export default class ComponentModel {
             return 'slider';
         }
 
+        // Color
+        if (this._options.type === 'color') {
+            return 'color';
+        }
+
         // Three.js Color
         if (value.isColor) {
             return 'color';

@@ -43651,7 +43651,7 @@
 	    }
 	}
 
-	var styleSidebar = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.dddd {\r\n    /* Layout */\r\n    --font: 'Arial', sans-serif;\r\n    --background-color: rgba(27, 27, 27, 0.9);\r\n\r\n    /* Panels */\r\n    --panel-background-color: rgba(27, 27, 27, 0.9);\r\n    --panel-spacing: 10px;\r\n\r\n    /* Groups */\r\n    --group-header-padding: 13px 13px;\r\n    --group-header-font-size: 12px;\r\n    --group-header-background-color: rgba(255, 255, 255, 0.03);\r\n    --group-padding: 12px 11px 12px 13px;\r\n    --group-border-radius: 8px;\r\n\r\n    /* Components */\r\n    --component-row-gap: 6px;\r\n\r\n    /* Label */\r\n    --label-width: 35%;\r\n    --label-padding: 0 20px 0 0;\r\n    --label-color: rgba(255, 255, 255, 0.5);\r\n    --label-font-size: 12px;\r\n    --label-font-weight: 400;\r\n\r\n    /* Input */\r\n    --input-background-color: rgba(255, 255, 255, 0.03);\r\n    --input-background-color-hover: rgba(255, 255, 255, 0.08);\r\n    --input-background-color-transition: background-color 0.35s ease-out;\r\n    --input-highlight-color: rgba(77, 83, 217, 0.64);\r\n    --input-highlight-color-hover: rgba(77, 83, 217, 1);\r\n    --input-text-color: rgba(255, 255, 255, 0.75);\r\n    --input-font-size: 12px;\r\n    --input-font-weight: 300;\r\n    --input-border-radius: 6px;\r\n    --input-padding: 12px;\r\n    --input-height: 32px;\r\n\r\n    z-index: 1337;\r\n\r\n    position: fixed;\r\n    top: 0;\r\n    right: 0;\r\n\r\n    width: 300px;\r\n    height: 100%;\r\n    max-height: 100vh;\r\n\r\n    background: var(--background-color);\r\n}\r\n\r\n.content {\r\n    width: 100%;\r\n    height: 100%;\r\n    /* overflow: auto; */\r\n}\r\n\r\n.resize-handle {\r\n    position: absolute;\r\n\r\n    padding: 0;\r\n\r\n    background-color: transparent;\r\n\r\n    border: 0;\r\n    outline: 0;\r\n}\r\n\r\n.resize-handle.side {\r\n    top: 0;\r\n    left: 0;\r\n\r\n    width: 6px;\r\n    height: 100%;\r\n\r\n    cursor: ew-resize;\r\n}\r\n\r\n.resize-handle.bottom {\r\n    bottom: 0;\r\n    left: 0;\r\n\r\n    width: 100%;\r\n    height: 6px;\r\n\r\n    cursor: ns-resize;\r\n}\r\n\r\n.resize-handle.corner {\r\n    bottom: 0;\r\n    left: 0;\r\n\r\n    width: 10px;\r\n    height: 10px;\r\n\r\n    cursor: nesw-resize;\r\n}\r\n";
+	var styleSidebar = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.dddd {\n    /* Layout */\n    --font: 'Arial', sans-serif;\n    --background-color: rgba(27, 27, 27, 0.9);\n\n    /* Panels */\n    --panel-background-color: rgba(27, 27, 27, 0.9);\n    --panel-spacing: 10px;\n\n    /* Groups */\n    --group-header-padding: 13px 13px;\n    --group-header-font-size: 12px;\n    --group-header-background-color: rgba(255, 255, 255, 0.03);\n    --group-padding: 12px 11px 12px 13px;\n    --group-border-radius: 8px;\n\n    /* Components */\n    --component-row-gap: 6px;\n\n    /* Label */\n    --label-width: 35%;\n    --label-padding: 0 20px 0 0;\n    --label-color: rgba(255, 255, 255, 0.5);\n    --label-font-size: 12px;\n    --label-font-weight: 400;\n\n    /* Input */\n    --input-background-color: rgba(255, 255, 255, 0.03);\n    --input-background-color-hover: rgba(255, 255, 255, 0.08);\n    --input-background-color-error: rgba(255, 0, 0, 0.13);\n    --input-background-color-transition: background-color 0.35s ease-out;\n    --input-highlight-color: rgba(77, 83, 217, 0.64);\n    --input-highlight-color-hover: rgba(77, 83, 217, 1);\n    --input-text-color: rgba(255, 255, 255, 0.75);\n    --input-font-size: 12px;\n    --input-font-weight: 300;\n    --input-border-radius: 6px;\n    --input-padding: 12px;\n    --input-height: 32px;\n\n    z-index: 1337;\n\n    position: fixed;\n    top: 0;\n    right: 0;\n\n    width: 300px;\n    height: 100%;\n    max-height: 100vh;\n\n    background: var(--background-color);\n}\n\n.content {\n    width: 100%;\n    height: 100%;\n    /* overflow: auto; */\n}\n\n.resize-handle {\n    position: absolute;\n\n    padding: 0;\n\n    background-color: transparent;\n\n    border: 0;\n    outline: 0;\n}\n\n.resize-handle.side {\n    top: 0;\n    left: 0;\n\n    width: 6px;\n    height: 100%;\n\n    cursor: ew-resize;\n}\n\n.resize-handle.bottom {\n    bottom: 0;\n    left: 0;\n\n    width: 100%;\n    height: 6px;\n\n    cursor: ns-resize;\n}\n\n.resize-handle.corner {\n    bottom: 0;\n    left: 0;\n\n    width: 10px;\n    height: 10px;\n\n    cursor: nesw-resize;\n}\n";
 
 	var styleDevtools = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.dddd {\r\n    /* Layout */\r\n    --font: 'Arial', sans-serif;\r\n    --background-color: #161616;\r\n\r\n    /* Panels */\r\n    --panel-background-color: #1B1B1B;\r\n    --panel-spacing: 15px;\r\n\r\n    /* Groups */\r\n    --group-header-font-size: 15px;\r\n    --group-header-background-color: rgba(255, 255, 255, 0.03);\r\n    --group-padding: 30px;\r\n    --group-border-radius: 10px;\r\n\r\n    /* Components */\r\n    --component-row-gap: 7px;\r\n\r\n    /* Label */\r\n    --label-width: 30%;\r\n    --label-padding: 0 20px 0 0;\r\n    --label-color: rgba(255, 255, 255, 0.75);\r\n    --label-font-size: 14px;\r\n    --label-font-weight: 400;\r\n    \r\n    /* Input */\r\n    --input-background-color: rgba(255, 255, 255, 0.03);\r\n    --input-background-color-hover: rgba(255, 255, 255, 0.08);\r\n    --input-background-color-transition: background-color 0.35s ease-out;\r\n    --input-highlight-color: rgba(77, 83, 217, 0.64);\r\n    --input-highlight-color-hover: rgba(77, 83, 217, 1);\r\n    --input-text-color: rgba(255, 255, 255, 0.75);\r\n    --input-font-size: 14px;\r\n    --input-font-weight: 300;\r\n    --input-border-radius: 10px;\r\n    --input-padding: 16px;\r\n    --input-height: 40px;\r\n\r\n    background: var(--background-color);\r\n}\r\n";
 
@@ -45534,15 +45534,17 @@
 
 	window.customElements.define('dddd-button', Button);
 
-	var style$b = ".component {\r\n    display: grid;\r\n\r\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\r\n    align-items: center;\r\n}\r\n\r\n.label {\r\n    overflow: hidden;\r\n\r\n    padding: var(--label-padding);\r\n\r\n    font-size: var(--label-font-size);\r\n    font-weight: var(--label-font-weight);\r\n    color: var(--label-color);\r\n    white-space: nowrap;\r\n    text-overflow: ellipsis;\r\n}\r\n\r\n.input-container {\r\n    display: grid;\r\n    position: relative;\r\n\r\n    grid-template-columns: 45px calc(50% - 50px) 50%;\r\n    align-items: center;\r\n\r\n    height: var(--input-height);\r\n    overflow: hidden;\r\n\r\n    padding: 0 var(--input-padding) 0 5px;\r\n\r\n    font-family: var(--font);\r\n    font-size: var(--input-font-size);\r\n    font-weight: var(--input-font-weight);\r\n\r\n    background-color: var(--input-background-color);\r\n\r\n    border-radius: var(--input-border-radius);\r\n\r\n    transition: var(--input-background-color-transition);\r\n}\r\n\r\n.input-container:hover {\r\n    background-color: var(--input-background-color-hover);\r\n}\r\n\r\n.color {\r\n    width: 30px;\r\n    height: 30px;\r\n\r\n    margin: 0;\r\n    padding: 0;\r\n\r\n    background: transparent;\r\n\r\n    border: 0;\r\n    outline: 0;\r\n\r\n    appearance: none;\r\n    cursor: pointer;\r\n}\r\n\r\n.color::-webkit-color-swatch-wrapper {\r\n    padding: 0;\r\n}\r\n\r\n.color::-webkit-color-swatch {\r\n    border: none;\r\n    border-radius: 7px;\r\n}\r\n\r\n.color-code {\r\n    color: var(--input-text-color);\r\n}\r\n\r\n.alpha {\r\n    color: var(--input-text-color);\r\n    text-align: right;\r\n}";
+	var style$b = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    display: grid;\n    position: relative;\n\n    grid-template-columns: 45px calc(100% - 50px);\n    align-items: center;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: 0 var(--input-padding) 0 5px;\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    transition: var(--input-background-color-transition);\n}\n\n.input-container:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.component.error .input-container {\n    background-color: var(--input-background-color-error);\n}\n\n.color {\n    width: 30px;\n    height: 30px;\n\n    margin: 0;\n    padding: 0;\n\n    background: transparent;\n\n    border: 0;\n    outline: 0;\n\n    appearance: none;\n    cursor: pointer;\n}\n\n.color::-webkit-color-swatch-wrapper {\n    padding: 0;\n}\n\n.color::-webkit-color-swatch {\n    border: none;\n    border-radius: 7px;\n}\n\n.color-string {\n    background: transparent;\n\n    border: 0;\n    outline: 0;\n\n    color: var(--input-text-color);\n}\n\n/* .alpha {\n    color: var(--input-text-color);\n    text-align: right;\n} */\n";
 
-	var template$b = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input container  -->\r\n    <div class=\"input-container\">\r\n\r\n        <!-- Color -->\r\n        <input type=\"color\" class=\"color\" ref=\"color\">\r\n\r\n        <!-- Color code -->\r\n        <span class=\"color-code\" ref=\"colorCode\"></span>\r\n\r\n        <!-- Alpha -->\r\n        <span class=\"alpha\">100%</span>\r\n\r\n    </div>\r\n\r\n</div>";
+	var template$b = "<div class=\"component\">\n\n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input container  -->\n    <div class=\"input-container\">\n\n        <!-- Color input -->\n        <input type=\"color\" class=\"color\" ref=\"color\">\n\n        <!-- Color string -->\n        <input type=\"text\" class=\"color-string\" ref=\"colorString\">\n\n        <!-- Alpha -->\n        <!-- <span class=\"alpha\">100%</span> -->\n\n    </div>\n\n</div>\n";
 
 	// Base component
 
 	// Constants
 	const TYPE_THREE$1 = 'TYPE_THREE';
 	const TYPE_STRING = 'TYPE_STRING';
+	const TYPE_HEX = 'TYPE_HEX';
+	const CLASS_NAME_ERROR = 'error';
 
 	class Color$1 extends Component {
 	    constructor(root, model) {
@@ -45557,8 +45559,8 @@
 
 	    connected() {
 	        const value = this._getValue();
-	        this._setStartColor(value);
-	        this._setColorCodeValue(value);
+	        this._setColorValue(value);
+	        this._setColorString(value);
 	        this._setupEventListeners();
 	    }
 
@@ -45571,42 +45573,53 @@
 	     */
 	    _bindHandlers() {
 	        this._inputChangeHandler = this._inputChangeHandler.bind(this);
+	        this._colorStringFocusHandler = this._colorStringFocusHandler.bind(this);
+	        this._colorStringBlurHandler = this._colorStringBlurHandler.bind(this);
+	        this._colorStringKeyUpHandler = this._colorStringKeyUpHandler.bind(this);
 	    }
 
 	    _setupEventListeners() {
 	        this.$refs.color.addEventListener('input', this._inputChangeHandler);
+	        this.$refs.colorString.addEventListener('focus', this._colorStringFocusHandler);
+	        this.$refs.colorString.addEventListener('blur', this._colorStringBlurHandler);
+	        this.$refs.colorString.addEventListener('keyup', this._colorStringKeyUpHandler);
 	    }
 
 	    _removeEventListeners() {
 	        this.$refs.color.removeEventListener('input', this._inputChangeHandler);
+	        this.$refs.colorString.removeEventListener('focus', this._colorStringFocusHandler);
+	        this.$refs.colorString.removeEventListener('blur', this._colorStringBlurHandler);
+	        this.$refs.colorString.removeEventListener('keyup', this._colorStringKeyUpHandler);
 	    }
 
 	    _getType() {
 	        const value = this.model.value;
-	        console.log(this.model);
-	        console.log(value);
-	        console.log(value.isColor);
 	        if (value.isColor) {
 	            return TYPE_THREE$1;
+	        } else if (this._isHex(value)) {
+	            return TYPE_HEX;
 	        } else {
 	            return TYPE_STRING;
 	        }
 	    }
 
 	    _getValue() {
-	        if (this._type === TYPE_THREE$1) {
-	            return `#${this.model.value.getHexString()}`;
-	        } else {
-	            return this.model.value;
+	        switch (this._type) {
+	            case TYPE_THREE$1:
+	                return `#${this.model.value.getHexString()}`;
+	            case TYPE_STRING:
+	                return this._convertColorNameToHex(this.model.value);
+	            default:
+	                return this.model.value;
 	        }
 	    }
 
-	    _setStartColor(value) {
+	    _setColorValue(value) {
 	        this.$refs.color.value = value;
 	    }
 
-	    _setColorCodeValue(value) {
-	        this.$refs.colorCode.innerText = value;
+	    _setColorString(value) {
+	        this.$refs.colorString.value = value;
 	    }
 
 	    _setModelValue(value) {
@@ -45620,13 +45633,65 @@
 	        }
 	    }
 
+	    _updateValueFromStringInput() {
+	        let value = this.$refs.colorString.value;
+	        if (value.charAt(0) !== '#') value = '#' + value;
+
+	        if (this._isHex(value)) {
+	            this._hideError();
+	            this._setColorString(value);
+	            this._setModelValue(value);
+	            this._setColorValue(value);
+	        } else {
+	            this._showError();
+	            this._setColorValue('#000000');
+	        }
+	    }
+
+	    _showError() {
+	        this.$el.classList.add(CLASS_NAME_ERROR);
+	    }
+
+	    _hideError() {
+	        this.$el.classList.remove(CLASS_NAME_ERROR);
+	    }
+
+	    /**
+	     * Helpers
+	     */
+	    _isHex(value) {
+	        return /^#([0-9A-F]{3}){1,2}$/i.test(value);
+	    }
+
+	    _convertColorNameToHex(colorName) {
+	        const context = document.createElement('canvas').getContext('2d');
+	        context.fillStyle = colorName;
+	        return context.fillStyle;
+	    }
+
 	    /**
 	     * Handlers
 	     */
-	    _inputChangeHandler(e) {
+	    _inputChangeHandler() {
 	        const value = this.$refs.color.value;
 	        this._setModelValue(value);
-	        this._setColorCodeValue(value);
+	        this._setColorString(value);
+	        this._hideError();
+	    }
+
+	    _colorStringFocusHandler() {
+	        this.$refs.colorString.select();
+	    }
+
+	    _colorStringBlurHandler() {
+	        this._updateValueFromStringInput();
+	    }
+
+	    _colorStringKeyUpHandler(e) {
+	        if (e.keyCode === 13) {
+	            this._updateValueFromStringInput();
+	            this.$refs.colorString.blur();
+	        }
 	    }
 	}
 
@@ -46101,7 +46166,6 @@
 	        const value = this._object?.[this._property];
 
 	        // Three.js Texture
-	        console.log( value);
 	        if (value.isTexture) {
 	            return 'image';
 	        }
@@ -46125,6 +46189,11 @@
 	            typeof this._options.min === 'number' &&
 	            typeof this._options.max === 'number') {
 	            return 'slider';
+	        }
+
+	        // Color
+	        if (this._options.type === 'color') {
+	            return 'color';
 	        }
 
 	        // Three.js Color
@@ -46591,6 +46660,13 @@
 
 	const textureImage = new Image();
 
+	/**
+	 * Colors
+	 * new Color()
+	 * #ff00000
+	 * rgb(255, 255, 255)
+	 */
+
 	const settings = {
 	    text: 'test',
 	    font: 'Verdana',
@@ -46767,5 +46843,22 @@
 	});
 
 	dddd.showStats();
+
+	/**
+	 * Colors
+	 */
+	const colorValues = {
+	    three: new Color(0xff0000),
+	    hex: '#00ff00',
+	    name: 'blue',
+	};
+
+	const colors = dddd.addGroup('Colors', {
+	    container: 'Layer #1',
+	});
+
+	colors.add(colorValues, 'three');
+	colors.add(colorValues, 'hex');
+	colors.add(colorValues, 'name', { type: 'color' });
 
 })));

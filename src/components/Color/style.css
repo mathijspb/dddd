@@ -21,7 +21,7 @@
     display: grid;
     position: relative;
 
-    grid-template-columns: 45px calc(50% - 50px) 50%;
+    grid-template-columns: 45px calc(100% - 50px);
     align-items: center;
 
     height: var(--input-height);
@@ -42,6 +42,10 @@
 
 .input-container:hover {
     background-color: var(--input-background-color-hover);
+}
+
+.component.error .input-container {
+    background-color: var(--input-background-color-error);
 }
 
 .color {
@@ -69,11 +73,16 @@
     border-radius: 7px;
 }
 
-.color-code {
+.color-string {
+    background: transparent;
+
+    border: 0;
+    outline: 0;
+
     color: var(--input-text-color);
 }
 
-.alpha {
+/* .alpha {
     color: var(--input-text-color);
     text-align: right;
-}
+} */
