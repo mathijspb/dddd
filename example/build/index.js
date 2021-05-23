@@ -45794,11 +45794,9 @@
 	    }
 
 	    _updateModelValue() {
-	        const value = {};
 	        for (const [index, [key]] of Object.entries(Object.entries(this.model.value))) {
-	            if (this._inputs[index]) value[key] = parseFloat(this._inputs[index].value);
+	            if (this._inputs[index]) this.model.value[key] = parseFloat(this._inputs[index].value);
 	        }
-	        this.model.value = value;
 	    }
 
 	    _getInputValueBasedOnMouseMovement(movementX) {
@@ -45854,9 +45852,7 @@
 	    _mouseMoveHandler(e) {
 	        if (!this._isPointerLockActive) return;
 
-	        let delta = e.movementX;
-	        delta = Math.max(Math.min(delta, 100), -100); // NOTE: Prevents bug in chrome where movementX spikes to high value
-
+	        const delta = Math.max(Math.min(e.movementX, 100), -100); // NOTE: Prevents bug in chrome where movementX spikes to high value
 	        const value = this._getInputValueBasedOnMouseMovement(delta);
 	        this._updateInputValue(value);
 	        this._updateModelValue();
@@ -46740,6 +46736,9 @@
 
 	multiInput.add(multiInputValues, 'xyz');
 	multiInput.add(multiInputValues, 'stepSize', { stepSize: 1 });
+
+	const exampleObject3D = new Object3D();
+	multiInput.add(exampleObject3D, 'position', { label: 'three' });
 
 	/**
 	 * Dropdown

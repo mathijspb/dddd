@@ -1,4 +1,4 @@
-import { Color, Texture } from 'three';
+import { Color, Texture, Object3D } from 'three';
 import DDDD from '../src/DDDD';
 
 const dddd = new DDDD({
@@ -75,6 +75,9 @@ const multiInputValues = {
 
 multiInput.add(multiInputValues, 'xyz');
 multiInput.add(multiInputValues, 'stepSize', { stepSize: 1 });
+
+const exampleObject3D = new Object3D();
+multiInput.add(exampleObject3D, 'position', { label: 'three' });
 
 /**
  * Dropdown
