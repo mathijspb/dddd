@@ -46716,11 +46716,13 @@
 
 	const numberValues = {
 	    infinite: 0.5,
+	    stepSize: 0.5,
 	    min: 0.5,
 	    max: 0.5,
 	};
 
 	number.add(numberValues, 'infinite');
+	number.add(numberValues, 'stepSize', { stepSize: 0.5 });
 	number.add(numberValues, 'min', { min: 0 });
 	number.add(numberValues, 'max', { max: 1 });
 
@@ -46733,9 +46735,11 @@
 
 	const multiInputValues = {
 	    xyz: { x: 0, y: 0, z: 0 },
+	    stepSize: { x: 0, y: 0, z: 0 },
 	};
 
 	multiInput.add(multiInputValues, 'xyz');
+	multiInput.add(multiInputValues, 'stepSize', { stepSize: 1 });
 
 	/**
 	 * Dropdown
