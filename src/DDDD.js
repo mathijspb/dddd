@@ -47,7 +47,8 @@ export default class DDDD {
         // this._components.remove(component);
     }
 
-    addButton(options) {
+    addButton(label, options = {}) {
+        options.label = label;
         return this._layout.addComponent({ options, type: 'button' });
     }
 
