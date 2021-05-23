@@ -28,6 +28,7 @@ export default class Navigation extends LayoutElement {
         });
 
         // Data
+        this._isMinimized = false;
         this._activeIndex = 0;
         this._elements = [];
 
@@ -44,6 +45,10 @@ export default class Navigation extends LayoutElement {
      * Public
      */
     add(label, options) {
+        if (this._elements.length === 0) {
+            this._setVisible();
+        }
+
         if (this.$root.isLayoutSidebar()) {
             const option = document.createElement('option');
             option.innerText = label;
@@ -71,11 +76,13 @@ export default class Navigation extends LayoutElement {
     }
 
     show() {
+        this._isMinimized = false;
         this.$refs.selectContainer.style.display = 'block';
         this.$el.style.display = 'grid';
     }
 
     hide() {
+        this._isMinimized = true;
         this.$refs.selectContainer.style.display = 'none';
         this.$el.style.display = 'block';
     }
@@ -101,8 +108,8 @@ export default class Navigation extends LayoutElement {
         if (this.$refs.buttonToggle) this.$refs.buttonToggle.removeEventListener('click', this._clickButtonToggle);
     }
 
-    _show() {
-        this.$el.style.display = 'grid';
+    _setVisible() {
+        this.$el.style.display = this._isMinimized ? 'block' : 'grid';
     }
 
     _getNavigationButtonIndex(element) {
