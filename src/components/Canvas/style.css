@@ -30,6 +30,9 @@
 .input-container {
     overflow: hidden;
 
+    text-align: center;
+
+    background-color: var(--input-background-color);
     border-radius: var(--input-border-radius);
 }
 

@@ -45862,7 +45862,7 @@
 
 	window.customElements.define('dddd-multi-input', MultiInput);
 
-	var style$d = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n\n    transition: background-color 0.15s;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    line-height: var(--input-height);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    overflow: hidden;\n\n    border-radius: var(--input-border-radius);\n}\n\n.input-container canvas {\n    max-width: 100%;\n}\n";
+	var style$d = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n\n    transition: background-color 0.15s;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    line-height: var(--input-height);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    overflow: hidden;\n\n    text-align: center;\n\n    background-color: var(--input-background-color);\n    border-radius: var(--input-border-radius);\n}\n\n.input-container canvas {\n    max-width: 100%;\n}\n";
 
 	var template$d = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input container -->\r\n    <div class=\"input-container\" ref=\"inputContainer\"></div>\r\n\r\n</div>";
 
@@ -46812,9 +46812,11 @@
 	});
 
 	const canvasExample = document.createElement('canvas');
+	canvasExample.width = 100;
+	canvasExample.height = 100;
 	const debugContext = canvasExample.getContext('2d');
 	debugContext.fillStyle = 'red';
-	debugContext.fillRect(0, 0, 100, 100);
+	debugContext.fillRect(0, 0, canvasExample.width, canvasExample.height);
 
 	canvas.addCanvas({
 	    label: 'canvas',

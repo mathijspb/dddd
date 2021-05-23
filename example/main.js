@@ -146,9 +146,11 @@ const canvas = dddd.addGroup('Canvas', {
 });
 
 const canvasExample = document.createElement('canvas');
+canvasExample.width = 100;
+canvasExample.height = 100;
 const debugContext = canvasExample.getContext('2d');
 debugContext.fillStyle = 'red';
-debugContext.fillRect(0, 0, 100, 100);
+debugContext.fillRect(0, 0, canvasExample.width, canvasExample.height);
 
 canvas.addCanvas({
     label: 'canvas',
