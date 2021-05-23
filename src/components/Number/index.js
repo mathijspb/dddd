@@ -16,12 +16,14 @@ export default class NumberComponent extends Component {
 
         // Options
         this._stepSize = this.model.options.stepSize || DEFAULT_STEP_SIZE;
+        this._min = typeof this.model.options.min === 'number' ? this.model.options.min : null;
+        this._max = typeof this.model.options.max === 'number' ? this.model.options.max : null;
         this._decimalPlaces = this._getDecimalPlaces(this._stepSize);
 
         // Data
         this._activeInput = null;
         this._isPointerLockActive = false;
-        this._mouseCurrentPositionX = 0;
+        this._isMouseMoved = false;
 
         // Setup
         this._bindHandlers();
@@ -93,11 +95,14 @@ export default class NumberComponent extends Component {
     _mouseDownHandler(e) {
         this.$refs.input.requestPointerLock();
         this._isPointerLockActive = true;
-        this._mouseCurrentPositionX = e.clientX;
+        this._isMouseMoved = false;
     }
 
-    _mouseUpHandler() {
+    _mouseUpHandler(e) {
         document.exitPointerLock();
+        if (!this._isMouseMoved) {
+            this.$refs.input.select();
+        }
     }
 
     _changeHandler() {
@@ -117,11 +122,12 @@ export default class NumberComponent extends Component {
     _mouseMoveHandler(e) {
         if (!this._isPointerLockActive) return;
 
-        let delta = e.movementX;
-        delta = Math.max(Math.min(delta, 100), -100); // NOTE: Prevents bug in chrome where movementX spikes to high value
+        this._isMouseMoved = true;
 
-        const value = this._getInputValueBasedOnMouseMovement(delta);
-        this._mouseCurrentPositionX = e.clientX;
+        const delta = Math.max(Math.min(e.movementX, 100), -100); // NOTE: Prevents bug in chrome where movementX spikes to high value
+        let value = this._getInputValueBasedOnMouseMovement(delta);
+        if (typeof this._min === 'number') value = Math.max(value, this._min);
+        if (typeof this._max === 'number') value = Math.min(value, this._max);
         this._updateInputValue(value);
         this._updateModelValue(value);
     }

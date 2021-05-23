@@ -212,3 +212,22 @@ const colors = dddd.addGroup('Colors', {
 colors.add(colorValues, 'three');
 colors.add(colorValues, 'hex');
 colors.add(colorValues, 'name', { type: 'color' });
+
+/**
+ * Sliders
+ */
+const sliderValues = {
+    fixed: 0.5,
+    infinite: 0.5,
+    min: 0.5,
+    max: 0.5,
+};
+
+const sliders = dddd.addGroup('Sliders', {
+    container: 'Layer #1',
+});
+
+sliders.add(sliderValues, 'fixed', { min: 0, max: 1 });
+sliders.add(sliderValues, 'infinite');
+sliders.add(sliderValues, 'min', { min: 0 });
+sliders.add(sliderValues, 'max', { max: 1 });
