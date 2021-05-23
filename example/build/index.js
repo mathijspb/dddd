@@ -44474,9 +44474,9 @@
 	        return this.$root.add(object, property, options);
 	    }
 
-	    addButton(options) {
+	    addButton(label, options = {}) {
 	        options.container = this;
-	        return this.$root.addButton(options);
+	        return this.$root.addButton(label, options);
 	    }
 
 	    addCanvas(options) {
@@ -45486,7 +45486,7 @@
 
 	window.customElements.define('dddd-checkbox', Checkbox);
 
-	var style$a = ".component {\r\n    transition: background-color 0.15s;\r\n}\r\n\r\n.button {\r\n    width: calc(100% - var(--label-width));\r\n    height: var(--input-height);\r\n\r\n    padding: 0 var(--input-padding);\r\n    margin-left: var(--label-width);\r\n\r\n    font-family: var(--font);\r\n    font-size: var(--input-font-size);\r\n    font-weight: var(--input-font-weight);\r\n    color: var(--input-text-color);\r\n    \r\n    background-color: var(--input-highlight-color);\r\n\r\n    border: 0;\r\n    border-radius: var(--input-border-radius);\r\n    outline: none;\r\n\r\n    transition: var(--input-background-color-transition);\r\n\r\n    cursor: pointer;\r\n}\r\n\r\n.button:hover {\r\n    background-color: rgba(77, 83, 217, 1);\r\n    background-color: var(--input-highlight-color-hover);\r\n}";
+	var style$a = ".component {\n    transition: background-color 0.15s;\n}\n\n.button {\n    width: calc(100% - var(--label-width));\n    height: var(--input-height);\n\n    padding: 0 var(--input-padding);\n    margin-left: var(--label-width);\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    background-color: var(--input-highlight-color);\n\n    border: 0;\n    border-radius: var(--input-border-radius);\n    outline: none;\n\n    transition: var(--input-background-color-transition);\n\n    cursor: pointer;\n}\n\n.button:hover {\n    background-color: rgba(77, 83, 217, 1);\n    background-color: var(--input-highlight-color-hover);\n}\n\n.full-width .button {\n    width: 100%;\n\n    margin-left: 0;\n}\n";
 
 	var template$a = "<div class=\"component\">\r\n    \r\n    <!-- Button -->\r\n    <button class=\"button\" ref=\"button\">{{ label }}</button>\r\n\r\n</div>";
 
@@ -45496,11 +45496,15 @@
 	    constructor(root, model) {
 	        super({ root, style: style$a, template: template$a, model });
 
+	        // Options
+	        this._isFullWidth = this.model.options.fullWidth || false;
+
 	        // Setup
 	        this._bindHandlers();
 	    }
 
 	    connected() {
+	        this._addFullWidthClass();
 	        this._setupEventListeners();
 	    }
 
@@ -45521,6 +45525,10 @@
 
 	    _removeEventListeners() {
 	        this.$refs.button.removeEventListener('click', this._clickHandler);
+	    }
+
+	    _addFullWidthClass() {
+	        if (this._isFullWidth) this.$el.classList.add('full-width');
 	    }
 
 	    // _triggerOnClickCallback(value) {
@@ -46177,14 +46185,16 @@
 	        }
 
 	        // Image
-	        if (this._options.type === 'image') {
+	        if ((/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i).test(value)) {
 	            return 'image';
 	        }
 
+	        // Canvas
 	        if (this._options.type === 'canvas') {
 	            return 'canvas';
 	        }
 
+	        // Dropdown
 	        if (this._options.options &&
 	            typeof this._options.options === 'object') {
 	            return 'dropdown';
@@ -46527,7 +46537,8 @@
 	        // this._components.remove(component);
 	    }
 
-	    addButton(options) {
+	    addButton(label, options = {}) {
+	        options.label = label;
 	        return this._layout.addComponent({ options, type: 'button' });
 	    }
 
@@ -46655,235 +46666,148 @@
 	    }
 	}
 
-	const width = 500;
-	const height = 500;
-
-	const canvas = document.getElementsByTagName('canvas')[0];
-	canvas.width = width;
-	canvas.height = height;
-
-	const context = canvas.getContext('2d');
-
-	const textureImage = new Image();
-
-	/**
-	 * Colors
-	 * new Color()
-	 * #ff00000
-	 * rgb(255, 255, 255)
-	 */
-
-	const settings = {
-	    text: 'test',
-	    font: 'Verdana',
-	    fontSize: 48,
-	    color: new Color(0xff0000),
-	    texture: new Texture(),
-	    capitals: false,
-	    rotation: new Euler(),
-	    image: '',
-	    position: {
-	        x: 20,
-	        y: 50,
-	    },
-	    time: 0,
-	};
-
-	window.settings = settings;
-
-	let imageElement = null;
-
 	const dddd = new DDDD({
 	    onLayerChange: (label) => {
 	        console.log('change layer', label);
 	    },
 	});
 
-	function update() {
-	    window.requestAnimationFrame(update);
-
-	    // dddd.stats.begin();
-
-	    context.clearRect(0, 0, width, height);
-
-	    context.fillStyle = 'red';
-	    context.fillRect(0, 0, width, height);
-
-	    if (imageElement) {
-	        context.drawImage(imageElement, 0, 0, width, height);
-	    }
-
-	    context.font = `${settings.fontSize}px ${settings.font}`;
-	    context.fillStyle = settings.color;
-
-	    const text = settings.capitals ? settings.text.toUpperCase() : settings.text;
-	    context.fillText(text, settings.position.x, settings.position.y);
-
-	    // settings.time += 0.01;
-
-	    // settings.fontSize = 30 + (70 * ((1 + Math.sin(settings.time)) / 2));
-
-	    // settings.position.x += 0.01;
-	    // settings.position.y += 0.01;
-
-	    // if (Math.random() > 0.95) {
-	    //     settings.capitals = !settings.capitals;
-
-	    //     const options = [
-	    //         'Arial',
-	    //         'Verdana',
-	    //         'Times New Roman',
-	    //     ];
-
-	    //     const option = options[Math.floor(options.length * Math.random())];
-	    //     settings.font = option;
-	    // }
-
-	    // dddd.stats.end();
-	}
-	window.requestAnimationFrame(update);
-
-	function loadImage(url) {
-	    const image = new Image();
-	    image.src = url;
-	    imageElement = image;
-	}
-	// loadImage(settings.image);
-
-	window.dddd = dddd;
-
+	/**
+	 * Layer
+	 */
 	dddd.addLayer('Layer #1');
-	const layer2 = dddd.addLayer('Layer #2');
-
-	const shape1 = dddd.addGroup('Shape #1', {
-	    container: 'Layer #1',
-	});
-
-	shape1.add(settings, 'time');
-	dddd.add(settings, 'fontSize', {
-	    container: 'Shape #1',
-	    min: 30,
-	    max: 100,
-	});
-
-	dddd.add(settings, 'position', {
-	    container: 'Shape #1',
-	    stepSize: 1,
-	});
-
-	const subgroup = shape1.addGroup('Subgroup');
-	subgroup.add(settings, 'text');
-	subgroup.add(settings, 'font', {
-	    container: 'Shape #1',
-	    options: [
-	        'Arial',
-	        'Verdana',
-	        'Times New Roman',
-	    ],
-	});
-
-	const subgroup2 = subgroup.addGroup('Subgroup2');
-	subgroup2.add(settings, 'fontSize', {
-	    container: 'Shape #1',
-	    min: 30,
-	    max: 100,
-	});
-
-	const shape2 = dddd.addGroup('Shape #2', {
-	    container: 'Layer #1',
-	});
-
-	const subgroup3 = shape1.addGroup('Subgroup3');
-	subgroup3.add(settings, 'color', {
-	    container: 'Shape #1',
-	    onChange: () => {
-	        console.log(settings.color);
-	    },
-	});
-	subgroup3.add(settings, 'capitals', {
-	    container: 'Shape #1',
-	});
-
-	dddd.add(settings, 'image', {
-	    type: 'image',
-	    container: 'Shape #1',
-	    onChange() {
-	        loadImage(settings.image);
-	    },
-	});
-	dddd.addButton({
-	    container: 'Shape #1',
-	    label: 'Remove group',
-	    onClick: () => {
-	        dddd.removeGroup('Subgroup3');
-	    },
-	});
-	dddd.addButton({
-	    container: 'Shape #1',
-	    label: 'Add group',
-	    onClick: () => {
-	        const sub = shape1.addGroup('Subgroup3');
-	        sub.add(settings, 'capitals', {
-	            container: 'Shape #1',
-	        });
-	    },
-	});
-	dddd.add(settings, 'rotation', {
-	    container: 'Shape #1',
-	});
-
-	const debugCanvas = document.createElement('canvas');
-	const debugContext = debugCanvas.getContext('2d');
-	debugContext.fillStyle = 'red';
-	debugContext.fillRect(0, 0, 100, 100);
-
-	dddd.addCanvas({
-	    label: 'canvas',
-	    canvas: debugCanvas,
-	    container: 'Shape #1',
-	});
-
-	dddd.add(settings, 'texture', {
-	    label: 'canvas',
-	    container: 'Shape #1',
-	});
-
-	dddd.showStats();
 
 	/**
-	 * Colors
+	 * Color
 	 */
+	const color = dddd.addGroup('Color', {
+	    container: 'Layer #1',
+	});
+
 	const colorValues = {
 	    three: new Color(0xff0000),
 	    hex: '#00ff00',
 	    name: 'blue',
 	};
 
-	const colors = dddd.addGroup('Colors', {
+	color.add(colorValues, 'three');
+	color.add(colorValues, 'hex');
+	color.add(colorValues, 'name', { type: 'color' });
+
+	/**
+	 * Slider
+	 */
+	const slider = dddd.addGroup('Slider', {
 	    container: 'Layer #1',
 	});
 
-	colors.add(colorValues, 'three');
-	colors.add(colorValues, 'hex');
-	colors.add(colorValues, 'name', { type: 'color' });
-
-	/**
-	 * Sliders
-	 */
 	const sliderValues = {
 	    fixed: 0.5,
+	};
+
+	slider.add(sliderValues, 'fixed', { min: 0, max: 1 });
+
+	/**
+	 * Number
+	 */
+	const number = dddd.addGroup('Number', {
+	    container: 'Layer #1',
+	});
+
+	const numberValues = {
 	    infinite: 0.5,
 	    min: 0.5,
 	    max: 0.5,
 	};
 
-	const sliders = dddd.addGroup('Sliders', {
+	number.add(numberValues, 'infinite');
+	number.add(numberValues, 'min', { min: 0 });
+	number.add(numberValues, 'max', { max: 1 });
+
+	/**
+	 * MultiInput
+	 */
+	const multiInput = dddd.addGroup('MultiInput', {
 	    container: 'Layer #1',
 	});
 
-	sliders.add(sliderValues, 'fixed', { min: 0, max: 1 });
-	sliders.add(sliderValues, 'infinite');
-	sliders.add(sliderValues, 'min', { min: 0 });
-	sliders.add(sliderValues, 'max', { max: 1 });
+	const multiInputValues = {
+	    xyz: { x: 0, y: 0, z: 0 },
+	};
+
+	multiInput.add(multiInputValues, 'xyz');
+
+	/**
+	 * Dropdown
+	 */
+	const dropdown = dddd.addGroup('Dropdown', {
+	    container: 'Layer #1',
+	});
+
+	const dropdownValues = {
+	    default: 'Options #3',
+	};
+
+	dropdown.add(dropdownValues, 'default', {
+	    options: [
+	        'Options #1',
+	        'Options #2',
+	        'Options #3',
+	        'Options #4',
+	        'Options #5',
+	    ],
+	});
+
+	/**
+	 * Button
+	 */
+	const button = dddd.addGroup('Button', {
+	    container: 'Layer #1',
+	});
+
+	button.addButton('Button', {
+	    onClick: () => {
+	        console.log('click');
+	    },
+	});
+
+	button.addButton('Button - Full width', {
+	    fullWidth: true,
+	    onClick: () => {
+	        console.log('click');
+	    },
+	});
+
+	/**
+	 * Image
+	 */
+	const image = dddd.addGroup('Image', {
+	    container: 'Layer #1',
+	});
+
+	const imageValues = {
+	    image: './image.png',
+	    three: new Texture(),
+	};
+
+	image.add(imageValues, 'image');
+	image.add(imageValues, 'three');
+
+	/**
+	 * Canvas
+	 */
+	const canvas = dddd.addGroup('Canvas', {
+	    container: 'Layer #1',
+	});
+
+	const canvasExample = document.createElement('canvas');
+	const debugContext = canvasExample.getContext('2d');
+	debugContext.fillStyle = 'red';
+	debugContext.fillRect(0, 0, 100, 100);
+
+	canvas.addCanvas({
+	    label: 'canvas',
+	    canvas: canvasExample,
+	});
 
 })));
