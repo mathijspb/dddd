@@ -46863,8 +46863,6 @@
 	    value: 0.5,
 	};
 
-	number.add(numberValues, 'infinite');
-
 	const subgroup = group.addGroup('Subgroup');
 	subgroup.add(groupValues, 'value');
 
