@@ -11,11 +11,15 @@ export default class Button extends Component {
     constructor(root, model) {
         super({ root, style, template, model });
 
+        // Options
+        this._isFullWidth = this.model.options.fullWidth || false;
+
         // Setup
         this._bindHandlers();
     }
 
     connected() {
+        this._addFullWidthClass();
         this._setupEventListeners();
     }
 
@@ -36,6 +40,10 @@ export default class Button extends Component {
 
     _removeEventListeners() {
         this.$refs.button.removeEventListener('click', this._clickHandler);
+    }
+
+    _addFullWidthClass() {
+        if (this._isFullWidth) this.$el.classList.add('full-width');
     }
 
     // _triggerOnClickCallback(value) {
