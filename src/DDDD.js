@@ -3,9 +3,10 @@ import Layout from './Layout';
 import LayoutModel from './LayoutModel';
 
 export default class DDDD {
-    constructor({ devtools, onChange, onLayerChange } = {}) {
+    constructor({ devtools, minimized, onChange, onLayerChange } = {}) {
         // Props
         this._isDevtools = devtools;
+        this._isMinimized = minimized || false;
         this._onChangeCallback = onChange;
         this._onLayerChangeCallback = onLayerChange;
 
@@ -129,6 +130,7 @@ export default class DDDD {
         const layout = new Layout({
             root: this,
             onLayerChange: this._onLayerChangeCallback,
+            minimized: this._isMinimized,
         });
         return layout;
     }

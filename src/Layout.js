@@ -10,7 +10,7 @@ import LayoutModel from './LayoutModel';
 import ComponentModel from './ComponentModel';
 
 export default class Layout {
-    constructor({ root, onLayerChange }) {
+    constructor({ root, onLayerChange, minimized }) {
         // Props
         this._root = root;
         this._onLayerChangeCallback = onLayerChange;
@@ -24,6 +24,7 @@ export default class Layout {
         // this._stats = this._createStats();
         this._layers = this._createLayers();
         this._components = this._createComponents();
+        if (minimized) this.toggleVisibility();
         this._bindHandlers();
         this._setupEventListeners();
     }
@@ -137,6 +138,7 @@ export default class Layout {
             this._isVisible = true;
         }
         this._layers.resize();
+        this._components.resize();
     }
 
     /**

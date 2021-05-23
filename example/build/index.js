@@ -43878,10 +43878,6 @@
 	     * Public
 	     */
 	    add(label, options) {
-	        if (this._elements.length === 0) {
-	            this._show();
-	        }
-
 	        if (this.$root.isLayoutSidebar()) {
 	            const option = document.createElement('option');
 	            option.innerText = label;
@@ -46265,7 +46261,7 @@
 	}
 
 	class Layout {
-	    constructor({ root, onLayerChange }) {
+	    constructor({ root, onLayerChange, minimized }) {
 	        // Props
 	        this._root = root;
 	        this._onLayerChangeCallback = onLayerChange;
@@ -46279,6 +46275,7 @@
 	        // this._stats = this._createStats();
 	        this._layers = this._createLayers();
 	        this._components = this._createComponents();
+	        if (minimized) this.toggleVisibility();
 	        this._bindHandlers();
 	        this._setupEventListeners();
 	    }
@@ -46392,6 +46389,7 @@
 	            this._isVisible = true;
 	        }
 	        this._layers.resize();
+	        this._components.resize();
 	    }
 
 	    /**
@@ -46494,9 +46492,10 @@
 	// Layout
 
 	class DDDD {
-	    constructor({ devtools, onChange, onLayerChange } = {}) {
+	    constructor({ devtools, minimized, onChange, onLayerChange } = {}) {
 	        // Props
 	        this._isDevtools = devtools;
+	        this._isMinimized = minimized || false;
 	        this._onChangeCallback = onChange;
 	        this._onLayerChangeCallback = onLayerChange;
 
@@ -46620,6 +46619,7 @@
 	        const layout = new Layout({
 	            root: this,
 	            onLayerChange: this._onLayerChangeCallback,
+	            minimized: this._isMinimized,
 	        });
 	        return layout;
 	    }
@@ -46668,6 +46668,7 @@
 	}
 
 	const dddd = new DDDD({
+	    minimized: false,
 	    onLayerChange: (label) => {
 	        console.log('change layer', label);
 	    },

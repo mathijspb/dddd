@@ -2,6 +2,7 @@ import { Color, Texture, Object3D } from 'three';
 import DDDD from '../src/DDDD';
 
 const dddd = new DDDD({
+    minimized: false,
     onLayerChange: (label) => {
         console.log('change layer', label);
     },

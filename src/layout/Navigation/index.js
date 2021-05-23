@@ -44,10 +44,6 @@ export default class Navigation extends LayoutElement {
      * Public
      */
     add(label, options) {
-        if (this._elements.length === 0) {
-            this._show();
-        }
-
         if (this.$root.isLayoutSidebar()) {
             const option = document.createElement('option');
             option.innerText = label;
