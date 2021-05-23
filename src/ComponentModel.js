@@ -120,14 +120,16 @@ export default class ComponentModel {
         }
 
         // Image
-        if (this._options.type === 'image') {
+        if ((/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i).test(value)) {
             return 'image';
         }
 
+        // Canvas
         if (this._options.type === 'canvas') {
             return 'canvas';
         }
 
+        // Dropdown
         if (this._options.options &&
             typeof this._options.options === 'object') {
             return 'dropdown';
