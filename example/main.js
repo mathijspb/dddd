@@ -129,10 +129,12 @@ const image = dddd.addGroup('Image', {
 
 const imageValues = {
     image: './image.png',
+    contain: './image.png',
     three: new Texture(),
 };
 
 image.add(imageValues, 'image');
+image.add(imageValues, 'contain', { contain: true });
 image.add(imageValues, 'three');
 
 /**

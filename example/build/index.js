@@ -45200,7 +45200,7 @@
 
 	window.customElements.define('dddd-number', NumberComponent);
 
-	var style$7 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    line-height: var(--input-height);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.image-container {\n    position: relative;\n\n    width: 100%;\n    aspect-ratio: 16 / 9;\n\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    transition: var(--input-background-color-transition);\n}\n\n.image-container:hover,\n.image-container.drop-area {\n    background-color: var(--input-background-color-hover);\n}\n\n.image-container img {\n    object-fit: cover;\n\n    width: 100%;\n    height: 100%;\n}\n\n.locked .image-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.file-input {\n    position: absolute;\n    top: 0;\n    left: 0;\n\n    width: 100%;\n    height: 100%;\n\n    border: 0;\n    outline: none;\n\n    cursor: pointer;\n}\n\n.file-input::-webkit-file-upload-button {\n    visibility: hidden;\n}\n\n.file-input::before {\n    content: '';\n\n    display: block;\n\n    width: 100%;\n    height: 100%;\n}\n";
+	var style$7 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    line-height: var(--input-height);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.image-container {\n    position: relative;\n\n    width: 100%;\n    aspect-ratio: 16 / 9;\n\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    transition: var(--input-background-color-transition);\n}\n\n.image-container:hover,\n.image-container.drop-area {\n    background-color: var(--input-background-color-hover);\n}\n\n.image-container img {\n    object-fit: cover;\n\n    width: 100%;\n    height: 100%;\n}\n\n.locked .image-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.contain .image-container img {\n    object-fit: contain;\n}\n\n.file-input {\n    position: absolute;\n    top: 0;\n    left: 0;\n\n    width: 100%;\n    height: 100%;\n\n    border: 0;\n    outline: none;\n\n    cursor: pointer;\n}\n\n.file-input::-webkit-file-upload-button {\n    visibility: hidden;\n}\n\n.file-input::before {\n    content: '';\n\n    display: block;\n\n    width: 100%;\n    height: 100%;\n}\n";
 
 	var template$7 = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Image -->\r\n    <div class=\"image-container\" ref=\"imageContainer\">\r\n\r\n        <!-- File input -->\r\n        <input type=\"file\" ref=\"fileInput\" class=\"file-input\" accept=\".jpg,.png,.gif\">\r\n\r\n    </div>\r\n\r\n</div>";
 
@@ -45216,6 +45216,7 @@
 	        super({ root, style: style$7, template: template$7, model });
 
 	        // Data
+	        this._contain = this.model.options.contain;
 	        this._previewImage = null;
 	        this._type = this._getType();
 
@@ -45225,6 +45226,7 @@
 
 	    connected() {
 	        this._addPreviewImage(this.model.value);
+	        if (this._contain) this._addContainClass();
 	        this._setupEventListeners();
 	    }
 
@@ -45257,6 +45259,10 @@
 	        this.$el.removeEventListener('dragenter', this._dragEnterHandler);
 	        this.$el.removeEventListener('dragover', this._dragOverHandler);
 	        this.$el.removeEventListener('dragleave', this._dragLeaveHandler);
+	    }
+
+	    _addContainClass() {
+	        this.$el.classList.add('contain');
 	    }
 
 	    _getType() {
@@ -45295,7 +45301,6 @@
 	            this._previewImage.src = image;
 	            this.$refs.imageContainer.appendChild(this._previewImage);
 	        }
-
 	    }
 
 	    _showDropArea() {
@@ -45504,7 +45509,7 @@
 	    }
 
 	    connected() {
-	        this._addFullWidthClass();
+	        if (this._isFullWidth) this._addFullWidthClass();
 	        this._setupEventListeners();
 	    }
 
@@ -45528,7 +45533,7 @@
 	    }
 
 	    _addFullWidthClass() {
-	        if (this._isFullWidth) this.$el.classList.add('full-width');
+	        this.$el.classList.add('full-width');
 	    }
 
 	    // _triggerOnClickCallback(value) {
@@ -46790,10 +46795,12 @@
 
 	const imageValues = {
 	    image: './image.png',
+	    contain: './image.png',
 	    three: new Texture(),
 	};
 
 	image.add(imageValues, 'image');
+	image.add(imageValues, 'contain', { contain: true });
 	image.add(imageValues, 'three');
 
 	/**

@@ -52,6 +52,10 @@
     pointer-events: none;
 }
 
+.contain .image-container img {
+    object-fit: contain;
+}
+
 .file-input {
     position: absolute;
     top: 0;

@@ -17,6 +17,7 @@ export default class ImageComponent extends Component {
         super({ root, style, template, model });
 
         // Data
+        this._contain = this.model.options.contain;
         this._previewImage = null;
         this._type = this._getType();
 
@@ -26,6 +27,7 @@ export default class ImageComponent extends Component {
 
     connected() {
         this._addPreviewImage(this.model.value);
+        if (this._contain) this._addContainClass();
         this._setupEventListeners();
     }
 
@@ -58,6 +60,10 @@ export default class ImageComponent extends Component {
         this.$el.removeEventListener('dragenter', this._dragEnterHandler);
         this.$el.removeEventListener('dragover', this._dragOverHandler);
         this.$el.removeEventListener('dragleave', this._dragLeaveHandler);
+    }
+
+    _addContainClass() {
+        this.$el.classList.add('contain');
     }
 
     _getType() {
@@ -96,7 +102,6 @@ export default class ImageComponent extends Component {
             this._previewImage.src = image;
             this.$refs.imageContainer.appendChild(this._previewImage);
         }
-
     }
 
     _showDropArea() {

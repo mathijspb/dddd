@@ -19,7 +19,7 @@ export default class Button extends Component {
     }
 
     connected() {
-        this._addFullWidthClass();
+        if (this._isFullWidth) this._addFullWidthClass();
         this._setupEventListeners();
     }
 
@@ -43,7 +43,7 @@ export default class Button extends Component {
     }
 
     _addFullWidthClass() {
-        if (this._isFullWidth) this.$el.classList.add('full-width');
+        this.$el.classList.add('full-width');
     }
 
     // _triggerOnClickCallback(value) {
