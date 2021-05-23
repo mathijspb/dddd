@@ -39,6 +39,10 @@ export default class Layer extends LayoutElement {
         return this._label;
     }
 
+    get content() {
+        return this.element;
+    }
+
     /**
      * Public
      */

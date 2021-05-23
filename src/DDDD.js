@@ -69,8 +69,8 @@ export default class DDDD {
         return this._layout.addGroup(label, options);
     }
 
-    removeGroup(label, options = {}) {
-        return this._layout.removeGroup(label, options);
+    removeGroup(id) {
+        return this._layout.removeGroup(id);
     }
 
     createLayoutFromModel(model, onCompleteCallback) {

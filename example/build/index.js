@@ -44171,6 +44171,10 @@
 	        return this._label;
 	    }
 
+	    get content() {
+	        return this.element;
+	    }
+
 	    /**
 	     * Public
 	     */
@@ -44335,7 +44339,7 @@
 
 	    get(container) {
 	        for (const layer of this._layers) {
-	            if (layer.label === container) return layer.element;
+	            if (layer.label === container) return layer;
 	        }
 	        return null;
 	    }
@@ -44415,7 +44419,7 @@
 	// Base class
 
 	class Group$1 extends LayoutElement {
-	    constructor({ root, label, options }) {
+	    constructor({ root, label, parent, options }) {
 	        super({
 	            root,
 	            style: {
@@ -44434,9 +44438,10 @@
 	        // Props
 	        this._label = label;
 	        this._options = options;
-	        this._parent = options.parent || null;
+	        this._parent = parent || null;
 
 	        // Data
+	        this._id = this._generateId();
 	        this._isVisible = true;
 
 	        // Setup
@@ -44453,6 +44458,10 @@
 	    /**
 	     * Getters & Setters
 	     */
+	    get id() {
+	        return this._id;
+	    }
+
 	    get label() {
 	        return this._label;
 	    }
@@ -44490,14 +44499,12 @@
 	    addGroup(label) {
 	        return this.$root.addGroup(label, {
 	            container: this._label,
-	            parent: this,
+	            // parent: this,
 	        });
 	    }
 
-	    removeGroup(label) {
-	        return this.$root.removeGroup(label, {
-	            parent: this,
-	        });
+	    remove() {
+	        return this.$root.removeGroup(this._id);
 	    }
 
 	    /**
@@ -44515,8 +44522,15 @@
 	        if (this.$refs.buttonHeader) this.$refs.buttonHeader.removeEventListener('click', this._clickHandler);
 	    }
 
+	    _generateId() {
+	        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+	            const r = Math.random() * 16 | 0; const v = c === 'x' ? r : (r & 0x3 | 0x8);
+	            return v.toString(16);
+	        });
+	    }
+
 	    _addSubgroupClass() {
-	        if (this.parent) this.$el.classList.add('subgroup');
+	        if (this._parent.tagName !== 'DDDD-LAYER') this.$el.classList.add('subgroup');
 	    }
 
 	    _updateStartupVisibility() {
@@ -44577,12 +44591,12 @@
 	        this._layers.push(label);
 	    }
 
-	    addGroup(label, options = {}) {
-	        this._groups.push({ label, options });
+	    addGroup(id, label, options = {}) {
+	        this._groups.push({ id, label, options });
 	    }
 
-	    removeGroup(label) {
-	        const index = this._getGroupIndex(label);
+	    removeGroup(id) {
+	        const index = this._getGroupIndex(id);
 	        this._groups.splice(index, 1);
 	    }
 
@@ -44610,9 +44624,9 @@
 	        return components;
 	    }
 
-	    _getGroupIndex(label) {
-	        for (let i = 0, len = this._groups.length; i < len; i++) {
-	            if (this._groups[i].label === label) return i;
+	    _getGroupIndex(id) {
+	        for (const [index, group] of this._groups.entries()) {
+	            if (group.id === id) return index;
 	        }
 	        return null;
 	    }
@@ -46017,7 +46031,7 @@
 
 	    _addComponentToContainer(component) {
 	        const container = component.model.options.container;
-	        const element = this._root.layout.getContainer(container);
+	        const element = this._root.layout.getParent(container).content;
 	        element.appendChild(component);
 	        this._root.layout.resize();
 	    }
@@ -46275,7 +46289,7 @@
 
 	        // Setup
 	        this._isVisible = true;
-	        this._groups = {};
+	        this._groups = [];
 	        this._container = this._createContainer();
 	        this._header = this._createHeader();
 	        this._navigation = this._createNavigation();
@@ -46327,33 +46341,29 @@
 	    }
 
 	    addGroup(label, options = {}) {
+	        const parent = this.getParent(options.container);
 	        const group = new Group$1({
 	            root: this._root,
 	            layout: this,
+	            parent,
 	            label,
 	            options,
 	        });
-	        const container = this.getContainer(options.container);
-	        container.appendChild(group);
 
-	        // if (!this._groups[options.container]) {
-	        //     this._groups[options.container] = {};
-	        // }
-	        // this._groups[options.container][label] = group;
-	        this._groups[label] = group;
+	        parent.content.appendChild(group);
+	        this._groups.push(group);
 
 	        this._layers.resize();
-	        LayoutModel$1.addGroup(label, options);
+	        LayoutModel$1.addGroup(group.id, label, options);
 	        return group;
 	    }
 
-	    removeGroup(label, options) {
-	        const group = this._groups[label];
-	        const container = this._groups[group.options.container];
-	        container.content.removeChild(group);
-	        delete this._groups[label];
+	    removeGroup(id) {
+	        const group = this._getGroupById(id);
+	        group.parent.content.removeChild(group);
+	        this._groups.splice(this._groups.indexOf(group), 1);
 	        this._layers.resize();
-	        LayoutModel$1.removeGroup(label);
+	        LayoutModel$1.removeGroup(id);
 	    }
 
 	    addComponent({ object, property, options, id, type, onChangeCallback }) {
@@ -46366,12 +46376,12 @@
 	        return this._layers.get(label);
 	    }
 
-	    getContainer(label) {
+	    getParent(label) {
 	        const layer = this._layers.get(label);
 	        if (layer) return layer;
 
-	        const group = this._groups[label];
-	        if (group) return group.content;
+	        const group = this._getGroupByLabel(label);
+	        if (group) return group;
 	    }
 
 	    remove() {
@@ -46460,6 +46470,18 @@
 	            layout: this,
 	        });
 	        return componenents;
+	    }
+
+	    _getGroupById(id) {
+	        for (const group of this._groups) {
+	            if (group.id === id) return group;
+	        }
+	    }
+
+	    _getGroupByLabel(label) {
+	        for (const group of this._groups) {
+	            if (group.label === label) return group;
+	        }
 	    }
 
 	    _getGroupContainer(label, container) {
@@ -46565,8 +46587,8 @@
 	        return this._layout.addGroup(label, options);
 	    }
 
-	    removeGroup(label, options = {}) {
-	        return this._layout.removeGroup(label, options);
+	    removeGroup(id) {
+	        return this._layout.removeGroup(id);
 	    }
 
 	    createLayoutFromModel(model, onCompleteCallback) {
@@ -46828,6 +46850,32 @@
 	canvas.addCanvas({
 	    label: 'canvas',
 	    canvas: canvasExample,
+	});
+
+	/**
+	 * Group
+	 */
+	const group = dddd.addGroup('Group', {
+	    container: 'Layer #1',
+	});
+
+	const groupValues = {
+	    value: 0.5,
+	};
+
+	number.add(numberValues, 'infinite');
+
+	const subgroup = group.addGroup('Subgroup');
+	subgroup.add(groupValues, 'value');
+
+	const subsubgroup = subgroup.addGroup('Subsubgroup');
+	subsubgroup.add(groupValues, 'value');
+
+	group.addButton('Remove subgroup', {
+	    fullWidth: true,
+	    onClick: () => {
+	        group.remove();
+	    },
 	});
 
 })));

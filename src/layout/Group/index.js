@@ -13,7 +13,7 @@ import templateSidebar from './template-sidebar.html';
 import templateDevtools from './template-devtools.html';
 
 export default class Group extends LayoutElement {
-    constructor({ root, label, options }) {
+    constructor({ root, label, parent, options }) {
         super({
             root,
             style: {
@@ -32,9 +32,10 @@ export default class Group extends LayoutElement {
         // Props
         this._label = label;
         this._options = options;
-        this._parent = options.parent || null;
+        this._parent = parent || null;
 
         // Data
+        this._id = this._generateId();
         this._isVisible = true;
 
         // Setup
@@ -51,6 +52,10 @@ export default class Group extends LayoutElement {
     /**
      * Getters & Setters
      */
+    get id() {
+        return this._id;
+    }
+
     get label() {
         return this._label;
     }
@@ -88,14 +93,12 @@ export default class Group extends LayoutElement {
     addGroup(label) {
         return this.$root.addGroup(label, {
             container: this._label,
-            parent: this,
+            // parent: this,
         });
     }
 
-    removeGroup(label) {
-        return this.$root.removeGroup(label, {
-            parent: this,
-        });
+    remove() {
+        return this.$root.removeGroup(this._id);
     }
 
     /**
@@ -113,8 +116,15 @@ export default class Group extends LayoutElement {
         if (this.$refs.buttonHeader) this.$refs.buttonHeader.removeEventListener('click', this._clickHandler);
     }
 
+    _generateId() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            const r = Math.random() * 16 | 0; const v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
+
     _addSubgroupClass() {
-        if (this.parent) this.$el.classList.add('subgroup');
+        if (this._parent.tagName !== 'DDDD-LAYER') this.$el.classList.add('subgroup');
     }
 
     _updateStartupVisibility() {

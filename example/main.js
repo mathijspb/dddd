@@ -156,3 +156,29 @@ canvas.addCanvas({
     label: 'canvas',
     canvas: canvasExample,
 });
+
+/**
+ * Group
+ */
+const group = dddd.addGroup('Group', {
+    container: 'Layer #1',
+});
+
+const groupValues = {
+    value: 0.5,
+};
+
+number.add(numberValues, 'infinite');
+
+const subgroup = group.addGroup('Subgroup');
+subgroup.add(groupValues, 'value');
+
+const subsubgroup = subgroup.addGroup('Subsubgroup');
+subsubgroup.add(groupValues, 'value');
+
+group.addButton('Remove subgroup', {
+    fullWidth: true,
+    onClick: () => {
+        group.remove();
+    },
+});

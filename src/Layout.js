@@ -17,7 +17,7 @@ export default class Layout {
 
         // Setup
         this._isVisible = true;
-        this._groups = {};
+        this._groups = [];
         this._container = this._createContainer();
         this._header = this._createHeader();
         this._navigation = this._createNavigation();
@@ -69,33 +69,29 @@ export default class Layout {
     }
 
     addGroup(label, options = {}) {
+        const parent = this.getParent(options.container);
         const group = new Group({
             root: this._root,
             layout: this,
+            parent,
             label,
             options,
         });
-        const container = this.getContainer(options.container);
-        container.appendChild(group);
 
-        // if (!this._groups[options.container]) {
-        //     this._groups[options.container] = {};
-        // }
-        // this._groups[options.container][label] = group;
-        this._groups[label] = group;
+        parent.content.appendChild(group);
+        this._groups.push(group);
 
         this._layers.resize();
-        LayoutModel.addGroup(label, options);
+        LayoutModel.addGroup(group.id, label, options);
         return group;
     }
 
-    removeGroup(label, options) {
-        const group = this._groups[label];
-        const container = this._groups[group.options.container];
-        container.content.removeChild(group);
-        delete this._groups[label];
+    removeGroup(id) {
+        const group = this._getGroupById(id);
+        group.parent.content.removeChild(group);
+        this._groups.splice(this._groups.indexOf(group), 1);
         this._layers.resize();
-        LayoutModel.removeGroup(label);
+        LayoutModel.removeGroup(id);
     }
 
     addComponent({ object, property, options, id, type, onChangeCallback }) {
@@ -108,12 +104,12 @@ export default class Layout {
         return this._layers.get(label);
     }
 
-    getContainer(label) {
+    getParent(label) {
         const layer = this._layers.get(label);
         if (layer) return layer;
 
-        const group = this._groups[label];
-        if (group) return group.content;
+        const group = this._getGroupByLabel(label);
+        if (group) return group;
     }
 
     remove() {
@@ -202,6 +198,18 @@ export default class Layout {
             layout: this,
         });
         return componenents;
+    }
+
+    _getGroupById(id) {
+        for (const group of this._groups) {
+            if (group.id === id) return group;
+        }
+    }
+
+    _getGroupByLabel(label) {
+        for (const group of this._groups) {
+            if (group.label === label) return group;
+        }
     }
 
     _getGroupContainer(label, container) {

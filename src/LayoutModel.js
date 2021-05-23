@@ -12,12 +12,12 @@ class LayoutModel {
         this._layers.push(label);
     }
 
-    addGroup(label, options = {}) {
-        this._groups.push({ label, options });
+    addGroup(id, label, options = {}) {
+        this._groups.push({ id, label, options });
     }
 
-    removeGroup(label) {
-        const index = this._getGroupIndex(label);
+    removeGroup(id) {
+        const index = this._getGroupIndex(id);
         this._groups.splice(index, 1);
     }
 
@@ -45,9 +45,9 @@ class LayoutModel {
         return components;
     }
 
-    _getGroupIndex(label) {
-        for (let i = 0, len = this._groups.length; i < len; i++) {
-            if (this._groups[i].label === label) return i;
+    _getGroupIndex(id) {
+        for (const [index, group] of this._groups.entries()) {
+            if (group.id === id) return index;
         }
         return null;
     }

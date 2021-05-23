@@ -47,7 +47,7 @@ export default class Layers extends LayoutElement {
 
     get(container) {
         for (const layer of this._layers) {
-            if (layer.label === container) return layer.element;
+            if (layer.label === container) return layer;
         }
         return null;
     }

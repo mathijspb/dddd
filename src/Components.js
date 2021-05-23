@@ -81,7 +81,7 @@ export default class Components {
 
     _addComponentToContainer(component) {
         const container = component.model.options.container;
-        const element = this._root.layout.getContainer(container);
+        const element = this._root.layout.getParent(container).content;
         element.appendChild(component);
         this._root.layout.resize();
     }
