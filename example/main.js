@@ -45,6 +45,9 @@ const colorValues2 = {
 
 color2.add(colorValues2, 'hex');
 
+const color2Subgroup = color2.addGroup('Subcolor');
+color2Subgroup.add(colorValues, 'name', { type: 'color' });
+
 /**
  * Slider
  */

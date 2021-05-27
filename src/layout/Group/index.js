@@ -92,8 +92,8 @@ export default class Group extends LayoutElement {
 
     addGroup(label) {
         return this.$root.addGroup(label, {
-            container: this._label,
-            // parent: this,
+            // container: this._label,
+            parent: this,
         });
     }
 

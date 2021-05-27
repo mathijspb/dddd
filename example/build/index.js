@@ -44498,8 +44498,8 @@
 
 	    addGroup(label) {
 	        return this.$root.addGroup(label, {
-	            container: this._label,
-	            // parent: this,
+	            // container: this._label,
+	            parent: this,
 	        });
 	    }
 
@@ -46350,7 +46350,7 @@
 	    }
 
 	    addGroup(label, options = {}) {
-	        const parent = this.getParent(options.container);
+	        const parent = options.parent ? options.parent : this.getParent(options.container);
 	        const group = new Group$1({
 	            root: this._root,
 	            layout: this,
@@ -46713,7 +46713,7 @@
 	});
 
 	/**
-	 * Layer
+	 * Layers
 	 */
 	dddd.addLayer('Layer #1');
 	dddd.addLayer('Layer #2');
@@ -46735,19 +46735,22 @@
 	color.add(colorValues, 'hex');
 	color.add(colorValues, 'name', { type: 'color' });
 
+	/**
+	 * Color in Layer #2
+	 */
 	const color2 = dddd.addGroup('Color', {
 	    container: 'Layer #2',
 	});
 
 	const colorValues2 = {
-	    three: new Color(0xff0000),
 	    hex: '#00ff00',
 	    name: 'blue',
 	};
 
-	color2.add(colorValues2, 'three');
 	color2.add(colorValues2, 'hex');
-	color2.add(colorValues2, 'name', { type: 'color' });
+
+	const color2Subgroup = color2.addGroup('Subcolor');
+	color2Subgroup.add(colorValues, 'name', { type: 'color' });
 
 	/**
 	 * Slider
