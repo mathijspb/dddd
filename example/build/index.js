@@ -43980,6 +43980,7 @@
 	    _selectChangeHandler() {
 	        const index = parseInt(this.$refs.select.value);
 	        this._triggerSwitchEvent(index);
+	        this.$refs.select.blur();
 	    }
 
 	    _clickButtonToggle() {
@@ -45184,7 +45185,9 @@
 
 	    _mouseUpHandler(e) {
 	        document.exitPointerLock();
-	        if (!this._isMouseMoved) {
+	        if (this._isMouseMoved) {
+	            this.$refs.input.blur();
+	        } else {
 	            this.$refs.input.select();
 	        }
 	    }
@@ -45204,9 +45207,11 @@
 	    _mouseMoveHandler(e) {
 	        if (!this._isPointerLockActive) return;
 
-	        this._isMouseMoved = true;
-
 	        const delta = Math.max(Math.min(e.movementX, 100), -100); // NOTE: Prevents bug in chrome where movementX spikes to high value
+	        if (Math.abs(delta) > 0) {
+	            this._isMouseMoved = true;
+	        }
+
 	        let value = this._getInputValueBasedOnMouseMovement(delta);
 	        if (typeof this._min === 'number') value = Math.max(value, this._min);
 	        if (typeof this._max === 'number') value = Math.min(value, this._max);
@@ -45444,6 +45449,7 @@
 	     */
 	    _selectChangeHandler() {
 	        this.model.value = this.$refs.select.value;
+	        this.$refs.select.blur();
 	    }
 	}
 

@@ -146,6 +146,7 @@ export default class Navigation extends LayoutElement {
     _selectChangeHandler() {
         const index = parseInt(this.$refs.select.value);
         this._triggerSwitchEvent(index);
+        this.$refs.select.blur();
     }
 
     _clickButtonToggle() {
