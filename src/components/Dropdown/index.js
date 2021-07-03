@@ -77,6 +77,7 @@ export default class Dropdown extends Component {
 
     _selectChangeHandler() {
         this.model.value = this.$refs.select.value;
+        this.$refs.select.blur();
     }
 }
 

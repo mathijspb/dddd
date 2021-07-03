@@ -76,7 +76,7 @@ export default class Layout {
     }
 
     addGroup(label, options = {}) {
-        const parent = this.getParent(options.container);
+        const parent = options.parent ? options.parent : this.getParent(options.container);
         const group = new Group({
             root: this._root,
             layout: this,

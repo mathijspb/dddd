@@ -9,9 +9,10 @@ const dddd = new DDDD({
 });
 
 /**
- * Layer
+ * Layers
  */
 dddd.addLayer('Layer #1');
+dddd.addLayer('Layer #2');
 
 /**
  * Color
@@ -29,6 +30,23 @@ const colorValues = {
 color.add(colorValues, 'three');
 color.add(colorValues, 'hex');
 color.add(colorValues, 'name', { type: 'color' });
+
+/**
+ * Color in Layer #2
+ */
+const color2 = dddd.addGroup('Color', {
+    container: 'Layer #2',
+});
+
+const colorValues2 = {
+    hex: '#00ff00',
+    name: 'blue',
+};
+
+color2.add(colorValues2, 'hex');
+
+const color2Subgroup = color2.addGroup('Subcolor');
+color2Subgroup.add(colorValues, 'name', { type: 'color' });
 
 /**
  * Slider

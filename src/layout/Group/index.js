@@ -76,24 +76,24 @@ export default class Group extends LayoutElement {
      * Public
      */
     add(object, property, options = {}) {
-        options.container = this;
+        options.parent = this;
         return this.$root.add(object, property, options);
     }
 
     addButton(label, options = {}) {
-        options.container = this;
+        options.parent = this;
         return this.$root.addButton(label, options);
     }
 
     addCanvas(options) {
-        options.container = this;
+        options.parent = this;
         return this.$root.addCanvas(options);
     }
 
     addGroup(label) {
         return this.$root.addGroup(label, {
-            container: this._label,
-            // parent: this,
+            // container: this._label,
+            parent: this,
         });
     }
 
