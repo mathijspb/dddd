@@ -45222,6 +45222,7 @@
 	        this._mouseDownHandler = this._mouseDownHandler.bind(this);
 	        this._mouseUpHandler = this._mouseUpHandler.bind(this);
 	        this._changeHandler = this._changeHandler.bind(this);
+	        this._mouseWheelHandler = this._mouseWheelHandler.bind(this);
 	        this._pointerLockHanderHandler = this._pointerLockHanderHandler.bind(this);
 	        this._mouseMoveHandler = this._mouseMoveHandler.bind(this);
 	    }
@@ -45231,6 +45232,7 @@
 	        this.$refs.input.addEventListener('mousedown', this._mouseDownHandler);
 	        this.$refs.input.addEventListener('mouseup', this._mouseUpHandler);
 	        this.$refs.input.addEventListener('change', this._changeHandler);
+	        this.$refs.input.addEventListener('mousewheel', this._mouseWheelHandler);
 	        document.addEventListener('pointerlockchange', this._pointerLockHanderHandler);
 	        document.addEventListener('mousemove', this._mouseMoveHandler);
 	    }
@@ -45240,6 +45242,7 @@
 	        this.$refs.input.removeEventListener('mousedown', this._mouseDownHandler);
 	        this.$refs.input.removeEventListener('mouseup', this._mouseUpHandler);
 	        this.$refs.input.removeEventListener('change', this._changeHandler);
+	        this.$refs.input.removeEventListener('mousewheel', this._mouseWheelHandler);
 	        document.removeEventListener('pointerlockchange', this._pointerLockHanderHandler);
 	        document.removeEventListener('mousemove', this._mouseMoveHandler);
 	    }
@@ -45287,6 +45290,12 @@
 	        const value = Number(this.$refs.input.value);
 	        this._updateModelValue(value);
 	        this.$refs.input.blur();
+	    }
+
+	    _mouseWheelHandler(e) {
+	        const value = this.model.value + this._stepSize * Math.sign(e.wheelDelta);
+	        this._updateInputValue(value);
+	        this._updateModelValue(value);
 	    }
 
 	    _pointerLockHanderHandler() {
