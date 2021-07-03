@@ -44793,6 +44793,29 @@
 
 	var template$4 = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input container -->\r\n    <div class=\"input-container\" ref=\"inputContainer\">\r\n\r\n        <!-- Scrubber -->\r\n        <div class=\"scrubber\" ref=\"scrubber\"></div>\r\n        \r\n        <!-- Input -->\r\n        <input class=\"input\" ref=\"input\">\r\n\r\n    </div>\r\n\r\n</div>";
 
+	class ValueHover {
+	    constructor() {
+	        this._value = null;
+	    }
+
+	    /**
+	     * Public
+	     */
+	    set(value) {
+	        this._value = value;
+	    }
+
+	    get() {
+	        return this._value;
+	    }
+
+	    copyToClipboard() {
+	        navigator.clipboard.writeText(this._value).then();
+	    }
+	}
+
+	var ValueHover$1 = new ValueHover();
+
 	// Base component
 
 	// Constants
@@ -44850,6 +44873,7 @@
 	    _bindHandlers() {
 	        this._windowMouseMoveHandler = this._windowMouseMoveHandler.bind(this);
 	        this._windowMouseUpHandler = this._windowMouseUpHandler.bind(this);
+	        this._inputContainerMouseEnterHandler = this._inputContainerMouseEnterHandler.bind(this);
 	        this._inputContainerMouseDownHandler = this._inputContainerMouseDownHandler.bind(this);
 	        this._inputContainerMouseUpHandler = this._inputContainerMouseUpHandler.bind(this);
 	        this._inputContainerDoubleClickHandler = this._inputContainerDoubleClickHandler.bind(this);
@@ -44860,6 +44884,7 @@
 	    }
 
 	    _setupEventListeners() {
+	        this.$refs.inputContainer.addEventListener('mouseenter', this._inputContainerMouseEnterHandler);
 	        this.$refs.inputContainer.addEventListener('mousedown', this._inputContainerMouseDownHandler);
 	        this.$refs.inputContainer.addEventListener('mouseup', this._inputContainerMouseUpHandler);
 	        this.$refs.inputContainer.addEventListener('dblclick', this._inputContainerDoubleClickHandler);
@@ -44872,6 +44897,7 @@
 	    }
 
 	    _removeEventListeners() {
+	        this.$refs.inputContainer.removeEventListener('mouseenter', this._inputContainerMouseEnterHandler);
 	        this.$refs.inputContainer.removeEventListener('mousedown', this._inputContainerMouseDownHandler);
 	        this.$refs.inputContainer.removeEventListener('mouseup', this._inputContainerMouseUpHandler);
 	        this.$refs.inputContainer.removeEventListener('dblclick', this._inputContainerDoubleClickHandler);
@@ -44886,6 +44912,7 @@
 	    _updateValue(value) {
 	        this.model.value = Math.max(Math.min(value, this.model.options.max), this.model.options.min);
 	        this._updateInputValue(this.model.value);
+	        ValueHover$1.set(this.model.value);
 	    }
 
 	    _calcValue(mouseX) {
@@ -44977,6 +45004,10 @@
 	        if (this._isSlideStarted) return;
 	        this._selectInput();
 	        this._hideScrubber();
+	    }
+
+	    _inputContainerMouseEnterHandler() {
+	        ValueHover$1.set(this.model.value);
 	    }
 
 	    _inputContainerMouseDownHandler(e) {
@@ -45133,6 +45164,7 @@
 	     * Private
 	     */
 	    _bindHandlers() {
+	        this._mouseEnterHandler = this._mouseEnterHandler.bind(this);
 	        this._mouseDownHandler = this._mouseDownHandler.bind(this);
 	        this._mouseUpHandler = this._mouseUpHandler.bind(this);
 	        this._changeHandler = this._changeHandler.bind(this);
@@ -45141,6 +45173,7 @@
 	    }
 
 	    _setupEventListeners() {
+	        this.$refs.input.addEventListener('mouseenter', this._mouseEnterHandler);
 	        this.$refs.input.addEventListener('mousedown', this._mouseDownHandler);
 	        this.$refs.input.addEventListener('mouseup', this._mouseUpHandler);
 	        this.$refs.input.addEventListener('change', this._changeHandler);
@@ -45149,6 +45182,7 @@
 	    }
 
 	    _removeEventListeners() {
+	        this.$refs.input.removeEventListener('mouseenter', this._mouseEnterHandler);
 	        this.$refs.input.removeEventListener('mousedown', this._mouseDownHandler);
 	        this.$refs.input.removeEventListener('mouseup', this._mouseUpHandler);
 	        this.$refs.input.removeEventListener('change', this._changeHandler);
@@ -45176,6 +45210,10 @@
 	    /**
 	     * Handlers
 	     */
+	    _mouseEnterHandler() {
+	        ValueHover$1.set(this.model.value);
+	    }
+
 	    _mouseDownHandler(e) {
 	        this.$refs.input.requestPointerLock();
 	        this._isPointerLockActive = true;
@@ -45384,6 +45422,8 @@
 
 	var template$8 = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input container  -->\r\n    <div class=\"input-container\">\r\n\r\n        <!-- Arrow -->\r\n        <svg width=\"11\" height=\"6\" viewBox=\"0 0 11 6\" class=\"arrow\">\r\n            <path d=\"M1 1L4.83564 4.40945C5.21452 4.74624 5.78548 4.74624 6.16436 4.40945L10 1\" stroke=\"white\" fill=\"transparent\" stroke-opacity=\"0.74\" stroke-linecap=\"round\"/>\r\n        </svg>\r\n        \r\n        <!-- Select -->\r\n        <select class=\"select\" ref=\"select\"></select>\r\n\r\n    </div>\r\n\r\n</div>";
 
+	// Base component
+
 	class Dropdown extends Component {
 	    constructor(root, model) {
 	        super({ root, style: style$8, template: template$8, model });
@@ -45412,14 +45452,17 @@
 	     * Private
 	     */
 	    _bindHandlers() {
+	        this._mouseEnterHandler = this._mouseEnterHandler.bind(this);
 	        this._selectChangeHandler = this._selectChangeHandler.bind(this);
 	    }
 
 	    _setupEventListeners() {
+	        this.$refs.select.addEventListener('mouseenter', this._mouseEnterHandler);
 	        this.$refs.select.addEventListener('change', this._selectChangeHandler);
 	    }
 
 	    _removeEventListeners() {
+	        this.$refs.select.removeEventListener('mouseenter', this._mouseEnterHandler);
 	        this.$refs.select.removeEventListener('change', this._selectChangeHandler);
 	    }
 
@@ -45442,6 +45485,10 @@
 	    /**
 	     * Handlers
 	     */
+	    _mouseEnterHandler() {
+	        ValueHover$1.set(this.model.value);
+	    }
+
 	    _selectChangeHandler() {
 	        this.model.value = this.$refs.select.value;
 	    }
@@ -45608,6 +45655,7 @@
 	     * Private
 	     */
 	    _bindHandlers() {
+	        this._mouseEnterHandler = this._mouseEnterHandler.bind(this);
 	        this._inputChangeHandler = this._inputChangeHandler.bind(this);
 	        this._colorStringFocusHandler = this._colorStringFocusHandler.bind(this);
 	        this._colorStringBlurHandler = this._colorStringBlurHandler.bind(this);
@@ -45615,6 +45663,7 @@
 	    }
 
 	    _setupEventListeners() {
+	        this.$refs.color.addEventListener('mouseenter', this._mouseEnterHandler);
 	        this.$refs.color.addEventListener('input', this._inputChangeHandler);
 	        this.$refs.colorString.addEventListener('focus', this._colorStringFocusHandler);
 	        this.$refs.colorString.addEventListener('blur', this._colorStringBlurHandler);
@@ -45622,6 +45671,7 @@
 	    }
 
 	    _removeEventListeners() {
+	        this.$refs.color.removeEventListener('mouseenter', this._mouseEnterHandler);
 	        this.$refs.color.removeEventListener('input', this._inputChangeHandler);
 	        this.$refs.colorString.removeEventListener('focus', this._colorStringFocusHandler);
 	        this.$refs.colorString.removeEventListener('blur', this._colorStringBlurHandler);
@@ -45708,11 +45758,16 @@
 	    /**
 	     * Handlers
 	     */
+	    _mouseEnterHandler() {
+	        ValueHover$1.set(this.$refs.colorString.value);
+	    }
+
 	    _inputChangeHandler() {
 	        const value = this.$refs.color.value;
 	        this._setModelValue(value);
 	        this._setColorString(value);
 	        this._hideError();
+	        ValueHover$1.set(value);
 	    }
 
 	    _colorStringFocusHandler() {
@@ -45779,6 +45834,7 @@
 	     * Private
 	     */
 	    _bindHandlers() {
+	        this._mouseEnterHandler = this._mouseEnterHandler.bind(this);
 	        this._mouseDownHandler = this._mouseDownHandler.bind(this);
 	        this._mouseUpHandler = this._mouseUpHandler.bind(this);
 	        this._changeHandler = this._changeHandler.bind(this);
@@ -45787,6 +45843,9 @@
 	    }
 
 	    _setupEventListeners() {
+	        for (let i = 0, len = this._inputs.length; i < len; i++) {
+	            this._inputs[i].addEventListener('mouseenter', this._mouseEnterHandler);
+	        }
 	        this.$el.addEventListener('mousedown', this._mouseDownHandler);
 	        this.$el.addEventListener('mouseup', this._mouseUpHandler);
 	        this.$el.addEventListener('change', this._changeHandler);
@@ -45795,6 +45854,9 @@
 	    }
 
 	    _removeEventListeners() {
+	        for (let i = 0, len = this._inputs.length; i < len; i++) {
+	            this._inputs[i].removeEventListener('mouseenter', this._mouseEnterHandler);
+	        }
 	        this.$el.removeEventListener('mousedown', this._mouseDownHandler);
 	        this.$el.removeEventListener('mouseup', this._mouseUpHandler);
 	        this.$el.removeEventListener('change', this._changeHandler);
@@ -45817,7 +45879,9 @@
 
 	    _updateModelValue() {
 	        for (const [index, [key]] of Object.entries(Object.entries(this.model.value))) {
-	            if (this._inputs[index]) this.model.value[key] = parseFloat(this._inputs[index].value);
+	            if (this._inputs[index]) {
+	                this.model.value[key] = parseFloat(this._inputs[index].value);
+	            }
 	        }
 	    }
 
@@ -45847,6 +45911,10 @@
 	    /**
 	     * Handlers
 	     */
+	    _mouseEnterHandler(e) {
+	        ValueHover$1.set(e.target.value);
+	    }
+
 	    _mouseDownHandler(e) {
 	        if (e.target.tagName === 'INPUT') {
 	            this._activeInput = e.target;
@@ -46281,6 +46349,8 @@
 	    }
 	}
 
+	// Layout
+
 	class Layout {
 	    constructor({ root, onLayerChange, minimized }) {
 	        // Props
@@ -46414,14 +46484,17 @@
 	     */
 	    _bindHandlers() {
 	        this._navigationSwitchHandler = this._navigationSwitchHandler.bind(this);
+	        this._keyUpHandler = this._keyUpHandler.bind(this);
 	    }
 
 	    _setupEventListeners() {
 	        this._navigation.addEventListener('switch', this._navigationSwitchHandler);
+	        window.addEventListener('keyup', this._keyUpHandler);
 	    }
 
 	    _removeEventListeners() {
 	        this._navigation.addEventListener('switch', this._navigationSwitchHandler);
+	        window.addEventListener('keyup', this._keyUpHandler);
 	    }
 
 	    _createContainer() {
@@ -46515,6 +46588,10 @@
 	            const label = this._layers.getByIndex(e.detail.index).label;
 	            this._onLayerChangeCallback(label);
 	        }
+	    }
+
+	    _keyUpHandler(e) {
+	        if (e.keyCode === 67) ValueHover$1.copyToClipboard();
 	    }
 	}
 

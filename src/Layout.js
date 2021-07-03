@@ -1,13 +1,20 @@
+// Layout
 import Container from './layout/Container';
 import Header from './layout/Header';
 import Navigation from './layout/Navigation';
 import Stats from './layout/Stats';
 import Layers from './layout/Layers';
 import Group from './layout/Group';
+
+// Components
 import Components from './Components';
 
+// Models
 import LayoutModel from './LayoutModel';
 import ComponentModel from './ComponentModel';
+
+// Utils
+import ValueHover from './utils/ValueHover';
 
 export default class Layout {
     constructor({ root, onLayerChange, minimized }) {
@@ -142,14 +149,17 @@ export default class Layout {
      */
     _bindHandlers() {
         this._navigationSwitchHandler = this._navigationSwitchHandler.bind(this);
+        this._keyUpHandler = this._keyUpHandler.bind(this);
     }
 
     _setupEventListeners() {
         this._navigation.addEventListener('switch', this._navigationSwitchHandler);
+        window.addEventListener('keyup', this._keyUpHandler);
     }
 
     _removeEventListeners() {
         this._navigation.addEventListener('switch', this._navigationSwitchHandler);
+        window.addEventListener('keyup', this._keyUpHandler);
     }
 
     _createContainer() {
@@ -243,5 +253,9 @@ export default class Layout {
             const label = this._layers.getByIndex(e.detail.index).label;
             this._onLayerChangeCallback(label);
         }
+    }
+
+    _keyUpHandler(e) {
+        if (e.keyCode === 67) ValueHover.copyToClipboard();
     }
 }

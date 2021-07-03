@@ -7,6 +7,9 @@ import style from './style.css';
 // Template
 import template from './template.html';
 
+// Utils
+import ValueHover from '../../utils/ValueHover';
+
 // Constants
 const DEFAULT_STEP_SIZE = 0.01;
 
@@ -47,6 +50,7 @@ export default class MultiInput extends Component {
      * Private
      */
     _bindHandlers() {
+        this._mouseEnterHandler = this._mouseEnterHandler.bind(this);
         this._mouseDownHandler = this._mouseDownHandler.bind(this);
         this._mouseUpHandler = this._mouseUpHandler.bind(this);
         this._changeHandler = this._changeHandler.bind(this);
@@ -55,6 +59,9 @@ export default class MultiInput extends Component {
     }
 
     _setupEventListeners() {
+        for (let i = 0, len = this._inputs.length; i < len; i++) {
+            this._inputs[i].addEventListener('mouseenter', this._mouseEnterHandler);
+        }
         this.$el.addEventListener('mousedown', this._mouseDownHandler);
         this.$el.addEventListener('mouseup', this._mouseUpHandler);
         this.$el.addEventListener('change', this._changeHandler);
@@ -63,6 +70,9 @@ export default class MultiInput extends Component {
     }
 
     _removeEventListeners() {
+        for (let i = 0, len = this._inputs.length; i < len; i++) {
+            this._inputs[i].removeEventListener('mouseenter', this._mouseEnterHandler);
+        }
         this.$el.removeEventListener('mousedown', this._mouseDownHandler);
         this.$el.removeEventListener('mouseup', this._mouseUpHandler);
         this.$el.removeEventListener('change', this._changeHandler);
@@ -85,7 +95,9 @@ export default class MultiInput extends Component {
 
     _updateModelValue() {
         for (const [index, [key]] of Object.entries(Object.entries(this.model.value))) {
-            if (this._inputs[index]) this.model.value[key] = parseFloat(this._inputs[index].value);
+            if (this._inputs[index]) {
+                this.model.value[key] = parseFloat(this._inputs[index].value);
+            }
         }
     }
 
@@ -115,6 +127,10 @@ export default class MultiInput extends Component {
     /**
      * Handlers
      */
+    _mouseEnterHandler(e) {
+        ValueHover.set(e.target.value);
+    }
+
     _mouseDownHandler(e) {
         if (e.target.tagName === 'INPUT') {
             this._activeInput = e.target;

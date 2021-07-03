@@ -7,6 +7,9 @@ import style from './style.css';
 // Template
 import template from './template.html';
 
+// Utils
+import ValueHover from '../../utils/ValueHover';
+
 // Constants
 const ACTIVE_CLASS = 'active';
 const PRECISION_MODIFIER = 0.3;
@@ -62,6 +65,7 @@ export default class Slider extends Component {
     _bindHandlers() {
         this._windowMouseMoveHandler = this._windowMouseMoveHandler.bind(this);
         this._windowMouseUpHandler = this._windowMouseUpHandler.bind(this);
+        this._inputContainerMouseEnterHandler = this._inputContainerMouseEnterHandler.bind(this);
         this._inputContainerMouseDownHandler = this._inputContainerMouseDownHandler.bind(this);
         this._inputContainerMouseUpHandler = this._inputContainerMouseUpHandler.bind(this);
         this._inputContainerDoubleClickHandler = this._inputContainerDoubleClickHandler.bind(this);
@@ -72,6 +76,7 @@ export default class Slider extends Component {
     }
 
     _setupEventListeners() {
+        this.$refs.inputContainer.addEventListener('mouseenter', this._inputContainerMouseEnterHandler);
         this.$refs.inputContainer.addEventListener('mousedown', this._inputContainerMouseDownHandler);
         this.$refs.inputContainer.addEventListener('mouseup', this._inputContainerMouseUpHandler);
         this.$refs.inputContainer.addEventListener('dblclick', this._inputContainerDoubleClickHandler);
@@ -84,6 +89,7 @@ export default class Slider extends Component {
     }
 
     _removeEventListeners() {
+        this.$refs.inputContainer.removeEventListener('mouseenter', this._inputContainerMouseEnterHandler);
         this.$refs.inputContainer.removeEventListener('mousedown', this._inputContainerMouseDownHandler);
         this.$refs.inputContainer.removeEventListener('mouseup', this._inputContainerMouseUpHandler);
         this.$refs.inputContainer.removeEventListener('dblclick', this._inputContainerDoubleClickHandler);
@@ -98,6 +104,7 @@ export default class Slider extends Component {
     _updateValue(value) {
         this.model.value = Math.max(Math.min(value, this.model.options.max), this.model.options.min);
         this._updateInputValue(this.model.value);
+        ValueHover.set(this.model.value);
     }
 
     _calcValue(mouseX) {
@@ -189,6 +196,10 @@ export default class Slider extends Component {
         if (this._isSlideStarted) return;
         this._selectInput();
         this._hideScrubber();
+    }
+
+    _inputContainerMouseEnterHandler() {
+        ValueHover.set(this.model.value);
     }
 
     _inputContainerMouseDownHandler(e) {

@@ -7,6 +7,9 @@ import style from './style.css';
 // Template
 import template from './template.html';
 
+// Utils
+import ValueHover from '../../utils/ValueHover';
+
 // Constants
 const TYPE_THREE = 'TYPE_THREE';
 const TYPE_STRING = 'TYPE_STRING';
@@ -39,6 +42,7 @@ export default class Color extends Component {
      * Private
      */
     _bindHandlers() {
+        this._mouseEnterHandler = this._mouseEnterHandler.bind(this);
         this._inputChangeHandler = this._inputChangeHandler.bind(this);
         this._colorStringFocusHandler = this._colorStringFocusHandler.bind(this);
         this._colorStringBlurHandler = this._colorStringBlurHandler.bind(this);
@@ -46,6 +50,7 @@ export default class Color extends Component {
     }
 
     _setupEventListeners() {
+        this.$refs.color.addEventListener('mouseenter', this._mouseEnterHandler);
         this.$refs.color.addEventListener('input', this._inputChangeHandler);
         this.$refs.colorString.addEventListener('focus', this._colorStringFocusHandler);
         this.$refs.colorString.addEventListener('blur', this._colorStringBlurHandler);
@@ -53,6 +58,7 @@ export default class Color extends Component {
     }
 
     _removeEventListeners() {
+        this.$refs.color.removeEventListener('mouseenter', this._mouseEnterHandler);
         this.$refs.color.removeEventListener('input', this._inputChangeHandler);
         this.$refs.colorString.removeEventListener('focus', this._colorStringFocusHandler);
         this.$refs.colorString.removeEventListener('blur', this._colorStringBlurHandler);
@@ -139,11 +145,16 @@ export default class Color extends Component {
     /**
      * Handlers
      */
+    _mouseEnterHandler() {
+        ValueHover.set(this.$refs.colorString.value);
+    }
+
     _inputChangeHandler() {
         const value = this.$refs.color.value;
         this._setModelValue(value);
         this._setColorString(value);
         this._hideError();
+        ValueHover.set(value);
     }
 
     _colorStringFocusHandler() {
