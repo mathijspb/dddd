@@ -21,7 +21,7 @@
     display: grid;
     position: relative;
 
-    grid-template-columns: 45px calc(100% - 50px);
+    grid-template-columns: 27px calc(100% - 20px);
     align-items: center;
 
     height: var(--input-height);
@@ -49,8 +49,8 @@
 }
 
 .color {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
 
     margin: 0;
     padding: 0;
@@ -70,7 +70,7 @@
 
 .color::-webkit-color-swatch {
     border: none;
-    border-radius: 7px;
+    border-radius: 4px;
 }
 
 .color-string {

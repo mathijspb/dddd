@@ -188,8 +188,12 @@ const groupValues = {
 
 const subgroup = group.addGroup('Subgroup');
 subgroup.add(groupValues, 'value');
+subgroup.add(groupValues, 'value');
+subgroup.add(groupValues, 'value');
 
 const subsubgroup = subgroup.addGroup('Subsubgroup');
+subsubgroup.add(groupValues, 'value');
+subsubgroup.add(groupValues, 'value');
 subsubgroup.add(groupValues, 'value');
 
 group.addButton('Remove subgroup', {
