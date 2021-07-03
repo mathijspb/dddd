@@ -17,6 +17,8 @@ export default class Container extends LayoutElement {
         this._isMouseDown = false;
         this._width = 0;
         this._height = 0;
+        this._customWidth = 0;
+        this._customHeight = 0;
         this._axis = { x: 0, y: 0 };
 
         // Setup
@@ -31,8 +33,19 @@ export default class Container extends LayoutElement {
     /**
      * Public
      */
+    get width() {
+        return this._width;
+    }
+
+    get height() {
+        return this._height;
+    }
+
+    /**
+     * Public
+     */
     show() {
-        this.$el.style.width = `${this._width}px`;
+        this.$el.style.width = `${this._customWidth}px`;
         if (this._height) {
             this.$el.style.height = `${this._height}px`;
         } else {
@@ -41,7 +54,7 @@ export default class Container extends LayoutElement {
     }
 
     hide() {
-        this._width = this.$el.offsetWidth;
+        this._customWidth = this.$el.offsetWidth;
         this.$el.style.width = 'auto';
         this.$el.style.height = 'auto';
     }
@@ -79,18 +92,27 @@ export default class Container extends LayoutElement {
         }
     }
 
-    _resize(x, y) {
+    /**
+     * Resize
+     */
+    onResize() {
+        this._width = this._customWidth ? this._customWidth : this.$el.offsetWidth;
+        this._height = this._customHeight ? this._customHeight : window.innerHeight;
+        this.$root.layout?.resize();
+    }
+
+    _setDimensions(x, y) {
         if (this._axis.x) {
-            this._width = window.innerWidth - x;
-            this.$el.style.width = `${this._width}px`;
+            this._customWidth = window.innerWidth - x;
+            this.$el.style.width = `${this._customWidth}px`;
         }
 
         if (this._axis.y) {
-            this._height = y;
-            this.$el.style.height = `${this._height}px`;
+            this._customHeight = y;
+            this.$el.style.height = `${this._customHeight}px`;
         }
 
-        this.$root.layout.resize();
+        this.onResize();
     }
 
     /**
@@ -120,7 +142,7 @@ export default class Container extends LayoutElement {
 
     _windowMouseMoveHandler(e) {
         if (this._isMouseDown) {
-            this._resize(e.clientX, e.clientY);
+            this._setDimensions(e.clientX, e.clientY);
         }
     }
 }

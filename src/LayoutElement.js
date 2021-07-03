@@ -14,6 +14,7 @@ export default class LayoutElement extends HTMLElement {
         // Setup
         this.__element = this.__addTemplate(template, templateData);
         this.__addStyle(style);
+        this.__bindHandlers();
 
         // Elements
         this.$el = this.__getRootElement();
@@ -21,10 +22,13 @@ export default class LayoutElement extends HTMLElement {
     }
 
     connectedCallback() {
+        this.__setupEventListeners();
+        this.__triggerResize();
         this.__triggerConnected();
     }
 
     destroy() {
+        this.__removeEventListeners();
         this.__triggerDestroyed();
     }
 
@@ -42,6 +46,18 @@ export default class LayoutElement extends HTMLElement {
     /**
      * Private
      */
+    __bindHandlers() {
+        this.__resizeHandler = this.__resizeHandler.bind(this);
+    }
+
+    __setupEventListeners() {
+        window.addEventListener('resize', this.__resizeHandler);
+    }
+
+    __removeEventListeners() {
+        window.removeEventListener('resize', this.__resizeHandler);
+    }
+
     __addTemplate(template, templateData = {}) {
         if (typeof template === 'object') {
             template = this.$root.isLayoutSidebar() ? template.templateSidebar : template.templateDevtools;
@@ -89,5 +105,18 @@ export default class LayoutElement extends HTMLElement {
         if (typeof this.destroyed === 'function') {
             this.destroyed();
         }
+    }
+
+    __triggerResize() {
+        if (typeof this.onResize === 'function') {
+            this.onResize();
+        }
+    }
+
+    /**
+     * Handlers
+     */
+    __resizeHandler() {
+        this.__triggerResize();
     }
 }

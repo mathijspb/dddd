@@ -80,6 +80,10 @@ export default class Layers extends LayoutElement {
         this.$el.style.display = 'none';
     }
 
+    setHeight(height) {
+        this.$el.style.height = `${height}px`;
+    }
+
     /**
      * Private
      */

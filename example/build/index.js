@@ -43573,6 +43573,7 @@
 	        // Setup
 	        this.__element = this.__addTemplate(template, templateData);
 	        this.__addStyle(style);
+	        this.__bindHandlers();
 
 	        // Elements
 	        this.$el = this.__getRootElement();
@@ -43580,10 +43581,13 @@
 	    }
 
 	    connectedCallback() {
+	        this.__setupEventListeners();
+	        this.__triggerResize();
 	        this.__triggerConnected();
 	    }
 
 	    destroy() {
+	        this.__removeEventListeners();
 	        this.__triggerDestroyed();
 	    }
 
@@ -43601,6 +43605,18 @@
 	    /**
 	     * Private
 	     */
+	    __bindHandlers() {
+	        this.__resizeHandler = this.__resizeHandler.bind(this);
+	    }
+
+	    __setupEventListeners() {
+	        window.addEventListener('resize', this.__resizeHandler);
+	    }
+
+	    __removeEventListeners() {
+	        window.removeEventListener('resize', this.__resizeHandler);
+	    }
+
 	    __addTemplate(template, templateData = {}) {
 	        if (typeof template === 'object') {
 	            template = this.$root.isLayoutSidebar() ? template.templateSidebar : template.templateDevtools;
@@ -43649,6 +43665,19 @@
 	            this.destroyed();
 	        }
 	    }
+
+	    __triggerResize() {
+	        if (typeof this.onResize === 'function') {
+	            this.onResize();
+	        }
+	    }
+
+	    /**
+	     * Handlers
+	     */
+	    __resizeHandler() {
+	        this.__triggerResize();
+	    }
 	}
 
 	var styleSidebar = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.dddd {\r\n    /* Layout */\r\n    --font: 'Arial', sans-serif;\r\n    --background-color: rgba(27, 27, 27, 0.9);\r\n\r\n    /* Panels */\r\n    --panel-background-color: rgba(27, 27, 27, 0.9);\r\n    --panel-spacing: 10px;\r\n\r\n    /* Groups */\r\n    --group-header-padding: 13px 13px;\r\n    --group-header-font-size: 12px;\r\n    --group-header-background-color: rgba(255, 255, 255, 0.03);\r\n    --group-padding: 12px 11px 12px 13px;\r\n    --group-border-radius: 8px;\r\n\r\n    /* Components */\r\n    --component-row-gap: 6px;\r\n\r\n    /* Label */\r\n    --label-width: 35%;\r\n    --label-padding: 0 20px 0 0;\r\n    --label-color: rgba(255, 255, 255, 0.5);\r\n    --label-font-size: 12px;\r\n    --label-font-weight: 400;\r\n\r\n    /* Input */\r\n    --input-background-color: rgba(255, 255, 255, 0.03);\r\n    --input-background-color-hover: rgba(255, 255, 255, 0.08);\r\n    --input-background-color-error: rgba(255, 0, 0, 0.13);\r\n    --input-background-color-transition: background-color 0.35s ease-out;\r\n    --input-highlight-color: rgba(77, 83, 217, 0.64);\r\n    --input-highlight-color-hover: rgba(77, 83, 217, 1);\r\n    --input-text-color: rgba(255, 255, 255, 0.75);\r\n    --input-font-size: 12px;\r\n    --input-font-weight: 300;\r\n    --input-border-radius: 6px;\r\n    --input-padding: 12px;\r\n    --input-height: 32px;\r\n\r\n    z-index: 1337;\r\n\r\n    position: fixed;\r\n    top: 0;\r\n    right: 0;\r\n\r\n    width: 300px;\r\n    height: 100%;\r\n    max-height: 100vh;\r\n\r\n    background: var(--background-color);\r\n}\r\n\r\n.content {\r\n    width: 100%;\r\n    height: 100%;\r\n    /* overflow: auto; */\r\n}\r\n\r\n.resize-handle {\r\n    position: absolute;\r\n\r\n    padding: 0;\r\n\r\n    background-color: transparent;\r\n\r\n    border: 0;\r\n    outline: 0;\r\n}\r\n\r\n.resize-handle.side {\r\n    top: 0;\r\n    left: 0;\r\n\r\n    width: 6px;\r\n    height: 100%;\r\n\r\n    cursor: ew-resize;\r\n}\r\n\r\n.resize-handle.bottom {\r\n    bottom: 0;\r\n    left: 0;\r\n\r\n    width: 100%;\r\n    height: 6px;\r\n\r\n    cursor: ns-resize;\r\n}\r\n\r\n.resize-handle.corner {\r\n    bottom: 0;\r\n    left: 0;\r\n\r\n    width: 10px;\r\n    height: 10px;\r\n\r\n    cursor: nesw-resize;\r\n}\r\n";
@@ -43669,6 +43698,8 @@
 	        this._isMouseDown = false;
 	        this._width = 0;
 	        this._height = 0;
+	        this._customWidth = 0;
+	        this._customHeight = 0;
 	        this._axis = { x: 0, y: 0 };
 
 	        // Setup
@@ -43683,8 +43714,19 @@
 	    /**
 	     * Public
 	     */
+	    get width() {
+	        return this._width;
+	    }
+
+	    get height() {
+	        return this._height;
+	    }
+
+	    /**
+	     * Public
+	     */
 	    show() {
-	        this.$el.style.width = `${this._width}px`;
+	        this.$el.style.width = `${this._customWidth}px`;
 	        if (this._height) {
 	            this.$el.style.height = `${this._height}px`;
 	        } else {
@@ -43693,7 +43735,7 @@
 	    }
 
 	    hide() {
-	        this._width = this.$el.offsetWidth;
+	        this._customWidth = this.$el.offsetWidth;
 	        this.$el.style.width = 'auto';
 	        this.$el.style.height = 'auto';
 	    }
@@ -43731,18 +43773,27 @@
 	        }
 	    }
 
-	    _resize(x, y) {
+	    /**
+	     * Resize
+	     */
+	    onResize() {
+	        this._width = this._customWidth ? this._customWidth : this.$el.offsetWidth;
+	        this._height = this._customHeight ? this._customHeight : window.innerHeight;
+	        this.$root.layout?.resize();
+	    }
+
+	    _setDimensions(x, y) {
 	        if (this._axis.x) {
-	            this._width = window.innerWidth - x;
-	            this.$el.style.width = `${this._width}px`;
+	            this._customWidth = window.innerWidth - x;
+	            this.$el.style.width = `${this._customWidth}px`;
 	        }
 
 	        if (this._axis.y) {
-	            this._height = y;
-	            this.$el.style.height = `${this._height}px`;
+	            this._customHeight = y;
+	            this.$el.style.height = `${this._customHeight}px`;
 	        }
 
-	        this.$root.layout.resize();
+	        this.onResize();
 	    }
 
 	    /**
@@ -43772,7 +43823,7 @@
 
 	    _windowMouseMoveHandler(e) {
 	        if (this._isMouseDown) {
-	            this._resize(e.clientX, e.clientY);
+	            this._setDimensions(e.clientX, e.clientY);
 	        }
 	    }
 	}
@@ -43792,43 +43843,41 @@
 	        // Props
 	        this._options = options;
 
-	        // Data
-
 	        // Setup
-	        this._bindHandlers();
-	        this._setupEventListeners();
-	    }
-
-	    destroyed() {
-	        this._removeEventListeners();
+	        this._width = null;
+	        this._height = null;
 	    }
 
 	    /**
 	     * Getters & Setters
 	     */
+	    get width() {
+	        return this._width;
+	    }
+
+	    get height() {
+	        return this._height;
+	    }
 
 	    /**
 	     * Public
 	     */
 	    addElement(element) {
 	        this.$el.appendChild(element);
+	        this._resize();
+	    }
+
+	    resize() {
+	        this._resize();
 	    }
 
 	    /**
-	     * Private
+	     * Resize
 	     */
-	    _bindHandlers() {
+	    _resize() {
+	        this._width = this.$el.offsetWidth;
+	        this._height = this.$el.offsetHeight;
 	    }
-
-	    _setupEventListeners() {
-	    }
-
-	    _removeEventListeners() {
-	    }
-
-	    /**
-	     * Handlers
-	     */
 	}
 
 	window.customElements.define('dddd-header', Header);
@@ -44371,6 +44420,10 @@
 
 	    hide() {
 	        this.$el.style.display = 'none';
+	    }
+
+	    setHeight(height) {
+	        this.$el.style.height = `${height}px`;
 	    }
 
 	    /**
@@ -46413,6 +46466,8 @@
 	        const layer = this._layers.add(label);
 	        this._layers.resize();
 	        LayoutModel$1.addLayer(label);
+	        this._header.resize();
+	        this._setLayersHeight();
 	        return layer;
 	    }
 
@@ -46476,6 +46531,7 @@
 	    resize() {
 	        this._layers.resize();
 	        this._components.resize();
+	        this._setLayersHeight();
 	    }
 
 	    toggleVisibility() {
@@ -46591,6 +46647,11 @@
 
 	    _removeContainerElement() {
 	        document.body.removeChild(this._container);
+	    }
+
+	    _setLayersHeight() {
+	        const layersHeight = this._container.height - this._header.height;
+	        this._layers.setHeight(layersHeight);
 	    }
 
 	    /**

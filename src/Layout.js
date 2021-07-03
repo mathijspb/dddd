@@ -63,6 +63,8 @@ export default class Layout {
         const layer = this._layers.add(label);
         this._layers.resize();
         LayoutModel.addLayer(label);
+        this._header.resize();
+        this._setLayersHeight();
         return layer;
     }
 
@@ -126,6 +128,7 @@ export default class Layout {
     resize() {
         this._layers.resize();
         this._components.resize();
+        this._setLayersHeight();
     }
 
     toggleVisibility() {
@@ -241,6 +244,11 @@ export default class Layout {
 
     _removeContainerElement() {
         document.body.removeChild(this._container);
+    }
+
+    _setLayersHeight() {
+        const layersHeight = this._container.height - this._header.height;
+        this._layers.setHeight(layersHeight);
     }
 
     /**

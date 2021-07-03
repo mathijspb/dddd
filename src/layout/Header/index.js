@@ -14,43 +14,41 @@ export default class Header extends LayoutElement {
         // Props
         this._options = options;
 
-        // Data
-
         // Setup
-        this._bindHandlers();
-        this._setupEventListeners();
-    }
-
-    destroyed() {
-        this._removeEventListeners();
+        this._width = null;
+        this._height = null;
     }
 
     /**
      * Getters & Setters
      */
+    get width() {
+        return this._width;
+    }
+
+    get height() {
+        return this._height;
+    }
 
     /**
      * Public
      */
     addElement(element) {
         this.$el.appendChild(element);
+        this._resize();
+    }
+
+    resize() {
+        this._resize();
     }
 
     /**
-     * Private
+     * Resize
      */
-    _bindHandlers() {
+    _resize() {
+        this._width = this.$el.offsetWidth;
+        this._height = this.$el.offsetHeight;
     }
-
-    _setupEventListeners() {
-    }
-
-    _removeEventListeners() {
-    }
-
-    /**
-     * Handlers
-     */
 }
 
 window.customElements.define('dddd-header', Header);
