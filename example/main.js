@@ -1,5 +1,25 @@
-import { Color, Texture, Object3D } from 'three';
+import { Color, Texture, Object3D, Scene, PerspectiveCamera, WebGLRenderer, BoxGeometry, MeshBasicMaterial, Mesh } from 'three';
 import DDDD from '../src/DDDD';
+
+const scene = new Scene();
+const camera = new PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+const renderer = new WebGLRenderer();
+renderer.setSize( window.innerWidth, window.innerHeight );
+document.body.appendChild( renderer.domElement );
+
+const geometry = new BoxGeometry();
+const material = new MeshBasicMaterial( { color: 0x00ff00 } );
+const cube = new Mesh( geometry, material );
+scene.add( cube );
+
+camera.position.z = 5;
+
+const animate = function () {
+    requestAnimationFrame( animate );
+    renderer.render( scene, camera );
+};
+animate();
 
 const dddd = new DDDD({
     minimized: false,
@@ -94,9 +114,8 @@ const multiInputValues = {
 
 multiInput.add(multiInputValues, 'xyz');
 multiInput.add(multiInputValues, 'stepSize', { stepSize: 1 });
-
-const exampleObject3D = new Object3D();
-multiInput.add(exampleObject3D, 'position', { label: 'three' });
+multiInput.add(cube, 'position', { label: 'position' });
+multiInput.add(cube, 'rotation', { label: 'rotation' });
 
 /**
  * Dropdown

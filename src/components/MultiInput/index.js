@@ -148,7 +148,7 @@ export default class MultiInput extends Component {
     }
 
     _pointerLockHanderHandler(e) {
-        if (document.pointerLockElement) {
+        if (this.shadowRoot.pointerLockElement === this.$el) {
             this._isPointerLockActive = true;
         } else {
             this._isPointerLockActive = false;
