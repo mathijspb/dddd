@@ -1,36 +1,48 @@
 // Layout
-import Container from './layout/Container';
-import Header from './layout/Header';
-import Navigation from './layout/Navigation';
-import Stats from './layout/Stats';
-import Layers from './layout/Layers';
-import Group from './layout/Group';
+import Container from './elements/layout/Container';
+import Header from './elements/layout/Header';
+import Navigation from './elements/layout/Navigation';
+import Stats from './elements/layout/Stats';
+import Layers from './elements/layout/Layers';
+import Group from './elements/layout/Group';
 
 // Components
-import Components from './Components';
+// import Components from './Components';
+import componentTypes from './componentTypes';
 
 // Models
-import LayoutModel from './LayoutModel';
-import ComponentModel from './ComponentModel';
+import LayoutModel from './models/LayoutModel';
+import LayerModel from './models/LayerModel';
+import ComponentModel from './models/ComponentModel';
+import GroupModel from './models/GroupModel';
 
 // Utils
 import ValueHover from './utils/ValueHover';
 
+// Layout types
+export const LAYOUT_TYPE_SIDEBAR = 'LAYOUT_TYPE_SIDEBAR';
+export const LAYOUT_TYPE_DEVTOOLS = 'LAYOUT_TYPE_DEVTOOLS';
+
 export default class Layout {
-    constructor({ root, onLayerChange, minimized }) {
+    constructor({ root, type, onLayerChange, minimized }) {
         // Props
         this._root = root;
+        this._type = type;
         this._onLayerChangeCallback = onLayerChange;
 
         // Setup
         this._isVisible = true;
+        this._layers = [];
         this._groups = [];
+        this._components = [];
+
+        // Elements
         this._container = this._createContainer();
         this._header = this._createHeader();
         this._navigation = this._createNavigation();
         // this._stats = this._createStats();
         this._layers = this._createLayers();
-        this._components = this._createComponents();
+
         if (minimized) this.toggleVisibility();
         this._bindHandlers();
         this._setupEventListeners();
@@ -40,17 +52,13 @@ export default class Layout {
         this._container.destroy();
         this._navigation.destroy();
         this._layers.destroy();
-        this._components.destroy();
+        // this._components.destroy();
         this._removeContainerElement();
     }
 
     /**
      * Getters & Setters
      */
-    get components() {
-        return this._components;
-    }
-
     get stats() {
         return this._stats;
     }
@@ -59,12 +67,28 @@ export default class Layout {
      * Public
      */
     addLayer(label) {
-        this._navigation.add(label);
-        const layer = this._layers.add(label);
+        // Create layer model
+        const model = new LayerModel({
+            label,
+        });
+
+        // Add layer model to the layour model
+        LayoutModel.addLayer(model);
+
+        // Create layer element
+        const layer = this._layers.add(model);
+
+        // Link element to model
+        model.element = layer;
+
+        // Add layer to navigation
+        this._navigation.add(model);
+
+        // FIX: Find a better solution for all this resize shit
         this._layers.resize();
-        LayoutModel.addLayer(label);
         this._header.resize();
         this._setLayersHeight();
+
         return layer;
     }
 
@@ -72,26 +96,40 @@ export default class Layout {
         const index = this._layers.getIndexByLabel(label);
         this._navigation.goto(index);
         this._layers.goto(index);
-
-        // TODO: tmp fix..
-        this._components.resize();
     }
 
-    addGroup(label, options = {}) {
-        const parent = options.parent ? options.parent : this.getParent(options.container);
-        const group = new Group({
-            root: this._root,
-            layout: this,
-            parent,
+    addGroup(label, options = {}, parentModel) {
+        // Get parent model if not present
+        parentModel = parentModel || this._getParentModelByContainer(options.container);
+
+        // Create group model
+        const model = new GroupModel({
             label,
-            options,
         });
 
-        parent.content.appendChild(group);
+        // Add model to parent model
+        parentModel.addGroup(model);
+
+        // Create group element
+        const group = new Group({
+            root: this._root,
+            parentModel,
+            options,
+            model,
+        });
+
+        // Link element to model
+        model.element = group;
+
+        // Add element to parent
+        parentModel.element.addElement(group);
+
+        // Store group reference
         this._groups.push(group);
 
+        // Resize..
         this._layers.resize();
-        LayoutModel.addGroup(group.id, label, options);
+
         return group;
     }
 
@@ -103,9 +141,47 @@ export default class Layout {
         LayoutModel.removeGroup(id);
     }
 
-    addComponent({ object, property, options, id, type, onChangeCallback }) {
-        const model = new ComponentModel({ root: this._root, object, property, options, id, type, onChangeCallback });
-        const component = this._components.create(model);
+    addComponent({ object, property, options, parentModel, id, type }) {
+        // Get parent model if not present
+        parentModel = parentModel || this._getParentModelByContainer(options.container);
+
+        // Create component model
+        const model = new ComponentModel({
+            object,
+            property,
+            options,
+            parent: parentModel,
+            id,
+            type,
+            onChange: (data) => {
+                this._root.triggerChange(data);
+            },
+        });
+
+        // Add model to parent model
+        parentModel.addComponent(model);
+
+        // Add model reference to layout model
+        LayoutModel.addComponent(model);
+
+        // Get component class
+        const componentClass = componentTypes[model.type];
+
+        // Create component
+        const component = new componentClass();
+        component.setup({
+            model,
+            root: this._root,
+            parentModel,
+        });
+
+        // Store component reference
+        this._components.push(component);
+
+        // Add component to container
+        parentModel.element.addElement(component);
+
+        // Return created component
         return component;
     }
 
@@ -121,13 +197,21 @@ export default class Layout {
         if (group) return group;
     }
 
+    getParentById(id) {
+        const layer = this._layers.getById(id);
+        if (layer) return layer;
+
+        const group = this._getGroupById(id);
+        if (group) return group;
+    }
+
     remove() {
         document.body.removeChild(this._container);
     }
 
     resize() {
         this._layers.resize();
-        this._components.resize();
+        // this._components.resize();
         this._setLayersHeight();
     }
 
@@ -144,7 +228,7 @@ export default class Layout {
             this._isVisible = true;
         }
         this._layers.resize();
-        this._components.resize();
+        // this._components.resize();
     }
 
     /**
@@ -205,13 +289,13 @@ export default class Layout {
         return layers;
     }
 
-    _createComponents() {
-        const componenents = new Components({
-            root: this._root,
-            layout: this,
-        });
-        return componenents;
-    }
+    // _createComponents() {
+    //     const componenents = new Components({
+    //         root: this._root,
+    //         layout: this,
+    //     });
+    //     return componenents;
+    // }
 
     _getGroupById(id) {
         for (const group of this._groups) {
@@ -221,7 +305,7 @@ export default class Layout {
 
     _getGroupByLabel(label) {
         for (const group of this._groups) {
-            if (group.label === label) return group;
+            if (group.model.label === label) return group;
         }
     }
 
@@ -251,12 +335,42 @@ export default class Layout {
         this._layers.setHeight(layersHeight);
     }
 
+    _addComponentToContainer(component) {
+        const container = component.model.options.container;
+        if (container) {
+            const element = this._root.layout.getParent(container).content;
+            element.appendChild(component);
+        }
+
+        const parentId = component.model.parentId;
+        if (parentId) {
+            const element = this._root.layout.getParentById(parentId).content;
+            element.appendChild(component);
+        }
+
+        const parent = component.model.parent;
+        if (parent) {
+            const element = parent.content;
+            element.appendChild(component);
+        }
+
+        this._root.layout.resize();
+    }
+
+    _getParentModelByContainer(container) {
+        const layer = this._layers.get(container);
+        if (layer) return layer.model;
+
+        const group = this._getGroupByLabel(container);
+        if (group) return group.model;
+    }
+
     /**
      * Handlers
      */
     _navigationSwitchHandler(e) {
         this._layers.goto(e.detail.index);
-        this._components.resize();
+        // this._components.resize();
         if (typeof this._onLayerChangeCallback === 'function') {
             const label = this._layers.getByIndex(e.detail.index).label;
             this._onLayerChangeCallback(label);

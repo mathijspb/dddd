@@ -5,5 +5,10 @@
     },
     "eslint.validate": [
         "javascript"
-    ]
+    ],
+    "search.exclude": {
+        "**/dist": true,
+        "**/example/build": true,
+        "**/extension/devtools-tab": true
+    }
 }

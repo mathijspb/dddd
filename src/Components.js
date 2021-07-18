@@ -1,4 +1,4 @@
-import LayoutModel from './LayoutModel';
+import LayoutModel from './models/LayoutModel';
 import componentTypes from './components/types';
 import Ticker from './utils/Ticker';
 
@@ -86,7 +86,13 @@ export default class Components {
             element.appendChild(component);
         }
 
-        const parent = component.model.options.parent;
+        const parentId = component.model.parentId;
+        if (parentId) {
+            const element = this._root.layout.getParentById(parentId).content;
+            element.appendChild(component);
+        }
+
+        const parent = component.model.parent;
         if (parent) {
             const element = parent.content;
             element.appendChild(component);

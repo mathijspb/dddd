@@ -1,6 +1,6 @@
 // Layout
-import Layout from './Layout';
-import LayoutModel from './LayoutModel';
+import Layout, { LAYOUT_TYPE_DEVTOOLS, LAYOUT_TYPE_SIDEBAR } from './Layout';
+import LayoutModel from './models/LayoutModel';
 
 export default class DDDD {
     constructor({ devtools, minimized, onChange, onLayerChange } = {}) {
@@ -36,11 +36,15 @@ export default class DDDD {
         return this._layout.stats;
     }
 
+    get onChangeCallback() {
+        return this._onChangeCallback;
+    }
+
     /**
      * Public
      */
-    add(object, property, options) {
-        return this._layout.addComponent({ object, property, options });
+    add(object, property, options, parentModel = null) {
+        return this._layout.addComponent({ object, property, options, parentModel });
     }
 
     // TODO: Fix
@@ -48,13 +52,13 @@ export default class DDDD {
         // this._components.remove(component);
     }
 
-    addButton(label, options = {}) {
+    addButton(label, options = {}, parent = null) {
         options.label = label;
-        return this._layout.addComponent({ options, type: 'button' });
+        return this._layout.addComponent({ options, type: 'button', parent });
     }
 
-    addCanvas(options) {
-        return this._layout.addComponent({ options, type: 'canvas' });
+    addCanvas(options, parent = null) {
+        return this._layout.addComponent({ options, type: 'canvas', parent });
     }
 
     addLayer(label) {
@@ -65,8 +69,8 @@ export default class DDDD {
         this._layout.gotoLayer(label);
     }
 
-    addGroup(label, options) {
-        return this._layout.addGroup(label, options);
+    addGroup(label, options, parent) {
+        return this._layout.addGroup(label, options, parent);
     }
 
     removeGroup(id) {
@@ -75,30 +79,45 @@ export default class DDDD {
 
     createLayoutFromModel(model, onCompleteCallback) {
         const layers = model.layers;
+        const scope = this;
+
+        function addComponents(components, parentModel) {
+            for (const component of components) {
+                scope._layout.addComponent({
+                    object: component.object,
+                    property: component.property,
+                    options: component.options,
+                    parentModel,
+                    type: component.type,
+                    id: component.id,
+                });
+            }
+        }
+
+        function addGroups(groups, parentModel) {
+            for (const group of groups) {
+                const groupElement = scope._layout.addGroup(group.label, null, parentModel);
+
+                if (group.components) {
+                    addComponents(group.components, groupElement.model);
+                }
+
+                if (group.groups) {
+                    addGroups(group.groups, groupElement.model);
+                }
+            }
+        }
+
         for (const layer of layers) {
-            this.createLayer(layer);
+            const layerElement = this._layout.addLayer(layer.label);
+            if (layer.groups) {
+                addGroups(layer.groups, layerElement.model);
+            }
         }
 
-        const groups = model.groups;
-        for (const group of groups) {
-            this.createGroup(group.label, group.options);
-        }
-
-        const components = model.components;
-        for (const modelData of components) {
-            this._layout.createComponent({
-                object: modelData.object,
-                property: modelData.property,
-                options: modelData.options,
-                id: modelData.id,
-                type: modelData.type,
-                onChangeCallback: this._onChangeCallback,
-            });
-        }
-
-        if (typeof onCompleteCallback === 'function') {
-            onCompleteCallback();
-        }
+        // if (typeof onCompleteCallback === 'function') {
+        //     onCompleteCallback();
+        // }
     }
 
     isLayoutSidebar() {
@@ -109,6 +128,12 @@ export default class DDDD {
 
     toggleVisibility() {
         this._layout.toggleVisibility();
+    }
+
+    triggerChange(data) {
+        if (typeof this._onChangeCallback === 'function') {
+            this._onChangeCallback(data);
+        }
     }
 
     /**
@@ -127,8 +152,10 @@ export default class DDDD {
     }
 
     _createLayout() {
+        const type = this._isDevtools ? LAYOUT_TYPE_DEVTOOLS : LAYOUT_TYPE_SIDEBAR;
         const layout = new Layout({
             root: this,
+            type,
             onLayerChange: this._onLayerChangeCallback,
             minimized: this._isMinimized,
         });
@@ -136,12 +163,11 @@ export default class DDDD {
     }
 
     _sendLayoutModel() {
-        const layoutModel = LayoutModel.get();
         window.postMessage({
             source: 'dddd-page',
             payload: {
                 action: 'setup',
-                layoutModel,
+                layoutModel: LayoutModel.serialize(),
             },
         });
     }
@@ -159,10 +185,10 @@ export default class DDDD {
                     this._sendLayoutModel();
                     break;
                 case 'setup-complete':
-                    this._layout.remove();
+                    // this._layout.remove();
                     break;
                 case 'change':
-                    this._layout.components.update(payload.modelData);
+                    LayoutModel.updateComponent(payload.modelData);
                     break;
             }
         }

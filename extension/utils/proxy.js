@@ -1,72 +1,49 @@
-// This is a content-script that is injected only when the devtools are activated. 
+// This is a content-script that is injected only when the devtools are activated.
 
-class Proxy {
-    constructor() {
-        this._port = this._connect();
-        this._bindHandlers();
-        this._setupEventListeners();
-        this._sendMessageToPage({ action: 'init' });
-    }
+function removeEventListeners() {
+    window.removeEventListener('message', this._windowMessageHandler);
+}
 
-    /**
-     * Private
-     */
-    _bindHandlers() {
-        this._portMessageHandler = this._portMessageHandler.bind(this);
-        this._portDisconnectHandler = this._portDisconnectHandler.bind(this);
-        this._windowMessageHandler = this._windowMessageHandler.bind(this);
-    }
+function connect() {
+    const port = window.chrome.runtime.connect({
+        name: JSON.stringify({
+            type: 'page',
+        }),
+    });
+    return port;
+}
 
-    _setupEventListeners() {
-        this._port.onMessage.addListener(this._portMessageHandler);
-        this._port.onDisconnect.addListener(this._portDisconnectHandler);
-        window.addEventListener('message', this._windowMessageHandler);
-    }
+function sendMessageToPage(message) {
+    window.postMessage(
+        {
+            source: 'dddd-devtools-proxy',
+            payload: message,
+        },
+        '*',
+    );
+}
 
-    _removeEventListeners() {
-        window.removeEventListener('message', this._windowMessageHandler);
-    }
+function sendMessageToDevtoolsTab(message) {
+    window.port.postMessage(message);
+}
 
-    _connect() {
-        const port = chrome.runtime.connect({
-            name: JSON.stringify({
-                type: 'page'
-            })
-        });
-        return port;
-    }
+function portMessageHandler(message) {
+    sendMessageToPage(message);
+}
 
-    _sendMessageToPage(message) {
-        window.postMessage(
-            {
-                source: 'dddd-devtools-proxy',
-                payload: message,
-            },
-            '*'
-        );
-    }
+function portDisconnectHandler() {
+    removeEventListeners();
+    sendMessageToPage('shutdown');
+}
 
-    _sendMessageToDevtoolsTab(message) {
-        this._port.postMessage(message);
-    }
-
-    /**
-     * Handlers
-     */
-    _portMessageHandler(message) {
-        this._sendMessageToPage(message);
-    }
-    
-    _portDisconnectHandler() {
-        this._removeEventListeners();
-        this._sendMessageToPage('shutdown');
-    }
-    
-    _windowMessageHandler(e) {
-        if (e.data && e.data.source === 'dddd-page') {
-            this._sendMessageToDevtoolsTab(e.data.payload);
-        }
+function windowMessageHandler(e) {
+    if (e.data && e.data.source === 'dddd-page') {
+        sendMessageToDevtoolsTab(e.data.payload);
     }
 }
 
-new Proxy();
+window.port = connect();
+window.port.onMessage.addListener(portMessageHandler);
+window.port.onDisconnect.addListener(portDisconnectHandler);
+window.addEventListener('message', windowMessageHandler);
+sendMessageToPage({ action: 'init' });

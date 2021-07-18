@@ -4,11 +4,20 @@
     "version_name": "0.0.1",
     "description": "",
     "manifest_version": 2,
-    "web_accessible_resources": ["devtools/index.html", "devtools-tab/index.html"],
+    "web_accessible_resources": [
+        "devtools/index.html",
+        "devtools-tab/index.html"
+    ],
     "devtools_page": "devtools/index.html",
     "background": {
-        "scripts": ["background.js"],
+        "scripts": [
+            "background.js"
+        ],
         "persistent": false
     },
-    "permissions": ["http://*/*", "https://*/*", "file:///*"]
+    "permissions": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+    ]
 }

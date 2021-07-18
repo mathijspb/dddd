@@ -1,4 +1,5 @@
 let dddd;
+let isSetup = false;
 
 function connect() {
     if (dddd) {
@@ -23,7 +24,8 @@ function connect() {
     });
 
     port.onMessage.addListener((e) => {
-        if (e.action === 'setup') {
+        if (e.action === 'setup' && !isSetup) {
+            isSetup = true;
             const model = e.layoutModel;
             dddd.createLayoutFromModel(model, () => {
                 port.postMessage({
@@ -34,6 +36,7 @@ function connect() {
     });
 }
 
+// NOTE: Resfreshes devtools on tab reload
 window.chrome.devtools.network.onNavigated.addListener(() => {
     connect();
 });

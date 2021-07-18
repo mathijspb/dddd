@@ -43682,7 +43682,7 @@
 
 	var styleSidebar = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.dddd {\n    /* Layout */\n    --font: 'Arial', sans-serif;\n    --background-color: rgba(27, 27, 27, 0.9);\n\n    /* Panels */\n    --panel-background-color: rgba(27, 27, 27, 0.9);\n    --panel-spacing: 6px;\n\n    /* Groups */\n    --group-header-padding: 11px;\n    --group-header-font-size: 11px;\n    --group-header-background-color: rgba(255, 255, 255, 0.03);\n    --group-padding: 9px 7px 9px 10px;\n    --group-border-radius: 4px;\n\n    /* Components */\n    --component-row-gap: 4px;\n\n    /* Label */\n    --label-width: 40%;\n    --label-padding: 0 20px 0 0;\n    --label-color: rgba(255, 255, 255, 0.5);\n    --label-font-size: 11px;\n    --label-font-weight: 400;\n\n    /* Input */\n    --input-background-color: rgba(255, 255, 255, 0.03);\n    --input-background-color-hover: rgba(255, 255, 255, 0.08);\n    --input-background-color-error: rgba(255, 0, 0, 0.13);\n    --input-background-color-transition: background-color 0.35s ease-out;\n    --input-highlight-color: rgba(220, 159, 47, 0.53);\n    --input-highlight-color-hover: rgba(220, 159, 47, 0.75);\n    --input-text-color: rgba(255, 255, 255, 0.75);\n    --input-font-size: 11px;\n    --input-font-weight: 300;\n    --input-border-radius: 4px;\n    --input-padding: 10px;\n    --input-height: 26px;\n\n    z-index: 1337;\n\n    position: fixed;\n    top: 0;\n    right: 0;\n\n    width: 300px;\n    height: 100%;\n    max-height: 100vh;\n\n    background: var(--background-color);\n}\n\n.content {\n    width: 100%;\n    height: 100%;\n    /* overflow: auto; */\n}\n\n.resize-handle {\n    position: absolute;\n\n    padding: 0;\n\n    background-color: transparent;\n\n    border: 0;\n    outline: 0;\n}\n\n.resize-handle.side {\n    top: 0;\n    left: 0;\n\n    width: 6px;\n    height: 100%;\n\n    cursor: ew-resize;\n}\n\n.resize-handle.bottom {\n    bottom: 0;\n    left: 0;\n\n    width: 100%;\n    height: 6px;\n\n    cursor: ns-resize;\n}\n\n.resize-handle.corner {\n    bottom: 0;\n    left: 0;\n\n    width: 10px;\n    height: 10px;\n\n    cursor: nesw-resize;\n}\n";
 
-	var styleDevtools = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.dddd {\r\n    /* Layout */\r\n    --font: 'Arial', sans-serif;\r\n    --background-color: #161616;\r\n\r\n    /* Panels */\r\n    --panel-background-color: #1B1B1B;\r\n    --panel-spacing: 15px;\r\n\r\n    /* Groups */\r\n    --group-header-font-size: 15px;\r\n    --group-header-background-color: rgba(255, 255, 255, 0.03);\r\n    --group-padding: 30px;\r\n    --group-border-radius: 10px;\r\n\r\n    /* Components */\r\n    --component-row-gap: 7px;\r\n\r\n    /* Label */\r\n    --label-width: 30%;\r\n    --label-padding: 0 20px 0 0;\r\n    --label-color: rgba(255, 255, 255, 0.75);\r\n    --label-font-size: 14px;\r\n    --label-font-weight: 400;\r\n    \r\n    /* Input */\r\n    --input-background-color: rgba(255, 255, 255, 0.03);\r\n    --input-background-color-hover: rgba(255, 255, 255, 0.08);\r\n    --input-background-color-transition: background-color 0.35s ease-out;\r\n    --input-highlight-color: rgba(77, 83, 217, 0.64);\r\n    --input-highlight-color-hover: rgba(77, 83, 217, 1);\r\n    --input-text-color: rgba(255, 255, 255, 0.75);\r\n    --input-font-size: 14px;\r\n    --input-font-weight: 300;\r\n    --input-border-radius: 10px;\r\n    --input-padding: 16px;\r\n    --input-height: 40px;\r\n\r\n    background: var(--background-color);\r\n}\r\n";
+	var styleDevtools = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.dddd {\n    /* Layout */\n    --font: 'Arial', sans-serif;\n    --background-color: #161616;\n\n    /* Panels */\n    --panel-background-color: #1B1B1B;\n    --panel-spacing: 6px;\n\n    /* Groups */\n    --group-header-padding: 11px;\n    --group-header-font-size: 11px;\n    --group-header-background-color: rgba(255, 255, 255, 0.03);\n    --group-padding: 9px 7px 9px 10px;\n    --group-border-radius: 4px;\n\n    /* Components */\n    --component-row-gap: 7px;\n\n    /* Label */\n    --label-width: 30%;\n    --label-padding: 0 20px 0 0;\n    --label-color: rgba(255, 255, 255, 0.75);\n    --label-font-size: 11px;\n    --label-font-weight: 400;\n\n    /* Input */\n    --input-background-color: rgba(255, 255, 255, 0.03);\n    --input-background-color-hover: rgba(255, 255, 255, 0.08);\n    --input-background-color-transition: background-color 0.35s ease-out;\n    --input-highlight-color: rgba(220, 159, 47, 0.53);\n    --input-highlight-color-hover: rgba(220, 159, 47, 0.75);\n    --input-text-color: rgba(255, 255, 255, 0.75);\n    --input-font-size: 11px;\n    --input-font-weight: 300;\n    --input-border-radius: 4px;\n    --input-padding: 10px;\n    --input-height: 26px;\n\n    background: var(--background-color);\n}\n";
 
 	var templateSidebar = "<div class=\"dddd\">\n\n    <!-- Content -->\n    <div class=\"content\" ref=\"content\"></div>\n\n    <!-- Resize handle -->\n    <button class=\"resize-handle side\" ref=\"resizeHandleSide\"></button>\n    <button class=\"resize-handle bottom\" ref=\"resizeHandleBottom\"></button>\n    <button class=\"resize-handle corner\" ref=\"resizeHandleCorner\"></button>\n\n</div>\n";
 
@@ -43884,7 +43884,7 @@
 
 	var styleSidebar$1 = ".navigation {\r\n    display: none;\r\n\r\n    grid-template-columns: 1fr var(--input-height);\r\n    column-gap: var(--panel-spacing);\r\n\r\n    padding: var(--panel-spacing);\r\n}\r\n\r\n.select-container {\r\n    position: relative;\r\n\r\n    height: var(--input-height);\r\n    overflow: hidden;\r\n\r\n    background-color: var(--input-background-color);\r\n\r\n    border-radius: var(--input-border-radius);\r\n\r\n    user-select: none;\r\n\r\n    transition: var(--input-background-color-transition);\r\n}\r\n\r\n.select-container:hover {\r\n    background-color: var(--input-background-color-hover);\r\n}\r\n\r\n.select {\r\n    width: 100%;\r\n    height: 100%;\r\n\r\n    border: 0;\r\n    outline: 0;\r\n\r\n    padding: 0 var(--input-padding);\r\n\r\n    background: transparent;\r\n\r\n    font-family: var(--font);\r\n    font-size: var(--input-font-size);\r\n    font-weight: var(--input-font-weight);\r\n    color: var(--input-text-color);\r\n\r\n    appearance: none;\r\n}\r\n\r\n.select option {\r\n    color: black;\r\n}\r\n\r\n.arrow {\r\n    position: absolute;\r\n    top: 0;\r\n    right: var(--input-padding);\r\n    bottom: 0;\r\n\r\n    margin: auto 0;\r\n}\r\n\r\n.button-toggle {\r\n    position: relative;\r\n\r\n    width: var(--input-height);\r\n    height: var(--input-height);\r\n\r\n    background-color: var(--input-background-color);\r\n\r\n    border: 0;\r\n    border-radius: var(--input-border-radius);\r\n    outline: 0;\r\n\r\n    cursor: pointer;\r\n\r\n    transition: var(--input-background-color-transition);\r\n}\r\n\r\n.button-toggle:hover {\r\n    background-color: var(--input-background-color-hover);\r\n}\r\n\r\n.button-toggle__line {\r\n    position: absolute;\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n\r\n    width: 12px;\r\n    height: 2px;\r\n\r\n    margin: auto;\r\n\r\n    background: var(--input-text-color);\r\n}\r\n";
 
-	var styleDevtools$1 = ".navigation {\r\n    display: none;\r\n    \r\n    padding: var(--panel-spacing);\r\n\r\n    font-size: 0;\r\n\r\n    list-style: none;\r\n\r\n    background-color: var(--panel-background-color);\r\n\r\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\r\n}\r\n\r\n.navigation li {\r\n    display: inline-block;\r\n\r\n    margin-right: 10px;\r\n}\r\n\r\n.navigation-button {\r\n    padding: 13px 30px;\r\n\r\n    color: rgba(255, 255, 255, 0.5);\r\n\r\n    background-color: transparent;\r\n\r\n    border: 0;\r\n    border-radius: 12px;\r\n    outline: 0;\r\n\r\n    font-family: var(--font);\r\n    font-size: 13px;\r\n    font-weight: 600;\r\n\r\n    cursor: pointer;\r\n\r\n    transition: all 0.3s ease-out;\r\n}\r\n\r\n.navigation-button:hover {\r\n    background-color: rgba(255, 255, 255, 0.01);\r\n}\r\n\r\n.navigation-button.active {\r\n    color: rgba(255, 255, 255, 0.9);\r\n\r\n    background-color: rgba(255, 255, 255, 0.03);\r\n}";
+	var styleDevtools$1 = ".navigation {\n    display: none;\n\n    padding: var(--panel-spacing);\n\n    font-size: 0;\n\n    list-style: none;\n\n    background-color: var(--panel-background-color);\n\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\n}\n\n.navigation li {\n    display: inline-block;\n    margin-right: 5px;\n}\n\n.navigation-button {\n    padding: 10px 15px;\n\n    color: rgba(255, 255, 255, 0.5);\n\n    background-color: transparent;\n\n    border: 0;\n    border-radius: 4px;\n    outline: 0;\n\n    font-family: var(--font);\n    font-size: 11px;\n    font-weight: 600;\n\n    cursor: pointer;\n\n    transition: all 0.3s ease-out;\n}\n\n.navigation-button:hover {\n    background-color: rgba(255, 255, 255, 0.01);\n}\n\n.navigation-button.active {\n    color: rgba(255, 255, 255, 0.9);\n\n    background-color: rgba(255, 255, 255, 0.03);\n}\n";
 
 	var templateSidebar$1 = "<div class=\"navigation\">\n\n    <!-- Select container-->\n    <div class=\"select-container\" ref=\"selectContainer\">\n\n        <!-- Arrow -->\n        <svg width=\"11\" height=\"6\" viewBox=\"0 0 11 6\" class=\"arrow\">\n            <path d=\"M1 1L4.83564 4.40945C5.21452 4.74624 5.78548 4.74624 6.16436 4.40945L10 1\" stroke=\"white\" fill=\"transparent\" stroke-opacity=\"0.74\" stroke-linecap=\"round\"/>\n        </svg>\n\n        <!-- Select -->\n        <select class=\"select\" ref=\"select\"></select>\n\n    </div>\n\n    <!-- Button toggle -->\n    <button class=\"button-toggle\" ref=\"buttonToggle\">\n        <div class=\"button-toggle__line\"></div>\n    </button>\n\n</div>\n";
 
@@ -43927,14 +43927,14 @@
 	    /**
 	     * Public
 	     */
-	    add(label, options) {
+	    add(model) {
 	        if (this._elements.length === 0) {
 	            this._setVisible();
 	        }
 
 	        if (this.$root.isLayoutSidebar()) {
 	            const option = document.createElement('option');
-	            option.innerText = label;
+	            option.innerText = model.label;
 	            option.value = this._elements.length;
 	            this._elements.push(option);
 	            this.$refs.select.appendChild(option);
@@ -43944,7 +43944,7 @@
 	            if (this.$el.children.length === this._activeIndex) {
 	                button.classList.add(ACTIVE_CLASS);
 	            }
-	            button.innerText = label;
+	            button.innerText = model.label;
 
 	            const li = document.createElement('li');
 	            li.appendChild(button);
@@ -43992,7 +43992,7 @@
 	    }
 
 	    _setVisible() {
-	        this.$el.style.display = this._isMinimized ? 'block' : 'grid';
+	        this.$el.style.display = this._isMinimized || this.$root.isDevtools ? 'block' : 'grid';
 	    }
 
 	    _getNavigationButtonIndex(element) {
@@ -44191,14 +44191,14 @@
 
 	// Constants
 	const ACTIVE_CLASS$1 = 'active';
-	const GROUP_MIN_WIDTH = 350;
+	const GROUP_MIN_WIDTH = 250;
 
 	class Layer extends LayoutElement {
-	    constructor({ root, label }) {
-	        super({ root, style: style$2, template: template$2, templateData: { label } });
+	    constructor({ root, model }) {
+	        super({ root, style: style$2, template: template$2, templateData: { label: model.label } });
 
 	        // Props
-	        this._label = label;
+	        this._model = model;
 
 	        // Data
 	        this._containerWidth = 0;
@@ -44218,19 +44218,23 @@
 	     * Getters & Setters
 	     */
 	    get label() {
-	        return this._label;
+	        return this._model.label;
 	    }
 
-	    get content() {
-	        return this.element;
+	    get model() {
+	        return this._model;
 	    }
 
 	    /**
 	     * Public
 	     */
+	    addElement(element) {
+	        this.element.appendChild(element);
+	    }
+
 	    addGroup(label) {
 	        return this.$root.addGroup(label, {
-	            container: this._label,
+	            parent: this,
 	        });
 	    }
 
@@ -44368,8 +44372,9 @@
 	    /**
 	     * Public
 	     */
-	    add(label) {
-	        const layer = new Layer({ root: this.$root, label });
+	    add(model) {
+	        const layer = new Layer({ root: this.$root, model });
+
 	        if (this._layers.length === this._activeIndex) {
 	            layer.activate();
 	        }
@@ -44390,6 +44395,13 @@
 	    get(container) {
 	        for (const layer of this._layers) {
 	            if (layer.label === container) return layer;
+	        }
+	        return null;
+	    }
+
+	    getById(id) {
+	        for (const layer of this._layers) {
+	            if (layer.id === id) return layer;
 	        }
 	        return null;
 	    }
@@ -44464,16 +44476,16 @@
 
 	var styleSidebar$2 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.group {\n    overflow: hidden;\n\n    margin: 0 0 var(--panel-spacing) 0;\n\n    background-color: var(--panel-background-color);\n\n    border-radius: var(--group-border-radius);\n\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\n}\n\n.button-header {\n    position: relative;\n\n    width: 100%;\n\n    padding: 0;\n\n    text-align: left;\n\n    background-color: var(--group-header-background-color);\n\n    border: 0;\n    outline: 0;\n    cursor: pointer;\n}\n\n.label {\n    display: block;\n\n    padding: var(--group-header-padding);\n\n    font-size: var(--group-header-font-size);\n    font-weight: 400;\n    color: white;\n    letter-spacing: 0.025em;\n}\n\n.arrow {\n    position: absolute;\n    top: 0;\n    right: calc(var(--group-header-padding) + 1px);\n    bottom: 0;\n\n    margin: auto 0;\n}\n\n.content {\n    display: grid;\n    position: relative;\n\n    row-gap: var(--component-row-gap);\n\n    padding: var(--group-padding);\n}\n\n.hidden .content {\n    display: none;\n}\n\n/* Subgroup */\n.group.subgroup {\n    padding: 8px 0 0 0;\n\n    background-color: transparent;\n\n    border-radius: 0;\n\n    box-shadow: initial;\n}\n\n.subgroup .button-header {\n    margin-bottom: 0;\n\n    background: transparent;\n}\n\n.subgroup .label {\n    padding: 0 0 0 21px;\n\n    font-size: 11px;\n}\n\n.subgroup .arrow {\n    position: absolute;\n    top: 3px;\n    right: 0;\n    bottom: 0;\n    left: 2px;\n\n    width: 10px;\n\n    margin: 0;\n}\n\n.hidden.subgroup .arrow {\n    transform: rotate(-90deg);\n}\n\n.subgroup .content {\n    margin: 7px 0 4px 0;\n    padding: 0 0 0 20px;\n}\n\n.subgroup .content:before {\n    content: '';\n\n    display: block;\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 6px;\n\n    width: 1px;\n    height: 100%;\n\n    background: rgba(255, 255, 255, 0.1);\n}\n";
 
-	var styleDevtools$2 = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.group {\r\n    padding: calc(var(--group-padding) - 3px) var(--group-padding) var(--group-padding);\r\n    margin: 0 var(--panel-spacing) var(--panel-spacing) 0;\r\n\r\n    background-color: var(--panel-background-color);\r\n    \r\n    border-radius: var(--group-border-radius);\r\n\r\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\r\n}\r\n\r\n.label {\r\n    display: block;\r\n\r\n    margin-bottom: 20px;\r\n\r\n    font-size: var(--group-header-font-size);\r\n    font-weight: 600;\r\n    color: white;\r\n    letter-spacing: 0.025em;\r\n}\r\n\r\n.content {\r\n    display: grid;\r\n\r\n    row-gap: var(--component-row-gap);\r\n}";
+	var styleDevtools$2 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.group {\n    overflow: hidden;\n\n    margin: 0 var(--panel-spacing) var(--panel-spacing) 0;\n\n    background-color: var(--panel-background-color);\n\n    border-radius: var(--group-border-radius);\n\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\n}\n\n.button-header {\n    position: relative;\n\n    width: 100%;\n\n    padding: 0;\n\n    text-align: left;\n\n    background-color: var(--group-header-background-color);\n\n    border: 0;\n    outline: 0;\n    cursor: pointer;\n}\n\n.label {\n    display: block;\n\n    padding: var(--group-header-padding);\n\n    font-size: var(--group-header-font-size);\n    font-weight: 400;\n    color: white;\n    letter-spacing: 0.025em;\n}\n\n.arrow {\n    position: absolute;\n    top: 0;\n    right: calc(var(--group-header-padding) + 1px);\n    bottom: 0;\n\n    margin: auto 0;\n}\n\n.content {\n    display: grid;\n    position: relative;\n\n    row-gap: var(--component-row-gap);\n\n    padding: var(--group-padding);\n}\n\n.hidden .content {\n    display: none;\n}\n\n/* Subgroup */\n.group.subgroup {\n    padding: 8px 0 0 0;\n\n    background-color: transparent;\n\n    border-radius: 0;\n\n    box-shadow: initial;\n}\n\n.subgroup .button-header {\n    margin-bottom: 0;\n\n    background: transparent;\n}\n\n.subgroup .label {\n    padding: 0 0 0 21px;\n\n    font-size: 11px;\n}\n\n.subgroup .arrow {\n    position: absolute;\n    top: 3px;\n    right: 0;\n    bottom: 0;\n    left: 2px;\n\n    width: 10px;\n\n    margin: 0;\n}\n\n.hidden.subgroup .arrow {\n    transform: rotate(-90deg);\n}\n\n.subgroup .content {\n    margin: 7px 0 4px 0;\n    padding: 0 0 0 20px;\n}\n\n.subgroup .content:before {\n    content: '';\n\n    display: block;\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 6px;\n\n    width: 1px;\n    height: 100%;\n\n    background: rgba(255, 255, 255, 0.1);\n}\n";
 
 	var templateSidebar$2 = "<div class=\"group active\">\n\n    <!-- Button header -->\n    <button class=\"button-header\" ref=\"buttonHeader\">\n\n        <!-- Label -->\n        <span class=\"label\">\n            {{ label }}\n        </span>\n\n        <!-- Arrow -->\n        <svg width=\"11\" height=\"6\" viewBox=\"0 0 11 6\" class=\"arrow\">\n            <path d=\"M1 1L4.83564 4.40945C5.21452 4.74624 5.78548 4.74624 6.16436 4.40945L10 1\" stroke=\"white\" fill=\"transparent\" stroke-opacity=\"0.74\" stroke-linecap=\"round\"/>\n        </svg>\n\n    </button>\n\n    <!-- Content -->\n    <div class=\"content\" ref=\"content\"></div>\n\n</div>\n";
 
-	var templateDevtools$2 = "<div class=\"group\">\n\n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Content -->\n    <div class=\"content\" ref=\"content\"></div>\n\n</div>\n";
+	var templateDevtools$2 = "<div class=\"group active\">\n\n    <!-- Button header -->\n    <button class=\"button-header\" ref=\"buttonHeader\">\n\n        <!-- Label -->\n        <span class=\"label\">\n            {{ label }}\n        </span>\n\n        <!-- Arrow -->\n        <svg width=\"11\" height=\"6\" viewBox=\"0 0 11 6\" class=\"arrow\">\n            <path d=\"M1 1L4.83564 4.40945C5.21452 4.74624 5.78548 4.74624 6.16436 4.40945L10 1\" stroke=\"white\" fill=\"transparent\" stroke-opacity=\"0.74\" stroke-linecap=\"round\"/>\n        </svg>\n\n    </button>\n\n    <!-- Content -->\n    <div class=\"content\" ref=\"content\"></div>\n\n</div>\n";
 
 	// Base class
 
 	class Group$1 extends LayoutElement {
-	    constructor({ root, label, parent, options }) {
+	    constructor({ root, parentModel, options, model, id }) {
 	        super({
 	            root,
 	            style: {
@@ -44485,17 +44497,17 @@
 	                templateDevtools: templateDevtools$2,
 	            },
 	            templateData: {
-	                label,
+	                label: model.label,
 	            },
 	        });
 
 	        // Props
-	        this._label = label;
+	        this._model = model;
 	        this._options = options;
-	        this._parent = parent || null;
+	        this._parentModel = parentModel || null;
 
 	        // Data
-	        this._id = this._generateId();
+	        this._id = id || this._generateId();
 	        this._isVisible = true;
 
 	        // Setup
@@ -44516,45 +44528,39 @@
 	        return this._id;
 	    }
 
-	    get label() {
-	        return this._label;
-	    }
-
-	    get content() {
-	        return this.$refs.content;
-	    }
-
-	    get parent() {
-	        return this._parent;
+	    get $parent() {
+	        return this._parentModel.element;
 	    }
 
 	    get options() {
 	        return this._options;
 	    }
 
+	    get model() {
+	        return this._model;
+	    }
+
 	    /**
 	     * Public
 	     */
+	    addElement(element) {
+	        this.$refs.content.appendChild(element);
+	    }
+
 	    add(object, property, options = {}) {
-	        options.parent = this;
-	        return this.$root.add(object, property, options);
+	        return this.$root.add(object, property, options, this._model);
 	    }
 
 	    addButton(label, options = {}) {
-	        options.parent = this;
-	        return this.$root.addButton(label, options);
+	        return this.$root.addButton(label, options, this);
 	    }
 
 	    addCanvas(options) {
-	        options.parent = this;
-	        return this.$root.addCanvas(options);
+	        return this.$root.addCanvas(options, this);
 	    }
 
-	    addGroup(label) {
-	        return this.$root.addGroup(label, {
-	            // container: this._label,
-	            parent: this,
-	        });
+	    addGroup(label, options) {
+	        return this.$root.addGroup(label, options, this._model);
 	    }
 
 	    remove() {
@@ -44584,7 +44590,7 @@
 	    }
 
 	    _addSubgroupClass() {
-	        if (this._parent.tagName !== 'DDDD-LAYER') this.$el.classList.add('subgroup');
+	        if (this._parentModel.element.tagName !== 'DDDD-LAYER') this.$el.classList.add('subgroup');
 	    }
 
 	    _updateStartupVisibility() {
@@ -44618,7 +44624,7 @@
 	    }
 
 	    _getLocalStorageKey() {
-	        return `group.${this._options.container}.${this._label}`;
+	        return `group.${this._parentModel.label}.${this._model.label}`;
 	    }
 
 	    /**
@@ -44631,82 +44637,33 @@
 
 	window.customElements.define('dddd-group', Group$1);
 
-	class LayoutModel {
-	    constructor() {
-	        this._layers = [];
-	        this._groups = [];
-	        this._components = [];
-	    }
-
-	    /**
-	     * Public
-	     */
-	    addLayer(label) {
-	        this._layers.push(label);
-	    }
-
-	    addGroup(id, label, options = {}) {
-	        this._groups.push({ id, label, options });
-	    }
-
-	    removeGroup(id) {
-	        const index = this._getGroupIndex(id);
-	        this._groups.splice(index, 1);
-	    }
-
-	    addComponent(model) {
-	        this._components.push(model);
-	    }
-
-	    get() {
-	        const structure = {
-	            layers: this._layers,
-	            groups: this._groups,
-	            components: this._getComponents(),
-	        };
-	        return structure;
-	    }
-
-	    /**
-	     * Private
-	     */
-	    _getComponents() {
-	        const components = [];
-	        for (const model of this._components) {
-	            components.push(model.getData());
-	        }
-	        return components;
-	    }
-
-	    _getGroupIndex(id) {
-	        for (const [index, group] of this._groups.entries()) {
-	            if (group.id === id) return index;
-	        }
-	        return null;
-	    }
-	}
-
-	var LayoutModel$1 = new LayoutModel();
-
 	// Vendor
 
 	class Component extends HTMLElement {
-	    constructor({ root, model, style, template }) {
+	    constructor({ style, template }) {
 	        super();
 
 	        // Props
+	        this._style = style;
+	        this._template = template;
+	    }
+
+	    setup({ model, root, parentModel }) {
+	        // Props
 	        this.__root = root;
 	        this.__model = model;
+	        this.__parentModel = parentModel;
 
 	        // Attach
 	        this.attachShadow({ mode: 'open' });
 
 	        // Setup
-	        this.$el = this.__addTemplate(template);
+	        this.$el = this.__addTemplate(this._template);
 	        this.$refs = this.__getReferences(this.$el);
-	        this.__addStyle(style);
+	        this.__addStyle(this._style);
 	        this.__addLockedClass();
 	        this.__bindHandlers();
+	        this.__triggerCreated();
 	    }
 
 	    connectedCallback() {
@@ -44727,21 +44684,22 @@
 	        return this.__root;
 	    }
 
-	    get model() {
-	        return this.__model;
+	    get $parent() {
+	        return this.__parentModel.element;
 	    }
 
-	    get container() {
-	        return this.__model.options.container;
+	    get model() {
+	        return this.__model;
 	    }
 
 	    /**
 	     * Public
 	     */
+
 	    tick() {
 	        this.__triggerTick();
 	        if (this.model.options.listen) {
-	            this.model.updateValueFromObject(); // !this.__root.isDevtools
+	            this.model.updateValueFromObject();
 	            this.__triggerOnListen();
 	        }
 	    }
@@ -44802,6 +44760,12 @@
 	    __addLockedClass() {
 	        if (this.model.options.locked) {
 	            this.$el.classList.add('locked');
+	        }
+	    }
+
+	    __triggerCreated() {
+	        if (typeof this.created === 'function') {
+	            this.created();
 	        }
 	    }
 
@@ -44878,9 +44842,11 @@
 
 	// TODO: On change is triggered twice
 	class Slider extends Component {
-	    constructor(root, model) {
-	        super({ root, style: style$4, template: template$4, model });
+	    constructor() {
+	        super({ style: style$4, template: template$4 });
+	    }
 
+	    created() {
 	        // Data
 	        this._scrubberOffset = 0;
 	        this._inputContainer = { x: 0, width: 0 };
@@ -45118,9 +45084,11 @@
 	var template$5 = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input -->\r\n    <input class=\"input\" ref=\"input\">\r\n\r\n</div>";
 
 	class Text extends Component {
-	    constructor(root, model) {
-	        super({ root, style: style$5, template: template$5, model });
+	    constructor() {
+	        super({ style: style$5, template: template$5 });
+	    }
 
+	    created() {
 	        // Setup
 	        this._bindHandlers();
 	    }
@@ -45180,9 +45148,11 @@
 	const DEFAULT_STEP_SIZE = 0.01;
 
 	class NumberComponent extends Component {
-	    constructor(root, model) {
-	        super({ root, style: style$6, template: template$6, model });
+	    constructor() {
+	        super({ style: style$6, template: template$6 });
+	    }
 
+	    created() {
 	        // Options
 	        this._stepSize = this.model.options.stepSize || DEFAULT_STEP_SIZE;
 	        this._min = typeof this.model.options.min === 'number' ? this.model.options.min : null;
@@ -45334,9 +45304,11 @@
 	const TYPE_IMAGE = 'TYPE_IMAGE';
 
 	class ImageComponent extends Component {
-	    constructor(root, model) {
-	        super({ root, style: style$7, template: template$7, model });
+	    constructor() {
+	        super({ style: style$7, template: template$7 });
+	    }
 
+	    created() {
 	        // Data
 	        this._contain = this.model.options.contain;
 	        this._previewImage = null;
@@ -45492,9 +45464,11 @@
 	// Base component
 
 	class Dropdown extends Component {
-	    constructor(root, model) {
-	        super({ root, style: style$8, template: template$8, model });
+	    constructor() {
+	        super({ style: style$8, template: template$8 });
+	    }
 
+	    created() {
 	        // Setup
 	        this._bindHandlers();
 	    }
@@ -45571,9 +45545,11 @@
 	// Base component
 
 	class Checkbox extends Component {
-	    constructor(root, model) {
-	        super({ root, style: style$9, template: template$9, model });
+	    constructor() {
+	        super({ style: style$9, template: template$9 });
+	    }
 
+	    created() {
 	        // Setup
 	        this._bindHandlers();
 	    }
@@ -45630,9 +45606,11 @@
 	// Base component
 
 	class Button extends Component {
-	    constructor(root, model) {
-	        super({ root, style: style$a, template: template$a, model });
+	    constructor() {
+	        super({ style: style$a, template: template$a });
+	    }
 
+	    created() {
 	        // Options
 	        this._isFullWidth = this.model.options.fullWidth || false;
 
@@ -45685,7 +45663,7 @@
 
 	window.customElements.define('dddd-button', Button);
 
-	var style$b = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    display: grid;\n    position: relative;\n\n    grid-template-columns: 27px calc(100% - 20px);\n    align-items: center;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: 0 var(--input-padding) 0 5px;\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    transition: var(--input-background-color-transition);\n}\n\n.input-container:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.component.error .input-container {\n    background-color: var(--input-background-color-error);\n}\n\n.color {\n    width: 20px;\n    height: 20px;\n\n    margin: 0;\n    padding: 0;\n\n    background: transparent;\n\n    border: 0;\n    outline: 0;\n\n    appearance: none;\n    cursor: pointer;\n}\n\n.color::-webkit-color-swatch-wrapper {\n    padding: 0;\n}\n\n.color::-webkit-color-swatch {\n    border: none;\n    border-radius: 4px;\n}\n\n.color-string {\n    background: transparent;\n\n    border: 0;\n    outline: 0;\n\n    color: var(--input-text-color);\n}\n\n/* .alpha {\n    color: var(--input-text-color);\n    text-align: right;\n} */\n";
+	var style$b = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    display: grid;\n    position: relative;\n\n    grid-template-columns: 27px calc(100% - 20px);\n    align-items: center;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: 0 var(--input-padding) 0 5px;\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    transition: var(--input-background-color-transition);\n}\n\n.input-container:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.component.error .input-container {\n    background-color: var(--input-background-color-error);\n}\n\n.color {\n    width: 20px;\n    height: 20px;\n\n    margin: 0;\n    padding: 0;\n\n    background: transparent;\n\n    border: 0;\n    outline: 0;\n\n    appearance: none;\n    cursor: pointer;\n}\n\n.color::-webkit-color-swatch-wrapper {\n    padding: 0;\n}\n\n.color::-webkit-color-swatch {\n    border: none;\n    border-radius: 4px;\n}\n\n.color-string {\n    background: transparent;\n\n    border: 0;\n    outline: 0;\n\n    font-size: var(--input-font-size);\n    color: var(--input-text-color);\n}\n\n/* .alpha {\n    color: var(--input-text-color);\n    text-align: right;\n} */\n";
 
 	var template$b = "<div class=\"component\">\r\n\r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input container  -->\r\n    <div class=\"input-container\">\r\n\r\n        <!-- Color input -->\r\n        <input type=\"color\" class=\"color\" ref=\"color\">\r\n\r\n        <!-- Color string -->\r\n        <input type=\"text\" class=\"color-string\" ref=\"colorString\">\r\n\r\n        <!-- Alpha -->\r\n        <!-- <span class=\"alpha\">100%</span> -->\r\n\r\n    </div>\r\n\r\n</div>\r\n";
 
@@ -45698,9 +45676,11 @@
 	const CLASS_NAME_ERROR = 'error';
 
 	class Color$1 extends Component {
-	    constructor(root, model) {
-	        super({ root, style: style$b, template: template$b, model });
+	    constructor() {
+	        super({ style: style$b, template: template$b });
+	    }
 
+	    created() {
 	        // Data
 	        this._type = this._getType();
 
@@ -45866,9 +45846,11 @@
 	const DEFAULT_STEP_SIZE$1 = 0.01;
 
 	class MultiInput extends Component {
-	    constructor(root, model) {
-	        super({ root, style: style$c, template: template$c, model });
+	    constructor() {
+	        super({ style: style$c, template: template$c });
+	    }
 
+	    created() {
 	        // Options
 	        this._stepSize = this.model.options.stepSize || DEFAULT_STEP_SIZE$1;
 	        this._decimalPlaces = this._getDecimalPlaces(this._stepSize);
@@ -46026,9 +46008,11 @@
 	// Base component
 
 	class Canvas extends Component {
-	    constructor(root, model) {
-	        super({ root, style: style$d, template: template$d, model });
+	    constructor() {
+	        super({ style: style$d, template: template$d });
+	    }
 
+	    created() {
 	        // Options
 
 	        // Data
@@ -46088,163 +46072,185 @@
 	    canvas: Canvas,
 	};
 
-	class Components {
-	    constructor({ root }) {
-	        // Props
-	        this._root = root;
-
-	        // Data
-	        this._components = [];
-
-	        // Setup
-	        this._bindHandlers();
-	        this._setupEventListeners();
-	    }
-
-	    destroy() {
-	        this._destroyComponents();
-	        this._removeEventListeners();
+	class LayerCollection {
+	    constructor() {
+	        this._layers = [];
 	    }
 
 	    /**
 	     * Public
 	     */
-	    create(model) {
-	        LayoutModel$1.addComponent(model);
-	        const type = model.type;
-	        const componentClass = componentTypes[type];
-	        const component = new componentClass(this._root, model);
-	        this._components.push(component);
-	        this._addComponentToContainer(component);
-	        return component;
+	    add(layer) {
+	        this._layers.push(layer);
 	    }
 
-	    remove(component) {
-	        const container = this._root.layout.getContainer(component.container);
-	        container.removeChild(component);
-	        component.destroy();
+	    remove(layer) {
+	        const index = this._layers.indexOf(layer);
+	        if (index > -1) this._layers.splice(index, 1);
 	    }
 
-	    update(modelData) {
-	        const component = this._getById(modelData.id);
-	        component.model.value = modelData.value;
-	    }
-
-	    updateObjects(models) {
-	        let model;
-	        let component;
-	        for (let i = 0, len = models.length; i < len; i++) {
-	            model = models[i];
-	            if (model.options.listen) {
-	                component = this._getById(model.id);
-	                if (component) {
-	                    component.model.object = model.object;
-	                }
-	            }
+	    serialize() {
+	        const layers = [];
+	        for (let i = 0, len = this._layers.length; i < len; i++) {
+	            layers.push(this._layers[i].serialize());
 	        }
+	        return layers;
+	    }
+	}
+
+	class LayoutModel {
+	    constructor() {
+	        this._layers = new LayerCollection();
+	        this._components = [];
 	    }
 
-	    resize() {
-	        for (const component of this._components) {
-	            component.resize();
-	        }
+	    /**
+	     * Public
+	     */
+	    addLayer(model) {
+	        this._layers.add(model);
+	    }
+
+	    addComponent(model) {
+	        this._components.push(model);
+	    }
+
+	    updateComponent(data) {
+	        const model = this._getComponentById(data.id);
+	        model.value = data.value;
+	    }
+
+	    serialize() {
+	        const data = {
+	            layers: this._layers.serialize(),
+	        };
+	        return data;
 	    }
 
 	    /**
 	     * Private
 	     */
-	    _bindHandlers() {
-	        this._tickHandler = this._tickHandler.bind(this);
-	    }
-
-	    _setupEventListeners() {
-	        Ticker$1.add(this._tickHandler);
-	    }
-
-	    _removeEventListeners() {
-	        Ticker$1.remove(this._tickHandler);
-	    }
-
-	    _addComponentToContainer(component) {
-	        const container = component.model.options.container;
-	        if (container) {
-	            const element = this._root.layout.getParent(container).content;
-	            element.appendChild(component);
-	        }
-
-	        const parent = component.model.options.parent;
-	        if (parent) {
-	            const element = parent.content;
-	            element.appendChild(component);
-	        }
-
-	        this._root.layout.resize();
-	    }
-
-	    _getById(id) {
-	        for (const component of this._components) {
-	            if (component.model.id === id) {
-	                return component;
-	            }
+	    _getComponentById(id) {
+	        let item;
+	        for (let i = 0, len = this._components.length; i < len; i++) {
+	            item = this._components[i];
+	            if (item.id === id) return item;
 	        }
 	    }
+	}
 
-	    _destroyComponents() {
-	        for (const component of this._components) {
-	            component.destroy();
-	        }
+	var LayoutModel$1 = new LayoutModel();
+
+	class GroupCollection {
+	    constructor() {
+	        this._groups = [];
 	    }
 
 	    /**
-	     * Tick
+	     * Public
 	     */
-
-	    _tickComponents() {
-	        for (let i = 0, len = this._components.length; i < len; i++) {
-	            this._components[i].tick();
-	        }
+	    add(group) {
+	        this._groups.push(group);
 	    }
 
-	    _sendModelsToDevtools() {
-	        const models = [];
-	        for (let i = 0, len = this._components.length; i < len; i++) {
-	            models.push(this._components[i].model.getData());
-	        }
+	    remove(group) {
+	        const index = this._groups.indexOf(group);
+	        if (index > -1) this._groups.splice(index, 1);
+	    }
 
-	        window.postMessage({
-	            source: 'dddd-page',
-	            payload: {
-	                action: 'update-objects',
-	                models,
-	            },
-	        });
+	    serialize() {
+	        const groups = [];
+	        for (let i = 0, len = this._groups.length; i < len; i++) {
+	            groups.push(this._groups[i].serialize());
+	        }
+	        return groups;
+	    }
+	}
+
+	class ComponentCollection {
+	    constructor() {
+	        this._components = [];
 	    }
 
 	    /**
-	     * Handlers
+	     * Public
 	     */
-	    _tickHandler() {
-	        this._tickComponents();
-	        // this._sendModelsToDevtools();
+	    add(layer) {
+	        this._components.push(layer);
+	    }
+
+	    remove(layer) {
+	        const index = this._components.indexOf(layer);
+	        if (index > -1) this._components.splice(index, 1);
+	    }
+
+	    serialize() {
+	        const components = [];
+	        for (let i = 0, len = this._components.length; i < len; i++) {
+	            components.push(this._components[i].serialize());
+	        }
+	        return components;
+	    }
+	}
+
+	// Collections
+
+	class LayerModel {
+	    constructor(options) {
+	        // Props
+	        this._label = options.label;
+	        this._element = options.element;
+
+	        // Setup
+	        this._groups = new GroupCollection();
+	        this._components = new ComponentCollection();
+	    }
+
+	    /**
+	     * Getters & Setters
+	     */
+	    get label() {
+	        return this._label;
+	    }
+
+	    get element() {
+	        return this._element;
+	    }
+
+	    set element(value) {
+	        this._element = value;
+	    }
+
+	    /**
+	     * Add GroupModel to GroupCollection
+	     * @param {GroupModel} model
+	     */
+	    addGroup(model) {
+	        this._groups.add(model);
+	    }
+
+	    serialize() {
+	        const data = {
+	            label: this._label,
+	            groups: this._groups.serialize(),
+	            components: this._components.serialize(),
+	        };
+	        return data;
 	    }
 	}
 
 	class ComponentModel {
-	    constructor({ root, object, property, options, id, type, value, onChangeCallback }) {
+	    constructor({ root, object, property, options, parent, id, type, value, onChange }) {
 	        // Props
 	        this._root = root;
 	        this._object = object || {};
 	        this._property = property;
 	        this._options = options || {};
+	        this._parent = parent || null;
 	        this._id = id || this._generateId();
 	        this._type = type || this._detectType();
 	        this._value = value || this._object[this._property];
-	        this._onChangeCallback = onChangeCallback;
-
-	        // TODO: Refactor
-	        if (this._options.container instanceof Group$1) {
-	            this._options.container = this._options.container.label;
-	        }
+	        this._onChangeCallback = onChange;
 	    }
 
 	    /**
@@ -46265,9 +46271,8 @@
 	            }
 	        }
 
-	        // TODO: Refactor function name
-	        if (this._root.isDevtools && typeof this._onChangeCallback === 'function') {
-	            this._onChangeCallback(this.getData());
+	        if (typeof this._onChangeCallback === 'function') {
+	            this._onChangeCallback(this.serialize());
 	        }
 	    }
 
@@ -46287,6 +46292,10 @@
 	        return this._options;
 	    }
 
+	    get parent() {
+	        return this._parent;
+	    }
+
 	    get property() {
 	        return this._property;
 	    }
@@ -46302,8 +46311,8 @@
 	    /**
 	     * Public
 	     */
-	    getData() {
-	        return {
+	    serialize() {
+	        const data = {
 	            object: this._object,
 	            property: this._property,
 	            options: this._removeFunctions(this._options),
@@ -46311,6 +46320,7 @@
 	            type: this._type,
 	            value: this._value,
 	        };
+	        return data;
 	    }
 
 	    updateValueFromObject() {
@@ -46410,6 +46420,7 @@
 	        }
 	    }
 
+	    // TODO: Move to helper file
 	    _removeFunctions(data) {
 	        const object = JSON.parse(JSON.stringify(data));
 	        function eachRecursive(object) {
@@ -46426,23 +46437,86 @@
 	    }
 	}
 
+	// Collections
+
+	class GroupModel {
+	    constructor(options) {
+	        // Props
+	        this._label = options.label;
+	        this._element = options.element;
+
+	        // Setup
+	        this._groups = new GroupCollection();
+	        this._components = new ComponentCollection();
+	    }
+
+	    /**
+	     * Getters & Setters
+	     */
+	    get label() {
+	        return this._label;
+	    }
+
+	    get element() {
+	        return this._element;
+	    }
+
+	    set element(value) {
+	        this._element = value;
+	    }
+
+	    /**
+	     * Add GroupModel to GroupCollection
+	     * @param {GroupModel} model
+	     */
+	    addGroup(model) {
+	        this._groups.add(model);
+	    }
+
+	    /**
+	     * Add ComponentModel to ComponentCollection
+	     * @param {ComponentModel} model
+	     */
+	    addComponent(model) {
+	        this._components.add(model);
+	    }
+
+	    serialize() {
+	        const data = {
+	            label: this._label,
+	            groups: this._groups.serialize(),
+	            components: this._components.serialize(),
+	        };
+	        return data;
+	    }
+	}
+
 	// Layout
 
+	// Layout types
+	const LAYOUT_TYPE_SIDEBAR = 'LAYOUT_TYPE_SIDEBAR';
+	const LAYOUT_TYPE_DEVTOOLS = 'LAYOUT_TYPE_DEVTOOLS';
+
 	class Layout {
-	    constructor({ root, onLayerChange, minimized }) {
+	    constructor({ root, type, onLayerChange, minimized }) {
 	        // Props
 	        this._root = root;
+	        this._type = type;
 	        this._onLayerChangeCallback = onLayerChange;
 
 	        // Setup
 	        this._isVisible = true;
+	        this._layers = [];
 	        this._groups = [];
+	        this._components = [];
+
+	        // Elements
 	        this._container = this._createContainer();
 	        this._header = this._createHeader();
 	        this._navigation = this._createNavigation();
 	        // this._stats = this._createStats();
 	        this._layers = this._createLayers();
-	        this._components = this._createComponents();
+
 	        if (minimized) this.toggleVisibility();
 	        this._bindHandlers();
 	        this._setupEventListeners();
@@ -46452,17 +46526,13 @@
 	        this._container.destroy();
 	        this._navigation.destroy();
 	        this._layers.destroy();
-	        this._components.destroy();
+	        // this._components.destroy();
 	        this._removeContainerElement();
 	    }
 
 	    /**
 	     * Getters & Setters
 	     */
-	    get components() {
-	        return this._components;
-	    }
-
 	    get stats() {
 	        return this._stats;
 	    }
@@ -46471,12 +46541,28 @@
 	     * Public
 	     */
 	    addLayer(label) {
-	        this._navigation.add(label);
-	        const layer = this._layers.add(label);
+	        // Create layer model
+	        const model = new LayerModel({
+	            label,
+	        });
+
+	        // Add layer model to the layour model
+	        LayoutModel$1.addLayer(model);
+
+	        // Create layer element
+	        const layer = this._layers.add(model);
+
+	        // Link element to model
+	        model.element = layer;
+
+	        // Add layer to navigation
+	        this._navigation.add(model);
+
+	        // FIX: Find a better solution for all this resize shit
 	        this._layers.resize();
-	        LayoutModel$1.addLayer(label);
 	        this._header.resize();
 	        this._setLayersHeight();
+
 	        return layer;
 	    }
 
@@ -46484,26 +46570,40 @@
 	        const index = this._layers.getIndexByLabel(label);
 	        this._navigation.goto(index);
 	        this._layers.goto(index);
-
-	        // TODO: tmp fix..
-	        this._components.resize();
 	    }
 
-	    addGroup(label, options = {}) {
-	        const parent = options.parent ? options.parent : this.getParent(options.container);
-	        const group = new Group$1({
-	            root: this._root,
-	            layout: this,
-	            parent,
+	    addGroup(label, options = {}, parentModel) {
+	        // Get parent model if not present
+	        parentModel = parentModel || this._getParentModelByContainer(options.container);
+
+	        // Create group model
+	        const model = new GroupModel({
 	            label,
-	            options,
 	        });
 
-	        parent.content.appendChild(group);
+	        // Add model to parent model
+	        parentModel.addGroup(model);
+
+	        // Create group element
+	        const group = new Group$1({
+	            root: this._root,
+	            parentModel,
+	            options,
+	            model,
+	        });
+
+	        // Link element to model
+	        model.element = group;
+
+	        // Add element to parent
+	        parentModel.element.addElement(group);
+
+	        // Store group reference
 	        this._groups.push(group);
 
+	        // Resize..
 	        this._layers.resize();
-	        LayoutModel$1.addGroup(group.id, label, options);
+
 	        return group;
 	    }
 
@@ -46515,9 +46615,47 @@
 	        LayoutModel$1.removeGroup(id);
 	    }
 
-	    addComponent({ object, property, options, id, type, onChangeCallback }) {
-	        const model = new ComponentModel({ root: this._root, object, property, options, id, type, onChangeCallback });
-	        const component = this._components.create(model);
+	    addComponent({ object, property, options, parentModel, id, type }) {
+	        // Get parent model if not present
+	        parentModel = parentModel || this._getParentModelByContainer(options.container);
+
+	        // Create component model
+	        const model = new ComponentModel({
+	            object,
+	            property,
+	            options,
+	            parent: parentModel,
+	            id,
+	            type,
+	            onChange: (data) => {
+	                this._root.triggerChange(data);
+	            },
+	        });
+
+	        // Add model to parent model
+	        parentModel.addComponent(model);
+
+	        // Add model reference to layout model
+	        LayoutModel$1.addComponent(model);
+
+	        // Get component class
+	        const componentClass = componentTypes[model.type];
+
+	        // Create component
+	        const component = new componentClass();
+	        component.setup({
+	            model,
+	            root: this._root,
+	            parentModel,
+	        });
+
+	        // Store component reference
+	        this._components.push(component);
+
+	        // Add component to container
+	        parentModel.element.addElement(component);
+
+	        // Return created component
 	        return component;
 	    }
 
@@ -46533,13 +46671,21 @@
 	        if (group) return group;
 	    }
 
+	    getParentById(id) {
+	        const layer = this._layers.getById(id);
+	        if (layer) return layer;
+
+	        const group = this._getGroupById(id);
+	        if (group) return group;
+	    }
+
 	    remove() {
 	        document.body.removeChild(this._container);
 	    }
 
 	    resize() {
 	        this._layers.resize();
-	        this._components.resize();
+	        // this._components.resize();
 	        this._setLayersHeight();
 	    }
 
@@ -46556,7 +46702,7 @@
 	            this._isVisible = true;
 	        }
 	        this._layers.resize();
-	        this._components.resize();
+	        // this._components.resize();
 	    }
 
 	    /**
@@ -46617,13 +46763,13 @@
 	        return layers;
 	    }
 
-	    _createComponents() {
-	        const componenents = new Components({
-	            root: this._root,
-	            layout: this,
-	        });
-	        return componenents;
-	    }
+	    // _createComponents() {
+	    //     const componenents = new Components({
+	    //         root: this._root,
+	    //         layout: this,
+	    //     });
+	    //     return componenents;
+	    // }
 
 	    _getGroupById(id) {
 	        for (const group of this._groups) {
@@ -46633,7 +46779,7 @@
 
 	    _getGroupByLabel(label) {
 	        for (const group of this._groups) {
-	            if (group.label === label) return group;
+	            if (group.model.label === label) return group;
 	        }
 	    }
 
@@ -46663,12 +46809,42 @@
 	        this._layers.setHeight(layersHeight);
 	    }
 
+	    _addComponentToContainer(component) {
+	        const container = component.model.options.container;
+	        if (container) {
+	            const element = this._root.layout.getParent(container).content;
+	            element.appendChild(component);
+	        }
+
+	        const parentId = component.model.parentId;
+	        if (parentId) {
+	            const element = this._root.layout.getParentById(parentId).content;
+	            element.appendChild(component);
+	        }
+
+	        const parent = component.model.parent;
+	        if (parent) {
+	            const element = parent.content;
+	            element.appendChild(component);
+	        }
+
+	        this._root.layout.resize();
+	    }
+
+	    _getParentModelByContainer(container) {
+	        const layer = this._layers.get(container);
+	        if (layer) return layer.model;
+
+	        const group = this._getGroupByLabel(container);
+	        if (group) return group.model;
+	    }
+
 	    /**
 	     * Handlers
 	     */
 	    _navigationSwitchHandler(e) {
 	        this._layers.goto(e.detail.index);
-	        this._components.resize();
+	        // this._components.resize();
 	        if (typeof this._onLayerChangeCallback === 'function') {
 	            const label = this._layers.getByIndex(e.detail.index).label;
 	            this._onLayerChangeCallback(label);
@@ -46716,11 +46892,15 @@
 	        return this._layout.stats;
 	    }
 
+	    get onChangeCallback() {
+	        return this._onChangeCallback;
+	    }
+
 	    /**
 	     * Public
 	     */
-	    add(object, property, options) {
-	        return this._layout.addComponent({ object, property, options });
+	    add(object, property, options, parentModel = null) {
+	        return this._layout.addComponent({ object, property, options, parentModel });
 	    }
 
 	    // TODO: Fix
@@ -46728,13 +46908,13 @@
 	        // this._components.remove(component);
 	    }
 
-	    addButton(label, options = {}) {
+	    addButton(label, options = {}, parent = null) {
 	        options.label = label;
-	        return this._layout.addComponent({ options, type: 'button' });
+	        return this._layout.addComponent({ options, type: 'button', parent });
 	    }
 
-	    addCanvas(options) {
-	        return this._layout.addComponent({ options, type: 'canvas' });
+	    addCanvas(options, parent = null) {
+	        return this._layout.addComponent({ options, type: 'canvas', parent });
 	    }
 
 	    addLayer(label) {
@@ -46745,8 +46925,8 @@
 	        this._layout.gotoLayer(label);
 	    }
 
-	    addGroup(label, options) {
-	        return this._layout.addGroup(label, options);
+	    addGroup(label, options, parent) {
+	        return this._layout.addGroup(label, options, parent);
 	    }
 
 	    removeGroup(id) {
@@ -46755,30 +46935,45 @@
 
 	    createLayoutFromModel(model, onCompleteCallback) {
 	        const layers = model.layers;
+	        const scope = this;
+
+	        function addComponents(components, parentModel) {
+	            for (const component of components) {
+	                scope._layout.addComponent({
+	                    object: component.object,
+	                    property: component.property,
+	                    options: component.options,
+	                    parentModel,
+	                    type: component.type,
+	                    id: component.id,
+	                });
+	            }
+	        }
+
+	        function addGroups(groups, parentModel) {
+	            for (const group of groups) {
+	                const groupElement = scope._layout.addGroup(group.label, null, parentModel);
+
+	                if (group.components) {
+	                    addComponents(group.components, groupElement.model);
+	                }
+
+	                if (group.groups) {
+	                    addGroups(group.groups, groupElement.model);
+	                }
+	            }
+	        }
+
 	        for (const layer of layers) {
-	            this.createLayer(layer);
+	            const layerElement = this._layout.addLayer(layer.label);
+	            if (layer.groups) {
+	                addGroups(layer.groups, layerElement.model);
+	            }
 	        }
 
-	        const groups = model.groups;
-	        for (const group of groups) {
-	            this.createGroup(group.label, group.options);
-	        }
-
-	        const components = model.components;
-	        for (const modelData of components) {
-	            this._layout.createComponent({
-	                object: modelData.object,
-	                property: modelData.property,
-	                options: modelData.options,
-	                id: modelData.id,
-	                type: modelData.type,
-	                onChangeCallback: this._onChangeCallback,
-	            });
-	        }
-
-	        if (typeof onCompleteCallback === 'function') {
-	            onCompleteCallback();
-	        }
+	        // if (typeof onCompleteCallback === 'function') {
+	        //     onCompleteCallback();
+	        // }
 	    }
 
 	    isLayoutSidebar() {
@@ -46789,6 +46984,12 @@
 
 	    toggleVisibility() {
 	        this._layout.toggleVisibility();
+	    }
+
+	    triggerChange(data) {
+	        if (typeof this._onChangeCallback === 'function') {
+	            this._onChangeCallback(data);
+	        }
 	    }
 
 	    /**
@@ -46807,8 +47008,10 @@
 	    }
 
 	    _createLayout() {
+	        const type = this._isDevtools ? LAYOUT_TYPE_DEVTOOLS : LAYOUT_TYPE_SIDEBAR;
 	        const layout = new Layout({
 	            root: this,
+	            type,
 	            onLayerChange: this._onLayerChangeCallback,
 	            minimized: this._isMinimized,
 	        });
@@ -46816,12 +47019,11 @@
 	    }
 
 	    _sendLayoutModel() {
-	        const layoutModel = LayoutModel$1.get();
 	        window.postMessage({
 	            source: 'dddd-page',
 	            payload: {
 	                action: 'setup',
-	                layoutModel,
+	                layoutModel: LayoutModel$1.serialize(),
 	            },
 	        });
 	    }
@@ -46839,10 +47041,10 @@
 	                    this._sendLayoutModel();
 	                    break;
 	                case 'setup-complete':
-	                    this._layout.remove();
+	                    // this._layout.remove();
 	                    break;
 	                case 'change':
-	                    this._layout.components.update(payload.modelData);
+	                    LayoutModel$1.updateComponent(payload.modelData);
 	                    break;
 	            }
 	        }
@@ -46857,6 +47059,33 @@
 	        }
 	    }
 	}
+
+	// const scene = new Scene();
+	// const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+	// const renderer = new WebGLRenderer();
+	// renderer.setSize(window.innerWidth, window.innerHeight);
+	// document.body.appendChild(renderer.domElement);
+
+	// const geometry = new BoxGeometry();
+	// const material = new MeshBasicMaterial({ color: 0x00ff00 });
+	// const cube = new Mesh(geometry, material);
+	// scene.add(cube);
+
+	// camera.position.z = 5;
+
+	const colors = {
+	    test: '#ffff00',
+	};
+
+	const div = document.querySelector('.div');
+
+	const animate = function() {
+	    div.style.background = colors.test;
+	    requestAnimationFrame(animate);
+	};
+
+	animate();
 
 	const dddd = new DDDD({
 	    minimized: false,
@@ -46884,9 +47113,9 @@
 	    name: 'blue',
 	};
 
-	color.add(colorValues, 'three');
-	color.add(colorValues, 'hex');
-	color.add(colorValues, 'name', { type: 'color' });
+	// color.add(colorValues, 'three');
+	color.add(colors, 'test');
+	// color.add(colorValues, 'name', { type: 'color' });
 
 	/**
 	 * Color in Layer #2
@@ -46908,156 +47137,156 @@
 	/**
 	 * Slider
 	 */
-	const slider = dddd.addGroup('Slider', {
-	    container: 'Layer #1',
-	});
+	// const slider = dddd.addGroup('Slider', {
+	//     container: 'Layer #1',
+	// });
 
-	const sliderValues = {
-	    fixed: 0.5,
-	};
+	// const sliderValues = {
+	//     fixed: 0.5,
+	// };
 
-	slider.add(sliderValues, 'fixed', { min: 0, max: 1 });
+	// slider.add(sliderValues, 'fixed', { min: 0, max: 1 });
 
 	/**
 	 * Number
 	 */
-	const number = dddd.addGroup('Number', {
-	    container: 'Layer #1',
-	});
+	// const number = dddd.addGroup('Number', {
+	//     container: 'Layer #1',
+	// });
 
-	const numberValues = {
-	    infinite: 0.5,
-	    stepSize: 0.5,
-	    min: 0.5,
-	    max: 0.5,
-	};
+	// const numberValues = {
+	//     infinite: 0.5,
+	//     stepSize: 0.5,
+	//     min: 0.5,
+	//     max: 0.5,
+	// };
 
-	number.add(numberValues, 'infinite');
-	number.add(numberValues, 'stepSize', { stepSize: 0.5 });
-	number.add(numberValues, 'min', { min: 0 });
-	number.add(numberValues, 'max', { max: 1 });
+	// number.add(numberValues, 'infinite');
+	// number.add(numberValues, 'stepSize', { stepSize: 0.5 });
+	// number.add(numberValues, 'min', { min: 0 });
+	// number.add(numberValues, 'max', { max: 1 });
 
 	/**
 	 * MultiInput
 	 */
-	const multiInput = dddd.addGroup('MultiInput', {
-	    container: 'Layer #1',
-	});
+	// const multiInput = dddd.addGroup('MultiInput', {
+	//     container: 'Layer #1',
+	// });
 
-	const multiInputValues = {
-	    xyz: { x: 0, y: 0, z: 0 },
-	    stepSize: { x: 0, y: 0, z: 0 },
-	};
+	// const multiInputValues = {
+	//     xyz: { x: 0, y: 0, z: 0 },
+	//     stepSize: { x: 0, y: 0, z: 0 },
+	// };
 
-	multiInput.add(multiInputValues, 'xyz');
-	multiInput.add(multiInputValues, 'stepSize', { stepSize: 1 });
+	// multiInput.add(multiInputValues, 'xyz');
+	// multiInput.add(multiInputValues, 'stepSize', { stepSize: 1 });
 
-	const exampleObject3D = new Object3D();
-	multiInput.add(exampleObject3D, 'position', { label: 'three' });
+	// const exampleObject3D = new Object3D();
+	// multiInput.add(exampleObject3D, 'position', { label: 'three' });
 
 	/**
 	 * Dropdown
 	 */
-	const dropdown = dddd.addGroup('Dropdown', {
-	    container: 'Layer #1',
-	});
+	// const dropdown = dddd.addGroup('Dropdown', {
+	//     container: 'Layer #1',
+	// });
 
-	const dropdownValues = {
-	    default: 'Options #3',
-	};
+	// const dropdownValues = {
+	//     default: 'Options #3',
+	// };
 
-	dropdown.add(dropdownValues, 'default', {
-	    options: [
-	        'Options #1',
-	        'Options #2',
-	        'Options #3',
-	        'Options #4',
-	        'Options #5',
-	    ],
-	});
+	// dropdown.add(dropdownValues, 'default', {
+	//     options: [
+	//         'Options #1',
+	//         'Options #2',
+	//         'Options #3',
+	//         'Options #4',
+	//         'Options #5',
+	//     ],
+	// });
 
 	/**
 	 * Button
 	 */
-	const button = dddd.addGroup('Button', {
-	    container: 'Layer #1',
-	});
+	// const button = dddd.addGroup('Button', {
+	//     container: 'Layer #1',
+	// });
 
-	button.addButton('Button', {
-	    onClick: () => {
-	        console.log('click');
-	    },
-	});
+	// button.addButton('Button', {
+	//     onClick: () => {
+	//         console.log('click');
+	//     },
+	// });
 
-	button.addButton('Button - Full width', {
-	    fullWidth: true,
-	    onClick: () => {
-	        console.log('click');
-	    },
-	});
+	// button.addButton('Button - Full width', {
+	//     fullWidth: true,
+	//     onClick: () => {
+	//         console.log('click');
+	//     },
+	// });
 
 	/**
 	 * Image
 	 */
-	const image = dddd.addGroup('Image', {
-	    container: 'Layer #1',
-	});
+	// const image = dddd.addGroup('Image', {
+	//     container: 'Layer #1',
+	// });
 
-	const imageValues = {
-	    image: './image.png',
-	    contain: './image.png',
-	    three: new Texture(),
-	};
+	// const imageValues = {
+	//     image: './image.png',
+	//     contain: './image.png',
+	//     three: new Texture(),
+	// };
 
-	image.add(imageValues, 'image');
-	image.add(imageValues, 'contain', { contain: true });
-	image.add(imageValues, 'three');
+	// image.add(imageValues, 'image');
+	// image.add(imageValues, 'contain', { contain: true });
+	// image.add(imageValues, 'three');
 
 	/**
 	 * Canvas
 	 */
-	const canvas = dddd.addGroup('Canvas', {
-	    container: 'Layer #1',
-	});
+	// const canvas = dddd.addGroup('Canvas', {
+	//     container: 'Layer #1',
+	// });
 
-	const canvasExample = document.createElement('canvas');
-	canvasExample.width = 100;
-	canvasExample.height = 100;
-	const debugContext = canvasExample.getContext('2d');
-	debugContext.fillStyle = 'red';
-	debugContext.fillRect(0, 0, canvasExample.width, canvasExample.height);
+	// const canvasExample = document.createElement('canvas');
+	// canvasExample.width = 100;
+	// canvasExample.height = 100;
+	// const debugContext = canvasExample.getContext('2d');
+	// debugContext.fillStyle = 'red';
+	// debugContext.fillRect(0, 0, canvasExample.width, canvasExample.height);
 
-	canvas.addCanvas({
-	    label: 'canvas',
-	    canvas: canvasExample,
-	});
+	// canvas.addCanvas({
+	//     label: 'canvas',
+	//     canvas: canvasExample,
+	// });
 
 	/**
 	 * Group
 	 */
-	const group = dddd.addGroup('Group', {
-	    container: 'Layer #1',
-	});
+	// const group = dddd.addGroup('Group', {
+	//     container: 'Layer #1',
+	// });
 
-	const groupValues = {
-	    value: 0.5,
-	};
+	// const groupValues = {
+	//     value: 0.5,
+	// };
 
-	const subgroup = group.addGroup('Subgroup');
-	subgroup.add(groupValues, 'value');
-	subgroup.add(groupValues, 'value');
-	subgroup.add(groupValues, 'value');
+	// const subgroup = group.addGroup('Subgroup');
+	// subgroup.add(groupValues, 'value');
+	// subgroup.add(groupValues, 'value');
+	// subgroup.add(groupValues, 'value');
 
-	const subsubgroup = subgroup.addGroup('Subsubgroup');
-	subsubgroup.add(groupValues, 'value');
-	subsubgroup.add(groupValues, 'value');
-	subsubgroup.add(groupValues, 'value');
+	// const subsubgroup = subgroup.addGroup('Subsubgroup');
+	// subsubgroup.add(groupValues, 'value');
+	// subsubgroup.add(groupValues, 'value');
+	// subsubgroup.add(groupValues, 'value');
 
-	group.addButton('Remove subgroup', {
-	    fullWidth: true,
-	    onClick: () => {
-	        group.remove();
-	    },
-	});
+	// group.addButton('Remove subgroup', {
+	//     fullWidth: true,
+	//     onClick: () => {
+	//         group.remove();
+	//     },
+	// });
 
 })));

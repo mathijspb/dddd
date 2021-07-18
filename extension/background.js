@@ -42,6 +42,8 @@ function installProxy(tabId) {
 }
 
 function doublePipe(tabId, devtoolsTab, page) {
+    console.log('doublePipe');
+
     // devtools-tab -> page
     function devtoolsTabMessageHandler(message) {
         page.postMessage(message);

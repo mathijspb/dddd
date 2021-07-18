@@ -766,6 +766,7 @@
 	        // Setup
 	        this.__element = this.__addTemplate(template, templateData);
 	        this.__addStyle(style);
+	        this.__bindHandlers();
 
 	        // Elements
 	        this.$el = this.__getRootElement();
@@ -773,10 +774,13 @@
 	    }
 
 	    connectedCallback() {
+	        this.__setupEventListeners();
+	        this.__triggerResize();
 	        this.__triggerConnected();
 	    }
 
 	    destroy() {
+	        this.__removeEventListeners();
 	        this.__triggerDestroyed();
 	    }
 
@@ -794,6 +798,18 @@
 	    /**
 	     * Private
 	     */
+	    __bindHandlers() {
+	        this.__resizeHandler = this.__resizeHandler.bind(this);
+	    }
+
+	    __setupEventListeners() {
+	        window.addEventListener('resize', this.__resizeHandler);
+	    }
+
+	    __removeEventListeners() {
+	        window.removeEventListener('resize', this.__resizeHandler);
+	    }
+
 	    __addTemplate(template, templateData = {}) {
 	        if (typeof template === 'object') {
 	            template = this.$root.isLayoutSidebar() ? template.templateSidebar : template.templateDevtools;
@@ -842,11 +858,24 @@
 	            this.destroyed();
 	        }
 	    }
+
+	    __triggerResize() {
+	        if (typeof this.onResize === 'function') {
+	            this.onResize();
+	        }
+	    }
+
+	    /**
+	     * Handlers
+	     */
+	    __resizeHandler() {
+	        this.__triggerResize();
+	    }
 	}
 
-	var styleSidebar = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.dddd {\n    /* Layout */\n    --font: 'Arial', sans-serif;\n    --background-color: #161616;\n\n    /* Panels */\n    --panel-background-color: #1B1B1B;\n    --panel-spacing: 10px;\n\n    /* Groups */\n    --group-header-padding: 14px;\n    --group-header-font-size: 13px;\n    --group-header-background-color: rgba(255, 255, 255, 0.03);\n    --group-padding: 15px;\n    --group-border-radius: 10px;\n\n    /* Components */\n    --component-row-gap: 7px;\n\n    /* Label */\n    --label-width: 35%;\n    --label-padding: 0 20px 0 0;\n    --label-color: rgba(255, 255, 255, 0.75);\n    --label-font-size: 12px;\n    --label-font-weight: 400;\n\n    /* Input */\n    --input-background-color: rgba(255, 255, 255, 0.03);\n    --input-background-color-hover: rgba(255, 255, 255, 0.08);\n    --input-background-color-transition: background-color 0.35s ease-out;\n    --input-highlight-color: rgba(77, 83, 217, 0.64);\n    --input-highlight-color-hover: rgba(77, 83, 217, 1);\n    --input-text-color: rgba(255, 255, 255, 0.75);\n    --input-font-size: 12px;\n    --input-font-weight: 300;\n    --input-border-radius: 6px;\n    --input-padding: 14px;\n    --input-height: 34px;\n\n    position: fixed;\n    top: 0;\n    right: 0;\n\n    width: 300px;\n    max-height: 100vh;\n\n    background: var(--background-color);\n}\n\n.content {\n    width: 100%;\n    height: 100%;\n    overflow: auto;\n}\n\n.resize-handle {\n    position: absolute;\n\n    padding: 0;\n\n    background-color: transparent;\n\n    border: 0;\n    outline: 0;\n}\n\n.resize-handle.side {\n    top: 0;\n    left: 0;\n\n    width: 6px;\n    height: 100%;\n\n    cursor: ew-resize;\n}\n\n.resize-handle.bottom {\n    bottom: 0;\n    left: 0;\n\n    width: 100%;\n    height: 6px;\n\n    cursor: ns-resize;\n}\n\n.resize-handle.corner {\n    bottom: 0;\n    left: 0;\n\n    width: 10px;\n    height: 10px;\n\n    cursor: nesw-resize;\n}\n";
+	var styleSidebar = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.dddd {\n    /* Layout */\n    --font: 'Arial', sans-serif;\n    --background-color: rgba(27, 27, 27, 0.9);\n\n    /* Panels */\n    --panel-background-color: rgba(27, 27, 27, 0.9);\n    --panel-spacing: 6px;\n\n    /* Groups */\n    --group-header-padding: 11px;\n    --group-header-font-size: 11px;\n    --group-header-background-color: rgba(255, 255, 255, 0.03);\n    --group-padding: 9px 7px 9px 10px;\n    --group-border-radius: 4px;\n\n    /* Components */\n    --component-row-gap: 4px;\n\n    /* Label */\n    --label-width: 40%;\n    --label-padding: 0 20px 0 0;\n    --label-color: rgba(255, 255, 255, 0.5);\n    --label-font-size: 11px;\n    --label-font-weight: 400;\n\n    /* Input */\n    --input-background-color: rgba(255, 255, 255, 0.03);\n    --input-background-color-hover: rgba(255, 255, 255, 0.08);\n    --input-background-color-error: rgba(255, 0, 0, 0.13);\n    --input-background-color-transition: background-color 0.35s ease-out;\n    --input-highlight-color: rgba(220, 159, 47, 0.53);\n    --input-highlight-color-hover: rgba(220, 159, 47, 0.75);\n    --input-text-color: rgba(255, 255, 255, 0.75);\n    --input-font-size: 11px;\n    --input-font-weight: 300;\n    --input-border-radius: 4px;\n    --input-padding: 10px;\n    --input-height: 26px;\n\n    z-index: 1337;\n\n    position: fixed;\n    top: 0;\n    right: 0;\n\n    width: 300px;\n    height: 100%;\n    max-height: 100vh;\n\n    background: var(--background-color);\n}\n\n.content {\n    width: 100%;\n    height: 100%;\n    /* overflow: auto; */\n}\n\n.resize-handle {\n    position: absolute;\n\n    padding: 0;\n\n    background-color: transparent;\n\n    border: 0;\n    outline: 0;\n}\n\n.resize-handle.side {\n    top: 0;\n    left: 0;\n\n    width: 6px;\n    height: 100%;\n\n    cursor: ew-resize;\n}\n\n.resize-handle.bottom {\n    bottom: 0;\n    left: 0;\n\n    width: 100%;\n    height: 6px;\n\n    cursor: ns-resize;\n}\n\n.resize-handle.corner {\n    bottom: 0;\n    left: 0;\n\n    width: 10px;\n    height: 10px;\n\n    cursor: nesw-resize;\n}\n";
 
-	var styleDevtools = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.dddd {\r\n    /* Layout */\r\n    --font: 'Arial', sans-serif;\r\n    --background-color: #161616;\r\n\r\n    /* Panels */\r\n    --panel-background-color: #1B1B1B;\r\n    --panel-spacing: 15px;\r\n\r\n    /* Groups */\r\n    --group-header-font-size: 15px;\r\n    --group-header-background-color: rgba(255, 255, 255, 0.03);\r\n    --group-padding: 30px;\r\n    --group-border-radius: 10px;\r\n\r\n    /* Components */\r\n    --component-row-gap: 7px;\r\n\r\n    /* Label */\r\n    --label-width: 30%;\r\n    --label-padding: 0 20px 0 0;\r\n    --label-color: rgba(255, 255, 255, 0.75);\r\n    --label-font-size: 14px;\r\n    --label-font-weight: 400;\r\n    \r\n    /* Input */\r\n    --input-background-color: rgba(255, 255, 255, 0.03);\r\n    --input-background-color-hover: rgba(255, 255, 255, 0.08);\r\n    --input-background-color-transition: background-color 0.35s ease-out;\r\n    --input-highlight-color: rgba(77, 83, 217, 0.64);\r\n    --input-highlight-color-hover: rgba(77, 83, 217, 1);\r\n    --input-text-color: rgba(255, 255, 255, 0.75);\r\n    --input-font-size: 14px;\r\n    --input-font-weight: 300;\r\n    --input-border-radius: 10px;\r\n    --input-padding: 16px;\r\n    --input-height: 40px;\r\n\r\n    background: var(--background-color);\r\n}\r\n";
+	var styleDevtools = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.dddd {\n    /* Layout */\n    --font: 'Arial', sans-serif;\n    --background-color: #161616;\n\n    /* Panels */\n    --panel-background-color: #1B1B1B;\n    --panel-spacing: 6px;\n\n    /* Groups */\n    --group-header-padding: 11px;\n    --group-header-font-size: 11px;\n    --group-header-background-color: rgba(255, 255, 255, 0.03);\n    --group-padding: 9px 7px 9px 10px;\n    --group-border-radius: 4px;\n\n    /* Components */\n    --component-row-gap: 7px;\n\n    /* Label */\n    --label-width: 30%;\n    --label-padding: 0 20px 0 0;\n    --label-color: rgba(255, 255, 255, 0.75);\n    --label-font-size: 11px;\n    --label-font-weight: 400;\n\n    /* Input */\n    --input-background-color: rgba(255, 255, 255, 0.03);\n    --input-background-color-hover: rgba(255, 255, 255, 0.08);\n    --input-background-color-transition: background-color 0.35s ease-out;\n    --input-highlight-color: rgba(220, 159, 47, 0.53);\n    --input-highlight-color-hover: rgba(220, 159, 47, 0.75);\n    --input-text-color: rgba(255, 255, 255, 0.75);\n    --input-font-size: 11px;\n    --input-font-weight: 300;\n    --input-border-radius: 4px;\n    --input-padding: 10px;\n    --input-height: 26px;\n\n    background: var(--background-color);\n}\n";
 
 	var templateSidebar = "<div class=\"dddd\">\n\n    <!-- Content -->\n    <div class=\"content\" ref=\"content\"></div>\n\n    <!-- Resize handle -->\n    <button class=\"resize-handle side\" ref=\"resizeHandleSide\"></button>\n    <button class=\"resize-handle bottom\" ref=\"resizeHandleBottom\"></button>\n    <button class=\"resize-handle corner\" ref=\"resizeHandleCorner\"></button>\n\n</div>\n";
 
@@ -860,6 +889,10 @@
 
 	        // Data
 	        this._isMouseDown = false;
+	        this._width = 0;
+	        this._height = 0;
+	        this._customWidth = 0;
+	        this._customHeight = 0;
 	        this._axis = { x: 0, y: 0 };
 
 	        // Setup
@@ -872,10 +905,36 @@
 	    }
 
 	    /**
-	     * Getters & Setters
+	     * Public
 	     */
-	    get content() {
-	        return this.$refs.content;
+	    get width() {
+	        return this._width;
+	    }
+
+	    get height() {
+	        return this._height;
+	    }
+
+	    /**
+	     * Public
+	     */
+	    show() {
+	        this.$el.style.width = `${this._customWidth}px`;
+	        if (this._height) {
+	            this.$el.style.height = `${this._height}px`;
+	        } else {
+	            this.$el.style.height = '100%';
+	        }
+	    }
+
+	    hide() {
+	        this._customWidth = this.$el.offsetWidth;
+	        this.$el.style.width = 'auto';
+	        this.$el.style.height = 'auto';
+	    }
+
+	    addElement(element) {
+	        this.$refs.content.appendChild(element);
 	    }
 
 	    /**
@@ -907,18 +966,27 @@
 	        }
 	    }
 
-	    _resize(x, y) {
+	    /**
+	     * Resize
+	     */
+	    onResize() {
+	        this._width = this._customWidth ? this._customWidth : this.$el.offsetWidth;
+	        this._height = this._customHeight ? this._customHeight : window.innerHeight;
+	        this.$root.layout?.resize();
+	    }
+
+	    _setDimensions(x, y) {
 	        if (this._axis.x) {
-	            const width = window.innerWidth - x;
-	            this.$el.style.width = `${width}px`;
+	            this._customWidth = window.innerWidth - x;
+	            this.$el.style.width = `${this._customWidth}px`;
 	        }
 
 	        if (this._axis.y) {
-	            const height = y;
-	            this.$el.style.height = `${height}px`;
+	            this._customHeight = y;
+	            this.$el.style.height = `${this._customHeight}px`;
 	        }
 
-	        this.$root.layout.resize();
+	        this.onResize();
 	    }
 
 	    /**
@@ -948,16 +1016,68 @@
 
 	    _windowMouseMoveHandler(e) {
 	        if (this._isMouseDown) {
-	            this._resize(e.clientX, e.clientY);
+	            this._setDimensions(e.clientX, e.clientY);
 	        }
 	    }
 	}
 
 	window.customElements.define('dddd-container', Container);
 
-	var styleSidebar$1 = ".navigation {\n    display: none;\n\n    grid-template-columns: 1fr var(--input-height);\n    column-gap: var(--panel-spacing);\n\n    padding: var(--panel-spacing);\n\n    background-color: var(--panel-background-color);\n\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\n}\n\n.select-container {\n    position: relative;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    user-select: none;\n\n    transition: var(--input-background-color-transition);\n}\n\n.select-container:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.select {\n    width: 100%;\n    height: 100%;\n\n    border: 0;\n    outline: 0;\n\n    padding: 0 var(--input-padding);\n\n    background: transparent;\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    appearance: none;\n}\n\n.select option {\n    color: black;\n}\n\n.arrow {\n    position: absolute;\n    top: 0;\n    right: var(--input-padding);\n    bottom: 0;\n\n    margin: auto 0;\n}\n\n.button-toggle {\n    position: relative;\n\n    width: var(--input-height);\n    height: var(--input-height);\n\n    background-color: var(--input-background-color);\n\n    border: 0;\n    border-radius: var(--input-border-radius);\n    outline: 0;\n\n    cursor: pointer;\n\n    transition: var(--input-background-color-transition);\n}\n\n.button-toggle:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.button-toggle__line {\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n\n    width: 12px;\n    height: 2px;\n\n    margin: auto;\n\n    background: var(--input-text-color);\n}\n";
+	var style = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.header {\r\n    background-color: var(--panel-background-color);\r\n\r\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\r\n}\r\n";
 
-	var styleDevtools$1 = ".navigation {\r\n    display: none;\r\n    \r\n    padding: var(--panel-spacing);\r\n\r\n    font-size: 0;\r\n\r\n    list-style: none;\r\n\r\n    background-color: var(--panel-background-color);\r\n\r\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\r\n}\r\n\r\n.navigation li {\r\n    display: inline-block;\r\n\r\n    margin-right: 10px;\r\n}\r\n\r\n.navigation-button {\r\n    padding: 13px 30px;\r\n\r\n    color: rgba(255, 255, 255, 0.5);\r\n\r\n    background-color: transparent;\r\n\r\n    border: 0;\r\n    border-radius: 12px;\r\n    outline: 0;\r\n\r\n    font-family: var(--font);\r\n    font-size: 13px;\r\n    font-weight: 600;\r\n\r\n    cursor: pointer;\r\n\r\n    transition: all 0.3s ease-out;\r\n}\r\n\r\n.navigation-button:hover {\r\n    background-color: rgba(255, 255, 255, 0.01);\r\n}\r\n\r\n.navigation-button.active {\r\n    color: rgba(255, 255, 255, 0.9);\r\n\r\n    background-color: rgba(255, 255, 255, 0.03);\r\n}";
+	var template = "<div class=\"header\">\r\n\r\n</div>\r\n";
+
+	// Base class
+
+	class Header extends LayoutElement {
+	    constructor({ root, options }) {
+	        super({ root, style, template });
+
+	        // Props
+	        this._options = options;
+
+	        // Setup
+	        this._width = null;
+	        this._height = null;
+	    }
+
+	    /**
+	     * Getters & Setters
+	     */
+	    get width() {
+	        return this._width;
+	    }
+
+	    get height() {
+	        return this._height;
+	    }
+
+	    /**
+	     * Public
+	     */
+	    addElement(element) {
+	        this.$el.appendChild(element);
+	        this._resize();
+	    }
+
+	    resize() {
+	        this._resize();
+	    }
+
+	    /**
+	     * Resize
+	     */
+	    _resize() {
+	        this._width = this.$el.offsetWidth;
+	        this._height = this.$el.offsetHeight;
+	    }
+	}
+
+	window.customElements.define('dddd-header', Header);
+
+	var styleSidebar$1 = ".navigation {\r\n    display: none;\r\n\r\n    grid-template-columns: 1fr var(--input-height);\r\n    column-gap: var(--panel-spacing);\r\n\r\n    padding: var(--panel-spacing);\r\n}\r\n\r\n.select-container {\r\n    position: relative;\r\n\r\n    height: var(--input-height);\r\n    overflow: hidden;\r\n\r\n    background-color: var(--input-background-color);\r\n\r\n    border-radius: var(--input-border-radius);\r\n\r\n    user-select: none;\r\n\r\n    transition: var(--input-background-color-transition);\r\n}\r\n\r\n.select-container:hover {\r\n    background-color: var(--input-background-color-hover);\r\n}\r\n\r\n.select {\r\n    width: 100%;\r\n    height: 100%;\r\n\r\n    border: 0;\r\n    outline: 0;\r\n\r\n    padding: 0 var(--input-padding);\r\n\r\n    background: transparent;\r\n\r\n    font-family: var(--font);\r\n    font-size: var(--input-font-size);\r\n    font-weight: var(--input-font-weight);\r\n    color: var(--input-text-color);\r\n\r\n    appearance: none;\r\n}\r\n\r\n.select option {\r\n    color: black;\r\n}\r\n\r\n.arrow {\r\n    position: absolute;\r\n    top: 0;\r\n    right: var(--input-padding);\r\n    bottom: 0;\r\n\r\n    margin: auto 0;\r\n}\r\n\r\n.button-toggle {\r\n    position: relative;\r\n\r\n    width: var(--input-height);\r\n    height: var(--input-height);\r\n\r\n    background-color: var(--input-background-color);\r\n\r\n    border: 0;\r\n    border-radius: var(--input-border-radius);\r\n    outline: 0;\r\n\r\n    cursor: pointer;\r\n\r\n    transition: var(--input-background-color-transition);\r\n}\r\n\r\n.button-toggle:hover {\r\n    background-color: var(--input-background-color-hover);\r\n}\r\n\r\n.button-toggle__line {\r\n    position: absolute;\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n\r\n    width: 12px;\r\n    height: 2px;\r\n\r\n    margin: auto;\r\n\r\n    background: var(--input-text-color);\r\n}\r\n";
+
+	var styleDevtools$1 = ".navigation {\n    display: none;\n\n    padding: var(--panel-spacing);\n\n    font-size: 0;\n\n    list-style: none;\n\n    background-color: var(--panel-background-color);\n\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\n}\n\n.navigation li {\n    display: inline-block;\n    margin-right: 5px;\n}\n\n.navigation-button {\n    padding: 10px 15px;\n\n    color: rgba(255, 255, 255, 0.5);\n\n    background-color: transparent;\n\n    border: 0;\n    border-radius: 4px;\n    outline: 0;\n\n    font-family: var(--font);\n    font-size: 11px;\n    font-weight: 600;\n\n    cursor: pointer;\n\n    transition: all 0.3s ease-out;\n}\n\n.navigation-button:hover {\n    background-color: rgba(255, 255, 255, 0.01);\n}\n\n.navigation-button.active {\n    color: rgba(255, 255, 255, 0.9);\n\n    background-color: rgba(255, 255, 255, 0.03);\n}\n";
 
 	var templateSidebar$1 = "<div class=\"navigation\">\n\n    <!-- Select container-->\n    <div class=\"select-container\" ref=\"selectContainer\">\n\n        <!-- Arrow -->\n        <svg width=\"11\" height=\"6\" viewBox=\"0 0 11 6\" class=\"arrow\">\n            <path d=\"M1 1L4.83564 4.40945C5.21452 4.74624 5.78548 4.74624 6.16436 4.40945L10 1\" stroke=\"white\" fill=\"transparent\" stroke-opacity=\"0.74\" stroke-linecap=\"round\"/>\n        </svg>\n\n        <!-- Select -->\n        <select class=\"select\" ref=\"select\"></select>\n\n    </div>\n\n    <!-- Button toggle -->\n    <button class=\"button-toggle\" ref=\"buttonToggle\">\n        <div class=\"button-toggle__line\"></div>\n    </button>\n\n</div>\n";
 
@@ -984,6 +1104,7 @@
 	        });
 
 	        // Data
+	        this._isMinimized = false;
 	        this._activeIndex = 0;
 	        this._elements = [];
 
@@ -999,14 +1120,14 @@
 	    /**
 	     * Public
 	     */
-	    add(label) {
+	    add(model) {
 	        if (this._elements.length === 0) {
-	            this._show();
+	            this._setVisible();
 	        }
 
 	        if (this.$root.isLayoutSidebar()) {
 	            const option = document.createElement('option');
-	            option.innerText = label;
+	            option.innerText = model.label;
 	            option.value = this._elements.length;
 	            this._elements.push(option);
 	            this.$refs.select.appendChild(option);
@@ -1016,7 +1137,7 @@
 	            if (this.$el.children.length === this._activeIndex) {
 	                button.classList.add(ACTIVE_CLASS);
 	            }
-	            button.innerText = label;
+	            button.innerText = model.label;
 
 	            const li = document.createElement('li');
 	            li.appendChild(button);
@@ -1026,12 +1147,20 @@
 	        }
 	    }
 
+	    goto(label) {
+	        this.$refs.select.value = label;
+	    }
+
 	    show() {
+	        this._isMinimized = false;
 	        this.$refs.selectContainer.style.display = 'block';
+	        this.$el.style.display = 'grid';
 	    }
 
 	    hide() {
+	        this._isMinimized = true;
 	        this.$refs.selectContainer.style.display = 'none';
+	        this.$el.style.display = 'block';
 	    }
 
 	    /**
@@ -1055,8 +1184,8 @@
 	        if (this.$refs.buttonToggle) this.$refs.buttonToggle.removeEventListener('click', this._clickButtonToggle);
 	    }
 
-	    _show() {
-	        this.$el.style.display = 'grid';
+	    _setVisible() {
+	        this.$el.style.display = this._isMinimized || this.$root.isDevtools ? 'block' : 'grid';
 	    }
 
 	    _getNavigationButtonIndex(element) {
@@ -1093,6 +1222,7 @@
 	    _selectChangeHandler() {
 	        const index = parseInt(this.$refs.select.value);
 	        this._triggerSwitchEvent(index);
+	        this.$refs.select.blur();
 	    }
 
 	    _clickButtonToggle() {
@@ -1102,22 +1232,166 @@
 
 	window.customElements.define('dddd-navigation', Navigation);
 
-	var style = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.layer {\r\n    display: none;\r\n\r\n    position: relative;\r\n\r\n    width: 100%;\r\n}\r\n\r\n.layer.active {\r\n    display: block;\r\n}";
+	class Ticker {
+	    constructor() {
+	        this._callbacks = [];
+	        this._tick = this._tick.bind(this);
+	        this._start();
+	    }
 
-	var template = "<div class=\"layer\"></div>";
+	    destroy() {
+	        this._stop();
+	    }
+
+	    /**
+	     * Public
+	     */
+	    add(callback) {
+	        this._callbacks.push(callback);
+	    }
+
+	    remove(callback) {
+	        this._callbacks.splice(this._callbacks.indexOf(callback), 1);
+	    }
+
+	    /**
+	     * Private
+	     */
+	    _start() {
+	        this._requestAnimationFrame = window.requestAnimationFrame(this._tick);
+	    }
+
+	    _stop() {
+	        window.cancelAnimationFrame(this._requestAnimationFrame);
+	    }
+
+	    _tick() {
+	        window.requestAnimationFrame(this._tick);
+	        this._triggerCallbacks();
+	    }
+
+	    _triggerCallbacks() {
+	        for (let i = 0, len = this._callbacks.length; i < len; i++) {
+	            this._callbacks[i]();
+	        }
+	    }
+	}
+
+	var Ticker$1 = new Ticker();
+
+	var style$1 = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.stats {\r\n    padding: 0 var(--panel-spacing) var(--panel-spacing) var(--panel-spacing);\r\n}\r\n\r\n.content {\r\n    height: 100px;\r\n\r\n    border-radius: var(--input-border-radius);background-color: var(--input-background-color);\r\n\r\n    background-color: var(--input-background-color);\r\n}\r\n\r\n.canvas {\r\n    width: 100%;\r\n}\r\n";
+
+	var template$1 = "<div class=\"stats\">\r\n\r\n    <!-- Content -->\r\n    <div class=\"content\">\r\n\r\n        <!-- Canvas -->\r\n        <canvas class=\"canvas\" ref=\"canvas\"></canvas>\r\n\r\n    </div>\r\n\r\n</div>\r\n";
+
+	// Based on
+
+	class Stats extends LayoutElement {
+	    constructor({ root, options }) {
+	        super({ root, style: style$1, template: template$1 });
+
+	        // Props
+	        this._options = options;
+
+	        // Setup
+	        this._beginTime = window.performance.now();
+	        this._previousTime = this._beginTime;
+	        this._fps = 0;
+	        this._frames = 0;
+	        this._context = this._getContext();
+	        this._bindHandlers();
+	        this._setupEventListeners();
+	    }
+
+	    destroyed() {
+	        this._removeEventListeners();
+	    }
+
+	    /**
+	     * Getters & Setters
+	     */
+
+	    /**
+	     * Public
+	     */
+	    begin() {
+	        this._beginTime = window.performance.now();
+	    }
+
+	    end() {
+	        this._update();
+	        this._draw();
+	    }
+
+	    /**
+	     * Private
+	     */
+	    _bindHandlers() {
+	        this._tickHandler = this._tickHandler.bind(this);
+	    }
+
+	    _setupEventListeners() {
+	        Ticker$1.add(this._tickHandler);
+	    }
+
+	    _removeEventListeners() {
+	        Ticker$1.remove(this._tickHandler);
+	    }
+
+	    _getContext() {
+	        return this.$refs.canvas.getContext('2d');
+	    }
+
+	    _update() {
+	        const time = window.performance.now();
+	        // const diff = time - this._beginTime;
+
+	        this._frames++;
+
+	        if (time >= this._previousTime + 1000) {
+	            this._fps = (this._frames * 1000) / (time - this._previousTime);
+	            this._previousTime = time;
+	            this._frames = 0;
+	            this._drawFps();
+	        }
+	    }
+
+	    _draw() {
+
+	    }
+
+	    _drawFps() {
+	        const height = 50;
+	        this._context.translate(1, 0);
+	        this._context.fillRect(0, height, 1, -height * this._fps / 60);
+	    }
+
+	    /**
+	     * Handlers
+	     */
+	    _tickHandler() {
+	        // this._update();
+	        // this._draw();
+	    }
+	}
+
+	window.customElements.define('dddd-stats', Stats);
+
+	var style$2 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.layer {\n    display: none;\n\n    position: relative;\n\n    width: 100%;\n    overflow: hidden;\n}\n\n.layer.active {\n    display: block;\n}\n";
+
+	var template$2 = "<div class=\"layer\"></div>";
 
 	// Base class
 
 	// Constants
 	const ACTIVE_CLASS$1 = 'active';
-	const GROUP_MIN_WIDTH = 350;
+	const GROUP_MIN_WIDTH = 250;
 
 	class Layer extends LayoutElement {
-	    constructor({ root, label }) {
-	        super({ root, style, template, templateData: { label } });
+	    constructor({ root, model }) {
+	        super({ root, style: style$2, template: template$2, templateData: { label: model.label } });
 
 	        // Props
-	        this._label = label;
+	        this._model = model;
 
 	        // Data
 	        this._containerWidth = 0;
@@ -1137,15 +1411,23 @@
 	     * Getters & Setters
 	     */
 	    get label() {
-	        return this._label;
+	        return this._model.label;
+	    }
+
+	    get model() {
+	        return this._model;
 	    }
 
 	    /**
 	     * Public
 	     */
-	    createGroup(label) {
-	        return this.$root.createGroup(label, {
-	            container: this._label,
+	    addElement(element) {
+	        this.element.appendChild(element);
+	    }
+
+	    addGroup(label) {
+	        return this.$root.addGroup(label, {
+	            parent: this,
 	        });
 	    }
 
@@ -1186,10 +1468,10 @@
 	        this._itemGap = this._getItemGap();
 	        this._itemWidth = this._getItemWidth();
 	        this._resetColumnHeight();
-	        // if (!this.$root.isLayoutSidebar()) {
-	        this._positionGroups();
-	        this._updateHeight();
-	        // }
+	        if (!this.$root.isLayoutSidebar()) {
+	            this._positionGroups();
+	            this._updateHeight();
+	        }
 	    }
 
 	    _getColumCount() {
@@ -1261,26 +1543,31 @@
 
 	window.customElements.define('dddd-layer', Layer);
 
-	var style$1 = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.layers {\r\n    position: relative;\r\n\r\n    width: 100%;\r\n\r\n    padding: var(--panel-spacing) var(--panel-spacing) 0 var(--panel-spacing);\r\n\r\n    -webkit-font-smoothing: antialiased;\r\n    font-family: var(--font);\r\n    font-weight: 300;\r\n    font-size: 13px;\r\n}\r\n";
+	var style$3 = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.layers {\r\n    position: relative;\r\n\r\n    width: 100%;\r\n    height: 100%;\r\n    overflow: auto;\r\n\r\n    /* padding: var(--panel-spacing) var(--panel-spacing) 0 var(--panel-spacing); */\r\n    padding: var(--panel-spacing);\r\n\r\n    -webkit-font-smoothing: antialiased;\r\n    font-family: var(--font);\r\n    font-weight: 300;\r\n    font-size: 13px;\r\n}\r\n";
 
-	var template$1 = "<div class=\"layers\"></div>";
+	var template$3 = "<div class=\"layers\"></div>";
 
 	// Base class
 
 	class Layers extends LayoutElement {
 	    constructor({ root }) {
-	        super({ root, style: style$1, template: template$1 });
+	        super({ root, style: style$3, template: template$3 });
 
 	        // Options
 	        this._activeIndex = 0;
 	        this._layers = [];
 	    }
 
+	    destroyed() {
+	        this._destroyLayers();
+	    }
+
 	    /**
 	     * Public
 	     */
-	    add(label) {
-	        const layer = new Layer({ root: this.$root, label });
+	    add(model) {
+	        const layer = new Layer({ root: this.$root, model });
+
 	        if (this._layers.length === this._activeIndex) {
 	            layer.activate();
 	        }
@@ -1300,7 +1587,26 @@
 
 	    get(container) {
 	        for (const layer of this._layers) {
-	            if (layer.label === container) return layer.element;
+	            if (layer.label === container) return layer;
+	        }
+	        return null;
+	    }
+
+	    getById(id) {
+	        for (const layer of this._layers) {
+	            if (layer.id === id) return layer;
+	        }
+	        return null;
+	    }
+
+	    getByIndex(index) {
+	        return this._layers[index];
+	    }
+
+	    // TODO: Refactor..
+	    getIndexByLabel(label) {
+	        for (let i = 0, len = this._layers.length; i < len; i++) {
+	            if (this._layers[i].label === label) return i;
 	        }
 	        return null;
 	    }
@@ -1321,9 +1627,19 @@
 	        this.$el.style.display = 'none';
 	    }
 
+	    setHeight(height) {
+	        this.$el.style.height = `${height}px`;
+	    }
+
 	    /**
 	     * Private
 	     */
+	    _destroyLayers() {
+	        for (const layer of this._layers) {
+	            layer.destroy();
+	        }
+	    }
+
 	    _resizeLayers() {
 	        for (const layer of this._layers) {
 	            layer.resize();
@@ -1333,18 +1649,36 @@
 
 	window.customElements.define('dddd-layers', Layers);
 
-	var styleSidebar$2 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.group {\n    overflow: hidden;\n\n    margin: 0 var(--panel-spacing) var(--panel-spacing) 0;\n\n    background-color: var(--panel-background-color);\n\n    border-radius: var(--group-border-radius);\n\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\n}\n\n.button-header {\n    position: relative;\n\n    width: 100%;\n\n    padding: 0;\n\n    text-align: left;\n\n    background-color: var(--group-header-background-color);\n\n    border: 0;\n    outline: 0;\n    cursor: pointer;\n}\n\n.label {\n    display: block;\n\n    padding: var(--group-header-padding);\n\n    font-size: var(--group-header-font-size);\n    font-weight: 600;\n    color: white;\n    letter-spacing: 0.025em;\n}\n\n.arrow {\n    position: absolute;\n    top: 0;\n    right: calc(var(--panel-spacing) + 7px);\n    bottom: 0;\n\n    margin: auto 0;\n}\n\n.content {\n    display: grid;\n\n    row-gap: var(--component-row-gap);\n\n    padding: calc(var(--group-padding) - 3px) var(--group-padding) var(--group-padding);\n}\n";
+	class LocalStorage {
+	    /**
+	     * Public
+	     */
+	    set(key, object) {
+	        const value = JSON.parse(localStorage.getItem(key)) || {};
+	        Object.assign(value, object);
+	        localStorage.setItem(key, JSON.stringify(value));
+	    }
 
-	var styleDevtools$2 = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.group {\r\n    padding: calc(var(--group-padding) - 3px) var(--group-padding) var(--group-padding);\r\n    margin: 0 var(--panel-spacing) var(--panel-spacing) 0;\r\n\r\n    background-color: var(--panel-background-color);\r\n    \r\n    border-radius: var(--group-border-radius);\r\n\r\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\r\n}\r\n\r\n.label {\r\n    display: block;\r\n\r\n    margin-bottom: 20px;\r\n\r\n    font-size: var(--group-header-font-size);\r\n    font-weight: 600;\r\n    color: white;\r\n    letter-spacing: 0.025em;\r\n}\r\n\r\n.content {\r\n    display: grid;\r\n\r\n    row-gap: var(--component-row-gap);\r\n}";
+	    get(key, property) {
+	        const value = JSON.parse(localStorage.getItem(key)) || {};
+	        return value[property];
+	    }
+	}
 
-	var templateSidebar$2 = "<div class=\"group\">\n\n    <!-- Button header -->\n    <button class=\"button-header\" ref=\"buttonHeader\">\n\n        <!-- Label -->\n        <span class=\"label\">\n            {{ label }}\n        </span>\n\n        <!-- Arrow -->\n        <svg width=\"11\" height=\"6\" viewBox=\"0 0 11 6\" class=\"arrow\">\n            <path d=\"M1 1L4.83564 4.40945C5.21452 4.74624 5.78548 4.74624 6.16436 4.40945L10 1\" stroke=\"white\" fill=\"transparent\" stroke-opacity=\"0.74\" stroke-linecap=\"round\"/>\n        </svg>\n\n    </button>\n\n    <!-- Content -->\n    <div class=\"content\" ref=\"content\"></div>\n\n</div>\n";
+	var LocalStorage$1 = new LocalStorage();
 
-	var templateDevtools$2 = "<div class=\"group sidebar\">\n\n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Content -->\n    <div class=\"content\" ref=\"content\"></div>\n\n</div>\n";
+	var styleSidebar$2 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.group {\n    overflow: hidden;\n\n    margin: 0 0 var(--panel-spacing) 0;\n\n    background-color: var(--panel-background-color);\n\n    border-radius: var(--group-border-radius);\n\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\n}\n\n.button-header {\n    position: relative;\n\n    width: 100%;\n\n    padding: 0;\n\n    text-align: left;\n\n    background-color: var(--group-header-background-color);\n\n    border: 0;\n    outline: 0;\n    cursor: pointer;\n}\n\n.label {\n    display: block;\n\n    padding: var(--group-header-padding);\n\n    font-size: var(--group-header-font-size);\n    font-weight: 400;\n    color: white;\n    letter-spacing: 0.025em;\n}\n\n.arrow {\n    position: absolute;\n    top: 0;\n    right: calc(var(--group-header-padding) + 1px);\n    bottom: 0;\n\n    margin: auto 0;\n}\n\n.content {\n    display: grid;\n    position: relative;\n\n    row-gap: var(--component-row-gap);\n\n    padding: var(--group-padding);\n}\n\n.hidden .content {\n    display: none;\n}\n\n/* Subgroup */\n.group.subgroup {\n    padding: 8px 0 0 0;\n\n    background-color: transparent;\n\n    border-radius: 0;\n\n    box-shadow: initial;\n}\n\n.subgroup .button-header {\n    margin-bottom: 0;\n\n    background: transparent;\n}\n\n.subgroup .label {\n    padding: 0 0 0 21px;\n\n    font-size: 11px;\n}\n\n.subgroup .arrow {\n    position: absolute;\n    top: 3px;\n    right: 0;\n    bottom: 0;\n    left: 2px;\n\n    width: 10px;\n\n    margin: 0;\n}\n\n.hidden.subgroup .arrow {\n    transform: rotate(-90deg);\n}\n\n.subgroup .content {\n    margin: 7px 0 4px 0;\n    padding: 0 0 0 20px;\n}\n\n.subgroup .content:before {\n    content: '';\n\n    display: block;\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 6px;\n\n    width: 1px;\n    height: 100%;\n\n    background: rgba(255, 255, 255, 0.1);\n}\n";
+
+	var styleDevtools$2 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.group {\n    overflow: hidden;\n\n    margin: 0 var(--panel-spacing) var(--panel-spacing) 0;\n\n    background-color: var(--panel-background-color);\n\n    border-radius: var(--group-border-radius);\n\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\n}\n\n.button-header {\n    position: relative;\n\n    width: 100%;\n\n    padding: 0;\n\n    text-align: left;\n\n    background-color: var(--group-header-background-color);\n\n    border: 0;\n    outline: 0;\n    cursor: pointer;\n}\n\n.label {\n    display: block;\n\n    padding: var(--group-header-padding);\n\n    font-size: var(--group-header-font-size);\n    font-weight: 400;\n    color: white;\n    letter-spacing: 0.025em;\n}\n\n.arrow {\n    position: absolute;\n    top: 0;\n    right: calc(var(--group-header-padding) + 1px);\n    bottom: 0;\n\n    margin: auto 0;\n}\n\n.content {\n    display: grid;\n    position: relative;\n\n    row-gap: var(--component-row-gap);\n\n    padding: var(--group-padding);\n}\n\n.hidden .content {\n    display: none;\n}\n\n/* Subgroup */\n.group.subgroup {\n    padding: 8px 0 0 0;\n\n    background-color: transparent;\n\n    border-radius: 0;\n\n    box-shadow: initial;\n}\n\n.subgroup .button-header {\n    margin-bottom: 0;\n\n    background: transparent;\n}\n\n.subgroup .label {\n    padding: 0 0 0 21px;\n\n    font-size: 11px;\n}\n\n.subgroup .arrow {\n    position: absolute;\n    top: 3px;\n    right: 0;\n    bottom: 0;\n    left: 2px;\n\n    width: 10px;\n\n    margin: 0;\n}\n\n.hidden.subgroup .arrow {\n    transform: rotate(-90deg);\n}\n\n.subgroup .content {\n    margin: 7px 0 4px 0;\n    padding: 0 0 0 20px;\n}\n\n.subgroup .content:before {\n    content: '';\n\n    display: block;\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 6px;\n\n    width: 1px;\n    height: 100%;\n\n    background: rgba(255, 255, 255, 0.1);\n}\n";
+
+	var templateSidebar$2 = "<div class=\"group active\">\n\n    <!-- Button header -->\n    <button class=\"button-header\" ref=\"buttonHeader\">\n\n        <!-- Label -->\n        <span class=\"label\">\n            {{ label }}\n        </span>\n\n        <!-- Arrow -->\n        <svg width=\"11\" height=\"6\" viewBox=\"0 0 11 6\" class=\"arrow\">\n            <path d=\"M1 1L4.83564 4.40945C5.21452 4.74624 5.78548 4.74624 6.16436 4.40945L10 1\" stroke=\"white\" fill=\"transparent\" stroke-opacity=\"0.74\" stroke-linecap=\"round\"/>\n        </svg>\n\n    </button>\n\n    <!-- Content -->\n    <div class=\"content\" ref=\"content\"></div>\n\n</div>\n";
+
+	var templateDevtools$2 = "<div class=\"group active\">\n\n    <!-- Button header -->\n    <button class=\"button-header\" ref=\"buttonHeader\">\n\n        <!-- Label -->\n        <span class=\"label\">\n            {{ label }}\n        </span>\n\n        <!-- Arrow -->\n        <svg width=\"11\" height=\"6\" viewBox=\"0 0 11 6\" class=\"arrow\">\n            <path d=\"M1 1L4.83564 4.40945C5.21452 4.74624 5.78548 4.74624 6.16436 4.40945L10 1\" stroke=\"white\" fill=\"transparent\" stroke-opacity=\"0.74\" stroke-linecap=\"round\"/>\n        </svg>\n\n    </button>\n\n    <!-- Content -->\n    <div class=\"content\" ref=\"content\"></div>\n\n</div>\n";
 
 	// Base class
 
 	class Group extends LayoutElement {
-	    constructor({ root, label }) {
+	    constructor({ root, parentModel, options, model, id }) {
 	        super({
 	            root,
 	            style: {
@@ -1356,19 +1690,24 @@
 	                templateDevtools: templateDevtools$2,
 	            },
 	            templateData: {
-	                label,
+	                label: model.label,
 	            },
 	        });
 
 	        // Props
-	        this._label = label;
+	        this._model = model;
+	        this._options = options;
+	        this._parentModel = parentModel || null;
 
 	        // Data
-	        this._isContentVisible = true;
+	        this._id = id || this._generateId();
+	        this._isVisible = true;
 
 	        // Setup
 	        this._bindHandlers();
 	        this._setupEventListeners();
+	        this._addSubgroupClass();
+	        this._updateStartupVisibility();
 	    }
 
 	    destroyed() {
@@ -1378,20 +1717,47 @@
 	    /**
 	     * Getters & Setters
 	     */
-	    get label() {
-	        return this._label;
+	    get id() {
+	        return this._id;
 	    }
 
-	    get content() {
-	        return this.$refs.content;
+	    get $parent() {
+	        return this._parentModel.element;
+	    }
+
+	    get options() {
+	        return this._options;
+	    }
+
+	    get model() {
+	        return this._model;
 	    }
 
 	    /**
 	     * Public
 	     */
+	    addElement(element) {
+	        this.$refs.content.appendChild(element);
+	    }
+
 	    add(object, property, options = {}) {
-	        options.container = this;
-	        return this.$root.add(object, property, options);
+	        return this.$root.add(object, property, options, this._model);
+	    }
+
+	    addButton(label, options = {}) {
+	        return this.$root.addButton(label, options, this);
+	    }
+
+	    addCanvas(options) {
+	        return this.$root.addCanvas(options, this);
+	    }
+
+	    addGroup(label, options) {
+	        return this.$root.addGroup(label, options, this._model);
+	    }
+
+	    remove() {
+	        return this.$root.removeGroup(this._id);
 	    }
 
 	    /**
@@ -1409,86 +1775,88 @@
 	        if (this.$refs.buttonHeader) this.$refs.buttonHeader.removeEventListener('click', this._clickHandler);
 	    }
 
-	    _toggleContent() {
-	        this._isContentVisible = !this._isContentVisible;
-	        this.$refs.content.style.display = this._isContentVisible ? 'grid' : 'none';
+	    _generateId() {
+	        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+	            const r = Math.random() * 16 | 0; const v = c === 'x' ? r : (r & 0x3 | 0x8);
+	            return v.toString(16);
+	        });
+	    }
+
+	    _addSubgroupClass() {
+	        if (this._parentModel.element.tagName !== 'DDDD-LAYER') this.$el.classList.add('subgroup');
+	    }
+
+	    _updateStartupVisibility() {
+	        const key = this._getLocalStorageKey();
+	        const visibility = LocalStorage$1.get(key, 'visibility');
+	        if (visibility === 'hidden') this._hide();
+	    }
+
+	    _toggleVisibility() {
+	        this._isVisible ? this._hide() : this._show();
+	    }
+
+	    _show() {
+	        this._isVisible = true;
+	        this._updateLocalStorage('visible');
+	        this.$el.classList.remove('hidden');
+
+	        // TODO: Fix - Should on resize components inside group
 	        this.$root.layout.resize();
+	    }
+
+	    _hide() {
+	        this._isVisible = false;
+	        this._updateLocalStorage('hidden');
+	        this.$el.classList.add('hidden');
+	    }
+
+	    _updateLocalStorage(visibility) {
+	        const key = this._getLocalStorageKey();
+	        LocalStorage$1.set(key, { visibility });
+	    }
+
+	    _getLocalStorageKey() {
+	        return `group.${this._parentModel.label}.${this._model.label}`;
 	    }
 
 	    /**
 	     * Handlers
 	     */
 	    _clickHandler() {
-	        this._toggleContent();
+	        this._toggleVisibility();
 	    }
 	}
 
 	window.customElements.define('dddd-group', Group);
 
-	class LayoutModel {
-	    constructor() {
-	        this._layers = [];
-	        this._groups = [];
-	        this._components = [];
-	    }
-
-	    /**
-	     * Public
-	     */
-	    addLayer(label) {
-	        this._layers.push(label);
-	    }
-
-	    addGroup(label, options = {}) {
-	        this._groups.push({ label, options });
-	    }
-
-	    addComponent(model) {
-	        this._components.push(model);
-	    }
-
-	    get() {
-	        const structure = {
-	            layers: this._layers,
-	            groups: this._groups,
-	            components: this._getComponents(),
-	        };
-	        return structure;
-	    }
-
-	    /**
-	     * Private
-	     */
-	    _getComponents() {
-	        const components = [];
-	        for (const model of this._components) {
-	            components.push(model.getData());
-	        }
-	        return components;
-	    }
-	}
-
-	var LayoutModel$1 = new LayoutModel();
-
 	// Vendor
 
 	class Component extends HTMLElement {
-	    constructor({ root, model, style, template }) {
+	    constructor({ style, template }) {
 	        super();
 
 	        // Props
+	        this._style = style;
+	        this._template = template;
+	    }
+
+	    setup({ model, root, parentModel }) {
+	        // Props
 	        this.__root = root;
 	        this.__model = model;
+	        this.__parentModel = parentModel;
 
 	        // Attach
 	        this.attachShadow({ mode: 'open' });
 
 	        // Setup
-	        this.$el = this.__addTemplate(template);
+	        this.$el = this.__addTemplate(this._template);
 	        this.$refs = this.__getReferences(this.$el);
-	        this.__addStyle(style);
+	        this.__addStyle(this._style);
 	        this.__addLockedClass();
 	        this.__bindHandlers();
+	        this.__triggerCreated();
 	    }
 
 	    connectedCallback() {
@@ -1509,23 +1877,28 @@
 	        return this.__root;
 	    }
 
-	    get model() {
-	        return this.__model;
+	    get $parent() {
+	        return this.__parentModel.element;
 	    }
 
-	    get container() {
-	        return this.__model.options.container;
+	    get model() {
+	        return this.__model;
 	    }
 
 	    /**
 	     * Public
 	     */
+
 	    tick() {
 	        this.__triggerTick();
 	        if (this.model.options.listen) {
-	            this.model.updateValueFromObject(); // !this.__root.isDevtools
+	            this.model.updateValueFromObject();
 	            this.__triggerOnListen();
 	        }
+	    }
+
+	    resize() {
+	        this.__triggerResize();
 	    }
 
 	    /**
@@ -1583,6 +1956,12 @@
 	        }
 	    }
 
+	    __triggerCreated() {
+	        if (typeof this.created === 'function') {
+	            this.created();
+	        }
+	    }
+
 	    __triggerConnected() {
 	        if (typeof this.connected === 'function') {
 	            this.connected();
@@ -1621,9 +2000,32 @@
 	    }
 	}
 
-	var style$2 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    position: relative;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    user-select: none;\n\n    transition: var(--input-background-color-transition);\n\n    cursor: col-resize;\n}\n\n.input-container:hover,\n.input-container.active {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.scrubber {\n    position: absolute;\n    top: 0;\n    left: 0;\n\n    width: 100%;\n    height: 100%;\n\n    background: var(--input-highlight-color);\n\n    transform-origin: top left;\n}\n\n.input {\n    position: relative;\n    display: block;\n\n    width: 100%;\n    height: 100%;\n\n    padding: 0 var(--input-padding);\n\n    background-color: transparent;\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    line-height: var(--input-height);\n    color: var(--input-text-color);\n\n    outline: none;\n    border: 0;\n\n    pointer-events: none;\n}\n";
+	var style$4 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    position: relative;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    user-select: none;\n\n    transition: var(--input-background-color-transition);\n\n    cursor: col-resize;\n}\n\n.input-container:hover,\n.input-container.active {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.scrubber {\n    position: absolute;\n    top: 0;\n    left: 0;\n\n    width: 100%;\n    height: 100%;\n\n    background: var(--input-highlight-color);\n\n    transform-origin: top left;\n}\n\n.input {\n    position: relative;\n    display: block;\n\n    width: 100%;\n    height: 100%;\n\n    padding: 0 var(--input-padding);\n\n    background-color: transparent;\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    line-height: var(--input-height);\n    color: var(--input-text-color);\n\n    outline: none;\n    border: 0;\n\n    pointer-events: none;\n}\n";
 
-	var template$2 = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input container -->\r\n    <div class=\"input-container\" ref=\"inputContainer\">\r\n\r\n        <!-- Scrubber -->\r\n        <div class=\"scrubber\" ref=\"scrubber\"></div>\r\n        \r\n        <!-- Input -->\r\n        <input class=\"input\" ref=\"input\">\r\n\r\n    </div>\r\n\r\n</div>";
+	var template$4 = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input container -->\r\n    <div class=\"input-container\" ref=\"inputContainer\">\r\n\r\n        <!-- Scrubber -->\r\n        <div class=\"scrubber\" ref=\"scrubber\"></div>\r\n        \r\n        <!-- Input -->\r\n        <input class=\"input\" ref=\"input\">\r\n\r\n    </div>\r\n\r\n</div>";
+
+	class ValueHover {
+	    constructor() {
+	        this._value = null;
+	    }
+
+	    /**
+	     * Public
+	     */
+	    set(value) {
+	        this._value = value;
+	    }
+
+	    get() {
+	        return this._value;
+	    }
+
+	    copyToClipboard() {
+	        navigator.clipboard.writeText(this._value).then();
+	    }
+	}
+
+	var ValueHover$1 = new ValueHover();
 
 	// Base component
 
@@ -1633,24 +2035,27 @@
 
 	// TODO: On change is triggered twice
 	class Slider extends Component {
-	    constructor(root, model) {
-	        super({ root, style: style$2, template: template$2, model });
+	    constructor() {
+	        super({ style: style$4, template: template$4 });
+	    }
 
+	    created() {
 	        // Data
 	        this._scrubberOffset = 0;
 	        this._inputContainer = { x: 0, width: 0 };
 	        this._scrubber = { width: 0 };
 	        this._mouseStartPosition = { x: 0, y: 0 };
 	        this._mousePosition = { x: 0, y: 0 };
-	        this._inputContainerWidth = null;
 	        this._isMouseDown = false;
 	        this._isShiftDown = false;
+	        this._isSlideStarted = false;
 
 	        // Setup
 	        this._bindHandlers();
 	    }
 
 	    connected() {
+	        this._resize();
 	        this._updateValue(this.model.value);
 	        this._setupEventListeners();
 	    }
@@ -1681,7 +2086,9 @@
 	    _bindHandlers() {
 	        this._windowMouseMoveHandler = this._windowMouseMoveHandler.bind(this);
 	        this._windowMouseUpHandler = this._windowMouseUpHandler.bind(this);
+	        this._inputContainerMouseEnterHandler = this._inputContainerMouseEnterHandler.bind(this);
 	        this._inputContainerMouseDownHandler = this._inputContainerMouseDownHandler.bind(this);
+	        this._inputContainerMouseUpHandler = this._inputContainerMouseUpHandler.bind(this);
 	        this._inputContainerDoubleClickHandler = this._inputContainerDoubleClickHandler.bind(this);
 	        this._inputChangeHandler = this._inputChangeHandler.bind(this);
 	        this._inputBlurHandler = this._inputBlurHandler.bind(this);
@@ -1690,7 +2097,9 @@
 	    }
 
 	    _setupEventListeners() {
+	        this.$refs.inputContainer.addEventListener('mouseenter', this._inputContainerMouseEnterHandler);
 	        this.$refs.inputContainer.addEventListener('mousedown', this._inputContainerMouseDownHandler);
+	        this.$refs.inputContainer.addEventListener('mouseup', this._inputContainerMouseUpHandler);
 	        this.$refs.inputContainer.addEventListener('dblclick', this._inputContainerDoubleClickHandler);
 	        this.$refs.input.addEventListener('change', this._inputChangeHandler);
 	        this.$refs.input.addEventListener('blur', this._inputBlurHandler);
@@ -1701,7 +2110,9 @@
 	    }
 
 	    _removeEventListeners() {
+	        this.$refs.inputContainer.removeEventListener('mouseenter', this._inputContainerMouseEnterHandler);
 	        this.$refs.inputContainer.removeEventListener('mousedown', this._inputContainerMouseDownHandler);
+	        this.$refs.inputContainer.removeEventListener('mouseup', this._inputContainerMouseUpHandler);
 	        this.$refs.inputContainer.removeEventListener('dblclick', this._inputContainerDoubleClickHandler);
 	        this.$refs.input.removeEventListener('change', this._inputChangeHandler);
 	        this.$refs.input.removeEventListener('blur', this._inputBlurHandler);
@@ -1714,13 +2125,14 @@
 	    _updateValue(value) {
 	        this.model.value = Math.max(Math.min(value, this.model.options.max), this.model.options.min);
 	        this._updateInputValue(this.model.value);
+	        ValueHover$1.set(this.model.value);
 	    }
 
 	    _calcValue(mouseX) {
 	        const modifier = this._isShiftDown ? PRECISION_MODIFIER : 1;
 	        const delta = (mouseX - this._mouseStartPosition.x) * modifier;
 	        const x = this._mouseStartPosition.x - this._inputContainer.x + delta;
-	        const percentage = (x / this._inputContainerWidth);
+	        const percentage = (x / this._inputContainer.width);
 	        const value = this._map(percentage, 0, 1, this.model.options.min, this.model.options.max);
 	        return value;
 	    }
@@ -1728,6 +2140,14 @@
 	    _scaleScrubber(value) {
 	        const scaleX = this._map(value, this.model.options.min, this.model.options.max, 0, 1);
 	        this.$refs.scrubber.style.transform = `scaleX(${scaleX})`;
+	    }
+
+	    _showScrubber() {
+	        this.$refs.scrubber.style.display = 'block';
+	    }
+
+	    _hideScrubber() {
+	        this.$refs.scrubber.style.display = 'none';
 	    }
 
 	    _updateInputValue(value) {
@@ -1744,7 +2164,6 @@
 	     */
 	    _resize() {
 	        this._inputContainer = this._getContainerData();
-	        this._inputContainerWidth = this._inputContainer.width;
 	        this._scaleScrubber(this.model.value);
 	    }
 
@@ -1779,6 +2198,9 @@
 	    _windowMouseMoveHandler(e) {
 	        if (this._isMouseDown) {
 	            this._mousePosition.x = e.clientX;
+	            if (Math.abs(this._mouseStartPosition.x - e.clientX) > 2) {
+	                this._isSlideStarted = true;
+	            }
 	            const value = this._calcValue(e.clientX);
 	            this._updateValue(value);
 	        }
@@ -1786,24 +2208,37 @@
 
 	    _windowMouseUpHandler(e) {
 	        this._isMouseDown = false;
+	        this._isSlideStarted = false;
 	        this._removeActiveClass();
-	        clearTimeout(this._mouseDownClickTimeout);
+	        // clearTimeout(this._mouseDownClickTimeout);
+	    }
+
+	    _inputContainerMouseUpHandler() {
+	        if (this._isSlideStarted) return;
+	        this._selectInput();
+	        this._hideScrubber();
+	    }
+
+	    _inputContainerMouseEnterHandler() {
+	        ValueHover$1.set(this.model.value);
 	    }
 
 	    _inputContainerMouseDownHandler(e) {
 	        if (this._isMouseDown || this._isInputSelected) return;
 	        this._addActiveClass();
 	        this._mouseStartPosition.x = e.clientX;
-	        clearTimeout(this._mouseDownClickTimeout);
-	        this._mouseDownClickTimeout = setTimeout(() => {
-	            this._isMouseDown = true;
-	            const value = this._calcValue(e.clientX);
-	            this._updateValue(value);
-	        }, 150);
+	        // clearTimeout(this._mouseDownClickTimeout);
+
+	        this._isMouseDown = true;
+	        // this._mouseDownClickTimeout = setTimeout(() => {
+	        //     this._isMouseDown = true;
+	        //     const value = this._calcValue(e.clientX);
+	        //     this._updateValue(value);
+	        // }, 150);
 	    }
 
 	    _inputContainerDoubleClickHandler(e) {
-	        clearTimeout(this._mouseDownClickTimeout);
+	        // clearTimeout(this._mouseDownClickTimeout);
 	        this._selectInput();
 	    }
 
@@ -1811,10 +2246,12 @@
 	        const value = parseFloat(this.$refs.input.value);
 	        this._updateValue(value);
 	        this._deselectInput();
+	        this._showScrubber();
 	    }
 
 	    _inputBlurHandler() {
 	        this._isInputSelected = false;
+	        this._showScrubber();
 	    }
 
 	    _windowKeyDownHandler(e) {
@@ -1835,14 +2272,16 @@
 
 	window.customElements.define('dddd-slider', Slider);
 
-	var style$3 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n\n    transition: background-color 0.15s;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input {\n    height: var(--input-height);\n\n    padding: 0 var(--input-padding);\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    background-color: var(--input-background-color);\n\n    border: 0;\n    border-radius: var(--input-border-radius);\n    outline: none;\n\n    transition: var(--input-background-color-transition);\n}\n\n.input:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n";
+	var style$5 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n\n    transition: background-color 0.15s;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input {\n    height: var(--input-height);\n\n    padding: 0 var(--input-padding);\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    background-color: var(--input-background-color);\n\n    border: 0;\n    border-radius: var(--input-border-radius);\n    outline: none;\n\n    transition: var(--input-background-color-transition);\n}\n\n.input:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n";
 
-	var template$3 = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input -->\r\n    <input class=\"input\" ref=\"input\">\r\n\r\n</div>";
+	var template$5 = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input -->\r\n    <input class=\"input\" ref=\"input\">\r\n\r\n</div>";
 
 	class Text extends Component {
-	    constructor(root, model) {
-	        super({ root, style: style$3, template: template$3, model });
+	    constructor() {
+	        super({ style: style$5, template: template$5 });
+	    }
 
+	    created() {
 	        // Setup
 	        this._bindHandlers();
 	    }
@@ -1892,26 +2331,31 @@
 
 	window.customElements.define('dddd-input', Text);
 
-	var style$4 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n\n    transition: background-color 0.15s;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    line-height: var(--input-height);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input {\n    width: 100%;\n    height: var(--input-height);\n\n    padding: 0 var(--input-padding);\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    background-color: var(--input-background-color);\n\n    border: 0;\n    border-radius: var(--input-border-radius);\n    outline: none;\n\n    transition: var(--input-background-color-transition);\n\n    cursor: ew-resize;\n}\n\n.input:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n";
+	var style$6 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n\n    transition: background-color 0.15s;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    line-height: var(--input-height);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input {\n    width: 100%;\n    height: var(--input-height);\n\n    padding: 0 var(--input-padding);\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    background-color: var(--input-background-color);\n\n    border: 0;\n    border-radius: var(--input-border-radius);\n    outline: none;\n\n    transition: var(--input-background-color-transition);\n\n    cursor: ew-resize;\n}\n\n.input:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n";
 
-	var template$4 = "<div class=\"component\">\n\n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input -->\n    <input class=\"input\" ref=\"input\">\n\n</div>\n";
+	var template$6 = "<div class=\"component\">\n\n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input -->\n    <input class=\"input\" ref=\"input\">\n\n</div>\n";
 
 	// Base component
 
 	// Constants
 	const DEFAULT_STEP_SIZE = 0.01;
 
-	class Number extends Component {
-	    constructor(root, model) {
-	        super({ root, style: style$4, template: template$4, model });
+	class NumberComponent extends Component {
+	    constructor() {
+	        super({ style: style$6, template: template$6 });
+	    }
 
+	    created() {
 	        // Options
 	        this._stepSize = this.model.options.stepSize || DEFAULT_STEP_SIZE;
+	        this._min = typeof this.model.options.min === 'number' ? this.model.options.min : null;
+	        this._max = typeof this.model.options.max === 'number' ? this.model.options.max : null;
 	        this._decimalPlaces = this._getDecimalPlaces(this._stepSize);
 
 	        // Data
 	        this._activeInput = null;
 	        this._isPointerLockActive = false;
+	        this._isMouseMoved = false;
 
 	        // Setup
 	        this._bindHandlers();
@@ -1937,26 +2381,32 @@
 	     * Private
 	     */
 	    _bindHandlers() {
+	        this._mouseEnterHandler = this._mouseEnterHandler.bind(this);
 	        this._mouseDownHandler = this._mouseDownHandler.bind(this);
 	        this._mouseUpHandler = this._mouseUpHandler.bind(this);
 	        this._changeHandler = this._changeHandler.bind(this);
+	        this._mouseWheelHandler = this._mouseWheelHandler.bind(this);
 	        this._pointerLockHanderHandler = this._pointerLockHanderHandler.bind(this);
 	        this._mouseMoveHandler = this._mouseMoveHandler.bind(this);
 	    }
 
 	    _setupEventListeners() {
+	        this.$refs.input.addEventListener('mouseenter', this._mouseEnterHandler);
 	        this.$refs.input.addEventListener('mousedown', this._mouseDownHandler);
 	        this.$refs.input.addEventListener('mouseup', this._mouseUpHandler);
 	        this.$refs.input.addEventListener('change', this._changeHandler);
-	        this.$refs.input.addEventListener('pointerlockchange', this._pointerLockHanderHandler);
+	        this.$refs.input.addEventListener('mousewheel', this._mouseWheelHandler);
+	        document.addEventListener('pointerlockchange', this._pointerLockHanderHandler);
 	        document.addEventListener('mousemove', this._mouseMoveHandler);
 	    }
 
 	    _removeEventListeners() {
+	        this.$refs.input.removeEventListener('mouseenter', this._mouseEnterHandler);
 	        this.$refs.input.removeEventListener('mousedown', this._mouseDownHandler);
 	        this.$refs.input.removeEventListener('mouseup', this._mouseUpHandler);
 	        this.$refs.input.removeEventListener('change', this._changeHandler);
-	        this.$refs.input.removeEventListener('pointerlockchange', this._pointerLockHanderHandler);
+	        this.$refs.input.removeEventListener('mousewheel', this._mouseWheelHandler);
+	        document.removeEventListener('pointerlockchange', this._pointerLockHanderHandler);
 	        document.removeEventListener('mousemove', this._mouseMoveHandler);
 	    }
 
@@ -1980,52 +2430,82 @@
 	    /**
 	     * Handlers
 	     */
-	    _mouseDownHandler(e) {
-	        this.$refs.input.requestPointerLock();
+	    _mouseEnterHandler() {
+	        ValueHover$1.set(this.model.value);
 	    }
 
-	    _mouseUpHandler() {
+	    _mouseDownHandler(e) {
+	        this.$refs.input.requestPointerLock();
+	        this._isPointerLockActive = true;
+	        this._isMouseMoved = false;
+	    }
+
+	    _mouseUpHandler(e) {
 	        document.exitPointerLock();
+	        if (this._isMouseMoved) {
+	            this.$refs.input.blur();
+	        } else {
+	            this.$refs.input.select();
+	        }
 	    }
 
 	    _changeHandler() {
-	        this._updateModelValue(this.$refs.input.value);
+	        const value = Number(this.$refs.input.value);
+	        this._updateModelValue(value);
+	        this.$refs.input.blur();
 	    }
 
-	    _pointerLockHanderHandler(e) {
-	        if (document.pointerLockElement) {
-	            this._isPointerLockActive = true;
-	        } else {
+	    _mouseWheelHandler(e) {
+	        const value = this.model.value + this._stepSize * Math.sign(e.wheelDelta);
+	        this._updateInputValue(value);
+	        this._updateModelValue(value);
+	    }
+
+	    _pointerLockHanderHandler() {
+	        if (document.pointerLockElement) ; else {
 	            this._isPointerLockActive = false;
 	        }
 	    }
 
 	    _mouseMoveHandler(e) {
-	        if (this._isPointerLockActive) {
-	            const value = this._getInputValueBasedOnMouseMovement(e.movementX);
-	            this._updateInputValue(value);
-	            this._updateModelValue(value);
+	        if (!this._isPointerLockActive) return;
+
+	        const delta = Math.max(Math.min(e.movementX, 100), -100); // NOTE: Prevents bug in chrome where movementX spikes to high value
+	        if (Math.abs(delta) > 0) {
+	            this._isMouseMoved = true;
 	        }
+
+	        let value = this._getInputValueBasedOnMouseMovement(delta);
+	        if (typeof this._min === 'number') value = Math.max(value, this._min);
+	        if (typeof this._max === 'number') value = Math.min(value, this._max);
+	        this._updateInputValue(value);
+	        this._updateModelValue(value);
 	    }
 	}
 
-	window.customElements.define('dddd-number', Number);
+	window.customElements.define('dddd-number', NumberComponent);
 
-	var style$5 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    line-height: var(--input-height);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.image-container {\n    position: relative;\n\n    width: 100%;\n    aspect-ratio: 16 / 9;\n\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    transition: var(--input-background-color-transition);\n}\n\n.image-container:hover,\n.image-container.drop-area {\n    background-color: var(--input-background-color-hover);\n}\n\n.image-container img {\n    object-fit: cover;\n\n    width: 100%;\n    height: 100%;\n}\n\n.locked .image-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.file-input {\n    position: absolute;\n    top: 0;\n    left: 0;\n\n    width: 100%;\n    height: 100%;\n\n    border: 0;\n    outline: none;\n\n    cursor: pointer;\n}\n\n.file-input::-webkit-file-upload-button {\n    visibility: hidden;\n}\n\n.file-input::before {\n    content: '';\n\n    display: block;\n\n    width: 100%;\n    height: 100%;\n}\n";
+	var style$7 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    line-height: var(--input-height);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.image-container {\n    position: relative;\n\n    width: 100%;\n    aspect-ratio: 16 / 9;\n\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    transition: var(--input-background-color-transition);\n}\n\n.image-container:hover,\n.image-container.drop-area {\n    background-color: var(--input-background-color-hover);\n}\n\n.image-container img {\n    object-fit: cover;\n\n    width: 100%;\n    height: 100%;\n}\n\n.locked .image-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.contain .image-container img {\n    object-fit: contain;\n}\n\n.file-input {\n    position: absolute;\n    top: 0;\n    left: 0;\n\n    width: 100%;\n    height: 100%;\n\n    border: 0;\n    outline: none;\n\n    cursor: pointer;\n}\n\n.file-input::-webkit-file-upload-button {\n    visibility: hidden;\n}\n\n.file-input::before {\n    content: '';\n\n    display: block;\n\n    width: 100%;\n    height: 100%;\n}\n";
 
-	var template$5 = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Image -->\r\n    <div class=\"image-container\" ref=\"imageContainer\">\r\n\r\n        <!-- File input -->\r\n        <input type=\"file\" ref=\"fileInput\" class=\"file-input\" accept=\".jpg,.png,.gif\">\r\n\r\n    </div>\r\n\r\n</div>";
+	var template$7 = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Image -->\r\n    <div class=\"image-container\" ref=\"imageContainer\">\r\n\r\n        <!-- File input -->\r\n        <input type=\"file\" ref=\"fileInput\" class=\"file-input\" accept=\".jpg,.png,.gif\">\r\n\r\n    </div>\r\n\r\n</div>";
 
 	// Base class
 
 	// Constants
 	const CLASS_DROP_AREA = 'drop-area';
+	const TYPE_THREE = 'TYPE_THREE';
+	const TYPE_IMAGE = 'TYPE_IMAGE';
 
 	class ImageComponent extends Component {
-	    constructor(root, model) {
-	        super({ root, style: style$5, template: template$5, model });
+	    constructor() {
+	        super({ style: style$7, template: template$7 });
+	    }
 
+	    created() {
 	        // Data
+	        this._contain = this.model.options.contain;
 	        this._previewImage = null;
+	        this._type = this._getType();
 
 	        // Setup
 	        this._bindHandlers();
@@ -2033,6 +2513,7 @@
 
 	    connected() {
 	        this._addPreviewImage(this.model.value);
+	        if (this._contain) this._addContainClass();
 	        this._setupEventListeners();
 	    }
 
@@ -2067,6 +2548,19 @@
 	        this.$el.removeEventListener('dragleave', this._dragLeaveHandler);
 	    }
 
+	    _addContainClass() {
+	        this.$el.classList.add('contain');
+	    }
+
+	    _getType() {
+	        const value = this.model.value;
+	        if (value.isTexture) {
+	            return TYPE_THREE;
+	        } else {
+	            return TYPE_IMAGE;
+	        }
+	    }
+
 	    _handleFile(file) {
 	        const reader = new FileReader();
 	        reader.onloadend = this._fileLoadedHandler;
@@ -2081,9 +2575,19 @@
 	    }
 
 	    _addPreviewImage(image) {
-	        this._previewImage = document.createElement('img');
-	        this._previewImage.src = image;
-	        this.$refs.imageContainer.appendChild(this._previewImage);
+	        if (!image) return;
+
+	        if (this._type === TYPE_THREE) {
+	            if (this.model.value.image) {
+	                this._previewImage = document.createElement('img');
+	                this._previewImage.src = this.model.value.image.src;
+	                this.$refs.imageContainer.appendChild(this._previewImage);
+	            }
+	        } else {
+	            this._previewImage = document.createElement('img');
+	            this._previewImage.src = image;
+	            this.$refs.imageContainer.appendChild(this._previewImage);
+	        }
 	    }
 
 	    _showDropArea() {
@@ -2122,7 +2626,18 @@
 
 	    _fileLoadedHandler(e) {
 	        const image = e.target.result;
-	        this.model.value = image;
+	        if (this._type === TYPE_THREE) {
+	            if (this.model.value.image) {
+	                this.model.value.image.src = image;
+	            } else {
+	                this.model.value.image = new Image();
+	                this.model.value.image.src = image;
+	            }
+
+	            this.model.value.needsUpdate = true;
+	        } else {
+	            this.model.value = image;
+	        }
 	        this._removePreviewImage();
 	        this._addPreviewImage(image);
 	    }
@@ -2135,14 +2650,18 @@
 
 	window.customElements.define('dddd-image', ImageComponent);
 
-	var style$6 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    position: relative;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    user-select: none;\n\n    transition: var(--input-background-color-transition);\n}\n\n.input-container:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.select {\n    width: 100%;\n    height: 100%;\n\n    border: 0;\n    outline: 0;\n\n    padding: 0 var(--input-padding);\n\n    background: transparent;\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    appearance: none;\n}\n\n.select option {\n    color: black;\n}\n\n.arrow {\n    position: absolute;\n    top: 0;\n    right: var(--input-padding);\n    bottom: 0;\n\n    margin: auto 0;\n}\n";
+	var style$8 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    position: relative;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    user-select: none;\n\n    transition: var(--input-background-color-transition);\n}\n\n.input-container:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.select {\n    width: 100%;\n    height: 100%;\n\n    border: 0;\n    outline: 0;\n\n    padding: 0 var(--input-padding);\n\n    background: transparent;\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    appearance: none;\n}\n\n.select option {\n    color: black;\n}\n\n.arrow {\n    position: absolute;\n    top: 0;\n    right: var(--input-padding);\n    bottom: 0;\n\n    margin: auto 0;\n}\n";
 
-	var template$6 = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input container  -->\r\n    <div class=\"input-container\">\r\n\r\n        <!-- Arrow -->\r\n        <svg width=\"11\" height=\"6\" viewBox=\"0 0 11 6\" class=\"arrow\">\r\n            <path d=\"M1 1L4.83564 4.40945C5.21452 4.74624 5.78548 4.74624 6.16436 4.40945L10 1\" stroke=\"white\" fill=\"transparent\" stroke-opacity=\"0.74\" stroke-linecap=\"round\"/>\r\n        </svg>\r\n        \r\n        <!-- Select -->\r\n        <select class=\"select\" ref=\"select\"></select>\r\n\r\n    </div>\r\n\r\n</div>";
+	var template$8 = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input container  -->\r\n    <div class=\"input-container\">\r\n\r\n        <!-- Arrow -->\r\n        <svg width=\"11\" height=\"6\" viewBox=\"0 0 11 6\" class=\"arrow\">\r\n            <path d=\"M1 1L4.83564 4.40945C5.21452 4.74624 5.78548 4.74624 6.16436 4.40945L10 1\" stroke=\"white\" fill=\"transparent\" stroke-opacity=\"0.74\" stroke-linecap=\"round\"/>\r\n        </svg>\r\n        \r\n        <!-- Select -->\r\n        <select class=\"select\" ref=\"select\"></select>\r\n\r\n    </div>\r\n\r\n</div>";
+
+	// Base component
 
 	class Dropdown extends Component {
-	    constructor(root, model) {
-	        super({ root, style: style$6, template: template$6, model });
+	    constructor() {
+	        super({ style: style$8, template: template$8 });
+	    }
 
+	    created() {
 	        // Setup
 	        this._bindHandlers();
 	    }
@@ -2167,14 +2686,17 @@
 	     * Private
 	     */
 	    _bindHandlers() {
+	        this._mouseEnterHandler = this._mouseEnterHandler.bind(this);
 	        this._selectChangeHandler = this._selectChangeHandler.bind(this);
 	    }
 
 	    _setupEventListeners() {
+	        this.$refs.select.addEventListener('mouseenter', this._mouseEnterHandler);
 	        this.$refs.select.addEventListener('change', this._selectChangeHandler);
 	    }
 
 	    _removeEventListeners() {
+	        this.$refs.select.removeEventListener('mouseenter', this._mouseEnterHandler);
 	        this.$refs.select.removeEventListener('change', this._selectChangeHandler);
 	    }
 
@@ -2185,7 +2707,7 @@
 	            const element = document.createElement('option');
 	            element.value = item;
 	            element.textContent = item;
-	            element.selected = item === this._value;
+	            element.selected = item === this.model.value;
 	            this.$refs.select.appendChild(element);
 	        }
 	    }
@@ -2197,23 +2719,30 @@
 	    /**
 	     * Handlers
 	     */
+	    _mouseEnterHandler() {
+	        ValueHover$1.set(this.model.value);
+	    }
+
 	    _selectChangeHandler() {
 	        this.model.value = this.$refs.select.value;
+	        this.$refs.select.blur();
 	    }
 	}
 
 	window.customElements.define('dddd-dropdown', Dropdown);
 
-	var style$7 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    position: relative;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    user-select: none;\n\n    transition: var(--input-background-color-transition);\n}\n\n.input-container:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.checkbox {\n    appearance: none;\n\n    display: block;\n    position: relative;\n\n    width: 100%;\n    height: 100%;\n\n    margin: 0;\n    padding: 0 var(--input-padding);\n\n    outline: none;\n\n    cursor: pointer;\n}\n\n.checkbox:after {\n    content: '';\n\n    display: block;\n    box-sizing: border-box;\n\n    position: absolute;\n    top: 0;\n    bottom: 0;\n\n    width: 17px;\n    height: 17px;\n\n    margin: auto 0 ;\n\n    border-radius: 50%;\n    border: 2px solid var(--input-highlight-color);\n}\n\n.checkbox:checked:after {\n    background: var(--input-highlight-color);\n\n    border: 0;\n}\n";
+	var style$9 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    position: relative;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    user-select: none;\n\n    transition: var(--input-background-color-transition);\n}\n\n.input-container:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.checkbox {\n    appearance: none;\n\n    display: block;\n    position: relative;\n\n    width: 100%;\n    height: 100%;\n\n    margin: 0;\n    padding: 0 var(--input-padding);\n\n    outline: none;\n\n    cursor: pointer;\n}\n\n.checkbox:after {\n    content: '';\n\n    display: block;\n    box-sizing: border-box;\n\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 10px;\n\n    width: 16px;\n    height: 16px;\n\n    margin: auto 0;\n\n    border-radius: 50%;\n    border: 1px solid var(--input-highlight-color);\n}\n\n.checkbox:checked:after {\n    background: var(--input-highlight-color);\n\n    border: 0;\n}\n";
 
-	var template$7 = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input container  -->\r\n    <div class=\"input-container\">\r\n\r\n        <!-- Checkbox -->\r\n        <input type=\"checkbox\" class=\"checkbox\" ref=\"checkbox\">\r\n\r\n    </div>\r\n\r\n</div>";
+	var template$9 = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input container  -->\r\n    <div class=\"input-container\">\r\n\r\n        <!-- Checkbox -->\r\n        <input type=\"checkbox\" class=\"checkbox\" ref=\"checkbox\">\r\n\r\n    </div>\r\n\r\n</div>";
 
 	// Base component
 
 	class Checkbox extends Component {
-	    constructor(root, model) {
-	        super({ root, style: style$7, template: template$7, model });
+	    constructor() {
+	        super({ style: style$9, template: template$9 });
+	    }
 
+	    created() {
 	        // Setup
 	        this._bindHandlers();
 	    }
@@ -2263,21 +2792,27 @@
 
 	window.customElements.define('dddd-checkbox', Checkbox);
 
-	var style$8 = ".component {\r\n    transition: background-color 0.15s;\r\n}\r\n\r\n.button {\r\n    width: calc(100% - var(--label-width));\r\n    height: var(--input-height);\r\n\r\n    padding: 0 var(--input-padding);\r\n    margin-left: var(--label-width);\r\n\r\n    font-family: var(--font);\r\n    font-size: var(--input-font-size);\r\n    font-weight: var(--input-font-weight);\r\n    color: var(--input-text-color);\r\n    \r\n    background-color: var(--input-highlight-color);\r\n\r\n    border: 0;\r\n    border-radius: var(--input-border-radius);\r\n    outline: none;\r\n\r\n    transition: var(--input-background-color-transition);\r\n\r\n    cursor: pointer;\r\n}\r\n\r\n.button:hover {\r\n    background-color: rgba(77, 83, 217, 1);\r\n    background-color: var(--input-highlight-color-hover);\r\n}";
+	var style$a = ".component {\n    transition: background-color 0.15s;\n}\n\n.button {\n    width: calc(100% - var(--label-width));\n    height: var(--input-height);\n\n    padding: 0 var(--input-padding);\n    margin-left: var(--label-width);\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    background-color: var(--input-highlight-color);\n\n    border: 0;\n    border-radius: var(--input-border-radius);\n    outline: none;\n\n    transition: var(--input-background-color-transition);\n\n    cursor: pointer;\n}\n\n.button:hover {\n    background-color: rgba(77, 83, 217, 1);\n    background-color: var(--input-highlight-color-hover);\n}\n\n.full-width .button {\n    width: 100%;\n\n    margin-left: 0;\n}\n";
 
-	var template$8 = "<div class=\"component\">\r\n    \r\n    <!-- Button -->\r\n    <button class=\"button\" ref=\"button\">{{ label }}</button>\r\n\r\n</div>";
+	var template$a = "<div class=\"component\">\r\n    \r\n    <!-- Button -->\r\n    <button class=\"button\" ref=\"button\">{{ label }}</button>\r\n\r\n</div>";
 
 	// Base component
 
 	class Button extends Component {
-	    constructor(root, model) {
-	        super({ root, style: style$8, template: template$8, model });
+	    constructor() {
+	        super({ style: style$a, template: template$a });
+	    }
+
+	    created() {
+	        // Options
+	        this._isFullWidth = this.model.options.fullWidth || false;
 
 	        // Setup
 	        this._bindHandlers();
 	    }
 
 	    connected() {
+	        if (this._isFullWidth) this._addFullWidthClass();
 	        this._setupEventListeners();
 	    }
 
@@ -2300,6 +2835,10 @@
 	        this.$refs.button.removeEventListener('click', this._clickHandler);
 	    }
 
+	    _addFullWidthClass() {
+	        this.$el.classList.add('full-width');
+	    }
+
 	    // _triggerOnClickCallback(value) {
 	    //     if (typeof this.model.options.onClick === 'function') {
 	    //         this.model.options.onClick(value);
@@ -2317,23 +2856,35 @@
 
 	window.customElements.define('dddd-button', Button);
 
-	var style$9 = ".component {\r\n    display: grid;\r\n\r\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\r\n    align-items: center;\r\n}\r\n\r\n.label {\r\n    overflow: hidden;\r\n\r\n    padding: var(--label-padding);\r\n\r\n    font-size: var(--label-font-size);\r\n    font-weight: var(--label-font-weight);\r\n    color: var(--label-color);\r\n    white-space: nowrap;\r\n    text-overflow: ellipsis;\r\n}\r\n\r\n.input-container {\r\n    display: grid;\r\n    position: relative;\r\n\r\n    grid-template-columns: 45px calc(50% - 50px) 50%;\r\n    align-items: center;\r\n\r\n    height: var(--input-height);\r\n    overflow: hidden;\r\n\r\n    padding: 0 var(--input-padding) 0 5px;\r\n\r\n    font-family: var(--font);\r\n    font-size: var(--input-font-size);\r\n    font-weight: var(--input-font-weight);\r\n\r\n    background-color: var(--input-background-color);\r\n\r\n    border-radius: var(--input-border-radius);\r\n\r\n    transition: var(--input-background-color-transition);\r\n}\r\n\r\n.input-container:hover {\r\n    background-color: var(--input-background-color-hover);\r\n}\r\n\r\n.color {\r\n    width: 30px;\r\n    height: 30px;\r\n\r\n    margin: 0;\r\n    padding: 0;\r\n\r\n    background: transparent;\r\n\r\n    border: 0;\r\n    outline: 0;\r\n\r\n    appearance: none;\r\n    cursor: pointer;\r\n}\r\n\r\n.color::-webkit-color-swatch-wrapper {\r\n    padding: 0;\r\n}\r\n\r\n.color::-webkit-color-swatch {\r\n    border: none;\r\n    border-radius: 7px;\r\n}\r\n\r\n.color-code {\r\n    color: var(--input-text-color);\r\n}\r\n\r\n.alpha {\r\n    color: var(--input-text-color);\r\n    text-align: right;\r\n}";
+	var style$b = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    display: grid;\n    position: relative;\n\n    grid-template-columns: 27px calc(100% - 20px);\n    align-items: center;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: 0 var(--input-padding) 0 5px;\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    transition: var(--input-background-color-transition);\n}\n\n.input-container:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.component.error .input-container {\n    background-color: var(--input-background-color-error);\n}\n\n.color {\n    width: 20px;\n    height: 20px;\n\n    margin: 0;\n    padding: 0;\n\n    background: transparent;\n\n    border: 0;\n    outline: 0;\n\n    appearance: none;\n    cursor: pointer;\n}\n\n.color::-webkit-color-swatch-wrapper {\n    padding: 0;\n}\n\n.color::-webkit-color-swatch {\n    border: none;\n    border-radius: 4px;\n}\n\n.color-string {\n    background: transparent;\n\n    border: 0;\n    outline: 0;\n\n    font-size: var(--input-font-size);\n    color: var(--input-text-color);\n}\n\n/* .alpha {\n    color: var(--input-text-color);\n    text-align: right;\n} */\n";
 
-	var template$9 = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input container  -->\r\n    <div class=\"input-container\">\r\n\r\n        <!-- Color -->\r\n        <input type=\"color\" class=\"color\" ref=\"color\">\r\n\r\n        <!-- Color code -->\r\n        <span class=\"color-code\" ref=\"colorCode\"></span>\r\n\r\n        <!-- Alpha -->\r\n        <span class=\"alpha\">100%</span>\r\n\r\n    </div>\r\n\r\n</div>";
+	var template$b = "<div class=\"component\">\r\n\r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input container  -->\r\n    <div class=\"input-container\">\r\n\r\n        <!-- Color input -->\r\n        <input type=\"color\" class=\"color\" ref=\"color\">\r\n\r\n        <!-- Color string -->\r\n        <input type=\"text\" class=\"color-string\" ref=\"colorString\">\r\n\r\n        <!-- Alpha -->\r\n        <!-- <span class=\"alpha\">100%</span> -->\r\n\r\n    </div>\r\n\r\n</div>\r\n";
 
 	// Base component
 
+	// Constants
+	const TYPE_THREE$1 = 'TYPE_THREE';
+	const TYPE_STRING = 'TYPE_STRING';
+	const TYPE_HEX = 'TYPE_HEX';
+	const CLASS_NAME_ERROR = 'error';
+
 	class Color extends Component {
-	    constructor(root, model) {
-	        super({ root, style: style$9, template: template$9, model });
+	    constructor() {
+	        super({ style: style$b, template: template$b });
+	    }
+
+	    created() {
+	        // Data
+	        this._type = this._getType();
 
 	        // Setup
 	        this._bindHandlers();
 	    }
 
 	    connected() {
-	        this._setStartColor();
-	        this._setColorCodeValue(this.model.value);
+	        const value = this._getValue();
+	        this._setColorValue(value);
+	        this._setColorString(value);
 	        this._setupEventListeners();
 	    }
 
@@ -2345,40 +2896,142 @@
 	     * Private
 	     */
 	    _bindHandlers() {
+	        this._mouseEnterHandler = this._mouseEnterHandler.bind(this);
 	        this._inputChangeHandler = this._inputChangeHandler.bind(this);
+	        this._colorStringFocusHandler = this._colorStringFocusHandler.bind(this);
+	        this._colorStringBlurHandler = this._colorStringBlurHandler.bind(this);
+	        this._colorStringKeyUpHandler = this._colorStringKeyUpHandler.bind(this);
 	    }
 
 	    _setupEventListeners() {
+	        this.$refs.color.addEventListener('mouseenter', this._mouseEnterHandler);
 	        this.$refs.color.addEventListener('input', this._inputChangeHandler);
+	        this.$refs.colorString.addEventListener('focus', this._colorStringFocusHandler);
+	        this.$refs.colorString.addEventListener('blur', this._colorStringBlurHandler);
+	        this.$refs.colorString.addEventListener('keyup', this._colorStringKeyUpHandler);
 	    }
 
 	    _removeEventListeners() {
+	        this.$refs.color.removeEventListener('mouseenter', this._mouseEnterHandler);
 	        this.$refs.color.removeEventListener('input', this._inputChangeHandler);
+	        this.$refs.colorString.removeEventListener('focus', this._colorStringFocusHandler);
+	        this.$refs.colorString.removeEventListener('blur', this._colorStringBlurHandler);
+	        this.$refs.colorString.removeEventListener('keyup', this._colorStringKeyUpHandler);
 	    }
 
-	    _setStartColor() {
-	        this.$refs.color.value = this.model.value;
+	    _getType() {
+	        const value = this.model.value;
+	        if (value.isColor) {
+	            return TYPE_THREE$1;
+	        } else if (this._isHex(value)) {
+	            return TYPE_HEX;
+	        } else {
+	            return TYPE_STRING;
+	        }
 	    }
 
-	    _setColorCodeValue(value) {
-	        this.$refs.colorCode.innerText = value;
+	    _getValue() {
+	        switch (this._type) {
+	            case TYPE_THREE$1:
+	                return `#${this.model.value.getHexString()}`;
+	            case TYPE_STRING:
+	                return this._convertColorNameToHex(this.model.value);
+	            default:
+	                return this.model.value;
+	        }
+	    }
+
+	    _setColorValue(value) {
+	        this.$refs.color.value = value;
+	    }
+
+	    _setColorString(value) {
+	        this.$refs.colorString.value = value;
+	    }
+
+	    _setModelValue(value) {
+	        if (this._type === TYPE_THREE$1) {
+	            this.model.value.set(value);
+	            if (typeof this.model.options.onChange === 'function') {
+	                this.model.options.onChange(this._value);
+	            }
+	        } else {
+	            this.model.value = value;
+	        }
+	    }
+
+	    _updateValueFromStringInput() {
+	        let value = this.$refs.colorString.value;
+	        if (value.charAt(0) !== '#') value = '#' + value;
+
+	        if (this._isHex(value)) {
+	            this._hideError();
+	            this._setColorString(value);
+	            this._setModelValue(value);
+	            this._setColorValue(value);
+	        } else {
+	            this._showError();
+	            this._setColorValue('#000000');
+	        }
+	    }
+
+	    _showError() {
+	        this.$el.classList.add(CLASS_NAME_ERROR);
+	    }
+
+	    _hideError() {
+	        this.$el.classList.remove(CLASS_NAME_ERROR);
+	    }
+
+	    /**
+	     * Helpers
+	     */
+	    _isHex(value) {
+	        return /^#([0-9A-F]{3}){1,2}$/i.test(value);
+	    }
+
+	    _convertColorNameToHex(colorName) {
+	        const context = document.createElement('canvas').getContext('2d');
+	        context.fillStyle = colorName;
+	        return context.fillStyle;
 	    }
 
 	    /**
 	     * Handlers
 	     */
-	    _inputChangeHandler(e) {
+	    _mouseEnterHandler() {
+	        ValueHover$1.set(this.$refs.colorString.value);
+	    }
+
+	    _inputChangeHandler() {
 	        const value = this.$refs.color.value;
-	        this.model.value = value;
-	        this._setColorCodeValue(value);
+	        this._setModelValue(value);
+	        this._setColorString(value);
+	        this._hideError();
+	        ValueHover$1.set(value);
+	    }
+
+	    _colorStringFocusHandler() {
+	        this.$refs.colorString.select();
+	    }
+
+	    _colorStringBlurHandler() {
+	        this._updateValueFromStringInput();
+	    }
+
+	    _colorStringKeyUpHandler(e) {
+	        if (e.keyCode === 13) {
+	            this._updateValueFromStringInput();
+	            this.$refs.colorString.blur();
+	        }
 	    }
 	}
 
 	window.customElements.define('dddd-color', Color);
 
-	var style$a = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n\n    transition: background-color 0.15s;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    line-height: var(--input-height);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    display: grid;\n\n    grid-template-columns: repeat(3, 1fr);\n    gap: var(--component-row-gap);\n}\n\n.input {\n    width: 100%;\n    height: var(--input-height);\n\n    padding: 0 var(--input-padding);\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    background-color: var(--input-background-color);\n\n    border: 0;\n    border-radius: var(--input-border-radius);\n    outline: none;\n\n    transition: var(--input-background-color-transition);\n\n    cursor: ew-resize;\n}\n\n.input:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n\n.locked .input {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n";
+	var style$c = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n\n    transition: background-color 0.15s;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    line-height: var(--input-height);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    display: grid;\n\n    grid-template-columns: repeat(3, 1fr);\n    gap: var(--component-row-gap);\n}\n\n.input {\n    width: 100%;\n    height: var(--input-height);\n\n    padding: 0 var(--input-padding);\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    background-color: var(--input-background-color);\n\n    border: 0;\n    border-radius: var(--input-border-radius);\n    outline: none;\n\n    transition: var(--input-background-color-transition);\n\n    cursor: ew-resize;\n}\n\n.input:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n\n.locked .input {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n";
 
-	var template$a = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input container -->\r\n    <div class=\"input-container\" ref=\"inputContainer\"></div>\r\n\r\n</div>";
+	var template$c = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input container -->\r\n    <div class=\"input-container\" ref=\"inputContainer\"></div>\r\n\r\n</div>";
 
 	// Base component
 
@@ -2386,9 +3039,11 @@
 	const DEFAULT_STEP_SIZE$1 = 0.01;
 
 	class MultiInput extends Component {
-	    constructor(root, model) {
-	        super({ root, style: style$a, template: template$a, model });
+	    constructor() {
+	        super({ style: style$c, template: template$c });
+	    }
 
+	    created() {
 	        // Options
 	        this._stepSize = this.model.options.stepSize || DEFAULT_STEP_SIZE$1;
 	        this._decimalPlaces = this._getDecimalPlaces(this._stepSize);
@@ -2422,6 +3077,7 @@
 	     * Private
 	     */
 	    _bindHandlers() {
+	        this._mouseEnterHandler = this._mouseEnterHandler.bind(this);
 	        this._mouseDownHandler = this._mouseDownHandler.bind(this);
 	        this._mouseUpHandler = this._mouseUpHandler.bind(this);
 	        this._changeHandler = this._changeHandler.bind(this);
@@ -2430,6 +3086,9 @@
 	    }
 
 	    _setupEventListeners() {
+	        for (let i = 0, len = this._inputs.length; i < len; i++) {
+	            this._inputs[i].addEventListener('mouseenter', this._mouseEnterHandler);
+	        }
 	        this.$el.addEventListener('mousedown', this._mouseDownHandler);
 	        this.$el.addEventListener('mouseup', this._mouseUpHandler);
 	        this.$el.addEventListener('change', this._changeHandler);
@@ -2438,6 +3097,9 @@
 	    }
 
 	    _removeEventListeners() {
+	        for (let i = 0, len = this._inputs.length; i < len; i++) {
+	            this._inputs[i].removeEventListener('mouseenter', this._mouseEnterHandler);
+	        }
 	        this.$el.removeEventListener('mousedown', this._mouseDownHandler);
 	        this.$el.removeEventListener('mouseup', this._mouseUpHandler);
 	        this.$el.removeEventListener('change', this._changeHandler);
@@ -2447,20 +3109,23 @@
 
 	    _createInputs() {
 	        for (const key in this.model.value) {
-	            const input = document.createElement('input');
-	            input.classList.add('input');
-	            input.value = this.model.value[key];
-	            this._inputs.push(input);
-	            this.$refs.inputContainer.appendChild(input);
+	            const value = this.model.value[key];
+	            if (typeof value === 'number') {
+	                const input = document.createElement('input');
+	                input.classList.add('input');
+	                input.value = value;
+	                this._inputs.push(input);
+	                this.$refs.inputContainer.appendChild(input);
+	            }
 	        }
 	    }
 
 	    _updateModelValue() {
-	        const value = {};
 	        for (const [index, [key]] of Object.entries(Object.entries(this.model.value))) {
-	            value[key] = parseInt(this._inputs[index].value);
+	            if (this._inputs[index]) {
+	                this.model.value[key] = parseFloat(this._inputs[index].value);
+	            }
 	        }
-	        this.model.value = value;
 	    }
 
 	    _getInputValueBasedOnMouseMovement(movementX) {
@@ -2489,6 +3154,10 @@
 	    /**
 	     * Handlers
 	     */
+	    _mouseEnterHandler(e) {
+	        ValueHover$1.set(e.target.value);
+	    }
+
 	    _mouseDownHandler(e) {
 	        if (e.target.tagName === 'INPUT') {
 	            this._activeInput = e.target;
@@ -2514,161 +3183,267 @@
 	    }
 
 	    _mouseMoveHandler(e) {
-	        if (this._isPointerLockActive) {
-	            const value = this._getInputValueBasedOnMouseMovement(e.movementX);
-	            this._updateInputValue(value);
-	            this._updateModelValue();
-	        }
+	        if (!this._isPointerLockActive) return;
+
+	        const delta = Math.max(Math.min(e.movementX, 100), -100); // NOTE: Prevents bug in chrome where movementX spikes to high value
+	        const value = this._getInputValueBasedOnMouseMovement(delta);
+	        this._updateInputValue(value);
+	        this._updateModelValue();
 	    }
 	}
 
 	window.customElements.define('dddd-multi-input', MultiInput);
 
-	var componentTypes = {
-	    slider: Slider,
-	    text: Text,
-	    number: Number,
-	    image: ImageComponent,
-	    dropdown: Dropdown,
-	    checkbox: Checkbox,
-	    button: Button,
-	    color: Color,
-	    multiInput: MultiInput,
-	};
+	var style$d = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n\n    transition: background-color 0.15s;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    line-height: var(--input-height);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    overflow: hidden;\n\n    text-align: center;\n\n    background-color: var(--input-background-color);\n    border-radius: var(--input-border-radius);\n}\n\n.input-container canvas {\n    max-width: 100%;\n}\n";
 
-	class Components {
-	    constructor({ root, layout }) {
-	        // Props
-	        this._root = root;
-	        this._layout = layout;
+	var template$d = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input container -->\r\n    <div class=\"input-container\" ref=\"inputContainer\"></div>\r\n\r\n</div>";
+
+	// Base component
+
+	class Canvas extends Component {
+	    constructor() {
+	        super({ style: style$d, template: template$d });
+	    }
+
+	    created() {
+	        // Options
 
 	        // Data
-	        this._components = [];
 
 	        // Setup
 	        this._bindHandlers();
+	    }
+
+	    connected() {
+	        this._addCanvas();
 	        this._setupEventListeners();
 	    }
 
-	    destroy() {
+	    destroyed() {
 	        this._removeEventListeners();
 	    }
 
 	    /**
-	     * Public
+	     * Hooks
 	     */
-	    create(model) {
-	        LayoutModel$1.addComponent(model);
-	        const type = model.type;
-	        const componentClass = componentTypes[type];
-	        const component = new componentClass(this._root, model);
-	        this._components.push(component);
-	        this._addComponentToContainer(component);
-	        return component;
-	    }
-
-	    remove(component) {
-	        const container = this._root.layout.getContainer(component.container);
-	        container.removeChild(component);
-	        component.destroy();
-	    }
-
-	    update(modelData) {
-	        const component = this._getById(modelData.id);
-	        component.model.value = modelData.value;
-	    }
-
-	    updateObjects(models) {
-	        let model;
-	        let component;
-	        for (let i = 0, len = models.length; i < len; i++) {
-	            model = models[i];
-	            if (model.options.listen) {
-	                component = this._getById(model.id);
-	                if (component) {
-	                    component.model.object = model.object;
-	                }
-	            }
-	        }
+	    onListen() {
 	    }
 
 	    /**
 	     * Private
 	     */
 	    _bindHandlers() {
-	        this._tick = this._tick.bind(this);
 	    }
 
 	    _setupEventListeners() {
-	        this._requestAnimationFrame = window.requestAnimationFrame(this._tick);
 	    }
 
 	    _removeEventListeners() {
-	        window.cancelAnimationFrame(this._requestAnimationFrame);
 	    }
 
-	    _addComponentToContainer(component) {
-	        const container = component.model.options.container;
-	        const element = this._layout.getContainer(container);
-	        element.appendChild(component);
-	        this._layout.resize();
-	    }
-
-	    _getById(id) {
-	        for (const component of this._components) {
-	            if (component.model.id === id) {
-	                return component;
-	            }
-	        }
+	    _addCanvas() {
+	        this.$refs.inputContainer.appendChild(this.model.options.canvas);
 	    }
 
 	    /**
-	     * Tick
+	     * Handlers
 	     */
-	    _tick() {
-	        window.requestAnimationFrame(this._tick);
-	        this._tickComponents();
-	        this._sendModelsToDevtools();
+	}
+
+	window.customElements.define('dddd-canvas', Canvas);
+
+	var componentTypes = {
+	    slider: Slider,
+	    text: Text,
+	    number: NumberComponent,
+	    image: ImageComponent,
+	    dropdown: Dropdown,
+	    checkbox: Checkbox,
+	    button: Button,
+	    color: Color,
+	    multiInput: MultiInput,
+	    canvas: Canvas,
+	};
+
+	class LayerCollection {
+	    constructor() {
+	        this._layers = [];
 	    }
 
-	    _tickComponents() {
-	        for (let i = 0, len = this._components.length; i < len; i++) {
-	            this._components[i].tick();
-	        }
+	    /**
+	     * Public
+	     */
+	    add(layer) {
+	        this._layers.push(layer);
 	    }
 
-	    _sendModelsToDevtools() {
-	        const models = [];
-	        for (let i = 0, len = this._components.length; i < len; i++) {
-	            models.push(this._components[i].model.getData());
-	        }
+	    remove(layer) {
+	        const index = this._layers.indexOf(layer);
+	        if (index > -1) this._layers.splice(index, 1);
+	    }
 
-	        window.postMessage({
-	            source: 'dddd-page',
-	            payload: {
-	                action: 'update-objects',
-	                models,
-	            },
-	        });
+	    serialize() {
+	        const layers = [];
+	        for (let i = 0, len = this._layers.length; i < len; i++) {
+	            layers.push(this._layers[i].serialize());
+	        }
+	        return layers;
+	    }
+	}
+
+	class LayoutModel {
+	    constructor() {
+	        this._layers = new LayerCollection();
+	        this._components = [];
+	    }
+
+	    /**
+	     * Public
+	     */
+	    addLayer(model) {
+	        this._layers.add(model);
+	    }
+
+	    addComponent(model) {
+	        this._components.push(model);
+	    }
+
+	    updateComponent(data) {
+	        const model = this._getComponentById(data.id);
+	        model.value = data.value;
+	    }
+
+	    serialize() {
+	        const data = {
+	            layers: this._layers.serialize(),
+	        };
+	        return data;
+	    }
+
+	    /**
+	     * Private
+	     */
+	    _getComponentById(id) {
+	        let item;
+	        for (let i = 0, len = this._components.length; i < len; i++) {
+	            item = this._components[i];
+	            if (item.id === id) return item;
+	        }
+	    }
+	}
+
+	var LayoutModel$1 = new LayoutModel();
+
+	class GroupCollection {
+	    constructor() {
+	        this._groups = [];
+	    }
+
+	    /**
+	     * Public
+	     */
+	    add(group) {
+	        this._groups.push(group);
+	    }
+
+	    remove(group) {
+	        const index = this._groups.indexOf(group);
+	        if (index > -1) this._groups.splice(index, 1);
+	    }
+
+	    serialize() {
+	        const groups = [];
+	        for (let i = 0, len = this._groups.length; i < len; i++) {
+	            groups.push(this._groups[i].serialize());
+	        }
+	        return groups;
+	    }
+	}
+
+	class ComponentCollection {
+	    constructor() {
+	        this._components = [];
+	    }
+
+	    /**
+	     * Public
+	     */
+	    add(layer) {
+	        this._components.push(layer);
+	    }
+
+	    remove(layer) {
+	        const index = this._components.indexOf(layer);
+	        if (index > -1) this._components.splice(index, 1);
+	    }
+
+	    serialize() {
+	        const components = [];
+	        for (let i = 0, len = this._components.length; i < len; i++) {
+	            components.push(this._components[i].serialize());
+	        }
+	        return components;
+	    }
+	}
+
+	// Collections
+
+	class LayerModel {
+	    constructor(options) {
+	        // Props
+	        this._label = options.label;
+	        this._element = options.element;
+
+	        // Setup
+	        this._groups = new GroupCollection();
+	        this._components = new ComponentCollection();
+	    }
+
+	    /**
+	     * Getters & Setters
+	     */
+	    get label() {
+	        return this._label;
+	    }
+
+	    get element() {
+	        return this._element;
+	    }
+
+	    set element(value) {
+	        this._element = value;
+	    }
+
+	    /**
+	     * Add GroupModel to GroupCollection
+	     * @param {GroupModel} model
+	     */
+	    addGroup(model) {
+	        this._groups.add(model);
+	    }
+
+	    serialize() {
+	        const data = {
+	            label: this._label,
+	            groups: this._groups.serialize(),
+	            components: this._components.serialize(),
+	        };
+	        return data;
 	    }
 	}
 
 	class ComponentModel {
-	    constructor({ root, object, property, options, id, type, value, onChangeCallback }) {
+	    constructor({ root, object, property, options, parent, id, type, value, onChange }) {
 	        // Props
 	        this._root = root;
 	        this._object = object || {};
 	        this._property = property;
 	        this._options = options || {};
+	        this._parent = parent || null;
 	        this._id = id || this._generateId();
 	        this._type = type || this._detectType();
 	        this._value = value || this._object[this._property];
-	        this._onChangeCallback = onChangeCallback;
-
-	        // TODO: Refactor
-	        if (this._options.container instanceof Group) {
-	            this._options.container = this._options.container.label;
-	        }
+	        this._onChangeCallback = onChange;
 	    }
 
 	    /**
@@ -2689,9 +3464,8 @@
 	            }
 	        }
 
-	        // TODO: Refactor function name
-	        if (this._root.isDevtools && typeof this._onChangeCallback === 'function') {
-	            this._onChangeCallback(this.getData());
+	        if (typeof this._onChangeCallback === 'function') {
+	            this._onChangeCallback(this.serialize());
 	        }
 	    }
 
@@ -2711,6 +3485,10 @@
 	        return this._options;
 	    }
 
+	    get parent() {
+	        return this._parent;
+	    }
+
 	    get property() {
 	        return this._property;
 	    }
@@ -2726,8 +3504,8 @@
 	    /**
 	     * Public
 	     */
-	    getData() {
-	        return {
+	    serialize() {
+	        const data = {
 	            object: this._object,
 	            property: this._property,
 	            options: this._removeFunctions(this._options),
@@ -2735,6 +3513,7 @@
 	            type: this._type,
 	            value: this._value,
 	        };
+	        return data;
 	    }
 
 	    updateValueFromObject() {
@@ -2766,11 +3545,22 @@
 
 	        const value = this._object?.[this._property];
 
-	        // Image
-	        if (this._options.type === 'image') {
+	        // Three.js Texture
+	        if (value.isTexture) {
 	            return 'image';
 	        }
 
+	        // Image
+	        if ((/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i).test(value)) {
+	            return 'image';
+	        }
+
+	        // Canvas
+	        if (this._options.type === 'canvas') {
+	            return 'canvas';
+	        }
+
+	        // Dropdown
 	        if (this._options.options &&
 	            typeof this._options.options === 'object') {
 	            return 'dropdown';
@@ -2783,6 +3573,21 @@
 	            return 'slider';
 	        }
 
+	        // Color
+	        if (this._options.type === 'color') {
+	            return 'color';
+	        }
+
+	        // Three.js Color
+	        if (value.isColor) {
+	            return 'color';
+	        }
+
+	        // Color
+	        if (/^#[0-9A-F]{6}$/i.test(value)) {
+	            return 'color';
+	        }
+
 	        // MultiInput
 	        if (typeof value === 'object') {
 	            return 'multiInput';
@@ -2791,11 +3596,6 @@
 	        // Checkbox
 	        if (typeof value === 'boolean') {
 	            return 'checkbox';
-	        }
-
-	        // Color
-	        if (/^#[0-9A-F]{6}$/i.test(value)) {
-	            return 'color';
 	        }
 
 	        // Number
@@ -2813,6 +3613,7 @@
 	        }
 	    }
 
+	    // TODO: Move to helper file
 	    _removeFunctions(data) {
 	        const object = JSON.parse(JSON.stringify(data));
 	        function eachRecursive(object) {
@@ -2829,63 +3630,225 @@
 	    }
 	}
 
-	class Layout {
-	    constructor({ root }) {
+	// Collections
+
+	class GroupModel {
+	    constructor(options) {
 	        // Props
-	        this._root = root;
+	        this._label = options.label;
+	        this._element = options.element;
 
-	        this._container = this._createContainer();
-	        this._navigation = this._createNavigation();
-	        this._layers = this._createLayers();
-	        this._components = this._createComponents();
-
-	        this._isVisible = true;
-
-	        this._groups = {};
-	        this._elements = [];
-
-	        this._bindHandlers();
-	        this._setupEventListeners();
-	    }
-
-	    destroy() {
-	        // TODO: Quick and dirty
-	        document.body.removeChild(this._container);
-
-	        this._removeEventListeners();
+	        // Setup
+	        this._groups = new GroupCollection();
+	        this._components = new ComponentCollection();
 	    }
 
 	    /**
 	     * Getters & Setters
 	     */
-	    get components() {
-	        return this._components;
+	    get label() {
+	        return this._label;
+	    }
+
+	    get element() {
+	        return this._element;
+	    }
+
+	    set element(value) {
+	        this._element = value;
+	    }
+
+	    /**
+	     * Add GroupModel to GroupCollection
+	     * @param {GroupModel} model
+	     */
+	    addGroup(model) {
+	        this._groups.add(model);
+	    }
+
+	    /**
+	     * Add ComponentModel to ComponentCollection
+	     * @param {ComponentModel} model
+	     */
+	    addComponent(model) {
+	        this._components.add(model);
+	    }
+
+	    serialize() {
+	        const data = {
+	            label: this._label,
+	            groups: this._groups.serialize(),
+	            components: this._components.serialize(),
+	        };
+	        return data;
+	    }
+	}
+
+	// Layout
+
+	// Layout types
+	const LAYOUT_TYPE_SIDEBAR = 'LAYOUT_TYPE_SIDEBAR';
+	const LAYOUT_TYPE_DEVTOOLS = 'LAYOUT_TYPE_DEVTOOLS';
+
+	class Layout {
+	    constructor({ root, type, onLayerChange, minimized }) {
+	        // Props
+	        this._root = root;
+	        this._type = type;
+	        this._onLayerChangeCallback = onLayerChange;
+
+	        // Setup
+	        this._isVisible = true;
+	        this._layers = [];
+	        this._groups = [];
+	        this._components = [];
+
+	        // Elements
+	        this._container = this._createContainer();
+	        this._header = this._createHeader();
+	        this._navigation = this._createNavigation();
+	        // this._stats = this._createStats();
+	        this._layers = this._createLayers();
+
+	        if (minimized) this.toggleVisibility();
+	        this._bindHandlers();
+	        this._setupEventListeners();
+	    }
+
+	    destroy() {
+	        this._container.destroy();
+	        this._navigation.destroy();
+	        this._layers.destroy();
+	        // this._components.destroy();
+	        this._removeContainerElement();
+	    }
+
+	    /**
+	     * Getters & Setters
+	     */
+	    get stats() {
+	        return this._stats;
 	    }
 
 	    /**
 	     * Public
 	     */
-	    createLayer(label) {
-	        this._navigation.add(label);
-	        const layer = this._layers.add(label);
+	    addLayer(label) {
+	        // Create layer model
+	        const model = new LayerModel({
+	            label,
+	        });
+
+	        // Add layer model to the layour model
+	        LayoutModel$1.addLayer(model);
+
+	        // Create layer element
+	        const layer = this._layers.add(model);
+
+	        // Link element to model
+	        model.element = layer;
+
+	        // Add layer to navigation
+	        this._navigation.add(model);
+
+	        // FIX: Find a better solution for all this resize shit
 	        this._layers.resize();
-	        LayoutModel$1.addLayer(label);
+	        this._header.resize();
+	        this._setLayersHeight();
+
 	        return layer;
 	    }
 
-	    createGroup(label, options = {}) {
-	        const group = new Group({ root: this._root, layout: this, label });
-	        const container = this._getGroupContainer(label, options.container);
-	        container.appendChild(group);
-	        this._groups[label] = group;
+	    gotoLayer(label) {
+	        const index = this._layers.getIndexByLabel(label);
+	        this._navigation.goto(index);
+	        this._layers.goto(index);
+	    }
+
+	    addGroup(label, options = {}, parentModel) {
+	        // Get parent model if not present
+	        parentModel = parentModel || this._getParentModelByContainer(options.container);
+
+	        // Create group model
+	        const model = new GroupModel({
+	            label,
+	        });
+
+	        // Add model to parent model
+	        parentModel.addGroup(model);
+
+	        // Create group element
+	        const group = new Group({
+	            root: this._root,
+	            parentModel,
+	            options,
+	            model,
+	        });
+
+	        // Link element to model
+	        model.element = group;
+
+	        // Add element to parent
+	        parentModel.element.addElement(group);
+
+	        // Store group reference
+	        this._groups.push(group);
+
+	        // Resize..
 	        this._layers.resize();
-	        LayoutModel$1.addGroup(label, options);
+
 	        return group;
 	    }
 
-	    createComponent({ object, property, options, id, type, onChangeCallback }) {
-	        const model = new ComponentModel({ root: this._root, object, property, options, id, type, onChangeCallback });
-	        const component = this._components.create(model);
+	    removeGroup(id) {
+	        const group = this._getGroupById(id);
+	        group.parent.content.removeChild(group);
+	        this._groups.splice(this._groups.indexOf(group), 1);
+	        this._layers.resize();
+	        LayoutModel$1.removeGroup(id);
+	    }
+
+	    addComponent({ object, property, options, parentModel, id, type }) {
+	        // Get parent model if not present
+	        parentModel = parentModel || this._getParentModelByContainer(options.container);
+
+	        // Create component model
+	        const model = new ComponentModel({
+	            object,
+	            property,
+	            options,
+	            parent: parentModel,
+	            id,
+	            type,
+	            onChange: (data) => {
+	                this._root.triggerChange(data);
+	            },
+	        });
+
+	        // Add model to parent model
+	        parentModel.addComponent(model);
+
+	        // Add model reference to layout model
+	        LayoutModel$1.addComponent(model);
+
+	        // Get component class
+	        const componentClass = componentTypes[model.type];
+
+	        // Create component
+	        const component = new componentClass();
+	        component.setup({
+	            model,
+	            root: this._root,
+	            parentModel,
+	        });
+
+	        // Store component reference
+	        this._components.push(component);
+
+	        // Add component to container
+	        parentModel.element.addElement(component);
+
+	        // Return created component
 	        return component;
 	    }
 
@@ -2893,12 +3856,20 @@
 	        return this._layers.get(label);
 	    }
 
-	    getContainer(label) {
+	    getParent(label) {
 	        const layer = this._layers.get(label);
 	        if (layer) return layer;
 
-	        const group = this._groups[label];
-	        if (group) return group.content;
+	        const group = this._getGroupByLabel(label);
+	        if (group) return group;
+	    }
+
+	    getParentById(id) {
+	        const layer = this._layers.getById(id);
+	        if (layer) return layer;
+
+	        const group = this._getGroupById(id);
+	        if (group) return group;
 	    }
 
 	    remove() {
@@ -2907,19 +3878,24 @@
 
 	    resize() {
 	        this._layers.resize();
+	        // this._components.resize();
+	        this._setLayersHeight();
 	    }
 
 	    toggleVisibility() {
 	        if (this._isVisible) {
+	            this._container.hide();
 	            this._layers.hide();
 	            this._navigation.hide();
 	            this._isVisible = false;
 	        } else {
+	            this._container.show();
 	            this._layers.show();
 	            this._navigation.show();
 	            this._isVisible = true;
 	        }
 	        this._layers.resize();
+	        // this._components.resize();
 	    }
 
 	    /**
@@ -2927,14 +3903,17 @@
 	     */
 	    _bindHandlers() {
 	        this._navigationSwitchHandler = this._navigationSwitchHandler.bind(this);
+	        this._keyUpHandler = this._keyUpHandler.bind(this);
 	    }
 
 	    _setupEventListeners() {
 	        this._navigation.addEventListener('switch', this._navigationSwitchHandler);
+	        window.addEventListener('keyup', this._keyUpHandler);
 	    }
 
 	    _removeEventListeners() {
 	        this._navigation.addEventListener('switch', this._navigationSwitchHandler);
+	        window.addEventListener('keyup', this._keyUpHandler);
 	    }
 
 	    _createContainer() {
@@ -2945,28 +3924,56 @@
 	        return container;
 	    }
 
+	    _createHeader() {
+	        const header = new Header({
+	            root: this._root,
+	        });
+	        this._container.addElement(header);
+	        return header;
+	    }
+
 	    _createNavigation() {
 	        const navigation = new Navigation({
 	            root: this._root,
 	        });
-	        this._container.content.appendChild(navigation);
+	        this._header.addElement(navigation);
 	        return navigation;
+	    }
+
+	    _createStats() {
+	        const stats = new Stats({
+	            root: this._root,
+	        });
+	        this._header.addElement(stats);
+	        return stats;
 	    }
 
 	    _createLayers() {
 	        const layers = new Layers({
 	            root: this._root,
 	        });
-	        this._container.content.appendChild(layers);
+	        this._container.addElement(layers);
 	        return layers;
 	    }
 
-	    _createComponents() {
-	        const componenents = new Components({
-	            root: this._root,
-	            layout: this,
-	        });
-	        return componenents;
+	    // _createComponents() {
+	    //     const componenents = new Components({
+	    //         root: this._root,
+	    //         layout: this,
+	    //     });
+	    //     return componenents;
+	    // }
+
+	    _getGroupById(id) {
+	        for (const group of this._groups) {
+	            if (group.id === id) return group;
+	        }
+	    }
+
+	    _getGroupByLabel(label) {
+	        for (const group of this._groups) {
+	            if (group.model.label === label) return group;
+	        }
 	    }
 
 	    _getGroupContainer(label, container) {
@@ -2986,24 +3993,74 @@
 	        return groupContainer;
 	    }
 
+	    _removeContainerElement() {
+	        document.body.removeChild(this._container);
+	    }
+
+	    _setLayersHeight() {
+	        const layersHeight = this._container.height - this._header.height;
+	        this._layers.setHeight(layersHeight);
+	    }
+
+	    _addComponentToContainer(component) {
+	        const container = component.model.options.container;
+	        if (container) {
+	            const element = this._root.layout.getParent(container).content;
+	            element.appendChild(component);
+	        }
+
+	        const parentId = component.model.parentId;
+	        if (parentId) {
+	            const element = this._root.layout.getParentById(parentId).content;
+	            element.appendChild(component);
+	        }
+
+	        const parent = component.model.parent;
+	        if (parent) {
+	            const element = parent.content;
+	            element.appendChild(component);
+	        }
+
+	        this._root.layout.resize();
+	    }
+
+	    _getParentModelByContainer(container) {
+	        const layer = this._layers.get(container);
+	        if (layer) return layer.model;
+
+	        const group = this._getGroupByLabel(container);
+	        if (group) return group.model;
+	    }
+
 	    /**
 	     * Handlers
 	     */
 	    _navigationSwitchHandler(e) {
 	        this._layers.goto(e.detail.index);
+	        // this._components.resize();
+	        if (typeof this._onLayerChangeCallback === 'function') {
+	            const label = this._layers.getByIndex(e.detail.index).label;
+	            this._onLayerChangeCallback(label);
+	        }
+	    }
+
+	    _keyUpHandler(e) {
+	        if (e.keyCode === 67) ValueHover$1.copyToClipboard();
 	    }
 	}
 
 	// Layout
 
 	class DDDD {
-	    constructor({ devtools, onChange } = {}) {
+	    constructor({ devtools, minimized, onChange, onLayerChange } = {}) {
 	        // Props
 	        this._isDevtools = devtools;
+	        this._isMinimized = minimized || false;
 	        this._onChangeCallback = onChange;
+	        this._onLayerChangeCallback = onLayerChange;
 
 	        // Setup
-	        this._layout = new Layout({ root: this });
+	        this._layout = this._createLayout();
 	        this._bindHandlers();
 	        this._setupEventListeners();
 	    }
@@ -3024,11 +4081,19 @@
 	        return this._layout;
 	    }
 
+	    get stats() {
+	        return this._layout.stats;
+	    }
+
+	    get onChangeCallback() {
+	        return this._onChangeCallback;
+	    }
+
 	    /**
 	     * Public
 	     */
-	    add(object, property, options) {
-	        return this._layout.createComponent({ object, property, options });
+	    add(object, property, options, parentModel = null) {
+	        return this._layout.addComponent({ object, property, options, parentModel });
 	    }
 
 	    // TODO: Fix
@@ -3036,48 +4101,88 @@
 	        // this._components.remove(component);
 	    }
 
-	    addButton(options) {
-	        return this._layout.createComponent({ options, type: 'button' });
+	    addButton(label, options = {}, parent = null) {
+	        options.label = label;
+	        return this._layout.addComponent({ options, type: 'button', parent });
 	    }
 
-	    createLayer(label) {
-	        return this._layout.createLayer(label);
+	    addCanvas(options, parent = null) {
+	        return this._layout.addComponent({ options, type: 'canvas', parent });
 	    }
 
-	    createGroup(label, options) {
-	        return this._layout.createGroup(label, options);
+	    addLayer(label) {
+	        return this._layout.addLayer(label);
+	    }
+
+	    gotoLayer(label) {
+	        this._layout.gotoLayer(label);
+	    }
+
+	    addGroup(label, options, parent) {
+	        return this._layout.addGroup(label, options, parent);
+	    }
+
+	    removeGroup(id) {
+	        return this._layout.removeGroup(id);
 	    }
 
 	    createLayoutFromModel(model, onCompleteCallback) {
 	        const layers = model.layers;
+	        const scope = this;
+
+	        function addComponents(components, parentModel) {
+	            for (const component of components) {
+	                scope._layout.addComponent({
+	                    object: component.object,
+	                    property: component.property,
+	                    options: component.options,
+	                    parentModel,
+	                    type: component.type,
+	                    id: component.id,
+	                });
+	            }
+	        }
+
+	        function addGroups(groups, parentModel) {
+	            for (const group of groups) {
+	                const groupElement = scope._layout.addGroup(group.label, null, parentModel);
+
+	                if (group.components) {
+	                    addComponents(group.components, groupElement.model);
+	                }
+
+	                if (group.groups) {
+	                    addGroups(group.groups, groupElement.model);
+	                }
+	            }
+	        }
+
 	        for (const layer of layers) {
-	            this.createLayer(layer);
+	            const layerElement = this._layout.addLayer(layer.label);
+	            if (layer.groups) {
+	                addGroups(layer.groups, layerElement.model);
+	            }
 	        }
 
-	        const groups = model.groups;
-	        for (const group of groups) {
-	            this.createGroup(group.label, group.options);
-	        }
-
-	        const components = model.components;
-	        for (const modelData of components) {
-	            this._layout.createComponent({
-	                object: modelData.object,
-	                property: modelData.property,
-	                options: modelData.options,
-	                id: modelData.id,
-	                type: modelData.type,
-	                onChangeCallback: this._onChangeCallback,
-	            });
-	        }
-
-	        if (typeof onCompleteCallback === 'function') {
-	            onCompleteCallback();
-	        }
+	        // if (typeof onCompleteCallback === 'function') {
+	        //     onCompleteCallback();
+	        // }
 	    }
 
 	    isLayoutSidebar() {
 	        return !this._isDevtools;
+	    }
+
+	    showStats() {}
+
+	    toggleVisibility() {
+	        this._layout.toggleVisibility();
+	    }
+
+	    triggerChange(data) {
+	        if (typeof this._onChangeCallback === 'function') {
+	            this._onChangeCallback(data);
+	        }
 	    }
 
 	    /**
@@ -3095,13 +4200,23 @@
 	        window.removeEventListener('message', this._messageHandler);
 	    }
 
+	    _createLayout() {
+	        const type = this._isDevtools ? LAYOUT_TYPE_DEVTOOLS : LAYOUT_TYPE_SIDEBAR;
+	        const layout = new Layout({
+	            root: this,
+	            type,
+	            onLayerChange: this._onLayerChangeCallback,
+	            minimized: this._isMinimized,
+	        });
+	        return layout;
+	    }
+
 	    _sendLayoutModel() {
-	        const layoutModel = LayoutModel$1.get();
 	        window.postMessage({
 	            source: 'dddd-page',
 	            payload: {
 	                action: 'setup',
-	                layoutModel,
+	                layoutModel: LayoutModel$1.serialize(),
 	            },
 	        });
 	    }
@@ -3119,10 +4234,10 @@
 	                    this._sendLayoutModel();
 	                    break;
 	                case 'setup-complete':
-	                    this._layout.remove();
+	                    // this._layout.remove();
 	                    break;
 	                case 'change':
-	                    this._layout.components.update(payload.modelData);
+	                    LayoutModel$1.updateComponent(payload.modelData);
 	                    break;
 	            }
 	        }
