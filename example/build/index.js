@@ -43954,6 +43954,19 @@
 	        }
 	    }
 
+	    remove(label) {
+	        let element;
+	        let item;
+	        for (let i = 0, len = this._elements.length; i < len; i++) {
+	            item = this._elements[i];
+	            if (item.innerText === label) {
+	                element = item;
+	            }
+	        }
+	        if (element) element.remove();
+	        this._elements.splice(this._elements.indexOf(element), 1);
+	    }
+
 	    goto(label) {
 	        this.$refs.select.value = label;
 	    }
@@ -44378,6 +44391,20 @@
 	        return layer;
 	    }
 
+	    remove(label) {
+	        let layer;
+	        let item;
+	        for (let i = 0, len = this._layers.length; i < len; i++) {
+	            item = this._layers[i];
+	            if (item.label === label) {
+	                layer = item;
+	            }
+	        }
+	        this.$el.removeChild(layer);
+	        this._layers.splice(this._layers.indexOf(layer), 1);
+	        console.log(this._layers);
+	    }
+
 	    goto(index) {
 	        const currentIndex = this._activeIndex;
 	        const newIndex = index;
@@ -44643,6 +44670,10 @@
 	     */
 	    addLayer(label) {
 	        this._layers.push(label);
+	    }
+
+	    removeLayer(label) {
+	        this._layers.splice(this._layers.indexOf(label), 1);
 	    }
 
 	    addGroup(id, label, options = {}) {
@@ -45688,7 +45719,7 @@
 
 	var style$b = ".component {\r\n    display: grid;\r\n\r\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\r\n    align-items: center;\r\n}\r\n\r\n.label {\r\n    overflow: hidden;\r\n\r\n    padding: var(--label-padding);\r\n\r\n    font-size: var(--label-font-size);\r\n    font-weight: var(--label-font-weight);\r\n    color: var(--label-color);\r\n    white-space: nowrap;\r\n    text-overflow: ellipsis;\r\n}\r\n\r\n.input-container {\r\n    display: grid;\r\n    position: relative;\r\n\r\n    grid-template-columns: 27px calc(100% - 20px);\r\n    align-items: center;\r\n\r\n    height: var(--input-height);\r\n    overflow: hidden;\r\n\r\n    padding: 0 var(--input-padding) 0 5px;\r\n\r\n    font-family: var(--font);\r\n    font-size: var(--input-font-size);\r\n    font-weight: var(--input-font-weight);\r\n\r\n    background-color: var(--input-background-color);\r\n\r\n    border-radius: var(--input-border-radius);\r\n\r\n    transition: var(--input-background-color-transition);\r\n}\r\n\r\n.input-container:hover {\r\n    background-color: var(--input-background-color-hover);\r\n}\r\n\r\n.component.error .input-container {\r\n    background-color: var(--input-background-color-error);\r\n}\r\n\r\n.color {\r\n    width: 20px;\r\n    height: 20px;\r\n\r\n    margin: 0;\r\n    padding: 0;\r\n\r\n    background: transparent;\r\n\r\n    border: 0;\r\n    outline: 0;\r\n\r\n    appearance: none;\r\n    cursor: pointer;\r\n}\r\n\r\n.color::-webkit-color-swatch-wrapper {\r\n    padding: 0;\r\n}\r\n\r\n.color::-webkit-color-swatch {\r\n    border: none;\r\n    border-radius: 4px;\r\n}\r\n\r\n.color-string {\r\n    background: transparent;\r\n\r\n    border: 0;\r\n    outline: 0;\r\n\r\n    color: var(--input-text-color);\r\n}\r\n\r\n/* .alpha {\r\n    color: var(--input-text-color);\r\n    text-align: right;\r\n} */\r\n";
 
-	var template$b = "<div class=\"component\">\r\n\r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input container  -->\r\n    <div class=\"input-container\">\r\n\r\n        <!-- Color input -->\r\n        <input type=\"color\" class=\"color\" ref=\"color\">\r\n\r\n        <!-- Color string -->\r\n        <input type=\"text\" class=\"color-string\" ref=\"colorString\">\r\n\r\n        <!-- Alpha -->\r\n        <!-- <span class=\"alpha\">100%</span> -->\r\n\r\n    </div>\r\n\r\n</div>\r\n";
+	var template$b = "<div class=\"component\">\n\n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input container  -->\n    <div class=\"input-container\">\n\n        <!-- Color input -->\n        <input type=\"color\" class=\"color\" ref=\"color\">\n\n        <!-- Color string -->\n        <input type=\"text\" class=\"color-string\" ref=\"colorString\">\n\n        <!-- Alpha -->\n        <!-- <span class=\"alpha\">100%</span> -->\n\n    </div>\n\n</div>\n";
 
 	// Base component
 
@@ -45918,7 +45949,7 @@
 	        this.$el.addEventListener('mousedown', this._mouseDownHandler);
 	        this.$el.addEventListener('mouseup', this._mouseUpHandler);
 	        this.$el.addEventListener('change', this._changeHandler);
-	        document.addEventListener('pointerlockchange', this._pointerLockHanderHandler, false);
+	        document.addEventListener('pointerlockchange', this._pointerLockHanderHandler);
 	        document.addEventListener('mousemove', this._mouseMoveHandler);
 	    }
 
@@ -46010,8 +46041,6 @@
 
 	    _mouseMoveHandler(e) {
 	        if (!this._isPointerLockActive) return;
-
-	        console.log(this.model);
 
 	        const delta = Math.max(Math.min(e.movementX, 100), -100); // NOTE: Prevents bug in chrome where movementX spikes to high value
 	        const value = this._getInputValueBasedOnMouseMovement(delta);
@@ -46483,6 +46512,14 @@
 	        return layer;
 	    }
 
+	    removeLayer(label) {
+	        this._navigation.remove(label);
+	        this._layers.remove(label);
+	        LayoutModel$1.removeLayer(label);
+	        this._header.resize();
+	        this._setLayersHeight();
+	    }
+
 	    gotoLayer(label) {
 	        const index = this._layers.getIndexByLabel(label);
 	        this._navigation.goto(index);
@@ -46744,6 +46781,10 @@
 	        return this._layout.addLayer(label);
 	    }
 
+	    removeLayer(label) {
+	        this._layout.removeLayer(label);
+	    }
+
 	    gotoLayer(label) {
 	        this._layout.gotoLayer(label);
 	    }
@@ -46862,22 +46903,22 @@
 	}
 
 	const scene = new Scene();
-	const camera = new PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+	const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
 	const renderer = new WebGLRenderer();
-	renderer.setSize( window.innerWidth, window.innerHeight );
-	document.body.appendChild( renderer.domElement );
+	renderer.setSize(window.innerWidth, window.innerHeight);
+	document.body.appendChild(renderer.domElement);
 
 	const geometry = new BoxGeometry();
-	const material = new MeshBasicMaterial( { color: 0x00ff00 } );
-	const cube = new Mesh( geometry, material );
-	scene.add( cube );
+	const material = new MeshBasicMaterial({ color: 0x00ff00 });
+	const cube = new Mesh(geometry, material);
+	scene.add(cube);
 
 	camera.position.z = 5;
 
-	const animate = function () {
-	    requestAnimationFrame( animate );
-	    renderer.render( scene, camera );
+	const animate = function() {
+	    requestAnimationFrame(animate);
+	    renderer.render(scene, camera);
 	};
 	animate();
 
@@ -46887,6 +46928,8 @@
 	        console.log('change layer', label);
 	    },
 	});
+
+	window.dddd = dddd;
 
 	/**
 	 * Layers

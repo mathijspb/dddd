@@ -61,6 +61,10 @@ export default class DDDD {
         return this._layout.addLayer(label);
     }
 
+    removeLayer(label) {
+        this._layout.removeLayer(label);
+    }
+
     gotoLayer(label) {
         this._layout.gotoLayer(label);
     }

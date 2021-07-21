@@ -68,6 +68,14 @@ export default class Layout {
         return layer;
     }
 
+    removeLayer(label) {
+        this._navigation.remove(label);
+        this._layers.remove(label);
+        LayoutModel.removeLayer(label);
+        this._header.resize();
+        this._setLayersHeight();
+    }
+
     gotoLayer(label) {
         const index = this._layers.getIndexByLabel(label);
         this._navigation.goto(index);

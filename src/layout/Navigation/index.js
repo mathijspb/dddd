@@ -71,6 +71,19 @@ export default class Navigation extends LayoutElement {
         }
     }
 
+    remove(label) {
+        let element;
+        let item;
+        for (let i = 0, len = this._elements.length; i < len; i++) {
+            item = this._elements[i];
+            if (item.innerText === label) {
+                element = item;
+            }
+        }
+        if (element) element.remove();
+        this._elements.splice(this._elements.indexOf(element), 1);
+    }
+
     goto(label) {
         this.$refs.select.value = label;
     }

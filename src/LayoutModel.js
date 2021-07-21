@@ -12,6 +12,10 @@ class LayoutModel {
         this._layers.push(label);
     }
 
+    removeLayer(label) {
+        this._layers.splice(this._layers.indexOf(label), 1);
+    }
+
     addGroup(id, label, options = {}) {
         this._groups.push({ id, label, options });
     }

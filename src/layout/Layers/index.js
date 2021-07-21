@@ -36,6 +36,20 @@ export default class Layers extends LayoutElement {
         return layer;
     }
 
+    remove(label) {
+        let layer;
+        let item;
+        for (let i = 0, len = this._layers.length; i < len; i++) {
+            item = this._layers[i];
+            if (item.label === label) {
+                layer = item;
+            }
+        }
+        this.$el.removeChild(layer);
+        this._layers.splice(this._layers.indexOf(layer), 1);
+        console.log(this._layers);
+    }
+
     goto(index) {
         const currentIndex = this._activeIndex;
         const newIndex = index;
