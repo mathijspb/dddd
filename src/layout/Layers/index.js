@@ -47,7 +47,6 @@ export default class Layers extends LayoutElement {
         }
         this.$el.removeChild(layer);
         this._layers.splice(this._layers.indexOf(layer), 1);
-        console.log(this._layers);
     }
 
     goto(index) {
