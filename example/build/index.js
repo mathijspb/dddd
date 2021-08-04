@@ -44402,7 +44402,6 @@
 	        }
 	        this.$el.removeChild(layer);
 	        this._layers.splice(this._layers.indexOf(layer), 1);
-	        console.log(this._layers);
 	    }
 
 	    goto(index) {
@@ -46182,6 +46181,24 @@
 	        }
 	    }
 
+	    removeComponents(label) {
+	        const _scope = this;
+	        let item;
+	        for (let i = this._components.length - 1; i >= 0; i--) {
+	            item = this._components[i];
+	            function removeComponent(object) {
+	                if (object.model && object.model.options && object.model.options.parent) {
+	                    removeComponent(object.model.options.parent);
+	                } else if (object.parent) {
+	                    removeComponent(object.parent);
+	                } else {
+	                    _scope._components.splice(_scope._components.indexOf(item), 1);
+	                }
+	            }
+	            removeComponent(item);
+	        }
+	    }
+
 	    /**
 	     * Private
 	     */
@@ -46516,6 +46533,7 @@
 	        this._navigation.remove(label);
 	        this._layers.remove(label);
 	        LayoutModel$1.removeLayer(label);
+	        this._components.removeComponents(label);
 	        this._header.resize();
 	        this._setLayersHeight();
 	    }

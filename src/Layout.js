@@ -72,6 +72,7 @@ export default class Layout {
         this._navigation.remove(label);
         this._layers.remove(label);
         LayoutModel.removeLayer(label);
+        this._components.removeComponents(label);
         this._header.resize();
         this._setLayersHeight();
     }

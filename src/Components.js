@@ -64,6 +64,24 @@ export default class Components {
         }
     }
 
+    removeComponents(label) {
+        const _scope = this;
+        let item;
+        for (let i = this._components.length - 1; i >= 0; i--) {
+            item = this._components[i];
+            function removeComponent(object) {
+                if (object.model && object.model.options && object.model.options.parent) {
+                    removeComponent(object.model.options.parent);
+                } else if (object.parent) {
+                    removeComponent(object.parent);
+                } else {
+                    _scope._components.splice(_scope._components.indexOf(item), 1);
+                }
+            }
+            removeComponent(item);
+        }
+    }
+
     /**
      * Private
      */
