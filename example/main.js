@@ -127,10 +127,11 @@ const dropdown = dddd.addGroup('Dropdown', {
 });
 
 const dropdownValues = {
-    default: 'Options #3',
+    array: 'Options #3',
+    object: 'Option #4',
 };
 
-dropdown.add(dropdownValues, 'default', {
+dropdown.add(dropdownValues, 'array', {
     options: [
         'Options #1',
         'Options #2',
@@ -138,6 +139,16 @@ dropdown.add(dropdownValues, 'default', {
         'Options #4',
         'Options #5',
     ],
+});
+
+dropdown.add(dropdownValues, 'object', {
+    options: {
+        Option1: 'Option #1',
+        Option2: 'Option #2',
+        Option3: 'Option #3',
+        Option4: 'Option #4',
+        Option5: 'Option #5',
+    },
 });
 
 /**

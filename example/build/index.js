@@ -45527,6 +45527,7 @@
 	        super({ root, style: style$8, template: template$8, model });
 
 	        // Setup
+	        this._isArray = Array.isArray(this.model.options.options);
 	        this._bindHandlers();
 	    }
 
@@ -45566,18 +45567,37 @@
 
 	    _addOptions() {
 	        const options = this.model.options.options;
-	        for (let i = 0, len = options.length; i < len; i++) {
-	            const item = options[i];
-	            const element = document.createElement('option');
-	            element.value = item;
-	            element.textContent = item;
-	            element.selected = item === this.model.value;
-	            this.$refs.select.appendChild(element);
+	        if (this._isArray) {
+	            for (let i = 0, len = options.length; i < len; i++) {
+	                const item = options[i];
+	                const element = document.createElement('option');
+	                element.value = item;
+	                element.textContent = item;
+	                element.selected = item === this.model.value;
+	                this.$refs.select.appendChild(element);
+	            }
+	        } else {
+	            for (const key in options) {
+	                const item = options[key];
+	                const element = document.createElement('option');
+	                element.value = key;
+	                element.textContent = key;
+	                element.selected = item === this.model.value;
+	                this.$refs.select.appendChild(element);
+	            }
 	        }
 	    }
 
 	    _updateSelectValue(value) {
-	        this.$refs.select.value = value; // TODO: Fix precision;
+	        this.$refs.select.value = value;
+	    }
+
+	    _getValue() {
+	        if (this._isArray) {
+	            return this.$refs.select.value;
+	        } else {
+	            return this.model.options.options[this.$refs.select.value];
+	        }
 	    }
 
 	    /**
@@ -45588,7 +45608,7 @@
 	    }
 
 	    _selectChangeHandler() {
-	        this.model.value = this.$refs.select.value;
+	        this.model.value = this._getValue();
 	        this.$refs.select.blur();
 	    }
 	}
@@ -47046,10 +47066,11 @@
 	});
 
 	const dropdownValues = {
-	    default: 'Options #3',
+	    array: 'Options #3',
+	    object: 'Option #4',
 	};
 
-	dropdown.add(dropdownValues, 'default', {
+	dropdown.add(dropdownValues, 'array', {
 	    options: [
 	        'Options #1',
 	        'Options #2',
@@ -47057,6 +47078,16 @@
 	        'Options #4',
 	        'Options #5',
 	    ],
+	});
+
+	dropdown.add(dropdownValues, 'object', {
+	    options: {
+	        Option1: 'Option #1',
+	        Option2: 'Option #2',
+	        Option3: 'Option #3',
+	        Option4: 'Option #4',
+	        Option5: 'Option #5',
+	    },
 	});
 
 	/**

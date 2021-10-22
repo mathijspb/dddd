@@ -15,6 +15,7 @@ export default class Dropdown extends Component {
         super({ root, style, template, model });
 
         // Setup
+        this._isArray = Array.isArray(this.model.options.options);
         this._bindHandlers();
     }
 
@@ -54,18 +55,37 @@ export default class Dropdown extends Component {
 
     _addOptions() {
         const options = this.model.options.options;
-        for (let i = 0, len = options.length; i < len; i++) {
-            const item = options[i];
-            const element = document.createElement('option');
-            element.value = item;
-            element.textContent = item;
-            element.selected = item === this.model.value;
-            this.$refs.select.appendChild(element);
+        if (this._isArray) {
+            for (let i = 0, len = options.length; i < len; i++) {
+                const item = options[i];
+                const element = document.createElement('option');
+                element.value = item;
+                element.textContent = item;
+                element.selected = item === this.model.value;
+                this.$refs.select.appendChild(element);
+            }
+        } else {
+            for (const key in options) {
+                const item = options[key];
+                const element = document.createElement('option');
+                element.value = key;
+                element.textContent = key;
+                element.selected = item === this.model.value;
+                this.$refs.select.appendChild(element);
+            }
         }
     }
 
     _updateSelectValue(value) {
-        this.$refs.select.value = value; // TODO: Fix precision;
+        this.$refs.select.value = value;
+    }
+
+    _getValue() {
+        if (this._isArray) {
+            return this.$refs.select.value;
+        } else {
+            return this.model.options.options[this.$refs.select.value];
+        }
     }
 
     /**
@@ -76,7 +96,7 @@ export default class Dropdown extends Component {
     }
 
     _selectChangeHandler() {
-        this.model.value = this.$refs.select.value;
+        this.model.value = this._getValue();
         this.$refs.select.blur();
     }
 }
