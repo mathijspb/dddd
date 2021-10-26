@@ -124,7 +124,7 @@ export default class Group extends LayoutElement {
     }
 
     _addSubgroupClass() {
-        if (this._parent.tagName !== 'DDDD-LAYER') this.$el.classList.add('subgroup');
+        if (this._parent.tagName !== 'DDDD-LAYER' && this._parent.tagName !== 'DDDD-GLOBAL') this.$el.classList.add('subgroup');
     }
 
     _updateStartupVisibility() {

@@ -234,3 +234,15 @@ group.addButton('Remove subgroup', {
         group.remove();
     },
 });
+
+/**
+ * Global
+ */
+const globalValues = {
+    value: 0.5,
+};
+
+const global = dddd.addGroup('Global group', {
+    container: 'Global',
+});
+global.add(globalValues, 'value');

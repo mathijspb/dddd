@@ -1,0 +1,19 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.global {
+    position: relative;
+
+    /* padding: var(--panel-spacing) var(--panel-spacing) 0 var(--panel-spacing); */
+    padding: 0 var(--panel-spacing) 1px;
+
+    -webkit-font-smoothing: antialiased;
+    font-family: var(--font);
+    font-weight: 300;
+    font-size: 13px;
+
+    background-color: var(--panel-background-color);
+}

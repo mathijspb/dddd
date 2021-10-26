@@ -2,6 +2,7 @@
 import Container from './layout/Container';
 import Header from './layout/Header';
 import Navigation from './layout/Navigation';
+import Global from './layout/Global';
 import Stats from './layout/Stats';
 import Layers from './layout/Layers';
 import Group from './layout/Group';
@@ -27,6 +28,7 @@ export default class Layout {
         this._groups = [];
         this._container = this._createContainer();
         this._header = this._createHeader();
+        this._global = this._createGlobal();
         this._navigation = this._createNavigation();
         // this._stats = this._createStats();
         this._layers = this._createLayers();
@@ -88,6 +90,7 @@ export default class Layout {
 
     addGroup(label, options = {}) {
         const parent = options.parent ? options.parent : this.getParent(options.container);
+
         const group = new Group({
             root: this._root,
             layout: this,
@@ -123,6 +126,8 @@ export default class Layout {
     }
 
     getParent(label) {
+        if (label === 'Global') return this._global;
+
         const layer = this._layers.get(label);
         if (layer) return layer;
 
@@ -188,6 +193,14 @@ export default class Layout {
         });
         this._container.addElement(header);
         return header;
+    }
+
+    _createGlobal() {
+        const global = new Global({
+            root: this._root,
+        });
+        this._container.addElement(global);
+        return global;
     }
 
     _createNavigation() {
