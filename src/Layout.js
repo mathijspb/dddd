@@ -150,11 +150,13 @@ export default class Layout {
             this._container.hide();
             this._layers.hide();
             this._navigation.hide();
+            this._global.hide();
             this._isVisible = false;
         } else {
             this._container.show();
             this._layers.show();
             this._navigation.show();
+            this._global.hide();
             this._isVisible = true;
         }
         this._layers.resize();

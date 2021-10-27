@@ -27,6 +27,14 @@ export default class Layer extends LayoutElement {
             container: this._label,
         });
     }
+
+    show() {
+        this.$refs.content.style.display = 'block';
+    }
+
+    hide() {
+        this.$refs.content.style.display = 'none';
+    }
 }
 
 window.customElements.define('dddd-global', Layer);
