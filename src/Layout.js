@@ -156,7 +156,7 @@ export default class Layout {
             this._container.show();
             this._layers.show();
             this._navigation.show();
-            this._global.hide();
+            this._global.show();
             this._isVisible = true;
         }
         this._layers.resize();
