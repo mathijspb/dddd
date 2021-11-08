@@ -45,6 +45,7 @@
     appearance: none;
 }
 
+.select optgroup,
 .select option {
     color: black;
 }

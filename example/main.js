@@ -33,7 +33,7 @@ window.dddd = dddd;
 /**
  * Layers
  */
-dddd.addLayer('Layer #1');
+dddd.addLayer('Layer #1', 'Group');
 dddd.addLayer('Layer #2');
 
 /**

@@ -30,6 +30,7 @@ export default class Navigation extends LayoutElement {
         // Data
         this._isMinimized = false;
         this._activeIndex = 0;
+        this._groups = [];
         this._elements = [];
 
         // Setup
@@ -44,7 +45,7 @@ export default class Navigation extends LayoutElement {
     /**
      * Public
      */
-    add(label, options) {
+    add(label, group) {
         if (this._elements.length === 0) {
             this._setVisible();
         }
@@ -54,7 +55,14 @@ export default class Navigation extends LayoutElement {
             option.innerText = label;
             option.value = this._elements.length;
             this._elements.push(option);
-            this.$refs.select.appendChild(option);
+
+            if (group) {
+                let groupElement = this._getGroupElement(group);
+                if (!groupElement) groupElement = this._createGroupElement(group);
+                groupElement.appendChild(option);
+            } else {
+                this.$refs.select.appendChild(option);
+            }
         } else {
             const button = document.createElement('button');
             button.classList.add(NAVIGATION_BUTTON_CLASS);
@@ -144,6 +152,21 @@ export default class Navigation extends LayoutElement {
             },
         });
         this.dispatchEvent(event);
+    }
+
+    _createGroupElement(label) {
+        const element = document.createElement('optgroup');
+        element.label = label;
+        this.$refs.select.appendChild(element);
+        return element;
+    }
+
+    _getGroupElement(label) {
+        let item;
+        for (let i = 0, len = this._groups.length; i < len; i++) {
+            item = this._groups[i];
+            if (item.label === label) return item;
+        }
     }
 
     /**

@@ -57,8 +57,8 @@ export default class DDDD {
         return this._layout.addComponent({ options, type: 'canvas' });
     }
 
-    addLayer(label) {
-        return this._layout.addLayer(label);
+    addLayer(label, group) {
+        return this._layout.addLayer(label, group);
     }
 
     removeLayer(label) {

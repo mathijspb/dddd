@@ -43882,7 +43882,7 @@
 
 	window.customElements.define('dddd-header', Header);
 
-	var styleSidebar$1 = ".navigation {\r\n    display: none;\r\n\r\n    grid-template-columns: 1fr var(--input-height);\r\n    column-gap: var(--panel-spacing);\r\n\r\n    padding: var(--panel-spacing);\r\n}\r\n\r\n.select-container {\r\n    position: relative;\r\n\r\n    height: var(--input-height);\r\n    overflow: hidden;\r\n\r\n    background-color: var(--input-background-color);\r\n\r\n    border-radius: var(--input-border-radius);\r\n\r\n    user-select: none;\r\n\r\n    transition: var(--input-background-color-transition);\r\n}\r\n\r\n.select-container:hover {\r\n    background-color: var(--input-background-color-hover);\r\n}\r\n\r\n.select {\r\n    width: 100%;\r\n    height: 100%;\r\n\r\n    border: 0;\r\n    outline: 0;\r\n\r\n    padding: 0 var(--input-padding);\r\n\r\n    background: transparent;\r\n\r\n    font-family: var(--font);\r\n    font-size: var(--input-font-size);\r\n    font-weight: var(--input-font-weight);\r\n    color: var(--input-text-color);\r\n\r\n    appearance: none;\r\n}\r\n\r\n.select option {\r\n    color: black;\r\n}\r\n\r\n.arrow {\r\n    position: absolute;\r\n    top: 0;\r\n    right: var(--input-padding);\r\n    bottom: 0;\r\n\r\n    margin: auto 0;\r\n}\r\n\r\n.button-toggle {\r\n    position: relative;\r\n\r\n    width: var(--input-height);\r\n    height: var(--input-height);\r\n\r\n    background-color: var(--input-background-color);\r\n\r\n    border: 0;\r\n    border-radius: var(--input-border-radius);\r\n    outline: 0;\r\n\r\n    cursor: pointer;\r\n\r\n    transition: var(--input-background-color-transition);\r\n}\r\n\r\n.button-toggle:hover {\r\n    background-color: var(--input-background-color-hover);\r\n}\r\n\r\n.button-toggle__line {\r\n    position: absolute;\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n\r\n    width: 12px;\r\n    height: 2px;\r\n\r\n    margin: auto;\r\n\r\n    background: var(--input-text-color);\r\n}\r\n";
+	var styleSidebar$1 = ".navigation {\n    display: none;\n\n    grid-template-columns: 1fr var(--input-height);\n    column-gap: var(--panel-spacing);\n\n    padding: var(--panel-spacing);\n}\n\n.select-container {\n    position: relative;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    user-select: none;\n\n    transition: var(--input-background-color-transition);\n}\n\n.select-container:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.select {\n    width: 100%;\n    height: 100%;\n\n    border: 0;\n    outline: 0;\n\n    padding: 0 var(--input-padding);\n\n    background: transparent;\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    appearance: none;\n}\n\n.select optgroup,\n.select option {\n    color: black;\n}\n\n.arrow {\n    position: absolute;\n    top: 0;\n    right: var(--input-padding);\n    bottom: 0;\n\n    margin: auto 0;\n}\n\n.button-toggle {\n    position: relative;\n\n    width: var(--input-height);\n    height: var(--input-height);\n\n    background-color: var(--input-background-color);\n\n    border: 0;\n    border-radius: var(--input-border-radius);\n    outline: 0;\n\n    cursor: pointer;\n\n    transition: var(--input-background-color-transition);\n}\n\n.button-toggle:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.button-toggle__line {\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n\n    width: 12px;\n    height: 2px;\n\n    margin: auto;\n\n    background: var(--input-text-color);\n}\n";
 
 	var styleDevtools$1 = ".navigation {\r\n    display: none;\r\n    \r\n    padding: var(--panel-spacing);\r\n\r\n    font-size: 0;\r\n\r\n    list-style: none;\r\n\r\n    background-color: var(--panel-background-color);\r\n\r\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\r\n}\r\n\r\n.navigation li {\r\n    display: inline-block;\r\n\r\n    margin-right: 10px;\r\n}\r\n\r\n.navigation-button {\r\n    padding: 13px 30px;\r\n\r\n    color: rgba(255, 255, 255, 0.5);\r\n\r\n    background-color: transparent;\r\n\r\n    border: 0;\r\n    border-radius: 12px;\r\n    outline: 0;\r\n\r\n    font-family: var(--font);\r\n    font-size: 13px;\r\n    font-weight: 600;\r\n\r\n    cursor: pointer;\r\n\r\n    transition: all 0.3s ease-out;\r\n}\r\n\r\n.navigation-button:hover {\r\n    background-color: rgba(255, 255, 255, 0.01);\r\n}\r\n\r\n.navigation-button.active {\r\n    color: rgba(255, 255, 255, 0.9);\r\n\r\n    background-color: rgba(255, 255, 255, 0.03);\r\n}";
 
@@ -43913,6 +43913,7 @@
 	        // Data
 	        this._isMinimized = false;
 	        this._activeIndex = 0;
+	        this._groups = [];
 	        this._elements = [];
 
 	        // Setup
@@ -43927,7 +43928,7 @@
 	    /**
 	     * Public
 	     */
-	    add(label, options) {
+	    add(label, group) {
 	        if (this._elements.length === 0) {
 	            this._setVisible();
 	        }
@@ -43937,7 +43938,14 @@
 	            option.innerText = label;
 	            option.value = this._elements.length;
 	            this._elements.push(option);
-	            this.$refs.select.appendChild(option);
+
+	            if (group) {
+	                let groupElement = this._getGroupElement(group);
+	                if (!groupElement) groupElement = this._createGroupElement(group);
+	                groupElement.appendChild(option);
+	            } else {
+	                this.$refs.select.appendChild(option);
+	            }
 	        } else {
 	            const button = document.createElement('button');
 	            button.classList.add(NAVIGATION_BUTTON_CLASS);
@@ -44027,6 +44035,21 @@
 	            },
 	        });
 	        this.dispatchEvent(event);
+	    }
+
+	    _createGroupElement(label) {
+	        const element = document.createElement('optgroup');
+	        element.label = label;
+	        this.$refs.select.appendChild(element);
+	        return element;
+	    }
+
+	    _getGroupElement(label) {
+	        let item;
+	        for (let i = 0, len = this._groups.length; i < len; i++) {
+	            item = this._groups[i];
+	            if (item.label === label) return item;
+	        }
 	    }
 
 	    /**
@@ -46578,8 +46601,8 @@
 	    /**
 	     * Public
 	     */
-	    addLayer(label) {
-	        this._navigation.add(label);
+	    addLayer(label, group) {
+	        this._navigation.add(label, group);
 	        const layer = this._layers.add(label);
 	        this._layers.resize();
 	        LayoutModel$1.addLayer(label);
@@ -46867,8 +46890,8 @@
 	        return this._layout.addComponent({ options, type: 'canvas' });
 	    }
 
-	    addLayer(label) {
-	        return this._layout.addLayer(label);
+	    addLayer(label, group) {
+	        return this._layout.addLayer(label, group);
 	    }
 
 	    removeLayer(label) {
@@ -47024,7 +47047,7 @@
 	/**
 	 * Layers
 	 */
-	dddd.addLayer('Layer #1');
+	dddd.addLayer('Layer #1', 'Group');
 	dddd.addLayer('Layer #2');
 
 	/**
