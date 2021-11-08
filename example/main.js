@@ -35,6 +35,7 @@ window.dddd = dddd;
  */
 dddd.addLayer('Layer #1', 'Group');
 dddd.addLayer('Layer #2');
+dddd.addLayer('Layer #3', 'Group');
 
 /**
  * Color

@@ -158,6 +158,7 @@ export default class Navigation extends LayoutElement {
         const element = document.createElement('optgroup');
         element.label = label;
         this.$refs.select.appendChild(element);
+        this._groups.push({ label, element });
         return element;
     }
 
@@ -165,7 +166,7 @@ export default class Navigation extends LayoutElement {
         let item;
         for (let i = 0, len = this._groups.length; i < len; i++) {
             item = this._groups[i];
-            if (item.label === label) return item;
+            if (item.label === label) return item.element;
         }
     }
 
