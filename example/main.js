@@ -22,7 +22,6 @@ const animate = function() {
 animate();
 
 const dddd = new DDDD({
-    minimized: false,
     onLayerChange: (label) => {
         console.log('change layer', label);
     },

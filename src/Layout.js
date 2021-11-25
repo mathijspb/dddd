@@ -16,6 +16,7 @@ import ComponentModel from './ComponentModel';
 
 // Utils
 import ValueHover from './utils/ValueHover';
+import LocalStorage from './utils/LocalStorage';
 
 export default class Layout {
     constructor({ root, onLayerChange, minimized }) {
@@ -33,7 +34,9 @@ export default class Layout {
         // this._stats = this._createStats();
         this._layers = this._createLayers();
         this._components = this._createComponents();
-        if (minimized) this.toggleVisibility();
+        if (minimized || !LocalStorage.get('visiblity', 'visible')) {
+            this._hide();
+        }
         this._bindHandlers();
         this._setupEventListeners();
     }
@@ -147,20 +150,10 @@ export default class Layout {
 
     toggleVisibility() {
         if (this._isVisible) {
-            this._container.hide();
-            this._layers.hide();
-            this._navigation.hide();
-            this._global.hide();
-            this._isVisible = false;
+            this._hide();
         } else {
-            this._container.show();
-            this._layers.show();
-            this._navigation.show();
-            this._global.show();
-            this._isVisible = true;
+            this._show();
         }
-        this._layers.resize();
-        this._components.resize();
     }
 
     /**
@@ -273,6 +266,28 @@ export default class Layout {
     _setLayersHeight() {
         const layersHeight = this._container.height - this._header.height;
         this._layers.setHeight(layersHeight);
+    }
+
+    _show() {
+        this._container.show();
+        this._layers.show();
+        this._navigation.show();
+        this._global.show();
+        this._layers.resize();
+        this._components.resize();
+        this._isVisible = true;
+        LocalStorage.set('visiblity', { visible: this._isVisible });
+    }
+
+    _hide() {
+        this._container.hide();
+        this._layers.hide();
+        this._navigation.hide();
+        this._global.hide();
+        this._layers.resize();
+        this._components.resize();
+        this._isVisible = false;
+        LocalStorage.set('visiblity', { visible: this._isVisible });
     }
 
     /**

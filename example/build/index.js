@@ -46575,7 +46575,9 @@
 	        // this._stats = this._createStats();
 	        this._layers = this._createLayers();
 	        this._components = this._createComponents();
-	        if (minimized) this.toggleVisibility();
+	        if (minimized || !LocalStorage$1.get('visiblity', 'visible')) {
+	            this._hide();
+	        }
 	        this._bindHandlers();
 	        this._setupEventListeners();
 	    }
@@ -46689,20 +46691,10 @@
 
 	    toggleVisibility() {
 	        if (this._isVisible) {
-	            this._container.hide();
-	            this._layers.hide();
-	            this._navigation.hide();
-	            this._global.hide();
-	            this._isVisible = false;
+	            this._hide();
 	        } else {
-	            this._container.show();
-	            this._layers.show();
-	            this._navigation.show();
-	            this._global.show();
-	            this._isVisible = true;
+	            this._show();
 	        }
-	        this._layers.resize();
-	        this._components.resize();
 	    }
 
 	    /**
@@ -46815,6 +46807,28 @@
 	    _setLayersHeight() {
 	        const layersHeight = this._container.height - this._header.height;
 	        this._layers.setHeight(layersHeight);
+	    }
+
+	    _show() {
+	        this._container.show();
+	        this._layers.show();
+	        this._navigation.show();
+	        this._global.show();
+	        this._layers.resize();
+	        this._components.resize();
+	        this._isVisible = true;
+	        LocalStorage$1.set('visiblity', { visible: this._isVisible });
+	    }
+
+	    _hide() {
+	        this._container.hide();
+	        this._layers.hide();
+	        this._navigation.hide();
+	        this._global.hide();
+	        this._layers.resize();
+	        this._components.resize();
+	        this._isVisible = false;
+	        LocalStorage$1.set('visiblity', { visible: this._isVisible });
 	    }
 
 	    /**
@@ -47037,7 +47051,6 @@
 	animate();
 
 	const dddd = new DDDD({
-	    minimized: false,
 	    onLayerChange: (label) => {
 	        console.log('change layer', label);
 	    },
