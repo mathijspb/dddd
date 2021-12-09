@@ -107,6 +107,9 @@ export default class Layout {
 
         this._layers.resize();
         LayoutModel.addGroup(group.id, label, options);
+
+        this._global.resize();
+
         return group;
     }
 
@@ -264,7 +267,7 @@ export default class Layout {
     }
 
     _setLayersHeight() {
-        const layersHeight = this._container.height - this._header.height;
+        const layersHeight = this._container.height - this._header.height - this._global.height;
         this._layers.setHeight(layersHeight);
     }
 

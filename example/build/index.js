@@ -44094,13 +44094,19 @@
 	        return this.$refs.content;
 	    }
 
+	    get height() {
+	        return this._height;
+	    }
+
 	    /**
 	     * Public
 	     */
 	    addGroup(label) {
-	        return this.$root.addGroup(label, {
+	        const group = this.$root.addGroup(label, {
 	            container: this._label,
 	        });
+	        this._resize();
+	        return group;
 	    }
 
 	    show() {
@@ -44109,6 +44115,18 @@
 
 	    hide() {
 	        this.$refs.content.style.display = 'none';
+	    }
+
+	    resize() {
+	        this._resize();
+	    }
+
+	    /**
+	     * Resize
+	     */
+	    _resize() {
+	        this._width = this.$el.offsetWidth;
+	        this._height = this.$el.offsetHeight;
 	    }
 	}
 
@@ -46648,6 +46666,9 @@
 
 	        this._layers.resize();
 	        LayoutModel$1.addGroup(group.id, label, options);
+
+	        this._global.resize();
+
 	        return group;
 	    }
 
@@ -46805,7 +46826,7 @@
 	    }
 
 	    _setLayersHeight() {
-	        const layersHeight = this._container.height - this._header.height;
+	        const layersHeight = this._container.height - this._header.height - this._global.height;
 	        this._layers.setHeight(layersHeight);
 	    }
 
