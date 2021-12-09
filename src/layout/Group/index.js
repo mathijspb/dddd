@@ -150,6 +150,8 @@ export default class Group extends LayoutElement {
         this._isVisible = false;
         this._updateLocalStorage('hidden');
         this.$el.classList.add('hidden');
+
+        this.$root.layout.resize();
     }
 
     _updateLocalStorage(visibility) {

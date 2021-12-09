@@ -44716,6 +44716,8 @@
 	        this._isVisible = false;
 	        this._updateLocalStorage('hidden');
 	        this.$el.classList.add('hidden');
+
+	        this.$root.layout.resize();
 	    }
 
 	    _updateLocalStorage(visibility) {
@@ -46827,6 +46829,7 @@
 	    }
 
 	    _setLayersHeight() {
+	        console.log(this._global.height);
 	        const layersHeight = this._container.height - this._header.height - this._global.height;
 	        this._layers.setHeight(layersHeight);
 	    }
@@ -47057,6 +47060,7 @@
 
 	const renderer = new WebGLRenderer();
 	renderer.setSize(window.innerWidth, window.innerHeight);
+	renderer.domElement.style.position = 'fixed';
 	document.body.appendChild(renderer.domElement);
 
 	const geometry = new BoxGeometry();
