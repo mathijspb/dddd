@@ -268,7 +268,6 @@ export default class Layout {
     }
 
     _setLayersHeight() {
-        console.log(this._global.height);
         const layersHeight = this._container.height - this._header.height - this._global.height;
         this._layers.setHeight(layersHeight);
     }
