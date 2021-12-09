@@ -46707,6 +46707,7 @@
 	    resize() {
 	        this._layers.resize();
 	        this._components.resize();
+	        this._global.resize();
 	        this._setLayersHeight();
 	    }
 
