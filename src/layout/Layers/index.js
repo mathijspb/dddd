@@ -50,11 +50,10 @@ export default class Layers extends LayoutElement {
     }
 
     goto(index) {
-        const currentIndex = this._activeIndex;
-        const newIndex = index;
-        this._layers[currentIndex].deactivate();
-        this._layers[newIndex].activate();
-        this._activeIndex = newIndex;
+        const activeLayer = this._layers[this._activeIndex];
+        if (activeLayer) activeLayer.deactivate();
+        this._layers[index].activate();
+        this._activeIndex = index;
         this._resizeLayers();
     }
 
