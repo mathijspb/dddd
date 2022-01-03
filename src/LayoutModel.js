@@ -38,6 +38,16 @@ class LayoutModel {
         return structure;
     }
 
+    getModelsByGroupId(id) {
+        const models = [];
+        let item;
+        for (let i = 0, len = this._components.length; i < len; i++) {
+            item = this._components[i];
+            if (item.parentId === id) models.push(item);
+        }
+        return models;
+    }
+
     /**
      * Private
      */

@@ -8,6 +8,7 @@ export default class ComponentModel {
         this._property = property;
         this._options = options || {};
         this._id = id || this._generateId();
+        this._parentId = this._getParentId();
         this._type = type || this._detectType();
         this._value = value || this._object[this._property];
         this._onChangeCallback = onChangeCallback;
@@ -70,6 +71,10 @@ export default class ComponentModel {
         return this._id;
     }
 
+    get parentId() {
+        return this._parentId;
+    }
+
     /**
      * Public
      */
@@ -104,6 +109,13 @@ export default class ComponentModel {
             const v = c === 'x' ? r : (r & 0x3) | 0x8;
             return v.toString(16);
         });
+    }
+
+    _getParentId() {
+        if (this._options.parent) {
+            return this._options.parent.id;
+        }
+        return null;
     }
 
     _detectType() {

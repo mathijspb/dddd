@@ -25,12 +25,6 @@ export default class Components {
      */
     create(model) {
         LayoutModel.addComponent(model);
-        const type = model.type;
-        const componentClass = componentTypes[type];
-        const component = new componentClass(this._root, model);
-        this._components.push(component);
-        this._addComponentToContainer(component);
-        return component;
     }
 
     remove(component) {
@@ -55,6 +49,18 @@ export default class Components {
                     component.model.object = model.object;
                 }
             }
+        }
+    }
+
+    createElementsByGroupId(id) {
+        const models = LayoutModel.getModelsByGroupId(id);
+        for (let i = 0, len = models.length; i < len; i++) {
+            const model = models[i];
+            const type = model.type;
+            const componentClass = componentTypes[type];
+            const component = new componentClass(this._root, model);
+            this._components.push(component);
+            this._addComponentToContainer(component);
         }
     }
 

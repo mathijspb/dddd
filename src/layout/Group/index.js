@@ -37,6 +37,7 @@ export default class Group extends LayoutElement {
         // Data
         this._id = this._generateId();
         this._isVisible = true;
+        this._isComponentsCreated = false;
 
         // Setup
         this._bindHandlers();
@@ -130,7 +131,11 @@ export default class Group extends LayoutElement {
     _updateStartupVisibility() {
         const key = this._getLocalStorageKey();
         const visibility = LocalStorage.get(key, 'visibility');
-        if (visibility === 'hidden') this._hide();
+        if (visibility === 'visible') {
+            this._show();
+        } else {
+            this._hide();
+        }
     }
 
     _toggleVisibility() {
@@ -138,6 +143,13 @@ export default class Group extends LayoutElement {
     }
 
     _show() {
+        if (!this._isComponentsCreated) {
+            setTimeout(() => {
+                this.$root.layout.components.createElementsByGroupId(this._id);
+                this._isComponentsCreated = true;
+            }, 0);
+        }
+
         this._isVisible = true;
         this._updateLocalStorage('visible');
         this.$el.classList.remove('hidden');

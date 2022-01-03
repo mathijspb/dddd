@@ -44485,11 +44485,10 @@
 	    }
 
 	    goto(index) {
-	        const currentIndex = this._activeIndex;
-	        const newIndex = index;
-	        this._layers[currentIndex].deactivate();
-	        this._layers[newIndex].activate();
-	        this._activeIndex = newIndex;
+	        const activeLayer = this._layers[this._activeIndex];
+	        if (activeLayer) activeLayer.deactivate();
+	        this._layers[index].activate();
+	        this._activeIndex = index;
 	        this._resizeLayers();
 	    }
 
@@ -44603,6 +44602,7 @@
 	        // Data
 	        this._id = this._generateId();
 	        this._isVisible = true;
+	        this._isComponentsCreated = false;
 
 	        // Setup
 	        this._bindHandlers();
@@ -44696,7 +44696,11 @@
 	    _updateStartupVisibility() {
 	        const key = this._getLocalStorageKey();
 	        const visibility = LocalStorage$1.get(key, 'visibility');
-	        if (visibility === 'hidden') this._hide();
+	        if (visibility === 'visible') {
+	            this._show();
+	        } else {
+	            this._hide();
+	        }
 	    }
 
 	    _toggleVisibility() {
@@ -44704,6 +44708,13 @@
 	    }
 
 	    _show() {
+	        if (!this._isComponentsCreated) {
+	            setTimeout(() => {
+	                this.$root.layout.components.createElementsByGroupId(this._id);
+	                this._isComponentsCreated = true;
+	            }, 0);
+	        }
+
 	        this._isVisible = true;
 	        this._updateLocalStorage('visible');
 	        this.$el.classList.remove('hidden');
@@ -44777,6 +44788,17 @@
 	            components: this._getComponents(),
 	        };
 	        return structure;
+	    }
+
+	    getModelsByGroupId(id) {
+	        const models = [];
+	        let item;
+	        for (let i = 0, len = this._components.length; i < len; i++) {
+	            item = this._components[i];
+	            // console.log(item.parentId, id);
+	            if (item.parentId === id) models.push(item);
+	        }
+	        return models;
 	    }
 
 	    /**
@@ -46244,12 +46266,12 @@
 	     */
 	    create(model) {
 	        LayoutModel$1.addComponent(model);
-	        const type = model.type;
-	        const componentClass = componentTypes[type];
-	        const component = new componentClass(this._root, model);
-	        this._components.push(component);
-	        this._addComponentToContainer(component);
-	        return component;
+	        // const type = model.type;
+	        // const componentClass = componentTypes[type];
+	        // const component = new componentClass(this._root, model);
+	        // this._components.push(component);
+	        // this._addComponentToContainer(component);
+	        // return component;
 	    }
 
 	    remove(component) {
@@ -46274,6 +46296,18 @@
 	                    component.model.object = model.object;
 	                }
 	            }
+	        }
+	    }
+
+	    createElementsByGroupId(id) {
+	        const models = LayoutModel$1.getModelsByGroupId(id);
+	        for (let i = 0, len = models.length; i < len; i++) {
+	            const model = models[i];
+	            const type = model.type;
+	            const componentClass = componentTypes[type];
+	            const component = new componentClass(this._root, model);
+	            this._components.push(component);
+	            this._addComponentToContainer(component);
 	        }
 	    }
 
@@ -46388,6 +46422,7 @@
 	        this._property = property;
 	        this._options = options || {};
 	        this._id = id || this._generateId();
+	        this._parentId = this._getParentId();
 	        this._type = type || this._detectType();
 	        this._value = value || this._object[this._property];
 	        this._onChangeCallback = onChangeCallback;
@@ -46450,6 +46485,10 @@
 	        return this._id;
 	    }
 
+	    get parentId() {
+	        return this._parentId;
+	    }
+
 	    /**
 	     * Public
 	     */
@@ -46484,6 +46523,13 @@
 	            const v = c === 'x' ? r : (r & 0x3) | 0x8;
 	            return v.toString(16);
 	        });
+	    }
+
+	    _getParentId() {
+	        if (this._options.parent) {
+	            return this._options.parent.id;
+	        }
+	        return null;
 	    }
 
 	    _detectType() {
@@ -46829,7 +46875,6 @@
 	    }
 
 	    _setLayersHeight() {
-	        console.log(this._global.height);
 	        const layersHeight = this._container.height - this._header.height - this._global.height;
 	        this._layers.setHeight(layersHeight);
 	    }
