@@ -1,4 +1,4 @@
-import { Color, Texture, Object3D, Scene, PerspectiveCamera, WebGLRenderer, BoxGeometry, MeshBasicMaterial, Mesh } from 'three';
+import { Color, Texture, Scene, PerspectiveCamera, WebGLRenderer, BoxGeometry, MeshBasicMaterial, Mesh } from 'three';
 import DDDD from '../src/DDDD';
 
 const scene = new Scene();
@@ -36,6 +36,19 @@ window.dddd = dddd;
 dddd.addLayer('Layer #1', 'Group');
 dddd.addLayer('Layer #2');
 dddd.addLayer('Layer #3', 'Group');
+
+/**
+ * Checkbox
+ */
+const checkbox = dddd.addGroup('Checkbox', {
+    container: 'Layer #1',
+});
+
+const checkboxValues = {
+    _checkedValue: true,
+};
+
+checkbox.add(checkboxValues, '_checkedValue');
 
 /**
  * Color

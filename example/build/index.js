@@ -44795,7 +44795,6 @@
 	        let item;
 	        for (let i = 0, len = this._components.length; i < len; i++) {
 	            item = this._components[i];
-	            // console.log(item.parentId, id);
 	            if (item.parentId === id) models.push(item);
 	        }
 	        return models;
@@ -44916,7 +44915,15 @@
 	    }
 
 	    __getLabel() {
-	        return this.__model.options.label ? this.__model.options.label : this.__model.property;
+	        return this.__model.options.label ? this.__model.options.label : this.__parsePropertyToLabel(this.__model.property);
+	    }
+
+	    __parsePropertyToLabel(property) {
+	        if (property.charAt(0) === '_') {
+	            property = property.substr(1);
+	            property = property.replace(/([A-Z])/g, ' $1').toLowerCase();
+	        }
+	        return property;
 	    }
 
 	    __getReferences(element) {
@@ -46266,12 +46273,6 @@
 	     */
 	    create(model) {
 	        LayoutModel$1.addComponent(model);
-	        // const type = model.type;
-	        // const componentClass = componentTypes[type];
-	        // const component = new componentClass(this._root, model);
-	        // this._components.push(component);
-	        // this._addComponentToContainer(component);
-	        // return component;
 	    }
 
 	    remove(component) {
@@ -47135,6 +47136,19 @@
 	dddd.addLayer('Layer #1', 'Group');
 	dddd.addLayer('Layer #2');
 	dddd.addLayer('Layer #3', 'Group');
+
+	/**
+	 * Checkbox
+	 */
+	const checkbox = dddd.addGroup('Checkbox', {
+	    container: 'Layer #1',
+	});
+
+	const checkboxValues = {
+	    _checkedValue: true,
+	};
+
+	checkbox.add(checkboxValues, '_checkedValue');
 
 	/**
 	 * Color

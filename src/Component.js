@@ -93,7 +93,15 @@ export default class Component extends HTMLElement {
     }
 
     __getLabel() {
-        return this.__model.options.label ? this.__model.options.label : this.__model.property;
+        return this.__model.options.label ? this.__model.options.label : this.__parsePropertyToLabel(this.__model.property);
+    }
+
+    __parsePropertyToLabel(property) {
+        if (property.charAt(0) === '_') {
+            property = property.substr(1);
+            property = property.replace(/([A-Z])/g, ' $1').toLowerCase();
+        }
+        return property;
     }
 
     __getReferences(element) {
