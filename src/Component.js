@@ -93,7 +93,9 @@ export default class Component extends HTMLElement {
     }
 
     __getLabel() {
-        return this.__model.options.label ? this.__model.options.label : this.__parsePropertyToLabel(this.__model.property);
+        let label = this.__model.options.label ? this.__model.options.label : this.__parsePropertyToLabel(this.__model.property);
+        if (this.__model.options.persistent) label += '*';
+        return label;
     }
 
     __parsePropertyToLabel(property) {
