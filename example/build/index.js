@@ -46432,6 +46432,11 @@
 	        if (this._options.container instanceof Group$1) {
 	            this._options.container = this._options.container.label;
 	        }
+
+	        if (this._options.persistent) {
+	            this._loadStoredValue();
+	            this._storeValue();
+	        }
 	    }
 
 	    /**
@@ -46455,6 +46460,10 @@
 	        // TODO: Refactor function name
 	        if (this._root.isDevtools && typeof this._onChangeCallback === 'function') {
 	            this._onChangeCallback(this.getData());
+	        }
+
+	        if (this._options.persistent) {
+	            this._storeValue();
 	        }
 	    }
 
@@ -46621,6 +46630,17 @@
 	        }
 	        eachRecursive(object);
 	        return object;
+	    }
+
+	    _loadStoredValue() {
+	        const id = `component.${this._options.parent.label}.${this._property}`;
+	        const storedValue = LocalStorage$1.get(id, 'value');
+	        if (storedValue !== undefined) this.value = storedValue;
+	    }
+
+	    _storeValue() {
+	        const id = `component.${this._options.parent.label}.${this._property}`;
+	        LocalStorage$1.set(id, { value: this._value });
 	    }
 	}
 
@@ -47148,7 +47168,7 @@
 	    _checkedValue: true,
 	};
 
-	checkbox.add(checkboxValues, '_checkedValue');
+	checkbox.add(checkboxValues, '_checkedValue', { persistent: true });
 
 	/**
 	 * Color

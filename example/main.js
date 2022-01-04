@@ -48,7 +48,7 @@ const checkboxValues = {
     _checkedValue: true,
 };
 
-checkbox.add(checkboxValues, '_checkedValue');
+checkbox.add(checkboxValues, '_checkedValue', { persistent: true });
 
 /**
  * Color

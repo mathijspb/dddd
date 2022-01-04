@@ -1,4 +1,5 @@
 import Group from './layout/Group/index';
+import LocalStorage from './utils/LocalStorage';
 
 export default class ComponentModel {
     constructor({ root, object, property, options, id, type, value, onChangeCallback }) {
@@ -16,6 +17,11 @@ export default class ComponentModel {
         // TODO: Refactor
         if (this._options.container instanceof Group) {
             this._options.container = this._options.container.label;
+        }
+
+        if (this._options.persistent) {
+            this._loadStoredValue();
+            this._storeValue();
         }
     }
 
@@ -40,6 +46,10 @@ export default class ComponentModel {
         // TODO: Refactor function name
         if (this._root.isDevtools && typeof this._onChangeCallback === 'function') {
             this._onChangeCallback(this.getData());
+        }
+
+        if (this._options.persistent) {
+            this._storeValue();
         }
     }
 
@@ -207,5 +217,16 @@ export default class ComponentModel {
         }
         eachRecursive(object);
         return object;
+    }
+
+    _loadStoredValue() {
+        const id = `component.${this._options.parent.label}.${this._property}`;
+        const storedValue = LocalStorage.get(id, 'value');
+        if (storedValue !== undefined) this.value = storedValue;
+    }
+
+    _storeValue() {
+        const id = `component.${this._options.parent.label}.${this._property}`;
+        LocalStorage.set(id, { value: this._value });
     }
 }
