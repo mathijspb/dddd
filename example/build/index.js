@@ -45612,10 +45612,9 @@
 	                this.model.value.image = new Image();
 	                this.model.value.image.src = image;
 	            }
-	            this.model.value.image.onload = () => {
-	                this.model.value.needsUpdate = true;
-	                this.model.triggerOnChange();
-	            };
+
+	            this.model.value.needsUpdate = true;
+	            this.model.triggerOnChange();
 	        } else {
 	            this.model.value = image;
 	        }
