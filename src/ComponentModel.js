@@ -32,9 +32,7 @@ export default class ComponentModel {
         this._value = value;
         this._object[this._property] = this._value;
 
-        if (typeof this._options.onChange === 'function') {
-            this._options.onChange(this._value);
-        }
+        this.triggerOnChange();
 
         // TODO: Refactor..
         if (this._type === 'button' && this._value === 'click') {
@@ -107,6 +105,12 @@ export default class ComponentModel {
         // if (this._root.isDevtools && typeof this._onChangeCallback === 'function') {
         //     this._onChangeCallback(this.getData());
         // }
+    }
+
+    triggerOnChange() {
+        if (typeof this._options.onChange === 'function') {
+            this._options.onChange(this._value);
+        }
     }
 
     /**

@@ -200,7 +200,11 @@ const imageValues = {
 
 image.add(imageValues, 'image');
 image.add(imageValues, 'contain', { contain: true });
-image.add(imageValues, 'three');
+image.add(imageValues, 'three', {
+    onChange: () => {
+        console.log('three image on change');
+    },
+});
 
 /**
  * Canvas

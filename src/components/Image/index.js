@@ -149,6 +149,7 @@ export default class ImageComponent extends Component {
             }
 
             this.model.value.needsUpdate = true;
+            this.model.triggerOnChange();
         } else {
             this.model.value = image;
         }
