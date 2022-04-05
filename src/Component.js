@@ -99,7 +99,7 @@ export default class Component extends HTMLElement {
     }
 
     __parsePropertyToLabel(property) {
-        if (property.charAt(0) === '_') {
+        if (property.charAt(0) === '_' || property.charAt(0) === 'u') {
             property = property.substr(1);
             property = property.replace(/([A-Z])/g, ' $1').toLowerCase();
         }

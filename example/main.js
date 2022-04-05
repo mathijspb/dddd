@@ -226,6 +226,21 @@ canvas.addCanvas({
 });
 
 /**
+ * Uniforms
+ */
+const uniforms = dddd.addGroup('Uniforms', {
+    container: 'Layer #1',
+});
+
+const uniformsValues = {
+    uProgress: { value: 0 },
+    uScale: { value: 0 },
+};
+
+uniforms.add(uniformsValues, 'uProgress');
+uniforms.add(uniformsValues, 'uScale', { min: 0, max: 1 });
+
+/**
  * Group
  */
 const group = dddd.addGroup('Group', {

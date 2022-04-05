@@ -11,7 +11,7 @@ export default class ComponentModel {
         this._id = id || this._generateId();
         this._parentId = this._getParentId();
         this._type = type || this._detectType();
-        this._value = value || this._object[this._property];
+        this._value = value || this._getValue();
         this._onChangeCallback = onChangeCallback;
 
         // TODO: Refactor
@@ -98,7 +98,7 @@ export default class ComponentModel {
     }
 
     updateValueFromObject() {
-        this._value = this._object[this._property];
+        this._value = this._getValue();
         // console.log(this._value);
 
         // // TODO: Refactor function name
@@ -137,7 +137,7 @@ export default class ComponentModel {
             throw new Error(`Property '${this._property}' does not exists`);
         }
 
-        const value = this._object?.[this._property];
+        const value = this._getValue();
         const type = null;
 
         // Three.js Texture
@@ -205,6 +205,15 @@ export default class ComponentModel {
 
         if (!type) {
             throw new Error('Input type not detected');
+        }
+    }
+
+    _getValue() {
+        const value = this._object[this._property];
+        if (typeof value === 'object' && value.value !== undefined) {
+            return value.value;
+        } else {
+            return value;
         }
     }
 
