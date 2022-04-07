@@ -94,9 +94,15 @@ export default class MultiInput extends Component {
     }
 
     _updateModelValue() {
-        for (const [index, [key]] of Object.entries(Object.entries(this.model.value))) {
-            if (this._inputs[index]) {
-                this.model.value[key] = parseFloat(this._inputs[index].value);
+        if (this.model.value.constructor.name === 'Euler') { // NOTE: TMP fix for Three js rotation
+            this.model.value.x = parseFloat(this._inputs[0].value);
+            this.model.value.y = parseFloat(this._inputs[1].value);
+            this.model.value.z = parseFloat(this._inputs[2].value);
+        } else {
+            for (const [index, [key]] of Object.entries(Object.entries(this.model.value))) {
+                if (this._inputs[index]) {
+                    this.model.value[key] = parseFloat(this._inputs[index].value);
+                }
             }
         }
     }
