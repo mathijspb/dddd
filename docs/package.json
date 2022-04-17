@@ -8,7 +8,9 @@
     "deploy": "sh deploy.sh"
   },
   "dependencies": {
-    "vue": "^3.2.31"
+    "dddd": "github:mathijspb/dddd",
+    "vue": "^3.2.31",
+    "vue3-highlightjs": "^1.0.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.1",

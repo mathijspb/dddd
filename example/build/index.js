@@ -43680,7 +43680,7 @@
 	    }
 	}
 
-	var styleSidebar = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.dddd {\r\n    /* Layout */\r\n    --font: 'Arial', sans-serif;\r\n    --background-color: rgba(27, 27, 27, 0.9);\r\n\r\n    /* Panels */\r\n    --panel-background-color: rgba(27, 27, 27, 0.9);\r\n    --panel-spacing: 6px;\r\n\r\n    /* Groups */\r\n    --group-header-padding: 11px;\r\n    --group-header-font-size: 11px;\r\n    --group-header-background-color: rgba(255, 255, 255, 0.03);\r\n    --group-padding: 9px 7px 9px 10px;\r\n    --group-border-radius: 4px;\r\n\r\n    /* Components */\r\n    --component-row-gap: 4px;\r\n\r\n    /* Label */\r\n    --label-width: 40%;\r\n    --label-padding: 0 20px 0 0;\r\n    --label-color: rgba(255, 255, 255, 0.5);\r\n    --label-font-size: 11px;\r\n    --label-font-weight: 400;\r\n\r\n    /* Input */\r\n    --input-background-color: rgba(255, 255, 255, 0.03);\r\n    --input-background-color-hover: rgba(255, 255, 255, 0.08);\r\n    --input-background-color-error: rgba(255, 0, 0, 0.13);\r\n    --input-background-color-transition: background-color 0.35s ease-out;\r\n    --input-highlight-color: rgba(220, 159, 47, 0.53);\r\n    --input-highlight-color-hover: rgba(220, 159, 47, 0.75);\r\n    --input-text-color: rgba(255, 255, 255, 0.75);\r\n    --input-font-size: 11px;\r\n    --input-font-weight: 300;\r\n    --input-border-radius: 4px;\r\n    --input-padding: 10px;\r\n    --input-height: 26px;\r\n\r\n    z-index: 1337;\r\n\r\n    position: fixed;\r\n    top: 0;\r\n    right: 0;\r\n\r\n    width: 300px;\r\n    height: 100%;\r\n    max-height: 100vh;\r\n\r\n    background: var(--background-color);\r\n}\r\n\r\n.content {\r\n    width: 100%;\r\n    height: 100%;\r\n    /* overflow: auto; */\r\n}\r\n\r\n.resize-handle {\r\n    position: absolute;\r\n\r\n    padding: 0;\r\n\r\n    background-color: transparent;\r\n\r\n    border: 0;\r\n    outline: 0;\r\n}\r\n\r\n.resize-handle.side {\r\n    top: 0;\r\n    left: 0;\r\n\r\n    width: 6px;\r\n    height: 100%;\r\n\r\n    cursor: ew-resize;\r\n}\r\n\r\n.resize-handle.bottom {\r\n    bottom: 0;\r\n    left: 0;\r\n\r\n    width: 100%;\r\n    height: 6px;\r\n\r\n    cursor: ns-resize;\r\n}\r\n\r\n.resize-handle.corner {\r\n    bottom: 0;\r\n    left: 0;\r\n\r\n    width: 10px;\r\n    height: 10px;\r\n\r\n    cursor: nesw-resize;\r\n}\r\n";
+	var styleSidebar = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.dddd {\n    /* Layout */\n    --font: 'Arial', sans-serif;\n    --background-color: rgba(27, 27, 27, 0.9);\n\n    /* Panels */\n    --panel-background-color: rgba(27, 27, 27, 0.9);\n    --panel-spacing: 6px;\n\n    /* Groups */\n    --group-header-padding: 11px;\n    --group-header-font-size: 11px;\n    --group-header-background-color: rgba(255, 255, 255, 0.03);\n    --group-padding: 9px 7px 9px 10px;\n    --group-border-radius: 4px;\n\n    /* Components */\n    --component-row-gap: 4px;\n\n    /* Label */\n    --label-width: 40%;\n    --label-padding: 0 20px 0 0;\n    --label-color: rgba(255, 255, 255, 0.5);\n    --label-font-size: 11px;\n    --label-font-weight: 400;\n\n    /* Input */\n    --input-background-color: rgba(255, 255, 255, 0.03);\n    --input-background-color-hover: rgba(255, 255, 255, 0.08);\n    --input-background-color-error: rgba(255, 0, 0, 0.13);\n    --input-background-color-transition: background-color 0.35s ease-out;\n    --input-highlight-color: rgba(220, 159, 47, 0.53);\n    --input-highlight-color-hover: rgba(220, 159, 47, 0.75);\n    --input-text-color: rgba(255, 255, 255, 0.75);\n    --input-font-size: 11px;\n    --input-font-weight: 300;\n    --input-border-radius: 4px;\n    --input-padding: 10px;\n    --input-height: 26px;\n\n    z-index: 1337;\n\n    width: 300px;\n    height: 100%;\n    max-height: 100vh;\n\n    background: var(--background-color);\n}\n\n.content {\n    width: 100%;\n    height: 100%;\n    /* overflow: auto; */\n}\n\n.resize-handle {\n    position: absolute;\n\n    padding: 0;\n\n    background-color: transparent;\n\n    border: 0;\n    outline: 0;\n}\n\n.resize-handle.side {\n    top: 0;\n    left: 0;\n\n    width: 6px;\n    height: 100%;\n\n    cursor: ew-resize;\n}\n\n.resize-handle.bottom {\n    bottom: 0;\n    left: 0;\n\n    width: 100%;\n    height: 6px;\n\n    cursor: ns-resize;\n}\n\n.resize-handle.corner {\n    bottom: 0;\n    left: 0;\n\n    width: 10px;\n    height: 10px;\n\n    cursor: nesw-resize;\n}\n";
 
 	var styleDevtools = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.dddd {\r\n    /* Layout */\r\n    --font: 'Arial', sans-serif;\r\n    --background-color: #161616;\r\n\r\n    /* Panels */\r\n    --panel-background-color: #1B1B1B;\r\n    --panel-spacing: 15px;\r\n\r\n    /* Groups */\r\n    --group-header-font-size: 15px;\r\n    --group-header-background-color: rgba(255, 255, 255, 0.03);\r\n    --group-padding: 30px;\r\n    --group-border-radius: 10px;\r\n\r\n    /* Components */\r\n    --component-row-gap: 7px;\r\n\r\n    /* Label */\r\n    --label-width: 30%;\r\n    --label-padding: 0 20px 0 0;\r\n    --label-color: rgba(255, 255, 255, 0.75);\r\n    --label-font-size: 14px;\r\n    --label-font-weight: 400;\r\n    \r\n    /* Input */\r\n    --input-background-color: rgba(255, 255, 255, 0.03);\r\n    --input-background-color-hover: rgba(255, 255, 255, 0.08);\r\n    --input-background-color-transition: background-color 0.35s ease-out;\r\n    --input-highlight-color: rgba(77, 83, 217, 0.64);\r\n    --input-highlight-color-hover: rgba(77, 83, 217, 1);\r\n    --input-text-color: rgba(255, 255, 255, 0.75);\r\n    --input-font-size: 14px;\r\n    --input-font-weight: 300;\r\n    --input-border-radius: 10px;\r\n    --input-padding: 16px;\r\n    --input-height: 40px;\r\n\r\n    background: var(--background-color);\r\n}\r\n";
 
@@ -43691,7 +43691,7 @@
 	// Base class
 
 	class Container extends LayoutElement {
-	    constructor({ root }) {
+	    constructor({ root, wrapper }) {
 	        super({ root, style: { styleSidebar, styleDevtools }, template: { templateSidebar, templateDevtools } });
 
 	        // Data
@@ -43705,6 +43705,7 @@
 	        // Setup
 	        this._bindHandlers();
 	        this._setupEventListeners();
+	        if (!wrapper) this._setDefaultPosition();
 	    }
 
 	    destroyed() {
@@ -43771,6 +43772,12 @@
 	            window.removeEventListener('mouseup', this._windowMouseUpHandler);
 	            window.removeEventListener('mousemove', this._windowMouseMoveHandler);
 	        }
+	    }
+
+	    _setDefaultPosition() {
+	        this.$el.style.position = 'fixed';
+	        this.$el.style.top = 0;
+	        this.$el.style.right = 0;
 	    }
 
 	    /**
@@ -44452,6 +44459,9 @@
 	        // Options
 	        this._activeIndex = 0;
 	        this._layers = [];
+
+	        // Create default layer
+	        this.add('default');
 	    }
 
 	    destroyed() {
@@ -46700,10 +46710,11 @@
 	// Layout
 
 	class Layout {
-	    constructor({ root, onLayerChange, minimized }) {
+	    constructor(options) {
 	        // Props
-	        this._root = root;
-	        this._onLayerChangeCallback = onLayerChange;
+	        this._root = options.root;
+	        this._onLayerChangeCallback = options.onLayerChange;
+	        this._wrapper = options.wrapper;
 
 	        // Setup
 	        this._isVisible = true;
@@ -46715,7 +46726,7 @@
 	        // this._stats = this._createStats();
 	        this._layers = this._createLayers();
 	        this._components = this._createComponents();
-	        if (minimized || !LocalStorage$1.get('visiblity', 'visible')) {
+	        if (options.minimized || !LocalStorage$1.get('visiblity', 'visible')) {
 	            this._hide();
 	        }
 	        this._bindHandlers();
@@ -46773,7 +46784,7 @@
 	    }
 
 	    addGroup(label, options = {}) {
-	        const parent = options.parent ? options.parent : this.getParent(options.container);
+	        const parent = options.parent ? options.parent : this.getParent(options.container || 'default');
 
 	        const group = new Group$1({
 	            root: this._root,
@@ -46862,8 +46873,14 @@
 	    _createContainer() {
 	        const container = new Container({
 	            root: this._root,
+	            wrapper: this._wrapper,
 	        });
-	        document.body.appendChild(container);
+
+	        if (this._wrapper) {
+	            this._wrapper.appendChild(container);
+	        } else {
+	            document.body.appendChild(container);
+	        }
 	        return container;
 	    }
 
@@ -46949,6 +46966,7 @@
 	    }
 
 	    _setLayersHeight() {
+	        if (this._wrapper) return;
 	        const layersHeight = this._container.height - this._header.height - this._global.height;
 	        this._layers.setHeight(layersHeight);
 	    }
@@ -46995,12 +47013,13 @@
 	// Layout
 
 	class DDDD {
-	    constructor({ devtools, minimized, onChange, onLayerChange } = {}) {
+	    constructor(options = {}) {
 	        // Props
-	        this._isDevtools = devtools;
-	        this._isMinimized = minimized || false;
-	        this._onChangeCallback = onChange;
-	        this._onLayerChangeCallback = onLayerChange;
+	        this._isDevtools = options.devtools;
+	        this._isMinimized = options.minimized || false;
+	        this._onChangeCallback = options.onChange;
+	        this._onLayerChangeCallback = options.onLayerChange;
+	        this._wrapper = options.wrapper;
 
 	        // Setup
 	        this._layout = this._createLayout();
@@ -47026,6 +47045,10 @@
 
 	    get stats() {
 	        return this._layout.stats;
+	    }
+
+	    get container() {
+	        return this._container;
 	    }
 
 	    /**
@@ -47127,6 +47150,7 @@
 	            root: this,
 	            onLayerChange: this._onLayerChangeCallback,
 	            minimized: this._isMinimized,
+	            wrapper: this._wrapper,
 	        });
 	        return layout;
 	    }
