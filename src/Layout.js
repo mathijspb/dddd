@@ -19,22 +19,22 @@ import ValueHover from './utils/ValueHover';
 import LocalStorage from './utils/LocalStorage';
 
 export default class Layout {
-    constructor({ root, onLayerChange, minimized }) {
+    constructor(options) {
         // Props
-        this._root = root;
-        this._onLayerChangeCallback = onLayerChange;
+        this._root = options.root;
+        this._onLayerChangeCallback = options.onLayerChange;
 
         // Setup
         this._isVisible = true;
         this._groups = [];
-        this._container = this._createContainer();
+        this._container = this._createContainer(options.container);
         this._header = this._createHeader();
         this._global = this._createGlobal();
         this._navigation = this._createNavigation();
         // this._stats = this._createStats();
         this._layers = this._createLayers();
         this._components = this._createComponents();
-        if (minimized || !LocalStorage.get('visiblity', 'visible')) {
+        if (options.minimized || !LocalStorage.get('visiblity', 'visible')) {
             this._hide();
         }
         this._bindHandlers();
@@ -92,7 +92,7 @@ export default class Layout {
     }
 
     addGroup(label, options = {}) {
-        const parent = options.parent ? options.parent : this.getParent(options.container);
+        const parent = options.parent ? options.parent : this.getParent(options.container || 'default');
 
         const group = new Group({
             root: this._root,
@@ -178,11 +178,17 @@ export default class Layout {
         window.addEventListener('keyup', this._keyUpHandler);
     }
 
-    _createContainer() {
+    _createContainer(wrapper) {
         const container = new Container({
             root: this._root,
+            wrapper,
         });
-        document.body.appendChild(container);
+
+        if (wrapper) {
+            wrapper.appendChild(container);
+        } else {
+            document.body.appendChild(container);
+        }
         return container;
     }
 

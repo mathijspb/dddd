@@ -3,12 +3,13 @@ import Layout from './Layout';
 import LayoutModel from './LayoutModel';
 
 export default class DDDD {
-    constructor({ devtools, minimized, onChange, onLayerChange } = {}) {
+    constructor(options = {}) {
         // Props
-        this._isDevtools = devtools;
-        this._isMinimized = minimized || false;
-        this._onChangeCallback = onChange;
-        this._onLayerChangeCallback = onLayerChange;
+        this._isDevtools = options.devtools;
+        this._isMinimized = options.minimized || false;
+        this._onChangeCallback = options.onChange;
+        this._onLayerChangeCallback = options.onLayerChange;
+        this._container = options.container;
 
         // Setup
         this._layout = this._createLayout();
@@ -34,6 +35,10 @@ export default class DDDD {
 
     get stats() {
         return this._layout.stats;
+    }
+
+    get container() {
+        return this._container;
     }
 
     /**
@@ -135,6 +140,7 @@ export default class DDDD {
             root: this,
             onLayerChange: this._onLayerChangeCallback,
             minimized: this._isMinimized,
+            container: this._container,
         });
         return layout;
     }

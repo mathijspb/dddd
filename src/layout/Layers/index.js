@@ -17,6 +17,9 @@ export default class Layers extends LayoutElement {
         // Options
         this._activeIndex = 0;
         this._layers = [];
+
+        // Create default layer
+        this.add('default');
     }
 
     destroyed() {

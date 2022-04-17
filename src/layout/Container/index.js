@@ -10,7 +10,7 @@ import templateSidebar from './template-sidebar.html';
 import templateDevtools from './template-devtools.html';
 
 export default class Container extends LayoutElement {
-    constructor({ root }) {
+    constructor({ root, wrapper }) {
         super({ root, style: { styleSidebar, styleDevtools }, template: { templateSidebar, templateDevtools } });
 
         // Data
@@ -24,6 +24,7 @@ export default class Container extends LayoutElement {
         // Setup
         this._bindHandlers();
         this._setupEventListeners();
+        if (!wrapper) this._setDefaultPosition();
     }
 
     destroyed() {
@@ -90,6 +91,12 @@ export default class Container extends LayoutElement {
             window.removeEventListener('mouseup', this._windowMouseUpHandler);
             window.removeEventListener('mousemove', this._windowMouseMoveHandler);
         }
+    }
+
+    _setDefaultPosition() {
+        this.$el.style.position = 'fixed';
+        this.$el.style.top = 0;
+        this.$el.style.right = 0;
     }
 
     /**
