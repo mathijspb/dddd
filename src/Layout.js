@@ -23,11 +23,12 @@ export default class Layout {
         // Props
         this._root = options.root;
         this._onLayerChangeCallback = options.onLayerChange;
+        this._wrapper = options.wrapper;
 
         // Setup
         this._isVisible = true;
         this._groups = [];
-        this._container = this._createContainer(options.container);
+        this._container = this._createContainer();
         this._header = this._createHeader();
         this._global = this._createGlobal();
         this._navigation = this._createNavigation();
@@ -178,14 +179,14 @@ export default class Layout {
         window.addEventListener('keyup', this._keyUpHandler);
     }
 
-    _createContainer(wrapper) {
+    _createContainer() {
         const container = new Container({
             root: this._root,
-            wrapper,
+            wrapper: this._wrapper,
         });
 
-        if (wrapper) {
-            wrapper.appendChild(container);
+        if (this._wrapper) {
+            this._wrapper.appendChild(container);
         } else {
             document.body.appendChild(container);
         }
@@ -274,6 +275,7 @@ export default class Layout {
     }
 
     _setLayersHeight() {
+        if (this._wrapper) return;
         const layersHeight = this._container.height - this._header.height - this._global.height;
         this._layers.setHeight(layersHeight);
     }

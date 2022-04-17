@@ -9,7 +9,7 @@ export default class DDDD {
         this._isMinimized = options.minimized || false;
         this._onChangeCallback = options.onChange;
         this._onLayerChangeCallback = options.onLayerChange;
-        this._container = options.container;
+        this._wrapper = options.wrapper;
 
         // Setup
         this._layout = this._createLayout();
@@ -140,7 +140,7 @@ export default class DDDD {
             root: this,
             onLayerChange: this._onLayerChangeCallback,
             minimized: this._isMinimized,
-            container: this._container,
+            wrapper: this._wrapper,
         });
         return layout;
     }
