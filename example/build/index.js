@@ -43882,7 +43882,7 @@
 
 	window.customElements.define('dddd-header', Header);
 
-	var styleSidebar$1 = ".navigation {\r\n    display: none;\r\n\r\n    grid-template-columns: 1fr var(--input-height);\r\n    column-gap: var(--panel-spacing);\r\n\r\n    padding: var(--panel-spacing);\r\n}\r\n\r\n.select-container {\r\n    position: relative;\r\n\r\n    height: var(--input-height);\r\n    overflow: hidden;\r\n\r\n    background-color: var(--input-background-color);\r\n\r\n    border-radius: var(--input-border-radius);\r\n\r\n    user-select: none;\r\n\r\n    transition: var(--input-background-color-transition);\r\n}\r\n\r\n.select-container:hover {\r\n    background-color: var(--input-background-color-hover);\r\n}\r\n\r\n.select {\r\n    width: 100%;\r\n    height: 100%;\r\n\r\n    border: 0;\r\n    outline: 0;\r\n\r\n    padding: 0 var(--input-padding);\r\n\r\n    background: transparent;\r\n\r\n    font-family: var(--font);\r\n    font-size: var(--input-font-size);\r\n    font-weight: var(--input-font-weight);\r\n    color: var(--input-text-color);\r\n\r\n    appearance: none;\r\n}\r\n\r\n.select optgroup,\r\n.select option {\r\n    color: black;\r\n}\r\n\r\n.arrow {\r\n    position: absolute;\r\n    top: 0;\r\n    right: var(--input-padding);\r\n    bottom: 0;\r\n\r\n    margin: auto 0;\r\n}\r\n\r\n.button-toggle {\r\n    position: relative;\r\n\r\n    width: var(--input-height);\r\n    height: var(--input-height);\r\n\r\n    background-color: var(--input-background-color);\r\n\r\n    border: 0;\r\n    border-radius: var(--input-border-radius);\r\n    outline: 0;\r\n\r\n    cursor: pointer;\r\n\r\n    transition: var(--input-background-color-transition);\r\n}\r\n\r\n.button-toggle:hover {\r\n    background-color: var(--input-background-color-hover);\r\n}\r\n\r\n.button-toggle__line {\r\n    position: absolute;\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n\r\n    width: 12px;\r\n    height: 2px;\r\n\r\n    margin: auto;\r\n\r\n    background: var(--input-text-color);\r\n}\r\n";
+	var styleSidebar$1 = ".navigation {\n    display: none;\n\n    grid-template-columns: 1fr var(--input-height);\n    column-gap: var(--panel-spacing);\n\n    padding: var(--panel-spacing);\n}\n\n.select-container {\n    position: relative;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    user-select: none;\n\n    transition: var(--input-background-color-transition);\n}\n\n.select-container:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.select {\n    width: 100%;\n    height: 100%;\n\n    border: 0;\n    outline: 0;\n\n    padding: 0 var(--input-padding);\n\n    background: transparent;\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    appearance: none;\n}\n\n.select optgroup,\n.select option {\n    color: black;\n}\n\n.arrow {\n    position: absolute;\n    top: 0;\n    right: var(--input-padding);\n    bottom: 0;\n\n    margin: auto 0;\n}\n\n.button-toggle {\n    position: relative;\n\n    width: var(--input-height);\n    height: var(--input-height);\n\n    background-color: var(--input-background-color);\n\n    border: 0;\n    border-radius: var(--input-border-radius);\n    outline: 0;\n\n    cursor: pointer;\n\n    transition: var(--input-background-color-transition);\n}\n\n.button-toggle:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.button-toggle__line {\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n\n    width: 12px;\n    height: 2px;\n\n    margin: auto;\n\n    background: var(--input-text-color);\n}\n";
 
 	var styleDevtools$1 = ".navigation {\r\n    display: none;\r\n    \r\n    padding: var(--panel-spacing);\r\n\r\n    font-size: 0;\r\n\r\n    list-style: none;\r\n\r\n    background-color: var(--panel-background-color);\r\n\r\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\r\n}\r\n\r\n.navigation li {\r\n    display: inline-block;\r\n\r\n    margin-right: 10px;\r\n}\r\n\r\n.navigation-button {\r\n    padding: 13px 30px;\r\n\r\n    color: rgba(255, 255, 255, 0.5);\r\n\r\n    background-color: transparent;\r\n\r\n    border: 0;\r\n    border-radius: 12px;\r\n    outline: 0;\r\n\r\n    font-family: var(--font);\r\n    font-size: 13px;\r\n    font-weight: 600;\r\n\r\n    cursor: pointer;\r\n\r\n    transition: all 0.3s ease-out;\r\n}\r\n\r\n.navigation-button:hover {\r\n    background-color: rgba(255, 255, 255, 0.01);\r\n}\r\n\r\n.navigation-button.active {\r\n    color: rgba(255, 255, 255, 0.9);\r\n\r\n    background-color: rgba(255, 255, 255, 0.03);\r\n}";
 
@@ -44076,9 +44076,9 @@
 
 	window.customElements.define('dddd-navigation', Navigation);
 
-	var style$1 = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.global {\r\n    position: relative;\r\n\r\n    /* padding: var(--panel-spacing) var(--panel-spacing) 0 var(--panel-spacing); */\r\n    padding: 0 var(--panel-spacing) 1px;\r\n\r\n    -webkit-font-smoothing: antialiased;\r\n    font-family: var(--font);\r\n    font-weight: 300;\r\n    font-size: 13px;\r\n\r\n    background-color: var(--panel-background-color);\r\n}\r\n";
+	var style$1 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.global {\n    position: relative;\n\n    /* padding: var(--panel-spacing) var(--panel-spacing) 0 var(--panel-spacing); */\n    padding: 0 var(--panel-spacing) 1px;\n\n    -webkit-font-smoothing: antialiased;\n    font-family: var(--font);\n    font-weight: 300;\n    font-size: 13px;\n\n    background-color: var(--panel-background-color);\n}\n";
 
-	var template$1 = "<div class=\"global\" ref=\"content\"></div>\r\n";
+	var template$1 = "<div class=\"global\" ref=\"content\"></div>\n";
 
 	// Base class
 
@@ -45018,13 +45018,19 @@
 	// Constants
 	const ACTIVE_CLASS$2 = 'active';
 	const PRECISION_MODIFIER = 0.3;
+	const DEFAULT_STEP_SIZE = 0.01;
 
 	// TODO: On change is triggered twice
 	class Slider extends Component {
 	    constructor(root, model) {
 	        super({ root, style: style$5, template: template$5, model });
 
+	        // Options
+	        this._stepSize = this.model.options.stepSize || DEFAULT_STEP_SIZE;
+	        this._decimalPlaces = this._getDecimalPlaces(this._stepSize);
+
 	        // Data
+	        this._isPointerLockActive = false;
 	        this._scrubberOffset = 0;
 	        this._inputContainer = { x: 0, width: 0 };
 	        this._scrubber = { width: 0 };
@@ -45068,14 +45074,14 @@
 	     * Private
 	     */
 	    _bindHandlers() {
-	        this._windowMouseMoveHandler = this._windowMouseMoveHandler.bind(this);
-	        this._windowMouseUpHandler = this._windowMouseUpHandler.bind(this);
 	        this._inputContainerMouseEnterHandler = this._inputContainerMouseEnterHandler.bind(this);
 	        this._inputContainerMouseDownHandler = this._inputContainerMouseDownHandler.bind(this);
 	        this._inputContainerMouseUpHandler = this._inputContainerMouseUpHandler.bind(this);
-	        this._inputContainerDoubleClickHandler = this._inputContainerDoubleClickHandler.bind(this);
 	        this._inputChangeHandler = this._inputChangeHandler.bind(this);
 	        this._inputBlurHandler = this._inputBlurHandler.bind(this);
+	        this._pointerLockHanderHandler = this._pointerLockHanderHandler.bind(this);
+	        this._windowMouseMoveHandler = this._windowMouseMoveHandler.bind(this);
+	        this._windowMouseUpHandler = this._windowMouseUpHandler.bind(this);
 	        this._windowKeyDownHandler = this._windowKeyDownHandler.bind(this);
 	        this._windowKeyUpHandler = this._windowKeyUpHandler.bind(this);
 	    }
@@ -45084,9 +45090,9 @@
 	        this.$refs.inputContainer.addEventListener('mouseenter', this._inputContainerMouseEnterHandler);
 	        this.$refs.inputContainer.addEventListener('mousedown', this._inputContainerMouseDownHandler);
 	        this.$refs.inputContainer.addEventListener('mouseup', this._inputContainerMouseUpHandler);
-	        this.$refs.inputContainer.addEventListener('dblclick', this._inputContainerDoubleClickHandler);
 	        this.$refs.input.addEventListener('change', this._inputChangeHandler);
 	        this.$refs.input.addEventListener('blur', this._inputBlurHandler);
+	        document.addEventListener('pointerlockchange', this._pointerLockHanderHandler);
 	        window.addEventListener('mousemove', this._windowMouseMoveHandler);
 	        window.addEventListener('mouseup', this._windowMouseUpHandler);
 	        window.addEventListener('keydown', this._windowKeyDownHandler);
@@ -45097,9 +45103,9 @@
 	        this.$refs.inputContainer.removeEventListener('mouseenter', this._inputContainerMouseEnterHandler);
 	        this.$refs.inputContainer.removeEventListener('mousedown', this._inputContainerMouseDownHandler);
 	        this.$refs.inputContainer.removeEventListener('mouseup', this._inputContainerMouseUpHandler);
-	        this.$refs.inputContainer.removeEventListener('dblclick', this._inputContainerDoubleClickHandler);
 	        this.$refs.input.removeEventListener('change', this._inputChangeHandler);
 	        this.$refs.input.removeEventListener('blur', this._inputBlurHandler);
+	        document.removeEventListener('pointerlockchange', this._pointerLockHanderHandler);
 	        window.removeEventListener('mousemove', this._windowMouseMoveHandler);
 	        window.removeEventListener('mouseup', this._windowMouseUpHandler);
 	        window.removeEventListener('keydown', this._windowKeyDownHandler);
@@ -45112,7 +45118,7 @@
 	        ValueHover$1.set(this.model.value);
 	    }
 
-	    _calcValue(mouseX) {
+	    _calcStartValue(mouseX) {
 	        const modifier = this._isShiftDown ? PRECISION_MODIFIER : 1;
 	        const delta = (mouseX - this._mouseStartPosition.x) * modifier;
 	        const x = this._mouseStartPosition.x - this._inputContainer.x + delta;
@@ -45135,12 +45141,17 @@
 	    }
 
 	    _updateInputValue(value) {
-	        const output = (Math.round(value * 100) / 100).toFixed(2);
+	        const output = value.toFixed(this._decimalPlaces);
 	        this.$refs.input.value = output;
 	    }
 
 	    _map(value, inMin, inMax, outMin, outMax) {
 	        return ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+	    }
+
+	    _getDecimalPlaces(value) {
+	        const split = value.toString().split('.');
+	        return split.length > 1 ? split[1].length : 0;
 	    }
 
 	    /**
@@ -45176,28 +45187,52 @@
 	        this.$refs.inputContainer.classList.remove(ACTIVE_CLASS$2);
 	    }
 
+	    _getInputValueBasedOnMouseMovement(movementX) {
+	        const modifier = this._isShiftDown ? PRECISION_MODIFIER : 1;
+	        return this.model.value + movementX * this._stepSize * modifier;
+	    }
+
 	    /**
 	     * Handlers
 	     */
-	    _windowMouseMoveHandler(e) {
-	        if (this._isMouseDown) {
-	            this._mousePosition.x = e.clientX;
-	            if (Math.abs(this._mouseStartPosition.x - e.clientX) > 2) {
-	                this._isSlideStarted = true;
-	            }
-	            const value = this._calcValue(e.clientX);
-	            this._updateValue(value);
+	    _pointerLockHanderHandler() {
+	        if (this.shadowRoot.pointerLockElement === this.$refs.input) {
+	            this._isPointerLockActive = true;
+	        } else {
+	            this._isPointerLockActive = false;
 	        }
+	    }
+
+	    _windowMouseMoveHandler(e) {
+	        if (!this._isMouseDown) return;
+
+	        let delta = e.movementX;
+
+	        // NOTE: Prevents bug in chrome where movementX spikes to high value
+	        if (Math.abs(delta) > 100) delta = 1 * Math.sign(delta);
+
+	        if (delta % 2 === 0) delta *= 0.5;
+
+	        if (!this._isSlideStarted) {
+	            const startValue = this._calcStartValue(e.clientX);
+	            this._updateValue(startValue);
+	        }
+
+	        if (Math.abs(delta) > 0) this._isSlideStarted = true;
+
+	        const value = this._getInputValueBasedOnMouseMovement(delta);
+	        this._updateValue(value);
 	    }
 
 	    _windowMouseUpHandler(e) {
 	        this._isMouseDown = false;
 	        this._isSlideStarted = false;
 	        this._removeActiveClass();
-	        // clearTimeout(this._mouseDownClickTimeout);
 	    }
 
 	    _inputContainerMouseUpHandler() {
+	        document.exitPointerLock();
+
 	        if (this._isSlideStarted) return;
 	        this._selectInput();
 	        this._hideScrubber();
@@ -45209,21 +45244,12 @@
 
 	    _inputContainerMouseDownHandler(e) {
 	        if (this._isMouseDown || this._isInputSelected) return;
+
+	        this.$refs.input.requestPointerLock();
+
 	        this._addActiveClass();
 	        this._mouseStartPosition.x = e.clientX;
-	        // clearTimeout(this._mouseDownClickTimeout);
-
 	        this._isMouseDown = true;
-	        // this._mouseDownClickTimeout = setTimeout(() => {
-	        //     this._isMouseDown = true;
-	        //     const value = this._calcValue(e.clientX);
-	        //     this._updateValue(value);
-	        // }, 150);
-	    }
-
-	    _inputContainerDoubleClickHandler(e) {
-	        // clearTimeout(this._mouseDownClickTimeout);
-	        this._selectInput();
 	    }
 
 	    _inputChangeHandler(e) {
@@ -45320,14 +45346,14 @@
 	// Base component
 
 	// Constants
-	const DEFAULT_STEP_SIZE = 0.01;
+	const DEFAULT_STEP_SIZE$1 = 0.01;
 
 	class NumberComponent extends Component {
 	    constructor(root, model) {
 	        super({ root, style: style$7, template: template$7, model });
 
 	        // Options
-	        this._stepSize = this.model.options.stepSize || DEFAULT_STEP_SIZE;
+	        this._stepSize = this.model.options.stepSize || DEFAULT_STEP_SIZE$1;
 	        this._min = typeof this.model.options.min === 'number' ? this.model.options.min : null;
 	        this._max = typeof this.model.options.max === 'number' ? this.model.options.max : null;
 	        this._decimalPlaces = this._getDecimalPlaces(this._stepSize);
@@ -45451,7 +45477,12 @@
 	    _mouseMoveHandler(e) {
 	        if (!this._isPointerLockActive) return;
 
-	        const delta = Math.max(Math.min(e.movementX, 100), -100); // NOTE: Prevents bug in chrome where movementX spikes to high value
+	        let delta = e.movementX;
+	        // NOTE: Prevents bug in chrome where movementX spikes to high value
+	        if (Math.abs(delta) > 100) delta = 1 * Math.sign(delta);
+
+	        if (delta % 2 === 0) delta *= 0.5;
+
 	        if (Math.abs(delta) > 0) {
 	            this._isMouseMoved = true;
 	        }
@@ -45852,7 +45883,7 @@
 
 	var style$c = ".component {\r\n    display: grid;\r\n\r\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\r\n    align-items: center;\r\n}\r\n\r\n.label {\r\n    overflow: hidden;\r\n\r\n    padding: var(--label-padding);\r\n\r\n    font-size: var(--label-font-size);\r\n    font-weight: var(--label-font-weight);\r\n    color: var(--label-color);\r\n    white-space: nowrap;\r\n    text-overflow: ellipsis;\r\n}\r\n\r\n.input-container {\r\n    display: grid;\r\n    position: relative;\r\n\r\n    grid-template-columns: 27px calc(100% - 20px);\r\n    align-items: center;\r\n\r\n    height: var(--input-height);\r\n    overflow: hidden;\r\n\r\n    padding: 0 var(--input-padding) 0 5px;\r\n\r\n    font-family: var(--font);\r\n    font-size: var(--input-font-size);\r\n    font-weight: var(--input-font-weight);\r\n\r\n    background-color: var(--input-background-color);\r\n\r\n    border-radius: var(--input-border-radius);\r\n\r\n    transition: var(--input-background-color-transition);\r\n}\r\n\r\n.input-container:hover {\r\n    background-color: var(--input-background-color-hover);\r\n}\r\n\r\n.component.error .input-container {\r\n    background-color: var(--input-background-color-error);\r\n}\r\n\r\n.color {\r\n    width: 20px;\r\n    height: 20px;\r\n\r\n    margin: 0;\r\n    padding: 0;\r\n\r\n    background: transparent;\r\n\r\n    border: 0;\r\n    outline: 0;\r\n\r\n    appearance: none;\r\n    cursor: pointer;\r\n}\r\n\r\n.color::-webkit-color-swatch-wrapper {\r\n    padding: 0;\r\n}\r\n\r\n.color::-webkit-color-swatch {\r\n    border: none;\r\n    border-radius: 4px;\r\n}\r\n\r\n.color-string {\r\n    background: transparent;\r\n\r\n    border: 0;\r\n    outline: 0;\r\n\r\n    color: var(--input-text-color);\r\n}\r\n\r\n/* .alpha {\r\n    color: var(--input-text-color);\r\n    text-align: right;\r\n} */\r\n";
 
-	var template$c = "<div class=\"component\">\r\n\r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input container  -->\r\n    <div class=\"input-container\">\r\n\r\n        <!-- Color input -->\r\n        <input type=\"color\" class=\"color\" ref=\"color\">\r\n\r\n        <!-- Color string -->\r\n        <input type=\"text\" class=\"color-string\" ref=\"colorString\">\r\n\r\n        <!-- Alpha -->\r\n        <!-- <span class=\"alpha\">100%</span> -->\r\n\r\n    </div>\r\n\r\n</div>\r\n";
+	var template$c = "<div class=\"component\">\n\n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input container  -->\n    <div class=\"input-container\">\n\n        <!-- Color input -->\n        <input type=\"color\" class=\"color\" ref=\"color\">\n\n        <!-- Color string -->\n        <input type=\"text\" class=\"color-string\" ref=\"colorString\">\n\n        <!-- Alpha -->\n        <!-- <span class=\"alpha\">100%</span> -->\n\n    </div>\n\n</div>\n";
 
 	// Base component
 
@@ -46028,14 +46059,14 @@
 	// Base component
 
 	// Constants
-	const DEFAULT_STEP_SIZE$1 = 0.01;
+	const DEFAULT_STEP_SIZE$2 = 0.01;
 
 	class MultiInput extends Component {
 	    constructor(root, model) {
 	        super({ root, style: style$d, template: template$d, model });
 
 	        // Options
-	        this._stepSize = this.model.options.stepSize || DEFAULT_STEP_SIZE$1;
+	        this._stepSize = this.model.options.stepSize || DEFAULT_STEP_SIZE$2;
 	        this._decimalPlaces = this._getDecimalPlaces(this._stepSize);
 
 	        // Data
@@ -47235,9 +47266,11 @@
 
 	const sliderValues = {
 	    fixed: 0.5,
+	    stepSize: 0.5,
 	};
 
 	slider.add(sliderValues, 'fixed', { min: 0, max: 1 });
+	slider.add(sliderValues, 'stepSize', { min: 0, max: 1, stepSize: 0.001 });
 
 	/**
 	 * Number

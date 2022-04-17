@@ -93,9 +93,11 @@ const slider = dddd.addGroup('Slider', {
 
 const sliderValues = {
     fixed: 0.5,
+    stepSize: 0.5,
 };
 
 slider.add(sliderValues, 'fixed', { min: 0, max: 1 });
+slider.add(sliderValues, 'stepSize', { min: 0, max: 1, stepSize: 0.001 });
 
 /**
  * Number

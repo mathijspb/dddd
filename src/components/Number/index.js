@@ -142,7 +142,12 @@ export default class NumberComponent extends Component {
     _mouseMoveHandler(e) {
         if (!this._isPointerLockActive) return;
 
-        const delta = Math.max(Math.min(e.movementX, 100), -100); // NOTE: Prevents bug in chrome where movementX spikes to high value
+        let delta = e.movementX;
+        // NOTE: Prevents bug in chrome where movementX spikes to high value
+        if (Math.abs(delta) > 100) delta = 1 * Math.sign(delta);
+
+        if (delta % 2 === 0) delta *= 0.5;
+
         if (Math.abs(delta) > 0) {
             this._isMouseMoved = true;
         }
