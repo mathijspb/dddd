@@ -9,20 +9,22 @@ export default {
         anchor: 'images',
         description: 'Shows an image when the value has one of the following extensions gif|jpe?g|tiff?|png|webp|bmp. You can click on the image to change it or drag a file on top of it.',
     },
-    api: [
-        {
-            property: 'contain',
-            type: 'Boolean',
-            default: 'false',
-            description: 'Contains the image within the input box',
-        },
-        {
-            property: 'onChange',
-            type: 'Callback',
-            default: 'undefined',
-            description: 'Callback that is triggered when the value changes',
-        },
-    ],
+    api: {
+        properties: [
+            {
+                property: 'contain',
+                type: 'Boolean',
+                default: 'false',
+                description: 'Contains the image within the input box',
+            },
+            {
+                property: 'onChange',
+                type: 'Callback',
+                default: 'undefined',
+                description: 'Callback that is triggered when the value changes',
+            },
+        ],
+    },
     example: {
         code: `
 const data = {

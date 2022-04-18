@@ -6,20 +6,22 @@ export default {
         anchor: 'layers',
         description: 'Create a layer the can group components for example per page',
     },
-    parameters: [
-        {
-            property: 'name',
-            type: 'String',
-            default: 'undefined',
-            description: 'The name of the layer',
-        },
-        {
-            property: 'group',
-            type: 'String',
-            default: 'undefined',
-            description: 'Optional group of the layer',
-        },
-    ],
+    api: {
+        parameters: [
+            {
+                property: 'name',
+                type: 'String',
+                default: 'undefined',
+                description: 'The name of the layer',
+            },
+            {
+                property: 'group',
+                type: 'String',
+                default: 'undefined',
+                description: 'Optional group of the layer',
+            },
+        ],
+    },
     example: {
         code: `
 const data = {

@@ -1,10 +1,10 @@
-import SectionComponent from '../SectionComponent/index.vue';
+import Section from '../Section/index.vue';
 
 import data from '../../data/components';
 
 export default {
     components: {
-        SectionComponent,
+        Section,
     },
 
     data() {

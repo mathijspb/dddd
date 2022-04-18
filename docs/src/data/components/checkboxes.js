@@ -6,14 +6,16 @@ export default {
         anchor: 'checkboxes',
         description: 'A simple checkbox that is created when the value is a boolean',
     },
-    api: [
-        {
-            property: 'onChange',
-            type: 'Callback',
-            default: 'undefined',
-            description: 'Callback that is triggered when the value changes',
-        },
-    ],
+    api: {
+        properties: [
+            {
+                property: 'onChange',
+                type: 'Callback',
+                default: 'undefined',
+                description: 'Callback that is triggered when the value changes',
+            },
+        ],
+    },
     example: {
         code: `
 const data = {

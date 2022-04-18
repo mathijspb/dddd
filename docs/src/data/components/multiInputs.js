@@ -7,20 +7,22 @@ export default {
         anchor: 'multi-inputs',
         description: 'If an object has multiple properties with numbers this one is created. It also works with a Vectors and Euler from Three.js.',
     },
-    api: [
-        {
-            property: 'stepSize',
-            type: 'Number',
-            default: '0.01',
-            description: 'The step size when dragging the number',
-        },
-        {
-            property: 'onChange',
-            type: 'Callback',
-            default: 'undefined',
-            description: 'Callback that is triggered when the value changes',
-        },
-    ],
+    api: {
+        properties: [
+            {
+                property: 'stepSize',
+                type: 'Number',
+                default: '0.01',
+                description: 'The step size when dragging the number',
+            },
+            {
+                property: 'onChange',
+                type: 'Callback',
+                default: 'undefined',
+                description: 'Callback that is triggered when the value changes',
+            },
+        ],
+    },
     example: {
         code: `
 const data = {

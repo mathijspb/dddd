@@ -1,10 +1,10 @@
-import SectionLayout from '../SectionLayout/index.vue';
+import Section from '../Section/index.vue';
 
 import data from '../../data/layout';
 
 export default {
     components: {
-        SectionLayout,
+        Section,
     },
 
     data() {

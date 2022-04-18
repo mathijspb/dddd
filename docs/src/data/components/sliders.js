@@ -6,32 +6,34 @@ export default {
         anchor: 'sliders',
         description: 'A slider is created when a minimum and maximum value is defined \'color\' is defined.',
     },
-    api: [
-        {
-            property: 'min',
-            type: 'Number',
-            default: 'undefined',
-            description: 'Minimum value',
-        },
-        {
-            property: 'max',
-            type: 'Number',
-            default: 'undefined',
-            description: 'Maxiumum value',
-        },
-        {
-            property: 'stepSize',
-            type: 'Number',
-            default: '0.01',
-            description: 'The step size when dragging the slider',
-        },
-        {
-            property: 'onChange',
-            type: 'Callback',
-            default: 'undefined',
-            description: 'Callback that is triggered when the value changes',
-        },
-    ],
+    api: {
+        properties: [
+            {
+                property: 'min',
+                type: 'Number',
+                default: 'undefined',
+                description: 'Minimum value',
+            },
+            {
+                property: 'max',
+                type: 'Number',
+                default: 'undefined',
+                description: 'Maxiumum value',
+            },
+            {
+                property: 'stepSize',
+                type: 'Number',
+                default: '0.01',
+                description: 'The step size when dragging the slider',
+            },
+            {
+                property: 'onChange',
+                type: 'Callback',
+                default: 'undefined',
+                description: 'Callback that is triggered when the value changes',
+            },
+        ],
+    },
     example: {
         code: `
 const data = {

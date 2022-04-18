@@ -6,20 +6,22 @@ export default {
         anchor: 'canvases',
         description: '',
     },
-    api: [
-        {
-            property: 'label',
-            type: 'String',
-            default: 'undefined',
-            description: 'Defines a label',
-        },
-        {
-            property: 'canvas',
-            type: 'CanvasRenderingContext2D',
-            default: 'undefined',
-            description: 'The canvas',
-        },
-    ],
+    api: {
+        properties: [
+            {
+                property: 'label',
+                type: 'String',
+                default: 'undefined',
+                description: 'Defines a label',
+            },
+            {
+                property: 'canvas',
+                type: 'CanvasRenderingContext2D',
+                default: 'undefined',
+                description: 'The canvas',
+            },
+        ],
+    },
     example: {
         code: `
 const canvasElement = document.createElement('canvas');

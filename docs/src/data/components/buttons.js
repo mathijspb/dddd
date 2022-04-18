@@ -6,20 +6,22 @@ export default {
         anchor: 'buttons',
         description: 'Use .addButton to add a ...!',
     },
-    api: [
-        {
-            property: 'fullWidth',
-            type: 'Boolean',
-            default: 'false',
-            description: 'This will make the button the full width of DDDD.',
-        },
-        {
-            property: 'onClick',
-            type: 'Callback',
-            default: 'undefined',
-            description: 'Callback that is triggered when the button is clicked',
-        },
-    ],
+    api: {
+        properties: [
+            {
+                property: 'fullWidth',
+                type: 'Boolean',
+                default: 'false',
+                description: 'This will make the button the full width of DDDD.',
+            },
+            {
+                property: 'onClick',
+                type: 'Callback',
+                default: 'undefined',
+                description: 'Callback that is triggered when the button is clicked',
+            },
+        ],
+    },
     example: {
         code: `
 const dddd = new DDDD();
