@@ -6,6 +6,7 @@
         <TheNavigation />
 
         <main>
+            <Setup />
             <Layout />
             <Components />
         </main>

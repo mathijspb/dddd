@@ -1,9 +1,9 @@
 <template>
     <div class="intro">
         <h2>
-            <a v-bind:name="data.anchor">{{ data.title }}</a>
+            <a v-bind:name="data.anchor" v-if="data.title">{{ data.title }}</a>
         </h2>
-        <p>{{ data.description }}</p>
+        <p v-if="data.description">{{ data.description }}</p>
     </div>
 </template>
 
