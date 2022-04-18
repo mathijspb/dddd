@@ -46726,9 +46726,16 @@
 	        // this._stats = this._createStats();
 	        this._layers = this._createLayers();
 	        this._components = this._createComponents();
-	        if (options.minimized || !LocalStorage$1.get('visiblity', 'visible')) {
+
+	        // TODO: Move this to a better location
+	        if (LocalStorage$1.get('visiblity', 'visible') === undefined) {
+	            if (options.minimized) {
+	                this._hide();
+	            }
+	        } else if (!LocalStorage$1.get('visiblity', 'visible')) {
 	            this._hide();
 	        }
+
 	        this._bindHandlers();
 	        this._setupEventListeners();
 	    }
