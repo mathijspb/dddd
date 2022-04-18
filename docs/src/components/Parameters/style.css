@@ -1,0 +1,39 @@
+.parameters {
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+
+    border-spacing: 0 10px;
+
+    font-size: 13px;
+}
+
+table tr {
+    padding: 30px;
+}
+
+table th {
+    font-weight: 400;
+    text-align: left;
+}
+
+table th:nth-child(1) {
+    width: 15%;
+}
+
+table th:nth-child(2) {
+    width: 15%;
+}
+
+table th:nth-child(3) {
+    width: 15%;
+}
+
+table td {
+    padding-right: 20px;
+
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+}

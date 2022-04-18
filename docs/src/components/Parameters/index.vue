@@ -1,5 +1,5 @@
 <template>
-    <div class="properties">
+    <div class="parameters">
         <table>
             <tr>
                 <th>Parameter</th>
@@ -18,3 +18,4 @@
 </template>
 
 <script src="./script.js"></script>
+<style src="./style.css" scoped></style>

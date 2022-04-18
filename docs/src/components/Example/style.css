@@ -1,0 +1,20 @@
+.example {
+    display: flex;
+
+    overflow: hidden;
+
+    background-color: rgba(27, 27, 27, 0.9);
+    border-radius: 8px;
+}
+
+.example pre {
+    flex: 1;
+
+    margin: 0;
+
+    padding: 21px 30px 25px 30px;
+}
+
+.example .dddd-container {
+    width: 300px;
+}
