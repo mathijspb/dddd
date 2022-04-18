@@ -7,6 +7,7 @@ export default class DDDD {
         // Props
         this._isDevtools = options.devtools;
         this._isMinimized = options.minimized || false;
+        this._collapseGroups = options.collapseGroups;
         this._onChangeCallback = options.onChange;
         this._onLayerChangeCallback = options.onLayerChange;
         this._wrapper = options.wrapper;
@@ -140,6 +141,7 @@ export default class DDDD {
             root: this,
             onLayerChange: this._onLayerChangeCallback,
             minimized: this._isMinimized,
+            collapseGroups: this._collapseGroups,
             wrapper: this._wrapper,
         });
         return layout;

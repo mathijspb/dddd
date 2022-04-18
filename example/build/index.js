@@ -44588,7 +44588,7 @@
 	// Base class
 
 	class Group$1 extends LayoutElement {
-	    constructor({ root, label, parent, options }) {
+	    constructor({ root, label, parent, collapseGroups, options }) {
 	        super({
 	            root,
 	            style: {
@@ -44608,6 +44608,7 @@
 	        this._label = label;
 	        this._options = options;
 	        this._parent = parent || null;
+	        this._collapseGroups = collapseGroups;
 
 	        // Data
 	        this._id = this._generateId();
@@ -44704,12 +44705,16 @@
 	    }
 
 	    _updateStartupVisibility() {
-	        const key = this._getLocalStorageKey();
-	        const visibility = LocalStorage$1.get(key, 'visibility');
-	        if (visibility === 'visible') {
-	            this._show();
+	        if (this._collapseGroups) {
+	            const key = this._getLocalStorageKey();
+	            const visibility = LocalStorage$1.get(key, 'visibility');
+	            if (visibility === 'visible') {
+	                this._show();
+	            } else {
+	                this._hide();
+	            }
 	        } else {
-	            this._hide();
+	            this._show();
 	        }
 	    }
 
@@ -46715,6 +46720,7 @@
 	        this._root = options.root;
 	        this._onLayerChangeCallback = options.onLayerChange;
 	        this._wrapper = options.wrapper;
+	        this._collapseGroups = options.collapseGroups;
 
 	        // Setup
 	        this._isVisible = true;
@@ -46796,6 +46802,7 @@
 	        const group = new Group$1({
 	            root: this._root,
 	            layout: this,
+	            collapseGroups: this._collapseGroups,
 	            parent,
 	            label,
 	            options,
@@ -47024,6 +47031,7 @@
 	        // Props
 	        this._isDevtools = options.devtools;
 	        this._isMinimized = options.minimized || false;
+	        this._collapseGroups = options.collapseGroups;
 	        this._onChangeCallback = options.onChange;
 	        this._onLayerChangeCallback = options.onLayerChange;
 	        this._wrapper = options.wrapper;
@@ -47157,6 +47165,7 @@
 	            root: this,
 	            onLayerChange: this._onLayerChangeCallback,
 	            minimized: this._isMinimized,
+	            collapseGroups: this._collapseGroups,
 	            wrapper: this._wrapper,
 	        });
 	        return layout;

@@ -13,7 +13,7 @@ import templateSidebar from './template-sidebar.html';
 import templateDevtools from './template-devtools.html';
 
 export default class Group extends LayoutElement {
-    constructor({ root, label, parent, options }) {
+    constructor({ root, label, parent, collapseGroups, options }) {
         super({
             root,
             style: {
@@ -33,6 +33,7 @@ export default class Group extends LayoutElement {
         this._label = label;
         this._options = options;
         this._parent = parent || null;
+        this._collapseGroups = collapseGroups;
 
         // Data
         this._id = this._generateId();
@@ -129,12 +130,16 @@ export default class Group extends LayoutElement {
     }
 
     _updateStartupVisibility() {
-        const key = this._getLocalStorageKey();
-        const visibility = LocalStorage.get(key, 'visibility');
-        if (visibility === 'visible') {
-            this._show();
+        if (this._collapseGroups) {
+            const key = this._getLocalStorageKey();
+            const visibility = LocalStorage.get(key, 'visibility');
+            if (visibility === 'visible') {
+                this._show();
+            } else {
+                this._hide();
+            }
         } else {
-            this._hide();
+            this._show();
         }
     }
 

@@ -24,6 +24,7 @@ export default class Layout {
         this._root = options.root;
         this._onLayerChangeCallback = options.onLayerChange;
         this._wrapper = options.wrapper;
+        this._collapseGroups = options.collapseGroups;
 
         // Setup
         this._isVisible = true;
@@ -105,6 +106,7 @@ export default class Layout {
         const group = new Group({
             root: this._root,
             layout: this,
+            collapseGroups: this._collapseGroups,
             parent,
             label,
             options,
