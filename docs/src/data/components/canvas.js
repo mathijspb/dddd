@@ -2,8 +2,8 @@ import DDDD from 'dddd';
 
 export default {
     intro: {
-        title: 'Canvases',
-        anchor: 'canvases',
+        title: 'Canvas',
+        anchor: 'canvas',
         description: '',
     },
     api: {

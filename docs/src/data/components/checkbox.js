@@ -2,8 +2,8 @@ import DDDD from 'dddd';
 
 export default {
     intro: {
-        title: 'Checkboxes',
-        anchor: 'checkboxes',
+        title: 'Checkbox',
+        anchor: 'checkbox',
         description: 'A simple checkbox that is created when the value is a boolean',
     },
     api: {

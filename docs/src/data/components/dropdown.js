@@ -2,8 +2,8 @@ import DDDD from 'dddd';
 
 export default {
     intro: {
-        title: 'Dropdowns',
-        anchor: 'dropdowns',
+        title: 'Dropdown',
+        anchor: 'dropdown',
         description: 'When some options are defined it will turn into a dropdown!',
     },
     api: [

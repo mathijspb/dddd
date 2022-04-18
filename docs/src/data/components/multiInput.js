@@ -3,8 +3,8 @@ import { Euler, Vector3 } from 'three';
 
 export default {
     intro: {
-        title: 'MultiInputs',
-        anchor: 'multi-inputs',
+        title: 'MultiInput',
+        anchor: 'multi-input',
         description: 'If an object has multiple properties with numbers this one is created. It also works with a Vectors and Euler from Three.js.',
     },
     api: {

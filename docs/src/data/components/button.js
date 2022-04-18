@@ -2,8 +2,8 @@ import DDDD from 'dddd';
 
 export default {
     intro: {
-        title: 'Buttons',
-        anchor: 'buttons',
+        title: 'Button',
+        anchor: 'button',
         description: 'Use .addButton to add a ...!',
     },
     api: {

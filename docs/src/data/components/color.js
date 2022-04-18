@@ -3,8 +3,8 @@ import { Color } from 'three';
 
 export default {
     intro: {
-        title: 'Colors',
-        anchor: 'colors',
+        title: 'Color',
+        anchor: 'color',
         description: 'The color component is created when the value is hexadecimal, an instance of Three.js Color module or when the type \'color\' is defined.',
     },
     api: {

@@ -5,8 +5,8 @@ import image from '../../assets/image.png';
 
 export default {
     intro: {
-        title: 'Images',
-        anchor: 'images',
+        title: 'Image',
+        anchor: 'image',
         description: 'Shows an image when the value has one of the following extensions gif|jpe?g|tiff?|png|webp|bmp. You can click on the image to change it or drag a file on top of it.',
     },
     api: {

@@ -2,9 +2,9 @@ import DDDD from 'dddd';
 
 export default {
     intro: {
-        title: 'Sliders',
-        anchor: 'sliders',
-        description: 'A slider is created when a minimum and maximum value is defined \'color\' is defined.',
+        title: 'Number',
+        anchor: 'number',
+        description: 'When the value is a number this component is created. Keep in mind that when both \'min\' and \'max\' properties are defined it will turn into a slider.',
     },
     api: {
         properties: [
@@ -24,7 +24,7 @@ export default {
                 property: 'stepSize',
                 type: 'Number',
                 default: '0.01',
-                description: 'The step size when dragging the slider',
+                description: 'The step size when dragging the number',
             },
             {
                 property: 'label',
@@ -43,22 +43,28 @@ export default {
     example: {
         code: `
 const data = {
-    fixed: 0.5,
+    _infinite: 0.5,
     stepSize: 0.5,
+    min: 0.5,
+    max: 0.5,
     uProgress: { value: 0.1 },
 };
 
 const dddd = new DDDD();
 
-const group = dddd.addGroup('Sliders');
-group.add(data, 'fixed', { min: 0, max: 1 });
-group.add(data, 'stepSize', { min: 0, max: 1, stepSize: 0.001 });
-group.add(data, 'uProgress', { min: 0, max: 1 });
+const group = dddd.addGroup('Numbers');
+group.add(data, '_infinite');
+group.add(data, 'stepSize', { stepSize: 0.5 });
+group.add(data, 'min', { min: 0 });
+group.add(data, 'max', { max: 1 });
+group.add(data, 'uProgress');
         `,
         dddd: function(element) {
             const data = {
-                fixed: 0.5,
+                _infinite: 0.5,
                 stepSize: 0.5,
+                min: 0.5,
+                max: 0.5,
                 uProgress: { value: 0.1 },
             };
 
@@ -66,10 +72,12 @@ group.add(data, 'uProgress', { min: 0, max: 1 });
                 wrapper: element,
             });
 
-            const group = dddd.addGroup('Sliders');
-            group.add(data, 'fixed', { min: 0, max: 1 });
-            group.add(data, 'stepSize', { min: 0, max: 1, stepSize: 0.001 });
-            group.add(data, 'uProgress', { min: 0, max: 1 });
+            const group = dddd.addGroup('Numbers');
+            group.add(data, '_infinite');
+            group.add(data, 'stepSize', { stepSize: 0.5 });
+            group.add(data, 'min', { min: 0 });
+            group.add(data, 'max', { max: 1 });
+            group.add(data, 'uProgress');
         },
     },
 };
