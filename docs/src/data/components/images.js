@@ -18,6 +18,12 @@ export default {
                 description: 'Contains the image within the input box',
             },
             {
+                property: 'label',
+                type: 'String',
+                default: 'undefined',
+                description: 'Define a custom label',
+            },
+            {
                 property: 'onChange',
                 type: 'Callback',
                 default: 'undefined',

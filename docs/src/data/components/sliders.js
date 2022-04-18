@@ -27,6 +27,12 @@ export default {
                 description: 'The step size when dragging the slider',
             },
             {
+                property: 'label',
+                type: 'String',
+                default: 'undefined',
+                description: 'Define a custom label',
+            },
+            {
                 property: 'onChange',
                 type: 'Callback',
                 default: 'undefined',

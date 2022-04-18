@@ -10,6 +10,12 @@ export default {
     api: {
         properties: [
             {
+                property: 'label',
+                type: 'String',
+                default: 'undefined',
+                description: 'Define a custom label',
+            },
+            {
                 property: 'type',
                 type: 'String',
                 default: 'undefined',
