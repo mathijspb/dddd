@@ -4,7 +4,7 @@ export default {
     intro: {
         title: 'Globals',
         anchor: 'globals',
-        description: '',
+        description: 'Add a global group that is available in every layer eg. post-processing.',
     },
     api: {
         parameters: [

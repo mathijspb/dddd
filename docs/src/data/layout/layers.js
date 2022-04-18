@@ -31,20 +31,9 @@ const data = {
 const dddd = new DDDD();
 
 dddd.addLayer('Layer #1');
-const groupLayer1 = dddd.addGroup('Group', { container: 'Layer #1' });
-groupLayer1.add(data, 'value');
-
 dddd.addLayer('Layer #2');
-const groupLayer2 = dddd.addGroup('Group', { container: 'Layer #2' });
-groupLayer2.add(data, 'value');
-
 dddd.addLayer('Layer #3', 'Group');
-const groupLayer3 = dddd.addGroup('Group', { container: 'Layer #3' });
-groupLayer3.add(data, 'value');
-
 dddd.addLayer('Layer #4', 'Group');
-const groupLayer4 = dddd.addGroup('Group', { container: 'Layer #4' });
-groupLayer4.add(data, 'value');
         `,
         dddd: function(element) {
             const data = {
