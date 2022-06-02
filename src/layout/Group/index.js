@@ -130,14 +130,16 @@ export default class Group extends LayoutElement {
     }
 
     _updateStartupVisibility() {
-        if (this._collapseGroups) {
-            const key = this._getLocalStorageKey();
-            const visibility = LocalStorage.get(key, 'visibility');
+        const key = this._getLocalStorageKey();
+        const visibility = LocalStorage.get(key, 'visibility');
+        if (visibility) {
             if (visibility === 'visible') {
                 this._show();
             } else {
                 this._hide();
             }
+        } else if (this._collapseGroups) {
+            this._hide();
         } else {
             this._show();
         }

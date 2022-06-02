@@ -23,6 +23,7 @@ const animate = function() {
 animate();
 
 const dddd = new DDDD({
+    // collapseGroups: true,
     onLayerChange: (label) => {
         console.log('change layer', label);
     },
