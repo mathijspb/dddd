@@ -48,8 +48,10 @@ export default class Layers extends LayoutElement {
                 layer = item;
             }
         }
-        this.$el.removeChild(layer);
-        this._layers.splice(this._layers.indexOf(layer), 1);
+        if (layer) {
+            this.$el.removeChild(layer);
+            this._layers.splice(this._layers.indexOf(layer), 1);
+        }
     }
 
     goto(index) {

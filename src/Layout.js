@@ -73,6 +73,7 @@ export default class Layout {
      * Public
      */
     addLayer(label, group) {
+        this._layers.remove('default');
         this._navigation.add(label, group);
         const layer = this._layers.add(label);
         this._layers.resize();

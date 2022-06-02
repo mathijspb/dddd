@@ -1,9 +1,9 @@
 
-(function(l, r) { if (l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (window.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(window.document);
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 (function (factory) {
 	typeof define === 'function' && define.amd ? define(factory) :
 	factory();
-}((function () { 'use strict';
+})((function () { 'use strict';
 
 	// threejs.org/license
 	const REVISION = '125';
@@ -6252,7 +6252,7 @@
 	const _matrix = /*@__PURE__*/ new Matrix4();
 	const _quaternion$1 = /*@__PURE__*/ new Quaternion();
 
-	class Layers {
+	class Layers$1 {
 
 		constructor() {
 
@@ -6391,7 +6391,7 @@
 		this.matrixAutoUpdate = Object3D.DefaultMatrixAutoUpdate;
 		this.matrixWorldNeedsUpdate = false;
 
-		this.layers = new Layers();
+		this.layers = new Layers$1();
 		this.visible = true;
 
 		this.castShadow = false;
@@ -7800,7 +7800,7 @@
 
 	}
 
-	class Color {
+	class Color$1 {
 
 		constructor( r, g, b ) {
 
@@ -8352,10 +8352,10 @@
 
 	}
 
-	Color.NAMES = _colorKeywords;
-	Color.prototype.r = 1;
-	Color.prototype.g = 1;
-	Color.prototype.b = 1;
+	Color$1.NAMES = _colorKeywords;
+	Color$1.prototype.r = 1;
+	Color$1.prototype.g = 1;
+	Color$1.prototype.b = 1;
 
 	class Face3 {
 
@@ -8368,7 +8368,7 @@
 			this.normal = ( normal && normal.isVector3 ) ? normal : new Vector3();
 			this.vertexNormals = Array.isArray( normal ) ? normal : [];
 
-			this.color = ( color && color.isColor ) ? color : new Color();
+			this.color = ( color && color.isColor ) ? color : new Color$1();
 			this.vertexColors = Array.isArray( color ) ? color : [];
 
 			this.materialIndex = materialIndex;
@@ -8892,7 +8892,7 @@
 
 		this.type = 'MeshBasicMaterial';
 
-		this.color = new Color( 0xffffff ); // emissive
+		this.color = new Color$1( 0xffffff ); // emissive
 
 		this.map = null;
 
@@ -9061,7 +9061,7 @@
 				if ( color === undefined ) {
 
 					console.warn( 'THREE.BufferAttribute.copyColorsArray(): color is undefined', i );
-					color = new Color();
+					color = new Color$1();
 
 				}
 
@@ -12946,7 +12946,7 @@
 
 		common: {
 
-			diffuse: { value: new Color( 0xeeeeee ) },
+			diffuse: { value: new Color$1( 0xeeeeee ) },
 			opacity: { value: 1.0 },
 
 			map: { value: null },
@@ -13038,7 +13038,7 @@
 			fogDensity: { value: 0.00025 },
 			fogNear: { value: 1 },
 			fogFar: { value: 2000 },
-			fogColor: { value: new Color( 0xffffff ) }
+			fogColor: { value: new Color$1( 0xffffff ) }
 
 		},
 
@@ -13123,7 +13123,7 @@
 
 		points: {
 
-			diffuse: { value: new Color( 0xeeeeee ) },
+			diffuse: { value: new Color$1( 0xeeeeee ) },
 			opacity: { value: 1.0 },
 			size: { value: 1.0 },
 			scale: { value: 1.0 },
@@ -13135,7 +13135,7 @@
 
 		sprite: {
 
-			diffuse: { value: new Color( 0xeeeeee ) },
+			diffuse: { value: new Color$1( 0xeeeeee ) },
 			opacity: { value: 1.0 },
 			center: { value: new Vector2( 0.5, 0.5 ) },
 			rotation: { value: 0.0 },
@@ -13177,7 +13177,7 @@
 				UniformsLib.fog,
 				UniformsLib.lights,
 				{
-					emissive: { value: new Color( 0x000000 ) }
+					emissive: { value: new Color$1( 0x000000 ) }
 				}
 			] ),
 
@@ -13201,8 +13201,8 @@
 				UniformsLib.fog,
 				UniformsLib.lights,
 				{
-					emissive: { value: new Color( 0x000000 ) },
-					specular: { value: new Color( 0x111111 ) },
+					emissive: { value: new Color$1( 0x000000 ) },
+					specular: { value: new Color$1( 0x111111 ) },
 					shininess: { value: 30 }
 				}
 			] ),
@@ -13228,7 +13228,7 @@
 				UniformsLib.fog,
 				UniformsLib.lights,
 				{
-					emissive: { value: new Color( 0x000000 ) },
+					emissive: { value: new Color$1( 0x000000 ) },
 					roughness: { value: 1.0 },
 					metalness: { value: 0.0 },
 					envMapIntensity: { value: 1 } // temporary
@@ -13254,7 +13254,7 @@
 				UniformsLib.fog,
 				UniformsLib.lights,
 				{
-					emissive: { value: new Color( 0x000000 ) }
+					emissive: { value: new Color$1( 0x000000 ) }
 				}
 			] ),
 
@@ -13414,7 +13414,7 @@
 				UniformsLib.lights,
 				UniformsLib.fog,
 				{
-					color: { value: new Color( 0x00000 ) },
+					color: { value: new Color$1( 0x00000 ) },
 					opacity: { value: 1.0 }
 				},
 			] ),
@@ -13437,7 +13437,7 @@
 				clearcoatRoughnessMap: { value: null },
 				clearcoatNormalScale: { value: new Vector2( 1, 1 ) },
 				clearcoatNormalMap: { value: null },
-				sheen: { value: new Color( 0x000000 ) },
+				sheen: { value: new Color$1( 0x000000 ) },
 				transmission: { value: 0 },
 				transmissionMap: { value: null },
 			}
@@ -13450,7 +13450,7 @@
 
 	function WebGLBackground( renderer, cubemaps, state, objects, premultipliedAlpha ) {
 
-		const clearColor = new Color( 0x000000 );
+		const clearColor = new Color$1( 0x000000 );
 		let clearAlpha = 0;
 
 		let planeMesh;
@@ -17812,7 +17812,7 @@
 					case 'DirectionalLight':
 						uniforms = {
 							direction: new Vector3(),
-							color: new Color()
+							color: new Color$1()
 						};
 						break;
 
@@ -17820,7 +17820,7 @@
 						uniforms = {
 							position: new Vector3(),
 							direction: new Vector3(),
-							color: new Color(),
+							color: new Color$1(),
 							distance: 0,
 							coneCos: 0,
 							penumbraCos: 0,
@@ -17831,7 +17831,7 @@
 					case 'PointLight':
 						uniforms = {
 							position: new Vector3(),
-							color: new Color(),
+							color: new Color$1(),
 							distance: 0,
 							decay: 0
 						};
@@ -17840,14 +17840,14 @@
 					case 'HemisphereLight':
 						uniforms = {
 							direction: new Vector3(),
-							skyColor: new Color(),
-							groundColor: new Color()
+							skyColor: new Color$1(),
+							groundColor: new Color$1()
 						};
 						break;
 
 					case 'RectAreaLight':
 						uniforms = {
-							color: new Color(),
+							color: new Color$1(),
 							position: new Vector3(),
 							halfWidth: new Vector3(),
 							halfHeight: new Vector3()
@@ -21446,7 +21446,7 @@
 
 	} );
 
-	function Group() {
+	function Group$1() {
 
 		Object3D.call( this );
 
@@ -21454,9 +21454,9 @@
 
 	}
 
-	Group.prototype = Object.assign( Object.create( Object3D.prototype ), {
+	Group$1.prototype = Object.assign( Object.create( Object3D.prototype ), {
 
-		constructor: Group,
+		constructor: Group$1,
 
 		isGroup: true
 
@@ -21478,7 +21478,7 @@
 
 			if ( this._hand === null ) {
 
-				this._hand = new Group();
+				this._hand = new Group$1();
 				this._hand.matrixAutoUpdate = false;
 				this._hand.visible = false;
 
@@ -21495,7 +21495,7 @@
 
 			if ( this._targetRay === null ) {
 
-				this._targetRay = new Group();
+				this._targetRay = new Group$1();
 				this._targetRay.matrixAutoUpdate = false;
 				this._targetRay.visible = false;
 
@@ -21509,7 +21509,7 @@
 
 			if ( this._grip === null ) {
 
-				this._grip = new Group();
+				this._grip = new Group$1();
 				this._grip.matrixAutoUpdate = false;
 				this._grip.visible = false;
 
@@ -21593,7 +21593,7 @@
 						if ( hand.joints[ inputjoint.jointName ] === undefined ) {
 
 							// The transform of this joint will be updated with the joint pose on each frame
-							const joint = new Group();
+							const joint = new Group$1();
 							joint.matrixAutoUpdate = false;
 							joint.visible = false;
 							hand.joints[ inputjoint.jointName ] = joint;
@@ -23364,7 +23364,7 @@
 
 				console.warn( 'WebGLRenderer: .getClearColor() now requires a Color as an argument' );
 
-				target = new Color();
+				target = new Color$1();
 
 			}
 
@@ -25324,7 +25324,7 @@
 
 		this.type = 'SpriteMaterial';
 
-		this.color = new Color( 0xffffff );
+		this.color = new Color$1( 0xffffff );
 
 		this.map = null;
 
@@ -26281,7 +26281,7 @@
 
 		this.type = 'LineBasicMaterial';
 
-		this.color = new Color( 0xffffff );
+		this.color = new Color$1( 0xffffff );
 
 		this.linewidth = 1;
 		this.linecap = 'round';
@@ -26649,7 +26649,7 @@
 
 		this.type = 'PointsMaterial';
 
-		this.color = new Color( 0xffffff );
+		this.color = new Color$1( 0xffffff );
 
 		this.map = null;
 
@@ -26984,10 +26984,10 @@
 	DepthTexture.prototype.constructor = DepthTexture;
 	DepthTexture.prototype.isDepthTexture = true;
 
-	const _v0$2 = new Vector3();
-	const _v1$5 = new Vector3();
-	const _normal$1 = new Vector3();
-	const _triangle = new Triangle();
+	new Vector3();
+	new Vector3();
+	new Vector3();
+	new Triangle();
 
 	/**
 	 * Port from https://github.com/mapbox/earcut (v2.2.2)
@@ -28945,7 +28945,7 @@
 
 		this.type = 'ShadowMaterial';
 
-		this.color = new Color( 0x000000 );
+		this.color = new Color$1( 0x000000 );
 		this.transparent = true;
 
 		this.setValues( parameters );
@@ -29038,7 +29038,7 @@
 
 		this.type = 'MeshStandardMaterial';
 
-		this.color = new Color( 0xffffff ); // diffuse
+		this.color = new Color$1( 0xffffff ); // diffuse
 		this.roughness = 1.0;
 		this.metalness = 0.0;
 
@@ -29050,7 +29050,7 @@
 		this.aoMap = null;
 		this.aoMapIntensity = 1.0;
 
-		this.emissive = new Color( 0x000000 );
+		this.emissive = new Color$1( 0x000000 );
 		this.emissiveIntensity = 1.0;
 		this.emissiveMap = null;
 
@@ -29245,7 +29245,7 @@
 
 		if ( source.sheen ) {
 
-			this.sheen = ( this.sheen || new Color() ).copy( source.sheen );
+			this.sheen = ( this.sheen || new Color$1() ).copy( source.sheen );
 
 		} else {
 
@@ -29314,8 +29314,8 @@
 
 		this.type = 'MeshPhongMaterial';
 
-		this.color = new Color( 0xffffff ); // diffuse
-		this.specular = new Color( 0x111111 );
+		this.color = new Color$1( 0xffffff ); // diffuse
+		this.specular = new Color$1( 0x111111 );
 		this.shininess = 30;
 
 		this.map = null;
@@ -29326,7 +29326,7 @@
 		this.aoMap = null;
 		this.aoMapIntensity = 1.0;
 
-		this.emissive = new Color( 0x000000 );
+		this.emissive = new Color$1( 0x000000 );
 		this.emissiveIntensity = 1.0;
 		this.emissiveMap = null;
 
@@ -29468,7 +29468,7 @@
 
 		this.type = 'MeshToonMaterial';
 
-		this.color = new Color( 0xffffff );
+		this.color = new Color$1( 0xffffff );
 
 		this.map = null;
 		this.gradientMap = null;
@@ -29479,7 +29479,7 @@
 		this.aoMap = null;
 		this.aoMapIntensity = 1.0;
 
-		this.emissive = new Color( 0x000000 );
+		this.emissive = new Color$1( 0x000000 );
 		this.emissiveIntensity = 1.0;
 		this.emissiveMap = null;
 
@@ -29685,7 +29685,7 @@
 
 		this.type = 'MeshLambertMaterial';
 
-		this.color = new Color( 0xffffff ); // diffuse
+		this.color = new Color$1( 0xffffff ); // diffuse
 
 		this.map = null;
 
@@ -29695,7 +29695,7 @@
 		this.aoMap = null;
 		this.aoMapIntensity = 1.0;
 
-		this.emissive = new Color( 0x000000 );
+		this.emissive = new Color$1( 0x000000 );
 		this.emissiveIntensity = 1.0;
 		this.emissiveMap = null;
 
@@ -29802,7 +29802,7 @@
 
 		this.type = 'MeshMatcapMaterial';
 
-		this.color = new Color( 0xffffff ); // diffuse
+		this.color = new Color$1( 0xffffff ); // diffuse
 
 		this.matcap = null;
 
@@ -34863,7 +34863,7 @@
 
 		this.type = 'Light';
 
-		this.color = new Color( color );
+		this.color = new Color$1( color );
 		this.intensity = intensity;
 
 	}
@@ -34916,7 +34916,7 @@
 		this.position.copy( Object3D.DefaultUp );
 		this.updateMatrix();
 
-		this.groundColor = new Color( groundColor );
+		this.groundColor = new Color$1( groundColor );
 
 	}
 
@@ -35900,7 +35900,7 @@
 			if ( json.color !== undefined && material.color !== undefined ) material.color.setHex( json.color );
 			if ( json.roughness !== undefined ) material.roughness = json.roughness;
 			if ( json.metalness !== undefined ) material.metalness = json.metalness;
-			if ( json.sheen !== undefined ) material.sheen = new Color().setHex( json.sheen );
+			if ( json.sheen !== undefined ) material.sheen = new Color$1().setHex( json.sheen );
 			if ( json.emissive !== undefined && material.emissive !== undefined ) material.emissive.setHex( json.emissive );
 			if ( json.specular !== undefined && material.specular !== undefined ) material.specular.setHex( json.specular );
 			if ( json.shininess !== undefined ) material.shininess = json.shininess;
@@ -35987,7 +35987,7 @@
 							break;
 
 						case 'c':
-							material.uniforms[ name ].value = new Color().setHex( uniform.value );
+							material.uniforms[ name ].value = new Color$1().setHex( uniform.value );
 							break;
 
 						case 'v2':
@@ -36562,7 +36562,7 @@
 
 		this.type = 'ShapePath';
 
-		this.color = new Color();
+		this.color = new Color$1();
 
 		this.subPaths = [];
 		this.currentPath = null;
@@ -37119,8 +37119,8 @@
 
 		LightProbe.call( this, undefined, intensity );
 
-		const color1 = new Color().set( skyColor );
-		const color2 = new Color().set( groundColor );
+		const color1 = new Color$1().set( skyColor );
+		const color2 = new Color$1().set( groundColor );
 
 		const sky = new Vector3( color1.r, color1.g, color1.b );
 		const ground = new Vector3( color2.r, color2.g, color2.b );
@@ -37164,7 +37164,7 @@
 
 		LightProbe.call( this, undefined, intensity );
 
-		const color1 = new Color().set( color );
+		const color1 = new Color$1().set( color );
 
 		// without extra factor of PI in the shader, would be 2 / Math.sqrt( Math.PI );
 		this.sh.coefficients[ 0 ].set( color1.r, color1.g, color1.b ).multiplyScalar( 2 * Math.sqrt( Math.PI ) );
@@ -40652,7 +40652,7 @@
 		this.near = near || 0;
 		this.far = far || Infinity;
 		this.camera = null;
-		this.layers = new Layers();
+		this.layers = new Layers$1();
 
 		this.params = {
 			Mesh: {},
@@ -41026,12 +41026,166 @@
 
 	ImmediateRenderObject.prototype.isImmediateRenderObject = true;
 
+	const _vector$a = /*@__PURE__*/ new Vector3();
+	const _boneMatrix = /*@__PURE__*/ new Matrix4();
+	const _matrixWorldInv = /*@__PURE__*/ new Matrix4();
+
+
+	class SkeletonHelper extends LineSegments {
+
+		constructor( object ) {
+
+			const bones = getBoneList( object );
+
+			const geometry = new BufferGeometry();
+
+			const vertices = [];
+			const colors = [];
+
+			const color1 = new Color$1( 0, 0, 1 );
+			const color2 = new Color$1( 0, 1, 0 );
+
+			for ( let i = 0; i < bones.length; i ++ ) {
+
+				const bone = bones[ i ];
+
+				if ( bone.parent && bone.parent.isBone ) {
+
+					vertices.push( 0, 0, 0 );
+					vertices.push( 0, 0, 0 );
+					colors.push( color1.r, color1.g, color1.b );
+					colors.push( color2.r, color2.g, color2.b );
+
+				}
+
+			}
+
+			geometry.setAttribute( 'position', new Float32BufferAttribute( vertices, 3 ) );
+			geometry.setAttribute( 'color', new Float32BufferAttribute( colors, 3 ) );
+
+			const material = new LineBasicMaterial( { vertexColors: true, depthTest: false, depthWrite: false, toneMapped: false, transparent: true } );
+
+			super( geometry, material );
+
+			this.type = 'SkeletonHelper';
+			this.isSkeletonHelper = true;
+
+			this.root = object;
+			this.bones = bones;
+
+			this.matrix = object.matrixWorld;
+			this.matrixAutoUpdate = false;
+
+		}
+
+		updateMatrixWorld( force ) {
+
+			const bones = this.bones;
+
+			const geometry = this.geometry;
+			const position = geometry.getAttribute( 'position' );
+
+			_matrixWorldInv.copy( this.root.matrixWorld ).invert();
+
+			for ( let i = 0, j = 0; i < bones.length; i ++ ) {
+
+				const bone = bones[ i ];
+
+				if ( bone.parent && bone.parent.isBone ) {
+
+					_boneMatrix.multiplyMatrices( _matrixWorldInv, bone.matrixWorld );
+					_vector$a.setFromMatrixPosition( _boneMatrix );
+					position.setXYZ( j, _vector$a.x, _vector$a.y, _vector$a.z );
+
+					_boneMatrix.multiplyMatrices( _matrixWorldInv, bone.parent.matrixWorld );
+					_vector$a.setFromMatrixPosition( _boneMatrix );
+					position.setXYZ( j + 1, _vector$a.x, _vector$a.y, _vector$a.z );
+
+					j += 2;
+
+				}
+
+			}
+
+			geometry.getAttribute( 'position' ).needsUpdate = true;
+
+			super.updateMatrixWorld( force );
+
+		}
+
+	}
+
+
+	function getBoneList( object ) {
+
+		const boneList = [];
+
+		if ( object && object.isBone ) {
+
+			boneList.push( object );
+
+		}
+
+		for ( let i = 0; i < object.children.length; i ++ ) {
+
+			boneList.push.apply( boneList, getBoneList( object.children[ i ] ) );
+
+		}
+
+		return boneList;
+
+	}
+
+	class GridHelper extends LineSegments {
+
+		constructor( size = 10, divisions = 10, color1 = 0x444444, color2 = 0x888888 ) {
+
+			color1 = new Color$1( color1 );
+			color2 = new Color$1( color2 );
+
+			const center = divisions / 2;
+			const step = size / divisions;
+			const halfSize = size / 2;
+
+			const vertices = [], colors = [];
+
+			for ( let i = 0, j = 0, k = - halfSize; i <= divisions; i ++, k += step ) {
+
+				vertices.push( - halfSize, 0, k, halfSize, 0, k );
+				vertices.push( k, 0, - halfSize, k, 0, halfSize );
+
+				const color = i === center ? color1 : color2;
+
+				color.toArray( colors, j ); j += 3;
+				color.toArray( colors, j ); j += 3;
+				color.toArray( colors, j ); j += 3;
+				color.toArray( colors, j ); j += 3;
+
+			}
+
+			const geometry = new BufferGeometry();
+			geometry.setAttribute( 'position', new Float32BufferAttribute( vertices, 3 ) );
+			geometry.setAttribute( 'color', new Float32BufferAttribute( colors, 3 ) );
+
+			const material = new LineBasicMaterial( { vertexColors: true, toneMapped: false } );
+
+			super( geometry, material );
+
+			this.type = 'GridHelper';
+
+		}
+
+	}
+
+	const _floatView = new Float32Array( 1 );
+	new Int32Array( _floatView.buffer );
+
 	const backgroundMaterial = new MeshBasicMaterial( {
 		side: BackSide,
 		depthWrite: false,
 		depthTest: false,
 	} );
-	const backgroundBox = new Mesh( new BoxGeometry(), backgroundMaterial );
+	new Mesh( new BoxGeometry(), backgroundMaterial );
 
 	//
 
@@ -41092,6 +41246,18 @@
 		}
 
 	} );
+
+	GridHelper.prototype.setColors = function () {
+
+		console.error( 'THREE.GridHelper: setColors() has been deprecated, pass them in the constructor instead.' );
+
+	};
+
+	SkeletonHelper.prototype.update = function () {
+
+		console.error( 'THREE.SkeletonHelper: update() no longer needs to be called.' );
+
+	};
 
 	//
 
@@ -42166,7 +42332,7 @@
 			get: function () {
 
 				console.warn( 'THREE.Material: .wrapRGB has been removed.' );
-				return new Color();
+				return new Color$1();
 
 			}
 		},
@@ -42811,752 +42977,768 @@
 
 	}
 
-	var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+	/*!
+	 * mustache.js - Logic-less {{mustache}} templates with JavaScript
+	 * http://github.com/janl/mustache.js
+	 */
 
-	function createCommonjsModule(fn) {
-	  var module = { exports: {} };
-		return fn(module, module.exports), module.exports;
+	var objectToString = Object.prototype.toString;
+	var isArray = Array.isArray || function isArrayPolyfill (object) {
+	  return objectToString.call(object) === '[object Array]';
+	};
+
+	function isFunction (object) {
+	  return typeof object === 'function';
 	}
 
-	var mustache = createCommonjsModule(function (module, exports) {
-	// This file has been generated from mustache.mjs
-	(function (global, factory) {
-	   module.exports = factory() ;
-	}(commonjsGlobal, (function () {
-	  /*!
-	   * mustache.js - Logic-less {{mustache}} templates with JavaScript
-	   * http://github.com/janl/mustache.js
-	   */
+	/**
+	 * More correct typeof string handling array
+	 * which normally returns typeof 'object'
+	 */
+	function typeStr (obj) {
+	  return isArray(obj) ? 'array' : typeof obj;
+	}
 
-	  var objectToString = Object.prototype.toString;
-	  var isArray = Array.isArray || function isArrayPolyfill (object) {
-	    return objectToString.call(object) === '[object Array]';
-	  };
+	function escapeRegExp (string) {
+	  return string.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&');
+	}
 
-	  function isFunction (object) {
-	    return typeof object === 'function';
-	  }
+	/**
+	 * Null safe way of checking whether or not an object,
+	 * including its prototype, has a given property
+	 */
+	function hasProperty (obj, propName) {
+	  return obj != null && typeof obj === 'object' && (propName in obj);
+	}
 
-	  /**
-	   * More correct typeof string handling array
-	   * which normally returns typeof 'object'
-	   */
-	  function typeStr (obj) {
-	    return isArray(obj) ? 'array' : typeof obj;
-	  }
+	/**
+	 * Safe way of detecting whether or not the given thing is a primitive and
+	 * whether it has the given property
+	 */
+	function primitiveHasOwnProperty (primitive, propName) {
+	  return (
+	    primitive != null
+	    && typeof primitive !== 'object'
+	    && primitive.hasOwnProperty
+	    && primitive.hasOwnProperty(propName)
+	  );
+	}
 
-	  function escapeRegExp (string) {
-	    return string.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&');
-	  }
+	// Workaround for https://issues.apache.org/jira/browse/COUCHDB-577
+	// See https://github.com/janl/mustache.js/issues/189
+	var regExpTest = RegExp.prototype.test;
+	function testRegExp (re, string) {
+	  return regExpTest.call(re, string);
+	}
 
-	  /**
-	   * Null safe way of checking whether or not an object,
-	   * including its prototype, has a given property
-	   */
-	  function hasProperty (obj, propName) {
-	    return obj != null && typeof obj === 'object' && (propName in obj);
-	  }
+	var nonSpaceRe = /\S/;
+	function isWhitespace (string) {
+	  return !testRegExp(nonSpaceRe, string);
+	}
 
-	  /**
-	   * Safe way of detecting whether or not the given thing is a primitive and
-	   * whether it has the given property
-	   */
-	  function primitiveHasOwnProperty (primitive, propName) {
-	    return (
-	      primitive != null
-	      && typeof primitive !== 'object'
-	      && primitive.hasOwnProperty
-	      && primitive.hasOwnProperty(propName)
-	    );
-	  }
+	var entityMap = {
+	  '&': '&amp;',
+	  '<': '&lt;',
+	  '>': '&gt;',
+	  '"': '&quot;',
+	  "'": '&#39;',
+	  '/': '&#x2F;',
+	  '`': '&#x60;',
+	  '=': '&#x3D;'
+	};
 
-	  // Workaround for https://issues.apache.org/jira/browse/COUCHDB-577
-	  // See https://github.com/janl/mustache.js/issues/189
-	  var regExpTest = RegExp.prototype.test;
-	  function testRegExp (re, string) {
-	    return regExpTest.call(re, string);
-	  }
+	function escapeHtml (string) {
+	  return String(string).replace(/[&<>"'`=\/]/g, function fromEntityMap (s) {
+	    return entityMap[s];
+	  });
+	}
 
-	  var nonSpaceRe = /\S/;
-	  function isWhitespace (string) {
-	    return !testRegExp(nonSpaceRe, string);
-	  }
+	var whiteRe = /\s*/;
+	var spaceRe = /\s+/;
+	var equalsRe = /\s*=/;
+	var curlyRe = /\s*\}/;
+	var tagRe = /#|\^|\/|>|\{|&|=|!/;
 
-	  var entityMap = {
-	    '&': '&amp;',
-	    '<': '&lt;',
-	    '>': '&gt;',
-	    '"': '&quot;',
-	    "'": '&#39;',
-	    '/': '&#x2F;',
-	    '`': '&#x60;',
-	    '=': '&#x3D;'
-	  };
+	/**
+	 * Breaks up the given `template` string into a tree of tokens. If the `tags`
+	 * argument is given here it must be an array with two string values: the
+	 * opening and closing tags used in the template (e.g. [ "<%", "%>" ]). Of
+	 * course, the default is to use mustaches (i.e. mustache.tags).
+	 *
+	 * A token is an array with at least 4 elements. The first element is the
+	 * mustache symbol that was used inside the tag, e.g. "#" or "&". If the tag
+	 * did not contain a symbol (i.e. {{myValue}}) this element is "name". For
+	 * all text that appears outside a symbol this element is "text".
+	 *
+	 * The second element of a token is its "value". For mustache tags this is
+	 * whatever else was inside the tag besides the opening symbol. For text tokens
+	 * this is the text itself.
+	 *
+	 * The third and fourth elements of the token are the start and end indices,
+	 * respectively, of the token in the original template.
+	 *
+	 * Tokens that are the root node of a subtree contain two more elements: 1) an
+	 * array of tokens in the subtree and 2) the index in the original template at
+	 * which the closing tag for that section begins.
+	 *
+	 * Tokens for partials also contain two more elements: 1) a string value of
+	 * indendation prior to that tag and 2) the index of that tag on that line -
+	 * eg a value of 2 indicates the partial is the third tag on this line.
+	 */
+	function parseTemplate (template, tags) {
+	  if (!template)
+	    return [];
+	  var lineHasNonSpace = false;
+	  var sections = [];     // Stack to hold section tokens
+	  var tokens = [];       // Buffer to hold the tokens
+	  var spaces = [];       // Indices of whitespace tokens on the current line
+	  var hasTag = false;    // Is there a {{tag}} on the current line?
+	  var nonSpace = false;  // Is there a non-space char on the current line?
+	  var indentation = '';  // Tracks indentation for tags that use it
+	  var tagIndex = 0;      // Stores a count of number of tags encountered on a line
 
-	  function escapeHtml (string) {
-	    return String(string).replace(/[&<>"'`=\/]/g, function fromEntityMap (s) {
-	      return entityMap[s];
-	    });
-	  }
-
-	  var whiteRe = /\s*/;
-	  var spaceRe = /\s+/;
-	  var equalsRe = /\s*=/;
-	  var curlyRe = /\s*\}/;
-	  var tagRe = /#|\^|\/|>|\{|&|=|!/;
-
-	  /**
-	   * Breaks up the given `template` string into a tree of tokens. If the `tags`
-	   * argument is given here it must be an array with two string values: the
-	   * opening and closing tags used in the template (e.g. [ "<%", "%>" ]). Of
-	   * course, the default is to use mustaches (i.e. mustache.tags).
-	   *
-	   * A token is an array with at least 4 elements. The first element is the
-	   * mustache symbol that was used inside the tag, e.g. "#" or "&". If the tag
-	   * did not contain a symbol (i.e. {{myValue}}) this element is "name". For
-	   * all text that appears outside a symbol this element is "text".
-	   *
-	   * The second element of a token is its "value". For mustache tags this is
-	   * whatever else was inside the tag besides the opening symbol. For text tokens
-	   * this is the text itself.
-	   *
-	   * The third and fourth elements of the token are the start and end indices,
-	   * respectively, of the token in the original template.
-	   *
-	   * Tokens that are the root node of a subtree contain two more elements: 1) an
-	   * array of tokens in the subtree and 2) the index in the original template at
-	   * which the closing tag for that section begins.
-	   *
-	   * Tokens for partials also contain two more elements: 1) a string value of
-	   * indendation prior to that tag and 2) the index of that tag on that line -
-	   * eg a value of 2 indicates the partial is the third tag on this line.
-	   */
-	  function parseTemplate (template, tags) {
-	    if (!template)
-	      return [];
-	    var lineHasNonSpace = false;
-	    var sections = [];     // Stack to hold section tokens
-	    var tokens = [];       // Buffer to hold the tokens
-	    var spaces = [];       // Indices of whitespace tokens on the current line
-	    var hasTag = false;    // Is there a {{tag}} on the current line?
-	    var nonSpace = false;  // Is there a non-space char on the current line?
-	    var indentation = '';  // Tracks indentation for tags that use it
-	    var tagIndex = 0;      // Stores a count of number of tags encountered on a line
-
-	    // Strips all whitespace tokens array for the current line
-	    // if there was a {{#tag}} on it and otherwise only space.
-	    function stripSpace () {
-	      if (hasTag && !nonSpace) {
-	        while (spaces.length)
-	          delete tokens[spaces.pop()];
-	      } else {
-	        spaces = [];
-	      }
-
-	      hasTag = false;
-	      nonSpace = false;
+	  // Strips all whitespace tokens array for the current line
+	  // if there was a {{#tag}} on it and otherwise only space.
+	  function stripSpace () {
+	    if (hasTag && !nonSpace) {
+	      while (spaces.length)
+	        delete tokens[spaces.pop()];
+	    } else {
+	      spaces = [];
 	    }
 
-	    var openingTagRe, closingTagRe, closingCurlyRe;
-	    function compileTags (tagsToCompile) {
-	      if (typeof tagsToCompile === 'string')
-	        tagsToCompile = tagsToCompile.split(spaceRe, 2);
-
-	      if (!isArray(tagsToCompile) || tagsToCompile.length !== 2)
-	        throw new Error('Invalid tags: ' + tagsToCompile);
-
-	      openingTagRe = new RegExp(escapeRegExp(tagsToCompile[0]) + '\\s*');
-	      closingTagRe = new RegExp('\\s*' + escapeRegExp(tagsToCompile[1]));
-	      closingCurlyRe = new RegExp('\\s*' + escapeRegExp('}' + tagsToCompile[1]));
-	    }
-
-	    compileTags(tags || mustache.tags);
-
-	    var scanner = new Scanner(template);
-
-	    var start, type, value, chr, token, openSection;
-	    while (!scanner.eos()) {
-	      start = scanner.pos;
-
-	      // Match any text between tags.
-	      value = scanner.scanUntil(openingTagRe);
-
-	      if (value) {
-	        for (var i = 0, valueLength = value.length; i < valueLength; ++i) {
-	          chr = value.charAt(i);
-
-	          if (isWhitespace(chr)) {
-	            spaces.push(tokens.length);
-	            indentation += chr;
-	          } else {
-	            nonSpace = true;
-	            lineHasNonSpace = true;
-	            indentation += ' ';
-	          }
-
-	          tokens.push([ 'text', chr, start, start + 1 ]);
-	          start += 1;
-
-	          // Check for whitespace on the current line.
-	          if (chr === '\n') {
-	            stripSpace();
-	            indentation = '';
-	            tagIndex = 0;
-	            lineHasNonSpace = false;
-	          }
-	        }
-	      }
-
-	      // Match the opening tag.
-	      if (!scanner.scan(openingTagRe))
-	        break;
-
-	      hasTag = true;
-
-	      // Get the tag type.
-	      type = scanner.scan(tagRe) || 'name';
-	      scanner.scan(whiteRe);
-
-	      // Get the tag value.
-	      if (type === '=') {
-	        value = scanner.scanUntil(equalsRe);
-	        scanner.scan(equalsRe);
-	        scanner.scanUntil(closingTagRe);
-	      } else if (type === '{') {
-	        value = scanner.scanUntil(closingCurlyRe);
-	        scanner.scan(curlyRe);
-	        scanner.scanUntil(closingTagRe);
-	        type = '&';
-	      } else {
-	        value = scanner.scanUntil(closingTagRe);
-	      }
-
-	      // Match the closing tag.
-	      if (!scanner.scan(closingTagRe))
-	        throw new Error('Unclosed tag at ' + scanner.pos);
-
-	      if (type == '>') {
-	        token = [ type, value, start, scanner.pos, indentation, tagIndex, lineHasNonSpace ];
-	      } else {
-	        token = [ type, value, start, scanner.pos ];
-	      }
-	      tagIndex++;
-	      tokens.push(token);
-
-	      if (type === '#' || type === '^') {
-	        sections.push(token);
-	      } else if (type === '/') {
-	        // Check section nesting.
-	        openSection = sections.pop();
-
-	        if (!openSection)
-	          throw new Error('Unopened section "' + value + '" at ' + start);
-
-	        if (openSection[1] !== value)
-	          throw new Error('Unclosed section "' + openSection[1] + '" at ' + start);
-	      } else if (type === 'name' || type === '{' || type === '&') {
-	        nonSpace = true;
-	      } else if (type === '=') {
-	        // Set the tags for the next time around.
-	        compileTags(value);
-	      }
-	    }
-
-	    stripSpace();
-
-	    // Make sure there are no open sections when we're done.
-	    openSection = sections.pop();
-
-	    if (openSection)
-	      throw new Error('Unclosed section "' + openSection[1] + '" at ' + scanner.pos);
-
-	    return nestTokens(squashTokens(tokens));
+	    hasTag = false;
+	    nonSpace = false;
 	  }
 
-	  /**
-	   * Combines the values of consecutive text tokens in the given `tokens` array
-	   * to a single token.
-	   */
-	  function squashTokens (tokens) {
-	    var squashedTokens = [];
+	  var openingTagRe, closingTagRe, closingCurlyRe;
+	  function compileTags (tagsToCompile) {
+	    if (typeof tagsToCompile === 'string')
+	      tagsToCompile = tagsToCompile.split(spaceRe, 2);
 
-	    var token, lastToken;
-	    for (var i = 0, numTokens = tokens.length; i < numTokens; ++i) {
-	      token = tokens[i];
+	    if (!isArray(tagsToCompile) || tagsToCompile.length !== 2)
+	      throw new Error('Invalid tags: ' + tagsToCompile);
 
-	      if (token) {
-	        if (token[0] === 'text' && lastToken && lastToken[0] === 'text') {
-	          lastToken[1] += token[1];
-	          lastToken[3] = token[3];
+	    openingTagRe = new RegExp(escapeRegExp(tagsToCompile[0]) + '\\s*');
+	    closingTagRe = new RegExp('\\s*' + escapeRegExp(tagsToCompile[1]));
+	    closingCurlyRe = new RegExp('\\s*' + escapeRegExp('}' + tagsToCompile[1]));
+	  }
+
+	  compileTags(tags || mustache.tags);
+
+	  var scanner = new Scanner(template);
+
+	  var start, type, value, chr, token, openSection;
+	  while (!scanner.eos()) {
+	    start = scanner.pos;
+
+	    // Match any text between tags.
+	    value = scanner.scanUntil(openingTagRe);
+
+	    if (value) {
+	      for (var i = 0, valueLength = value.length; i < valueLength; ++i) {
+	        chr = value.charAt(i);
+
+	        if (isWhitespace(chr)) {
+	          spaces.push(tokens.length);
+	          indentation += chr;
 	        } else {
-	          squashedTokens.push(token);
-	          lastToken = token;
+	          nonSpace = true;
+	          lineHasNonSpace = true;
+	          indentation += ' ';
+	        }
+
+	        tokens.push([ 'text', chr, start, start + 1 ]);
+	        start += 1;
+
+	        // Check for whitespace on the current line.
+	        if (chr === '\n') {
+	          stripSpace();
+	          indentation = '';
+	          tagIndex = 0;
+	          lineHasNonSpace = false;
 	        }
 	      }
 	    }
 
-	    return squashedTokens;
-	  }
+	    // Match the opening tag.
+	    if (!scanner.scan(openingTagRe))
+	      break;
 
-	  /**
-	   * Forms the given array of `tokens` into a nested tree structure where
-	   * tokens that represent a section have two additional items: 1) an array of
-	   * all tokens that appear in that section and 2) the index in the original
-	   * template that represents the end of that section.
-	   */
-	  function nestTokens (tokens) {
-	    var nestedTokens = [];
-	    var collector = nestedTokens;
-	    var sections = [];
+	    hasTag = true;
 
-	    var token, section;
-	    for (var i = 0, numTokens = tokens.length; i < numTokens; ++i) {
-	      token = tokens[i];
+	    // Get the tag type.
+	    type = scanner.scan(tagRe) || 'name';
+	    scanner.scan(whiteRe);
 
-	      switch (token[0]) {
-	        case '#':
-	        case '^':
-	          collector.push(token);
-	          sections.push(token);
-	          collector = token[4] = [];
-	          break;
-	        case '/':
-	          section = sections.pop();
-	          section[5] = token[2];
-	          collector = sections.length > 0 ? sections[sections.length - 1][4] : nestedTokens;
-	          break;
-	        default:
-	          collector.push(token);
-	      }
+	    // Get the tag value.
+	    if (type === '=') {
+	      value = scanner.scanUntil(equalsRe);
+	      scanner.scan(equalsRe);
+	      scanner.scanUntil(closingTagRe);
+	    } else if (type === '{') {
+	      value = scanner.scanUntil(closingCurlyRe);
+	      scanner.scan(curlyRe);
+	      scanner.scanUntil(closingTagRe);
+	      type = '&';
+	    } else {
+	      value = scanner.scanUntil(closingTagRe);
 	    }
 
-	    return nestedTokens;
+	    // Match the closing tag.
+	    if (!scanner.scan(closingTagRe))
+	      throw new Error('Unclosed tag at ' + scanner.pos);
+
+	    if (type == '>') {
+	      token = [ type, value, start, scanner.pos, indentation, tagIndex, lineHasNonSpace ];
+	    } else {
+	      token = [ type, value, start, scanner.pos ];
+	    }
+	    tagIndex++;
+	    tokens.push(token);
+
+	    if (type === '#' || type === '^') {
+	      sections.push(token);
+	    } else if (type === '/') {
+	      // Check section nesting.
+	      openSection = sections.pop();
+
+	      if (!openSection)
+	        throw new Error('Unopened section "' + value + '" at ' + start);
+
+	      if (openSection[1] !== value)
+	        throw new Error('Unclosed section "' + openSection[1] + '" at ' + start);
+	    } else if (type === 'name' || type === '{' || type === '&') {
+	      nonSpace = true;
+	    } else if (type === '=') {
+	      // Set the tags for the next time around.
+	      compileTags(value);
+	    }
 	  }
 
-	  /**
-	   * A simple string scanner that is used by the template parser to find
-	   * tokens in template strings.
-	   */
-	  function Scanner (string) {
-	    this.string = string;
-	    this.tail = string;
-	    this.pos = 0;
+	  stripSpace();
+
+	  // Make sure there are no open sections when we're done.
+	  openSection = sections.pop();
+
+	  if (openSection)
+	    throw new Error('Unclosed section "' + openSection[1] + '" at ' + scanner.pos);
+
+	  return nestTokens(squashTokens(tokens));
+	}
+
+	/**
+	 * Combines the values of consecutive text tokens in the given `tokens` array
+	 * to a single token.
+	 */
+	function squashTokens (tokens) {
+	  var squashedTokens = [];
+
+	  var token, lastToken;
+	  for (var i = 0, numTokens = tokens.length; i < numTokens; ++i) {
+	    token = tokens[i];
+
+	    if (token) {
+	      if (token[0] === 'text' && lastToken && lastToken[0] === 'text') {
+	        lastToken[1] += token[1];
+	        lastToken[3] = token[3];
+	      } else {
+	        squashedTokens.push(token);
+	        lastToken = token;
+	      }
+	    }
 	  }
 
-	  /**
-	   * Returns `true` if the tail is empty (end of string).
-	   */
-	  Scanner.prototype.eos = function eos () {
-	    return this.tail === '';
-	  };
+	  return squashedTokens;
+	}
 
-	  /**
-	   * Tries to match the given regular expression at the current position.
-	   * Returns the matched text if it can match, the empty string otherwise.
-	   */
-	  Scanner.prototype.scan = function scan (re) {
-	    var match = this.tail.match(re);
+	/**
+	 * Forms the given array of `tokens` into a nested tree structure where
+	 * tokens that represent a section have two additional items: 1) an array of
+	 * all tokens that appear in that section and 2) the index in the original
+	 * template that represents the end of that section.
+	 */
+	function nestTokens (tokens) {
+	  var nestedTokens = [];
+	  var collector = nestedTokens;
+	  var sections = [];
 
-	    if (!match || match.index !== 0)
-	      return '';
+	  var token, section;
+	  for (var i = 0, numTokens = tokens.length; i < numTokens; ++i) {
+	    token = tokens[i];
 
-	    var string = match[0];
-
-	    this.tail = this.tail.substring(string.length);
-	    this.pos += string.length;
-
-	    return string;
-	  };
-
-	  /**
-	   * Skips all text until the given regular expression can be matched. Returns
-	   * the skipped string, which is the entire tail if no match can be made.
-	   */
-	  Scanner.prototype.scanUntil = function scanUntil (re) {
-	    var index = this.tail.search(re), match;
-
-	    switch (index) {
-	      case -1:
-	        match = this.tail;
-	        this.tail = '';
+	    switch (token[0]) {
+	      case '#':
+	      case '^':
+	        collector.push(token);
+	        sections.push(token);
+	        collector = token[4] = [];
 	        break;
-	      case 0:
-	        match = '';
+	      case '/':
+	        section = sections.pop();
+	        section[5] = token[2];
+	        collector = sections.length > 0 ? sections[sections.length - 1][4] : nestedTokens;
 	        break;
 	      default:
-	        match = this.tail.substring(0, index);
-	        this.tail = this.tail.substring(index);
+	        collector.push(token);
 	    }
-
-	    this.pos += match.length;
-
-	    return match;
-	  };
-
-	  /**
-	   * Represents a rendering context by wrapping a view object and
-	   * maintaining a reference to the parent context.
-	   */
-	  function Context (view, parentContext) {
-	    this.view = view;
-	    this.cache = { '.': this.view };
-	    this.parent = parentContext;
 	  }
 
-	  /**
-	   * Creates a new context using the given view with this context
-	   * as the parent.
-	   */
-	  Context.prototype.push = function push (view) {
-	    return new Context(view, this);
-	  };
+	  return nestedTokens;
+	}
 
-	  /**
-	   * Returns the value of the given name in this context, traversing
-	   * up the context hierarchy if the value is absent in this context's view.
-	   */
-	  Context.prototype.lookup = function lookup (name) {
-	    var cache = this.cache;
+	/**
+	 * A simple string scanner that is used by the template parser to find
+	 * tokens in template strings.
+	 */
+	function Scanner (string) {
+	  this.string = string;
+	  this.tail = string;
+	  this.pos = 0;
+	}
 
-	    var value;
-	    if (cache.hasOwnProperty(name)) {
-	      value = cache[name];
-	    } else {
-	      var context = this, intermediateValue, names, index, lookupHit = false;
+	/**
+	 * Returns `true` if the tail is empty (end of string).
+	 */
+	Scanner.prototype.eos = function eos () {
+	  return this.tail === '';
+	};
 
-	      while (context) {
-	        if (name.indexOf('.') > 0) {
-	          intermediateValue = context.view;
-	          names = name.split('.');
-	          index = 0;
+	/**
+	 * Tries to match the given regular expression at the current position.
+	 * Returns the matched text if it can match, the empty string otherwise.
+	 */
+	Scanner.prototype.scan = function scan (re) {
+	  var match = this.tail.match(re);
 
-	          /**
-	           * Using the dot notion path in `name`, we descend through the
-	           * nested objects.
-	           *
-	           * To be certain that the lookup has been successful, we have to
-	           * check if the last object in the path actually has the property
-	           * we are looking for. We store the result in `lookupHit`.
-	           *
-	           * This is specially necessary for when the value has been set to
-	           * `undefined` and we want to avoid looking up parent contexts.
-	           *
-	           * In the case where dot notation is used, we consider the lookup
-	           * to be successful even if the last "object" in the path is
-	           * not actually an object but a primitive (e.g., a string, or an
-	           * integer), because it is sometimes useful to access a property
-	           * of an autoboxed primitive, such as the length of a string.
-	           **/
-	          while (intermediateValue != null && index < names.length) {
-	            if (index === names.length - 1)
-	              lookupHit = (
-	                hasProperty(intermediateValue, names[index])
-	                || primitiveHasOwnProperty(intermediateValue, names[index])
-	              );
+	  if (!match || match.index !== 0)
+	    return '';
 
-	            intermediateValue = intermediateValue[names[index++]];
-	          }
-	        } else {
-	          intermediateValue = context.view[name];
+	  var string = match[0];
 
-	          /**
-	           * Only checking against `hasProperty`, which always returns `false` if
-	           * `context.view` is not an object. Deliberately omitting the check
-	           * against `primitiveHasOwnProperty` if dot notation is not used.
-	           *
-	           * Consider this example:
-	           * ```
-	           * Mustache.render("The length of a football field is {{#length}}{{length}}{{/length}}.", {length: "100 yards"})
-	           * ```
-	           *
-	           * If we were to check also against `primitiveHasOwnProperty`, as we do
-	           * in the dot notation case, then render call would return:
-	           *
-	           * "The length of a football field is 9."
-	           *
-	           * rather than the expected:
-	           *
-	           * "The length of a football field is 100 yards."
-	           **/
-	          lookupHit = hasProperty(context.view, name);
-	        }
+	  this.tail = this.tail.substring(string.length);
+	  this.pos += string.length;
 
-	        if (lookupHit) {
-	          value = intermediateValue;
-	          break;
-	        }
+	  return string;
+	};
 
-	        context = context.parent;
-	      }
+	/**
+	 * Skips all text until the given regular expression can be matched. Returns
+	 * the skipped string, which is the entire tail if no match can be made.
+	 */
+	Scanner.prototype.scanUntil = function scanUntil (re) {
+	  var index = this.tail.search(re), match;
 
-	      cache[name] = value;
-	    }
-
-	    if (isFunction(value))
-	      value = value.call(this.view);
-
-	    return value;
-	  };
-
-	  /**
-	   * A Writer knows how to take a stream of tokens and render them to a
-	   * string, given a context. It also maintains a cache of templates to
-	   * avoid the need to parse the same template twice.
-	   */
-	  function Writer () {
-	    this.templateCache = {
-	      _cache: {},
-	      set: function set (key, value) {
-	        this._cache[key] = value;
-	      },
-	      get: function get (key) {
-	        return this._cache[key];
-	      },
-	      clear: function clear () {
-	        this._cache = {};
-	      }
-	    };
+	  switch (index) {
+	    case -1:
+	      match = this.tail;
+	      this.tail = '';
+	      break;
+	    case 0:
+	      match = '';
+	      break;
+	    default:
+	      match = this.tail.substring(0, index);
+	      this.tail = this.tail.substring(index);
 	  }
 
-	  /**
-	   * Clears all cached templates in this writer.
-	   */
-	  Writer.prototype.clearCache = function clearCache () {
-	    if (typeof this.templateCache !== 'undefined') {
-	      this.templateCache.clear();
-	    }
-	  };
+	  this.pos += match.length;
 
-	  /**
-	   * Parses and caches the given `template` according to the given `tags` or
-	   * `mustache.tags` if `tags` is omitted,  and returns the array of tokens
-	   * that is generated from the parse.
-	   */
-	  Writer.prototype.parse = function parse (template, tags) {
-	    var cache = this.templateCache;
-	    var cacheKey = template + ':' + (tags || mustache.tags).join(':');
-	    var isCacheEnabled = typeof cache !== 'undefined';
-	    var tokens = isCacheEnabled ? cache.get(cacheKey) : undefined;
+	  return match;
+	};
 
-	    if (tokens == undefined) {
-	      tokens = parseTemplate(template, tags);
-	      isCacheEnabled && cache.set(cacheKey, tokens);
-	    }
-	    return tokens;
-	  };
+	/**
+	 * Represents a rendering context by wrapping a view object and
+	 * maintaining a reference to the parent context.
+	 */
+	function Context (view, parentContext) {
+	  this.view = view;
+	  this.cache = { '.': this.view };
+	  this.parent = parentContext;
+	}
 
-	  /**
-	   * High-level method that is used to render the given `template` with
-	   * the given `view`.
-	   *
-	   * The optional `partials` argument may be an object that contains the
-	   * names and templates of partials that are used in the template. It may
-	   * also be a function that is used to load partial templates on the fly
-	   * that takes a single argument: the name of the partial.
-	   *
-	   * If the optional `tags` argument is given here it must be an array with two
-	   * string values: the opening and closing tags used in the template (e.g.
-	   * [ "<%", "%>" ]). The default is to mustache.tags.
-	   */
-	  Writer.prototype.render = function render (template, view, partials, tags) {
-	    var tokens = this.parse(template, tags);
-	    var context = (view instanceof Context) ? view : new Context(view, undefined);
-	    return this.renderTokens(tokens, context, partials, template, tags);
-	  };
+	/**
+	 * Creates a new context using the given view with this context
+	 * as the parent.
+	 */
+	Context.prototype.push = function push (view) {
+	  return new Context(view, this);
+	};
 
-	  /**
-	   * Low-level method that renders the given array of `tokens` using
-	   * the given `context` and `partials`.
-	   *
-	   * Note: The `originalTemplate` is only ever used to extract the portion
-	   * of the original template that was contained in a higher-order section.
-	   * If the template doesn't use higher-order sections, this argument may
-	   * be omitted.
-	   */
-	  Writer.prototype.renderTokens = function renderTokens (tokens, context, partials, originalTemplate, tags) {
-	    var buffer = '';
+	/**
+	 * Returns the value of the given name in this context, traversing
+	 * up the context hierarchy if the value is absent in this context's view.
+	 */
+	Context.prototype.lookup = function lookup (name) {
+	  var cache = this.cache;
 
-	    var token, symbol, value;
-	    for (var i = 0, numTokens = tokens.length; i < numTokens; ++i) {
-	      value = undefined;
-	      token = tokens[i];
-	      symbol = token[0];
+	  var value;
+	  if (cache.hasOwnProperty(name)) {
+	    value = cache[name];
+	  } else {
+	    var context = this, intermediateValue, names, index, lookupHit = false;
 
-	      if (symbol === '#') value = this.renderSection(token, context, partials, originalTemplate);
-	      else if (symbol === '^') value = this.renderInverted(token, context, partials, originalTemplate);
-	      else if (symbol === '>') value = this.renderPartial(token, context, partials, tags);
-	      else if (symbol === '&') value = this.unescapedValue(token, context);
-	      else if (symbol === 'name') value = this.escapedValue(token, context);
-	      else if (symbol === 'text') value = this.rawValue(token);
+	    while (context) {
+	      if (name.indexOf('.') > 0) {
+	        intermediateValue = context.view;
+	        names = name.split('.');
+	        index = 0;
 
-	      if (value !== undefined)
-	        buffer += value;
-	    }
+	        /**
+	         * Using the dot notion path in `name`, we descend through the
+	         * nested objects.
+	         *
+	         * To be certain that the lookup has been successful, we have to
+	         * check if the last object in the path actually has the property
+	         * we are looking for. We store the result in `lookupHit`.
+	         *
+	         * This is specially necessary for when the value has been set to
+	         * `undefined` and we want to avoid looking up parent contexts.
+	         *
+	         * In the case where dot notation is used, we consider the lookup
+	         * to be successful even if the last "object" in the path is
+	         * not actually an object but a primitive (e.g., a string, or an
+	         * integer), because it is sometimes useful to access a property
+	         * of an autoboxed primitive, such as the length of a string.
+	         **/
+	        while (intermediateValue != null && index < names.length) {
+	          if (index === names.length - 1)
+	            lookupHit = (
+	              hasProperty(intermediateValue, names[index])
+	              || primitiveHasOwnProperty(intermediateValue, names[index])
+	            );
 
-	    return buffer;
-	  };
+	          intermediateValue = intermediateValue[names[index++]];
+	        }
+	      } else {
+	        intermediateValue = context.view[name];
 
-	  Writer.prototype.renderSection = function renderSection (token, context, partials, originalTemplate) {
-	    var self = this;
-	    var buffer = '';
-	    var value = context.lookup(token[1]);
-
-	    // This function is used to render an arbitrary template
-	    // in the current context by higher-order sections.
-	    function subRender (template) {
-	      return self.render(template, context, partials);
-	    }
-
-	    if (!value) return;
-
-	    if (isArray(value)) {
-	      for (var j = 0, valueLength = value.length; j < valueLength; ++j) {
-	        buffer += this.renderTokens(token[4], context.push(value[j]), partials, originalTemplate);
+	        /**
+	         * Only checking against `hasProperty`, which always returns `false` if
+	         * `context.view` is not an object. Deliberately omitting the check
+	         * against `primitiveHasOwnProperty` if dot notation is not used.
+	         *
+	         * Consider this example:
+	         * ```
+	         * Mustache.render("The length of a football field is {{#length}}{{length}}{{/length}}.", {length: "100 yards"})
+	         * ```
+	         *
+	         * If we were to check also against `primitiveHasOwnProperty`, as we do
+	         * in the dot notation case, then render call would return:
+	         *
+	         * "The length of a football field is 9."
+	         *
+	         * rather than the expected:
+	         *
+	         * "The length of a football field is 100 yards."
+	         **/
+	        lookupHit = hasProperty(context.view, name);
 	      }
-	    } else if (typeof value === 'object' || typeof value === 'string' || typeof value === 'number') {
-	      buffer += this.renderTokens(token[4], context.push(value), partials, originalTemplate);
-	    } else if (isFunction(value)) {
-	      if (typeof originalTemplate !== 'string')
-	        throw new Error('Cannot use higher-order sections without the original template');
 
-	      // Extract the portion of the original template that the section contains.
-	      value = value.call(context.view, originalTemplate.slice(token[3], token[5]), subRender);
-
-	      if (value != null)
-	        buffer += value;
-	    } else {
-	      buffer += this.renderTokens(token[4], context, partials, originalTemplate);
-	    }
-	    return buffer;
-	  };
-
-	  Writer.prototype.renderInverted = function renderInverted (token, context, partials, originalTemplate) {
-	    var value = context.lookup(token[1]);
-
-	    // Use JavaScript's definition of falsy. Include empty arrays.
-	    // See https://github.com/janl/mustache.js/issues/186
-	    if (!value || (isArray(value) && value.length === 0))
-	      return this.renderTokens(token[4], context, partials, originalTemplate);
-	  };
-
-	  Writer.prototype.indentPartial = function indentPartial (partial, indentation, lineHasNonSpace) {
-	    var filteredIndentation = indentation.replace(/[^ \t]/g, '');
-	    var partialByNl = partial.split('\n');
-	    for (var i = 0; i < partialByNl.length; i++) {
-	      if (partialByNl[i].length && (i > 0 || !lineHasNonSpace)) {
-	        partialByNl[i] = filteredIndentation + partialByNl[i];
+	      if (lookupHit) {
+	        value = intermediateValue;
+	        break;
 	      }
+
+	      context = context.parent;
 	    }
-	    return partialByNl.join('\n');
-	  };
 
-	  Writer.prototype.renderPartial = function renderPartial (token, context, partials, tags) {
-	    if (!partials) return;
+	    cache[name] = value;
+	  }
 
-	    var value = isFunction(partials) ? partials(token[1]) : partials[token[1]];
-	    if (value != null) {
-	      var lineHasNonSpace = token[6];
-	      var tagIndex = token[5];
-	      var indentation = token[4];
-	      var indentedValue = value;
-	      if (tagIndex == 0 && indentation) {
-	        indentedValue = this.indentPartial(value, indentation, lineHasNonSpace);
-	      }
-	      return this.renderTokens(this.parse(indentedValue, tags), context, partials, indentedValue, tags);
-	    }
-	  };
+	  if (isFunction(value))
+	    value = value.call(this.view);
 
-	  Writer.prototype.unescapedValue = function unescapedValue (token, context) {
-	    var value = context.lookup(token[1]);
-	    if (value != null)
-	      return value;
-	  };
+	  return value;
+	};
 
-	  Writer.prototype.escapedValue = function escapedValue (token, context) {
-	    var value = context.lookup(token[1]);
-	    if (value != null)
-	      return mustache.escape(value);
-	  };
-
-	  Writer.prototype.rawValue = function rawValue (token) {
-	    return token[1];
-	  };
-
-	  var mustache = {
-	    name: 'mustache.js',
-	    version: '4.0.1',
-	    tags: [ '{{', '}}' ],
-	    clearCache: undefined,
-	    escape: undefined,
-	    parse: undefined,
-	    render: undefined,
-	    Scanner: undefined,
-	    Context: undefined,
-	    Writer: undefined,
-	    /**
-	     * Allows a user to override the default caching strategy, by providing an
-	     * object with set, get and clear methods. This can also be used to disable
-	     * the cache by setting it to the literal `undefined`.
-	     */
-	    set templateCache (cache) {
-	      defaultWriter.templateCache = cache;
+	/**
+	 * A Writer knows how to take a stream of tokens and render them to a
+	 * string, given a context. It also maintains a cache of templates to
+	 * avoid the need to parse the same template twice.
+	 */
+	function Writer () {
+	  this.templateCache = {
+	    _cache: {},
+	    set: function set (key, value) {
+	      this._cache[key] = value;
 	    },
-	    /**
-	     * Gets the default or overridden caching object from the default writer.
-	     */
-	    get templateCache () {
-	      return defaultWriter.templateCache;
+	    get: function get (key) {
+	      return this._cache[key];
+	    },
+	    clear: function clear () {
+	      this._cache = {};
 	    }
 	  };
+	}
 
-	  // All high-level mustache.* functions use this writer.
-	  var defaultWriter = new Writer();
+	/**
+	 * Clears all cached templates in this writer.
+	 */
+	Writer.prototype.clearCache = function clearCache () {
+	  if (typeof this.templateCache !== 'undefined') {
+	    this.templateCache.clear();
+	  }
+	};
 
-	  /**
-	   * Clears all cached templates in the default writer.
-	   */
-	  mustache.clearCache = function clearCache () {
-	    return defaultWriter.clearCache();
-	  };
+	/**
+	 * Parses and caches the given `template` according to the given `tags` or
+	 * `mustache.tags` if `tags` is omitted,  and returns the array of tokens
+	 * that is generated from the parse.
+	 */
+	Writer.prototype.parse = function parse (template, tags) {
+	  var cache = this.templateCache;
+	  var cacheKey = template + ':' + (tags || mustache.tags).join(':');
+	  var isCacheEnabled = typeof cache !== 'undefined';
+	  var tokens = isCacheEnabled ? cache.get(cacheKey) : undefined;
 
-	  /**
-	   * Parses and caches the given template in the default writer and returns the
-	   * array of tokens it contains. Doing this ahead of time avoids the need to
-	   * parse templates on the fly as they are rendered.
-	   */
-	  mustache.parse = function parse (template, tags) {
-	    return defaultWriter.parse(template, tags);
-	  };
+	  if (tokens == undefined) {
+	    tokens = parseTemplate(template, tags);
+	    isCacheEnabled && cache.set(cacheKey, tokens);
+	  }
+	  return tokens;
+	};
 
-	  /**
-	   * Renders the `template` with the given `view` and `partials` using the
-	   * default writer. If the optional `tags` argument is given here it must be an
-	   * array with two string values: the opening and closing tags used in the
-	   * template (e.g. [ "<%", "%>" ]). The default is to mustache.tags.
-	   */
-	  mustache.render = function render (template, view, partials, tags) {
-	    if (typeof template !== 'string') {
-	      throw new TypeError('Invalid template! Template should be a "string" ' +
-	                          'but "' + typeStr(template) + '" was given as the first ' +
-	                          'argument for mustache#render(template, view, partials)');
+	/**
+	 * High-level method that is used to render the given `template` with
+	 * the given `view`.
+	 *
+	 * The optional `partials` argument may be an object that contains the
+	 * names and templates of partials that are used in the template. It may
+	 * also be a function that is used to load partial templates on the fly
+	 * that takes a single argument: the name of the partial.
+	 *
+	 * If the optional `config` argument is given here, then it should be an
+	 * object with a `tags` attribute or an `escape` attribute or both.
+	 * If an array is passed, then it will be interpreted the same way as
+	 * a `tags` attribute on a `config` object.
+	 *
+	 * The `tags` attribute of a `config` object must be an array with two
+	 * string values: the opening and closing tags used in the template (e.g.
+	 * [ "<%", "%>" ]). The default is to mustache.tags.
+	 *
+	 * The `escape` attribute of a `config` object must be a function which
+	 * accepts a string as input and outputs a safely escaped string.
+	 * If an `escape` function is not provided, then an HTML-safe string
+	 * escaping function is used as the default.
+	 */
+	Writer.prototype.render = function render (template, view, partials, config) {
+	  var tags = this.getConfigTags(config);
+	  var tokens = this.parse(template, tags);
+	  var context = (view instanceof Context) ? view : new Context(view, undefined);
+	  return this.renderTokens(tokens, context, partials, template, config);
+	};
+
+	/**
+	 * Low-level method that renders the given array of `tokens` using
+	 * the given `context` and `partials`.
+	 *
+	 * Note: The `originalTemplate` is only ever used to extract the portion
+	 * of the original template that was contained in a higher-order section.
+	 * If the template doesn't use higher-order sections, this argument may
+	 * be omitted.
+	 */
+	Writer.prototype.renderTokens = function renderTokens (tokens, context, partials, originalTemplate, config) {
+	  var buffer = '';
+
+	  var token, symbol, value;
+	  for (var i = 0, numTokens = tokens.length; i < numTokens; ++i) {
+	    value = undefined;
+	    token = tokens[i];
+	    symbol = token[0];
+
+	    if (symbol === '#') value = this.renderSection(token, context, partials, originalTemplate, config);
+	    else if (symbol === '^') value = this.renderInverted(token, context, partials, originalTemplate, config);
+	    else if (symbol === '>') value = this.renderPartial(token, context, partials, config);
+	    else if (symbol === '&') value = this.unescapedValue(token, context);
+	    else if (symbol === 'name') value = this.escapedValue(token, context, config);
+	    else if (symbol === 'text') value = this.rawValue(token);
+
+	    if (value !== undefined)
+	      buffer += value;
+	  }
+
+	  return buffer;
+	};
+
+	Writer.prototype.renderSection = function renderSection (token, context, partials, originalTemplate, config) {
+	  var self = this;
+	  var buffer = '';
+	  var value = context.lookup(token[1]);
+
+	  // This function is used to render an arbitrary template
+	  // in the current context by higher-order sections.
+	  function subRender (template) {
+	    return self.render(template, context, partials, config);
+	  }
+
+	  if (!value) return;
+
+	  if (isArray(value)) {
+	    for (var j = 0, valueLength = value.length; j < valueLength; ++j) {
+	      buffer += this.renderTokens(token[4], context.push(value[j]), partials, originalTemplate, config);
 	    }
+	  } else if (typeof value === 'object' || typeof value === 'string' || typeof value === 'number') {
+	    buffer += this.renderTokens(token[4], context.push(value), partials, originalTemplate, config);
+	  } else if (isFunction(value)) {
+	    if (typeof originalTemplate !== 'string')
+	      throw new Error('Cannot use higher-order sections without the original template');
 
-	    return defaultWriter.render(template, view, partials, tags);
-	  };
+	    // Extract the portion of the original template that the section contains.
+	    value = value.call(context.view, originalTemplate.slice(token[3], token[5]), subRender);
 
-	  // Export the escaping function so that the user may override it.
-	  // See https://github.com/janl/mustache.js/issues/244
-	  mustache.escape = escapeHtml;
+	    if (value != null)
+	      buffer += value;
+	  } else {
+	    buffer += this.renderTokens(token[4], context, partials, originalTemplate, config);
+	  }
+	  return buffer;
+	};
 
-	  // Export these mainly for testing, but also for advanced usage.
-	  mustache.Scanner = Scanner;
-	  mustache.Context = Context;
-	  mustache.Writer = Writer;
+	Writer.prototype.renderInverted = function renderInverted (token, context, partials, originalTemplate, config) {
+	  var value = context.lookup(token[1]);
 
-	  return mustache;
+	  // Use JavaScript's definition of falsy. Include empty arrays.
+	  // See https://github.com/janl/mustache.js/issues/186
+	  if (!value || (isArray(value) && value.length === 0))
+	    return this.renderTokens(token[4], context, partials, originalTemplate, config);
+	};
 
-	})));
-	});
+	Writer.prototype.indentPartial = function indentPartial (partial, indentation, lineHasNonSpace) {
+	  var filteredIndentation = indentation.replace(/[^ \t]/g, '');
+	  var partialByNl = partial.split('\n');
+	  for (var i = 0; i < partialByNl.length; i++) {
+	    if (partialByNl[i].length && (i > 0 || !lineHasNonSpace)) {
+	      partialByNl[i] = filteredIndentation + partialByNl[i];
+	    }
+	  }
+	  return partialByNl.join('\n');
+	};
+
+	Writer.prototype.renderPartial = function renderPartial (token, context, partials, config) {
+	  if (!partials) return;
+	  var tags = this.getConfigTags(config);
+
+	  var value = isFunction(partials) ? partials(token[1]) : partials[token[1]];
+	  if (value != null) {
+	    var lineHasNonSpace = token[6];
+	    var tagIndex = token[5];
+	    var indentation = token[4];
+	    var indentedValue = value;
+	    if (tagIndex == 0 && indentation) {
+	      indentedValue = this.indentPartial(value, indentation, lineHasNonSpace);
+	    }
+	    var tokens = this.parse(indentedValue, tags);
+	    return this.renderTokens(tokens, context, partials, indentedValue, config);
+	  }
+	};
+
+	Writer.prototype.unescapedValue = function unescapedValue (token, context) {
+	  var value = context.lookup(token[1]);
+	  if (value != null)
+	    return value;
+	};
+
+	Writer.prototype.escapedValue = function escapedValue (token, context, config) {
+	  var escape = this.getConfigEscape(config) || mustache.escape;
+	  var value = context.lookup(token[1]);
+	  if (value != null)
+	    return (typeof value === 'number' && escape === mustache.escape) ? String(value) : escape(value);
+	};
+
+	Writer.prototype.rawValue = function rawValue (token) {
+	  return token[1];
+	};
+
+	Writer.prototype.getConfigTags = function getConfigTags (config) {
+	  if (isArray(config)) {
+	    return config;
+	  }
+	  else if (config && typeof config === 'object') {
+	    return config.tags;
+	  }
+	  else {
+	    return undefined;
+	  }
+	};
+
+	Writer.prototype.getConfigEscape = function getConfigEscape (config) {
+	  if (config && typeof config === 'object' && !isArray(config)) {
+	    return config.escape;
+	  }
+	  else {
+	    return undefined;
+	  }
+	};
+
+	var mustache = {
+	  name: 'mustache.js',
+	  version: '4.2.0',
+	  tags: [ '{{', '}}' ],
+	  clearCache: undefined,
+	  escape: undefined,
+	  parse: undefined,
+	  render: undefined,
+	  Scanner: undefined,
+	  Context: undefined,
+	  Writer: undefined,
+	  /**
+	   * Allows a user to override the default caching strategy, by providing an
+	   * object with set, get and clear methods. This can also be used to disable
+	   * the cache by setting it to the literal `undefined`.
+	   */
+	  set templateCache (cache) {
+	    defaultWriter.templateCache = cache;
+	  },
+	  /**
+	   * Gets the default or overridden caching object from the default writer.
+	   */
+	  get templateCache () {
+	    return defaultWriter.templateCache;
+	  }
+	};
+
+	// All high-level mustache.* functions use this writer.
+	var defaultWriter = new Writer();
+
+	/**
+	 * Clears all cached templates in the default writer.
+	 */
+	mustache.clearCache = function clearCache () {
+	  return defaultWriter.clearCache();
+	};
+
+	/**
+	 * Parses and caches the given template in the default writer and returns the
+	 * array of tokens it contains. Doing this ahead of time avoids the need to
+	 * parse templates on the fly as they are rendered.
+	 */
+	mustache.parse = function parse (template, tags) {
+	  return defaultWriter.parse(template, tags);
+	};
+
+	/**
+	 * Renders the `template` with the given `view`, `partials`, and `config`
+	 * using the default writer.
+	 */
+	mustache.render = function render (template, view, partials, config) {
+	  if (typeof template !== 'string') {
+	    throw new TypeError('Invalid template! Template should be a "string" ' +
+	                        'but "' + typeStr(template) + '" was given as the first ' +
+	                        'argument for mustache#render(template, view, partials)');
+	  }
+
+	  return defaultWriter.render(template, view, partials, config);
+	};
+
+	// Export the escaping function so that the user may override it.
+	// See https://github.com/janl/mustache.js/issues/244
+	mustache.escape = escapeHtml;
+
+	// Export these mainly for testing, but also for advanced usage.
+	mustache.Scanner = Scanner;
+	mustache.Context = Context;
+	mustache.Writer = Writer;
 
 	// Vendor
 
@@ -43680,19 +43862,19 @@
 	    }
 	}
 
-	var styleSidebar = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.dddd {\n    /* Layout */\n    --font: 'Arial', sans-serif;\n    --background-color: rgba(27, 27, 27, 0.9);\n\n    /* Panels */\n    --panel-background-color: rgba(27, 27, 27, 0.9);\n    --panel-spacing: 6px;\n\n    /* Groups */\n    --group-header-padding: 11px;\n    --group-header-font-size: 11px;\n    --group-header-background-color: rgba(255, 255, 255, 0.03);\n    --group-padding: 9px 7px 9px 10px;\n    --group-border-radius: 4px;\n\n    /* Components */\n    --component-row-gap: 4px;\n\n    /* Label */\n    --label-width: 40%;\n    --label-padding: 0 20px 0 0;\n    --label-color: rgba(255, 255, 255, 0.5);\n    --label-font-size: 11px;\n    --label-font-weight: 400;\n\n    /* Input */\n    --input-background-color: rgba(255, 255, 255, 0.03);\n    --input-background-color-hover: rgba(255, 255, 255, 0.08);\n    --input-background-color-error: rgba(255, 0, 0, 0.13);\n    --input-background-color-transition: background-color 0.35s ease-out;\n    --input-highlight-color: rgba(220, 159, 47, 0.53);\n    --input-highlight-color-hover: rgba(220, 159, 47, 0.75);\n    --input-text-color: rgba(255, 255, 255, 0.75);\n    --input-font-size: 11px;\n    --input-font-weight: 300;\n    --input-border-radius: 4px;\n    --input-padding: 10px;\n    --input-height: 26px;\n\n    z-index: 1337;\n\n    width: 300px;\n    height: 100%;\n    max-height: 100vh;\n\n    background: var(--background-color);\n}\n\n.content {\n    width: 100%;\n    height: 100%;\n    /* overflow: auto; */\n}\n\n.resize-handle {\n    position: absolute;\n\n    padding: 0;\n\n    background-color: transparent;\n\n    border: 0;\n    outline: 0;\n}\n\n.resize-handle.side {\n    top: 0;\n    left: 0;\n\n    width: 6px;\n    height: 100%;\n\n    cursor: ew-resize;\n}\n\n.resize-handle.bottom {\n    bottom: 0;\n    left: 0;\n\n    width: 100%;\n    height: 6px;\n\n    cursor: ns-resize;\n}\n\n.resize-handle.corner {\n    bottom: 0;\n    left: 0;\n\n    width: 10px;\n    height: 10px;\n\n    cursor: nesw-resize;\n}\n";
+	var styleSidebar$2 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.dddd {\n    /* Layout */\n    --font: 'Arial', sans-serif;\n    --background-color: rgba(27, 27, 27, 0.9);\n\n    /* Panels */\n    --panel-background-color: rgba(27, 27, 27, 0.9);\n    --panel-spacing: 6px;\n\n    /* Groups */\n    --group-header-padding: 11px;\n    --group-header-font-size: 11px;\n    --group-header-background-color: rgba(255, 255, 255, 0.03);\n    --group-padding: 9px 7px 9px 10px;\n    --group-border-radius: 4px;\n\n    /* Components */\n    --component-row-gap: 4px;\n\n    /* Label */\n    --label-width: 40%;\n    --label-padding: 0 20px 0 0;\n    --label-color: rgba(255, 255, 255, 0.5);\n    --label-font-size: 11px;\n    --label-font-weight: 400;\n\n    /* Input */\n    --input-background-color: rgba(255, 255, 255, 0.03);\n    --input-background-color-hover: rgba(255, 255, 255, 0.08);\n    --input-background-color-error: rgba(255, 0, 0, 0.13);\n    --input-background-color-transition: background-color 0.35s ease-out;\n    --input-highlight-color: rgba(220, 159, 47, 0.53);\n    --input-highlight-color-hover: rgba(220, 159, 47, 0.75);\n    --input-text-color: rgba(255, 255, 255, 0.75);\n    --input-font-size: 11px;\n    --input-font-weight: 300;\n    --input-border-radius: 4px;\n    --input-padding: 10px;\n    --input-height: 26px;\n\n    z-index: 1337;\n\n    width: 300px;\n    height: 100%;\n    max-height: 100vh;\n\n    background: var(--background-color);\n}\n\n.content {\n    width: 100%;\n    height: 100%;\n    /* overflow: auto; */\n}\n\n.resize-handle {\n    position: absolute;\n\n    padding: 0;\n\n    background-color: transparent;\n\n    border: 0;\n    outline: 0;\n}\n\n.resize-handle.side {\n    top: 0;\n    left: 0;\n\n    width: 6px;\n    height: 100%;\n\n    cursor: ew-resize;\n}\n\n.resize-handle.bottom {\n    bottom: 0;\n    left: 0;\n\n    width: 100%;\n    height: 6px;\n\n    cursor: ns-resize;\n}\n\n.resize-handle.corner {\n    bottom: 0;\n    left: 0;\n\n    width: 10px;\n    height: 10px;\n\n    cursor: nesw-resize;\n}\n";
 
-	var styleDevtools = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.dddd {\r\n    /* Layout */\r\n    --font: 'Arial', sans-serif;\r\n    --background-color: #161616;\r\n\r\n    /* Panels */\r\n    --panel-background-color: #1B1B1B;\r\n    --panel-spacing: 15px;\r\n\r\n    /* Groups */\r\n    --group-header-font-size: 15px;\r\n    --group-header-background-color: rgba(255, 255, 255, 0.03);\r\n    --group-padding: 30px;\r\n    --group-border-radius: 10px;\r\n\r\n    /* Components */\r\n    --component-row-gap: 7px;\r\n\r\n    /* Label */\r\n    --label-width: 30%;\r\n    --label-padding: 0 20px 0 0;\r\n    --label-color: rgba(255, 255, 255, 0.75);\r\n    --label-font-size: 14px;\r\n    --label-font-weight: 400;\r\n    \r\n    /* Input */\r\n    --input-background-color: rgba(255, 255, 255, 0.03);\r\n    --input-background-color-hover: rgba(255, 255, 255, 0.08);\r\n    --input-background-color-transition: background-color 0.35s ease-out;\r\n    --input-highlight-color: rgba(77, 83, 217, 0.64);\r\n    --input-highlight-color-hover: rgba(77, 83, 217, 1);\r\n    --input-text-color: rgba(255, 255, 255, 0.75);\r\n    --input-font-size: 14px;\r\n    --input-font-weight: 300;\r\n    --input-border-radius: 10px;\r\n    --input-padding: 16px;\r\n    --input-height: 40px;\r\n\r\n    background: var(--background-color);\r\n}\r\n";
+	var styleDevtools$2 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.dddd {\n    /* Layout */\n    --font: 'Arial', sans-serif;\n    --background-color: #161616;\n\n    /* Panels */\n    --panel-background-color: #1B1B1B;\n    --panel-spacing: 15px;\n\n    /* Groups */\n    --group-header-font-size: 15px;\n    --group-header-background-color: rgba(255, 255, 255, 0.03);\n    --group-padding: 30px;\n    --group-border-radius: 10px;\n\n    /* Components */\n    --component-row-gap: 7px;\n\n    /* Label */\n    --label-width: 30%;\n    --label-padding: 0 20px 0 0;\n    --label-color: rgba(255, 255, 255, 0.75);\n    --label-font-size: 14px;\n    --label-font-weight: 400;\n    \n    /* Input */\n    --input-background-color: rgba(255, 255, 255, 0.03);\n    --input-background-color-hover: rgba(255, 255, 255, 0.08);\n    --input-background-color-transition: background-color 0.35s ease-out;\n    --input-highlight-color: rgba(77, 83, 217, 0.64);\n    --input-highlight-color-hover: rgba(77, 83, 217, 1);\n    --input-text-color: rgba(255, 255, 255, 0.75);\n    --input-font-size: 14px;\n    --input-font-weight: 300;\n    --input-border-radius: 10px;\n    --input-padding: 16px;\n    --input-height: 40px;\n\n    background: var(--background-color);\n}\n";
 
-	var templateSidebar = "<div class=\"dddd\">\r\n\r\n    <!-- Content -->\r\n    <div class=\"content\" ref=\"content\"></div>\r\n\r\n    <!-- Resize handle -->\r\n    <button class=\"resize-handle side\" ref=\"resizeHandleSide\"></button>\r\n    <button class=\"resize-handle bottom\" ref=\"resizeHandleBottom\"></button>\r\n    <button class=\"resize-handle corner\" ref=\"resizeHandleCorner\"></button>\r\n\r\n</div>\r\n";
+	var templateSidebar$2 = "<div class=\"dddd\">\n\n    <!-- Content -->\n    <div class=\"content\" ref=\"content\"></div>\n\n    <!-- Resize handle -->\n    <button class=\"resize-handle side\" ref=\"resizeHandleSide\"></button>\n    <button class=\"resize-handle bottom\" ref=\"resizeHandleBottom\"></button>\n    <button class=\"resize-handle corner\" ref=\"resizeHandleCorner\"></button>\n\n</div>\n";
 
-	var templateDevtools = "<div class=\"dddd\">\r\n\r\n    <!-- Content -->\r\n    <div class=\"content\" ref=\"content\"></div>\r\n\r\n</div>\r\n";
+	var templateDevtools$2 = "<div class=\"dddd\">\n\n    <!-- Content -->\n    <div class=\"content\" ref=\"content\"></div>\n\n</div>\n";
 
 	// Base class
 
 	class Container extends LayoutElement {
 	    constructor({ root, wrapper }) {
-	        super({ root, style: { styleSidebar, styleDevtools }, template: { templateSidebar, templateDevtools } });
+	        super({ root, style: { styleSidebar: styleSidebar$2, styleDevtools: styleDevtools$2 }, template: { templateSidebar: templateSidebar$2, templateDevtools: templateDevtools$2 } });
 
 	        // Data
 	        this._isMouseDown = false;
@@ -43837,15 +44019,15 @@
 
 	window.customElements.define('dddd-container', Container);
 
-	var style = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.header {\r\n    background-color: var(--panel-background-color);\r\n\r\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\r\n}\r\n";
+	var style$e = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.header {\n    background-color: var(--panel-background-color);\n\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\n}\n";
 
-	var template = "<div class=\"header\">\r\n\r\n</div>\r\n";
+	var template$e = "<div class=\"header\">\n\n</div>\n";
 
 	// Base class
 
 	class Header extends LayoutElement {
 	    constructor({ root, options }) {
-	        super({ root, style, template });
+	        super({ root, style: style$e, template: template$e });
 
 	        // Props
 	        this._options = options;
@@ -43891,17 +44073,17 @@
 
 	var styleSidebar$1 = ".navigation {\n    display: none;\n\n    grid-template-columns: 1fr var(--input-height);\n    column-gap: var(--panel-spacing);\n\n    padding: var(--panel-spacing);\n}\n\n.select-container {\n    position: relative;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    user-select: none;\n\n    transition: var(--input-background-color-transition);\n}\n\n.select-container:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.select {\n    width: 100%;\n    height: 100%;\n\n    border: 0;\n    outline: 0;\n\n    padding: 0 var(--input-padding);\n\n    background: transparent;\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    appearance: none;\n}\n\n.select optgroup,\n.select option {\n    color: black;\n}\n\n.arrow {\n    position: absolute;\n    top: 0;\n    right: var(--input-padding);\n    bottom: 0;\n\n    margin: auto 0;\n}\n\n.button-toggle {\n    position: relative;\n\n    width: var(--input-height);\n    height: var(--input-height);\n\n    background-color: var(--input-background-color);\n\n    border: 0;\n    border-radius: var(--input-border-radius);\n    outline: 0;\n\n    cursor: pointer;\n\n    transition: var(--input-background-color-transition);\n}\n\n.button-toggle:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.button-toggle__line {\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n\n    width: 12px;\n    height: 2px;\n\n    margin: auto;\n\n    background: var(--input-text-color);\n}\n";
 
-	var styleDevtools$1 = ".navigation {\r\n    display: none;\r\n    \r\n    padding: var(--panel-spacing);\r\n\r\n    font-size: 0;\r\n\r\n    list-style: none;\r\n\r\n    background-color: var(--panel-background-color);\r\n\r\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\r\n}\r\n\r\n.navigation li {\r\n    display: inline-block;\r\n\r\n    margin-right: 10px;\r\n}\r\n\r\n.navigation-button {\r\n    padding: 13px 30px;\r\n\r\n    color: rgba(255, 255, 255, 0.5);\r\n\r\n    background-color: transparent;\r\n\r\n    border: 0;\r\n    border-radius: 12px;\r\n    outline: 0;\r\n\r\n    font-family: var(--font);\r\n    font-size: 13px;\r\n    font-weight: 600;\r\n\r\n    cursor: pointer;\r\n\r\n    transition: all 0.3s ease-out;\r\n}\r\n\r\n.navigation-button:hover {\r\n    background-color: rgba(255, 255, 255, 0.01);\r\n}\r\n\r\n.navigation-button.active {\r\n    color: rgba(255, 255, 255, 0.9);\r\n\r\n    background-color: rgba(255, 255, 255, 0.03);\r\n}";
+	var styleDevtools$1 = ".navigation {\n    display: none;\n    \n    padding: var(--panel-spacing);\n\n    font-size: 0;\n\n    list-style: none;\n\n    background-color: var(--panel-background-color);\n\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\n}\n\n.navigation li {\n    display: inline-block;\n\n    margin-right: 10px;\n}\n\n.navigation-button {\n    padding: 13px 30px;\n\n    color: rgba(255, 255, 255, 0.5);\n\n    background-color: transparent;\n\n    border: 0;\n    border-radius: 12px;\n    outline: 0;\n\n    font-family: var(--font);\n    font-size: 13px;\n    font-weight: 600;\n\n    cursor: pointer;\n\n    transition: all 0.3s ease-out;\n}\n\n.navigation-button:hover {\n    background-color: rgba(255, 255, 255, 0.01);\n}\n\n.navigation-button.active {\n    color: rgba(255, 255, 255, 0.9);\n\n    background-color: rgba(255, 255, 255, 0.03);\n}";
 
-	var templateSidebar$1 = "<div class=\"navigation\">\r\n\r\n    <!-- Select container-->\r\n    <div class=\"select-container\" ref=\"selectContainer\">\r\n\r\n        <!-- Arrow -->\r\n        <svg width=\"11\" height=\"6\" viewBox=\"0 0 11 6\" class=\"arrow\">\r\n            <path d=\"M1 1L4.83564 4.40945C5.21452 4.74624 5.78548 4.74624 6.16436 4.40945L10 1\" stroke=\"white\" fill=\"transparent\" stroke-opacity=\"0.74\" stroke-linecap=\"round\"/>\r\n        </svg>\r\n\r\n        <!-- Select -->\r\n        <select class=\"select\" ref=\"select\"></select>\r\n\r\n    </div>\r\n\r\n    <!-- Button toggle -->\r\n    <button class=\"button-toggle\" ref=\"buttonToggle\">\r\n        <div class=\"button-toggle__line\"></div>\r\n    </button>\r\n\r\n</div>\r\n";
+	var templateSidebar$1 = "<div class=\"navigation\">\n\n    <!-- Select container-->\n    <div class=\"select-container\" ref=\"selectContainer\">\n\n        <!-- Arrow -->\n        <svg width=\"11\" height=\"6\" viewBox=\"0 0 11 6\" class=\"arrow\">\n            <path d=\"M1 1L4.83564 4.40945C5.21452 4.74624 5.78548 4.74624 6.16436 4.40945L10 1\" stroke=\"white\" fill=\"transparent\" stroke-opacity=\"0.74\" stroke-linecap=\"round\"/>\n        </svg>\n\n        <!-- Select -->\n        <select class=\"select\" ref=\"select\"></select>\n\n    </div>\n\n    <!-- Button toggle -->\n    <button class=\"button-toggle\" ref=\"buttonToggle\">\n        <div class=\"button-toggle__line\"></div>\n    </button>\n\n</div>\n";
 
-	var templateDevtools$1 = "<ul class=\"navigation\"></ul>\r\n";
+	var templateDevtools$1 = "<ul class=\"navigation\"></ul>\n";
 
 	// Base class
 
 	// Constants
 	const NAVIGATION_BUTTON_CLASS = 'navigation-button';
-	const ACTIVE_CLASS = 'active';
+	const ACTIVE_CLASS$2 = 'active';
 
 	class Navigation extends LayoutElement {
 	    constructor({ root }) {
@@ -43957,7 +44139,7 @@
 	            const button = document.createElement('button');
 	            button.classList.add(NAVIGATION_BUTTON_CLASS);
 	            if (this.$el.children.length === this._activeIndex) {
-	                button.classList.add(ACTIVE_CLASS);
+	                button.classList.add(ACTIVE_CLASS$2);
 	            }
 	            button.innerText = label;
 
@@ -44028,9 +44210,9 @@
 	    }
 
 	    _switch(index) {
-	        this.$el.children[this._activeIndex].firstChild.classList.remove(ACTIVE_CLASS);
+	        this.$el.children[this._activeIndex].firstChild.classList.remove(ACTIVE_CLASS$2);
 	        this._activeIndex = index;
-	        this.$el.children[this._activeIndex].firstChild.classList.add(ACTIVE_CLASS);
+	        this.$el.children[this._activeIndex].firstChild.classList.add(ACTIVE_CLASS$2);
 	        this._triggerSwitchEvent(this._activeIndex);
 	    }
 
@@ -44083,15 +44265,15 @@
 
 	window.customElements.define('dddd-navigation', Navigation);
 
-	var style$1 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.global {\n    position: relative;\n\n    /* padding: var(--panel-spacing) var(--panel-spacing) 0 var(--panel-spacing); */\n    padding: 0 var(--panel-spacing) 1px;\n\n    -webkit-font-smoothing: antialiased;\n    font-family: var(--font);\n    font-weight: 300;\n    font-size: 13px;\n\n    background-color: var(--panel-background-color);\n}\n";
+	var style$d = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.global {\n    position: relative;\n\n    /* padding: var(--panel-spacing) var(--panel-spacing) 0 var(--panel-spacing); */\n    padding: 0 var(--panel-spacing) 1px;\n\n    -webkit-font-smoothing: antialiased;\n    font-family: var(--font);\n    font-weight: 300;\n    font-size: 13px;\n\n    background-color: var(--panel-background-color);\n}\n";
 
-	var template$1 = "<div class=\"global\" ref=\"content\"></div>\n";
+	var template$d = "<div class=\"global\" ref=\"content\"></div>\n";
 
 	// Base class
 
-	class Layer extends LayoutElement {
+	class Layer$1 extends LayoutElement {
 	    constructor({ root }) {
-	        super({ root, style: style$1, template: template$1 });
+	        super({ root, style: style$d, template: template$d });
 	    }
 
 	    /**
@@ -44137,7 +44319,7 @@
 	    }
 	}
 
-	window.customElements.define('dddd-global', Layer);
+	window.customElements.define('dddd-global', Layer$1);
 
 	class Ticker {
 	    constructor() {
@@ -44186,15 +44368,15 @@
 
 	var Ticker$1 = new Ticker();
 
-	var style$2 = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.stats {\r\n    padding: 0 var(--panel-spacing) var(--panel-spacing) var(--panel-spacing);\r\n}\r\n\r\n.content {\r\n    height: 100px;\r\n\r\n    border-radius: var(--input-border-radius);background-color: var(--input-background-color);\r\n\r\n    background-color: var(--input-background-color);\r\n}\r\n\r\n.canvas {\r\n    width: 100%;\r\n}\r\n";
+	var style$c = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.stats {\n    padding: 0 var(--panel-spacing) var(--panel-spacing) var(--panel-spacing);\n}\n\n.content {\n    height: 100px;\n\n    border-radius: var(--input-border-radius);background-color: var(--input-background-color);\n\n    background-color: var(--input-background-color);\n}\n\n.canvas {\n    width: 100%;\n}\n";
 
-	var template$2 = "<div class=\"stats\">\r\n\r\n    <!-- Content -->\r\n    <div class=\"content\">\r\n\r\n        <!-- Canvas -->\r\n        <canvas class=\"canvas\" ref=\"canvas\"></canvas>\r\n\r\n    </div>\r\n\r\n</div>\r\n";
+	var template$c = "<div class=\"stats\">\n\n    <!-- Content -->\n    <div class=\"content\">\n\n        <!-- Canvas -->\n        <canvas class=\"canvas\" ref=\"canvas\"></canvas>\n\n    </div>\n\n</div>\n";
 
 	// Based on
 
 	class Stats extends LayoutElement {
 	    constructor({ root, options }) {
-	        super({ root, style: style$2, template: template$2 });
+	        super({ root, style: style$c, template: template$c });
 
 	        // Props
 	        this._options = options;
@@ -44283,9 +44465,9 @@
 
 	window.customElements.define('dddd-stats', Stats);
 
-	var style$3 = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.layer {\r\n    display: none;\r\n\r\n    position: relative;\r\n\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n\r\n.layer.active {\r\n    display: block;\r\n}\r\n";
+	var style$b = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.layer {\n    display: none;\n\n    position: relative;\n\n    width: 100%;\n    overflow: hidden;\n}\n\n.layer.active {\n    display: block;\n}\n";
 
-	var template$3 = "<div class=\"layer\"></div>";
+	var template$b = "<div class=\"layer\"></div>";
 
 	// Base class
 
@@ -44293,9 +44475,9 @@
 	const ACTIVE_CLASS$1 = 'active';
 	const GROUP_MIN_WIDTH = 350;
 
-	class Layer$1 extends LayoutElement {
+	class Layer extends LayoutElement {
 	    constructor({ root, label }) {
-	        super({ root, style: style$3, template: template$3, templateData: { label } });
+	        super({ root, style: style$b, template: template$b, templateData: { label } });
 
 	        // Props
 	        this._label = label;
@@ -44444,17 +44626,17 @@
 	    }
 	}
 
-	window.customElements.define('dddd-layer', Layer$1);
+	window.customElements.define('dddd-layer', Layer);
 
-	var style$4 = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.layers {\r\n    position: relative;\r\n\r\n    width: 100%;\r\n    height: 100%;\r\n    overflow: auto;\r\n\r\n    /* padding: var(--panel-spacing) var(--panel-spacing) 0 var(--panel-spacing); */\r\n    padding: var(--panel-spacing);\r\n\r\n    -webkit-font-smoothing: antialiased;\r\n    font-family: var(--font);\r\n    font-weight: 300;\r\n    font-size: 13px;\r\n}\r\n";
+	var style$a = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.layers {\n    position: relative;\n\n    width: 100%;\n    height: 100%;\n    overflow: auto;\n\n    /* padding: var(--panel-spacing) var(--panel-spacing) 0 var(--panel-spacing); */\n    padding: var(--panel-spacing);\n\n    -webkit-font-smoothing: antialiased;\n    font-family: var(--font);\n    font-weight: 300;\n    font-size: 13px;\n}\n";
 
-	var template$4 = "<div class=\"layers\"></div>";
+	var template$a = "<div class=\"layers\"></div>";
 
 	// Base class
 
-	class Layers$1 extends LayoutElement {
+	class Layers extends LayoutElement {
 	    constructor({ root }) {
-	        super({ root, style: style$4, template: template$4 });
+	        super({ root, style: style$a, template: template$a });
 
 	        // Options
 	        this._activeIndex = 0;
@@ -44472,7 +44654,7 @@
 	     * Public
 	     */
 	    add(label) {
-	        const layer = new Layer$1({ root: this.$root, label });
+	        const layer = new Layer({ root: this.$root, label });
 	        if (this._layers.length === this._activeIndex) {
 	            layer.activate();
 	        }
@@ -44490,8 +44672,10 @@
 	                layer = item;
 	            }
 	        }
-	        this.$el.removeChild(layer);
-	        this._layers.splice(this._layers.indexOf(layer), 1);
+	        if (layer) {
+	            this.$el.removeChild(layer);
+	            this._layers.splice(this._layers.indexOf(layer), 1);
+	        }
 	    }
 
 	    goto(index) {
@@ -44557,7 +44741,7 @@
 	    }
 	}
 
-	window.customElements.define('dddd-layers', Layers$1);
+	window.customElements.define('dddd-layers', Layers);
 
 	class LocalStorage {
 	    /**
@@ -44577,27 +44761,27 @@
 
 	var LocalStorage$1 = new LocalStorage();
 
-	var styleSidebar$2 = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.group {\r\n    overflow: hidden;\r\n\r\n    margin: 0 0 var(--panel-spacing) 0;\r\n\r\n    background-color: var(--panel-background-color);\r\n\r\n    border-radius: var(--group-border-radius);\r\n\r\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\r\n}\r\n\r\n.button-header {\r\n    position: relative;\r\n\r\n    width: 100%;\r\n\r\n    padding: 0;\r\n\r\n    text-align: left;\r\n\r\n    background-color: var(--group-header-background-color);\r\n\r\n    border: 0;\r\n    outline: 0;\r\n    cursor: pointer;\r\n}\r\n\r\n.label {\r\n    display: block;\r\n\r\n    padding: var(--group-header-padding);\r\n\r\n    font-size: var(--group-header-font-size);\r\n    font-weight: 400;\r\n    color: white;\r\n    letter-spacing: 0.025em;\r\n}\r\n\r\n.arrow {\r\n    position: absolute;\r\n    top: 0;\r\n    right: calc(var(--group-header-padding) + 1px);\r\n    bottom: 0;\r\n\r\n    margin: auto 0;\r\n}\r\n\r\n.content {\r\n    display: grid;\r\n    position: relative;\r\n\r\n    row-gap: var(--component-row-gap);\r\n\r\n    padding: var(--group-padding);\r\n}\r\n\r\n.hidden .content {\r\n    display: none;\r\n}\r\n\r\n/* Subgroup */\r\n.group.subgroup {\r\n    padding: 8px 0 0 0;\r\n\r\n    background-color: transparent;\r\n\r\n    border-radius: 0;\r\n\r\n    box-shadow: initial;\r\n}\r\n\r\n.subgroup .button-header {\r\n    margin-bottom: 0;\r\n\r\n    background: transparent;\r\n}\r\n\r\n.subgroup .label {\r\n    padding: 0 0 0 21px;\r\n\r\n    font-size: 11px;\r\n}\r\n\r\n.subgroup .arrow {\r\n    position: absolute;\r\n    top: 3px;\r\n    right: 0;\r\n    bottom: 0;\r\n    left: 2px;\r\n\r\n    width: 10px;\r\n\r\n    margin: 0;\r\n}\r\n\r\n.hidden.subgroup .arrow {\r\n    transform: rotate(-90deg);\r\n}\r\n\r\n.subgroup .content {\r\n    margin: 7px 0 4px 0;\r\n    padding: 0 0 0 20px;\r\n}\r\n\r\n.subgroup .content:before {\r\n    content: '';\r\n\r\n    display: block;\r\n    position: absolute;\r\n    top: 0;\r\n    bottom: 0;\r\n    left: 6px;\r\n\r\n    width: 1px;\r\n    height: 100%;\r\n\r\n    background: rgba(255, 255, 255, 0.1);\r\n}\r\n";
+	var styleSidebar = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.group {\n    overflow: hidden;\n\n    margin: 0 0 var(--panel-spacing) 0;\n\n    background-color: var(--panel-background-color);\n\n    border-radius: var(--group-border-radius);\n\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\n}\n\n.button-header {\n    position: relative;\n\n    width: 100%;\n\n    padding: 0;\n\n    text-align: left;\n\n    background-color: var(--group-header-background-color);\n\n    border: 0;\n    outline: 0;\n    cursor: pointer;\n}\n\n.label {\n    display: block;\n\n    padding: var(--group-header-padding);\n\n    font-size: var(--group-header-font-size);\n    font-weight: 400;\n    color: white;\n    letter-spacing: 0.025em;\n}\n\n.arrow {\n    position: absolute;\n    top: 0;\n    right: calc(var(--group-header-padding) + 1px);\n    bottom: 0;\n\n    margin: auto 0;\n}\n\n.content {\n    display: grid;\n    position: relative;\n\n    row-gap: var(--component-row-gap);\n\n    padding: var(--group-padding);\n}\n\n.hidden .content {\n    display: none;\n}\n\n/* Subgroup */\n.group.subgroup {\n    padding: 8px 0 0 0;\n\n    background-color: transparent;\n\n    border-radius: 0;\n\n    box-shadow: initial;\n}\n\n.subgroup .button-header {\n    margin-bottom: 0;\n\n    background: transparent;\n}\n\n.subgroup .label {\n    padding: 0 0 0 21px;\n\n    font-size: 11px;\n}\n\n.subgroup .arrow {\n    position: absolute;\n    top: 3px;\n    right: 0;\n    bottom: 0;\n    left: 2px;\n\n    width: 10px;\n\n    margin: 0;\n}\n\n.hidden.subgroup .arrow {\n    transform: rotate(-90deg);\n}\n\n.subgroup .content {\n    margin: 7px 0 4px 0;\n    padding: 0 0 0 20px;\n}\n\n.subgroup .content:before {\n    content: '';\n\n    display: block;\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 6px;\n\n    width: 1px;\n    height: 100%;\n\n    background: rgba(255, 255, 255, 0.1);\n}\n";
 
-	var styleDevtools$2 = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.group {\r\n    padding: calc(var(--group-padding) - 3px) var(--group-padding) var(--group-padding);\r\n    margin: 0 var(--panel-spacing) var(--panel-spacing) 0;\r\n\r\n    background-color: var(--panel-background-color);\r\n    \r\n    border-radius: var(--group-border-radius);\r\n\r\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\r\n}\r\n\r\n.label {\r\n    display: block;\r\n\r\n    margin-bottom: 20px;\r\n\r\n    font-size: var(--group-header-font-size);\r\n    font-weight: 600;\r\n    color: white;\r\n    letter-spacing: 0.025em;\r\n}\r\n\r\n.content {\r\n    display: grid;\r\n\r\n    row-gap: var(--component-row-gap);\r\n}";
+	var styleDevtools = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.group {\n    padding: calc(var(--group-padding) - 3px) var(--group-padding) var(--group-padding);\n    margin: 0 var(--panel-spacing) var(--panel-spacing) 0;\n\n    background-color: var(--panel-background-color);\n    \n    border-radius: var(--group-border-radius);\n\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\n}\n\n.label {\n    display: block;\n\n    margin-bottom: 20px;\n\n    font-size: var(--group-header-font-size);\n    font-weight: 600;\n    color: white;\n    letter-spacing: 0.025em;\n}\n\n.content {\n    display: grid;\n\n    row-gap: var(--component-row-gap);\n}";
 
-	var templateSidebar$2 = "<div class=\"group active\">\r\n\r\n    <!-- Button header -->\r\n    <button class=\"button-header\" ref=\"buttonHeader\">\r\n\r\n        <!-- Label -->\r\n        <span class=\"label\">\r\n            {{ label }}\r\n        </span>\r\n\r\n        <!-- Arrow -->\r\n        <svg width=\"11\" height=\"6\" viewBox=\"0 0 11 6\" class=\"arrow\">\r\n            <path d=\"M1 1L4.83564 4.40945C5.21452 4.74624 5.78548 4.74624 6.16436 4.40945L10 1\" stroke=\"white\" fill=\"transparent\" stroke-opacity=\"0.74\" stroke-linecap=\"round\"/>\r\n        </svg>\r\n\r\n    </button>\r\n\r\n    <!-- Content -->\r\n    <div class=\"content\" ref=\"content\"></div>\r\n\r\n</div>\r\n";
+	var templateSidebar = "<div class=\"group active\">\n\n    <!-- Button header -->\n    <button class=\"button-header\" ref=\"buttonHeader\">\n\n        <!-- Label -->\n        <span class=\"label\">\n            {{ label }}\n        </span>\n\n        <!-- Arrow -->\n        <svg width=\"11\" height=\"6\" viewBox=\"0 0 11 6\" class=\"arrow\">\n            <path d=\"M1 1L4.83564 4.40945C5.21452 4.74624 5.78548 4.74624 6.16436 4.40945L10 1\" stroke=\"white\" fill=\"transparent\" stroke-opacity=\"0.74\" stroke-linecap=\"round\"/>\n        </svg>\n\n    </button>\n\n    <!-- Content -->\n    <div class=\"content\" ref=\"content\"></div>\n\n</div>\n";
 
-	var templateDevtools$2 = "<div class=\"group\">\r\n\r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Content -->\r\n    <div class=\"content\" ref=\"content\"></div>\r\n\r\n</div>\r\n";
+	var templateDevtools = "<div class=\"group\">\n\n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Content -->\n    <div class=\"content\" ref=\"content\"></div>\n\n</div>\n";
 
 	// Base class
 
-	class Group$1 extends LayoutElement {
+	class Group extends LayoutElement {
 	    constructor({ root, label, parent, collapseGroups, options }) {
 	        super({
 	            root,
 	            style: {
-	                styleSidebar: styleSidebar$2,
-	                styleDevtools: styleDevtools$2,
+	                styleSidebar,
+	                styleDevtools,
 	            },
 	            template: {
-	                templateSidebar: templateSidebar$2,
-	                templateDevtools: templateDevtools$2,
+	                templateSidebar,
+	                templateDevtools,
 	            },
 	            templateData: {
 	                label,
@@ -44763,7 +44947,7 @@
 	    }
 	}
 
-	window.customElements.define('dddd-group', Group$1);
+	window.customElements.define('dddd-group', Group);
 
 	class LayoutModel {
 	    constructor() {
@@ -45001,9 +45185,9 @@
 	    }
 	}
 
-	var style$5 = ".component {\r\n    display: grid;\r\n\r\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\r\n    align-items: center;\r\n}\r\n\r\n.label {\r\n    overflow: hidden;\r\n\r\n    padding: var(--label-padding);\r\n\r\n    font-size: var(--label-font-size);\r\n    font-weight: var(--label-font-weight);\r\n    color: var(--label-color);\r\n    white-space: nowrap;\r\n    text-overflow: ellipsis;\r\n}\r\n\r\n.input-container {\r\n    position: relative;\r\n\r\n    height: var(--input-height);\r\n    overflow: hidden;\r\n\r\n    background-color: var(--input-background-color);\r\n\r\n    border-radius: var(--input-border-radius);\r\n\r\n    user-select: none;\r\n\r\n    transition: var(--input-background-color-transition);\r\n\r\n    cursor: col-resize;\r\n}\r\n\r\n.input-container:hover,\r\n.input-container.active {\r\n    background-color: var(--input-background-color-hover);\r\n}\r\n\r\n.locked .input-container {\r\n    opacity: 0.6;\r\n\r\n    pointer-events: none;\r\n}\r\n\r\n.scrubber {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n\r\n    width: 100%;\r\n    height: 100%;\r\n\r\n    background: var(--input-highlight-color);\r\n\r\n    transform-origin: top left;\r\n}\r\n\r\n.input {\r\n    position: relative;\r\n    display: block;\r\n\r\n    width: 100%;\r\n    height: 100%;\r\n\r\n    padding: 0 var(--input-padding);\r\n\r\n    background-color: transparent;\r\n\r\n    font-family: var(--font);\r\n    font-size: var(--input-font-size);\r\n    font-weight: var(--input-font-weight);\r\n    line-height: var(--input-height);\r\n    color: var(--input-text-color);\r\n\r\n    outline: none;\r\n    border: 0;\r\n\r\n    pointer-events: none;\r\n}\r\n";
+	var style$9 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    position: relative;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    user-select: none;\n\n    transition: var(--input-background-color-transition);\n\n    cursor: col-resize;\n}\n\n.input-container:hover,\n.input-container.active {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.scrubber {\n    position: absolute;\n    top: 0;\n    left: 0;\n\n    width: 100%;\n    height: 100%;\n\n    background: var(--input-highlight-color);\n\n    transform-origin: top left;\n}\n\n.input {\n    position: relative;\n    display: block;\n\n    width: 100%;\n    height: 100%;\n\n    padding: 0 var(--input-padding);\n\n    background-color: transparent;\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    line-height: var(--input-height);\n    color: var(--input-text-color);\n\n    outline: none;\n    border: 0;\n\n    pointer-events: none;\n}\n";
 
-	var template$5 = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input container -->\r\n    <div class=\"input-container\" ref=\"inputContainer\">\r\n\r\n        <!-- Scrubber -->\r\n        <div class=\"scrubber\" ref=\"scrubber\"></div>\r\n        \r\n        <!-- Input -->\r\n        <input class=\"input\" ref=\"input\">\r\n\r\n    </div>\r\n\r\n</div>";
+	var template$9 = "<div class=\"component\">\n    \n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input container -->\n    <div class=\"input-container\" ref=\"inputContainer\">\n\n        <!-- Scrubber -->\n        <div class=\"scrubber\" ref=\"scrubber\"></div>\n        \n        <!-- Input -->\n        <input class=\"input\" ref=\"input\">\n\n    </div>\n\n</div>";
 
 	class ValueHover {
 	    constructor() {
@@ -45031,17 +45215,17 @@
 	// Base component
 
 	// Constants
-	const ACTIVE_CLASS$2 = 'active';
+	const ACTIVE_CLASS = 'active';
 	const PRECISION_MODIFIER = 0.3;
-	const DEFAULT_STEP_SIZE = 0.01;
+	const DEFAULT_STEP_SIZE$2 = 0.01;
 
 	// TODO: On change is triggered twice
 	class Slider extends Component {
 	    constructor(root, model) {
-	        super({ root, style: style$5, template: template$5, model });
+	        super({ root, style: style$9, template: template$9, model });
 
 	        // Options
-	        this._stepSize = this.model.options.stepSize || DEFAULT_STEP_SIZE;
+	        this._stepSize = this.model.options.stepSize || DEFAULT_STEP_SIZE$2;
 	        this._decimalPlaces = this._getDecimalPlaces(this._stepSize);
 
 	        // Data
@@ -45195,11 +45379,11 @@
 	    }
 
 	    _addActiveClass() {
-	        this.$refs.inputContainer.classList.add(ACTIVE_CLASS$2);
+	        this.$refs.inputContainer.classList.add(ACTIVE_CLASS);
 	    }
 
 	    _removeActiveClass() {
-	        this.$refs.inputContainer.classList.remove(ACTIVE_CLASS$2);
+	        this.$refs.inputContainer.classList.remove(ACTIVE_CLASS);
 	    }
 
 	    _getInputValueBasedOnMouseMovement(movementX) {
@@ -45297,13 +45481,13 @@
 
 	window.customElements.define('dddd-slider', Slider);
 
-	var style$6 = ".component {\r\n    display: grid;\r\n\r\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\r\n    align-items: center;\r\n\r\n    transition: background-color 0.15s;\r\n}\r\n\r\n.label {\r\n    overflow: hidden;\r\n\r\n    padding: var(--label-padding);\r\n\r\n    font-size: var(--label-font-size);\r\n    font-weight: var(--label-font-weight);\r\n    color: var(--label-color);\r\n    white-space: nowrap;\r\n    text-overflow: ellipsis;\r\n}\r\n\r\n.input {\r\n    height: var(--input-height);\r\n\r\n    padding: 0 var(--input-padding);\r\n\r\n    font-family: var(--font);\r\n    font-size: var(--input-font-size);\r\n    font-weight: var(--input-font-weight);\r\n    color: var(--input-text-color);\r\n\r\n    background-color: var(--input-background-color);\r\n\r\n    border: 0;\r\n    border-radius: var(--input-border-radius);\r\n    outline: none;\r\n\r\n    transition: var(--input-background-color-transition);\r\n}\r\n\r\n.input:hover {\r\n    background-color: var(--input-background-color-hover);\r\n}\r\n\r\n.locked .input {\r\n    opacity: 0.6;\r\n\r\n    pointer-events: none;\r\n}\r\n";
+	var style$8 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n\n    transition: background-color 0.15s;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input {\n    height: var(--input-height);\n\n    padding: 0 var(--input-padding);\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    background-color: var(--input-background-color);\n\n    border: 0;\n    border-radius: var(--input-border-radius);\n    outline: none;\n\n    transition: var(--input-background-color-transition);\n}\n\n.input:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n";
 
-	var template$6 = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input -->\r\n    <input class=\"input\" ref=\"input\">\r\n\r\n</div>";
+	var template$8 = "<div class=\"component\">\n    \n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input -->\n    <input class=\"input\" ref=\"input\">\n\n</div>";
 
 	class Text extends Component {
 	    constructor(root, model) {
-	        super({ root, style: style$6, template: template$6, model });
+	        super({ root, style: style$8, template: template$8, model });
 
 	        // Setup
 	        this._bindHandlers();
@@ -45354,9 +45538,9 @@
 
 	window.customElements.define('dddd-input', Text);
 
-	var style$7 = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.component {\r\n    display: grid;\r\n\r\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\r\n    align-items: start;\r\n\r\n    transition: background-color 0.15s;\r\n}\r\n\r\n.label {\r\n    height: var(--input-height);\r\n    overflow: hidden;\r\n\r\n    padding: var(--label-padding);\r\n\r\n    font-size: var(--label-font-size);\r\n    line-height: var(--input-height);\r\n    font-weight: var(--label-font-weight);\r\n    color: var(--label-color);\r\n    white-space: nowrap;\r\n    text-overflow: ellipsis;\r\n}\r\n\r\n.input {\r\n    width: 100%;\r\n    height: var(--input-height);\r\n\r\n    padding: 0 var(--input-padding);\r\n\r\n    font-family: var(--font);\r\n    font-size: var(--input-font-size);\r\n    font-weight: var(--input-font-weight);\r\n    color: var(--input-text-color);\r\n\r\n    background-color: var(--input-background-color);\r\n\r\n    border: 0;\r\n    border-radius: var(--input-border-radius);\r\n    outline: none;\r\n\r\n    transition: var(--input-background-color-transition);\r\n\r\n    cursor: ew-resize;\r\n}\r\n\r\n.input:hover {\r\n    background-color: var(--input-background-color-hover);\r\n}\r\n\r\n.locked .input {\r\n    opacity: 0.6;\r\n\r\n    pointer-events: none;\r\n}\r\n";
+	var style$7 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n\n    transition: background-color 0.15s;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    line-height: var(--input-height);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input {\n    width: 100%;\n    height: var(--input-height);\n\n    padding: 0 var(--input-padding);\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    background-color: var(--input-background-color);\n\n    border: 0;\n    border-radius: var(--input-border-radius);\n    outline: none;\n\n    transition: var(--input-background-color-transition);\n\n    cursor: ew-resize;\n}\n\n.input:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n";
 
-	var template$7 = "<div class=\"component\">\r\n\r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input -->\r\n    <input class=\"input\" ref=\"input\">\r\n\r\n</div>\r\n";
+	var template$7 = "<div class=\"component\">\n\n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input -->\n    <input class=\"input\" ref=\"input\">\n\n</div>\n";
 
 	// Base component
 
@@ -45512,20 +45696,20 @@
 
 	window.customElements.define('dddd-number', NumberComponent);
 
-	var style$8 = ".component {\r\n    display: grid;\r\n\r\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\r\n    align-items: start;\r\n}\r\n\r\n.label {\r\n    height: var(--input-height);\r\n    overflow: hidden;\r\n\r\n    padding: var(--label-padding);\r\n\r\n    font-size: var(--label-font-size);\r\n    font-weight: var(--label-font-weight);\r\n    line-height: var(--input-height);\r\n    color: var(--label-color);\r\n    white-space: nowrap;\r\n    text-overflow: ellipsis;\r\n}\r\n\r\n.image-container {\r\n    position: relative;\r\n\r\n    width: 100%;\r\n    aspect-ratio: 16 / 9;\r\n\r\n    overflow: hidden;\r\n\r\n    background-color: var(--input-background-color);\r\n\r\n    border-radius: var(--input-border-radius);\r\n\r\n    transition: var(--input-background-color-transition);\r\n}\r\n\r\n.image-container:hover,\r\n.image-container.drop-area {\r\n    background-color: var(--input-background-color-hover);\r\n}\r\n\r\n.image-container img {\r\n    object-fit: cover;\r\n\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\n.locked .image-container {\r\n    opacity: 0.6;\r\n\r\n    pointer-events: none;\r\n}\r\n\r\n.contain .image-container img {\r\n    object-fit: contain;\r\n}\r\n\r\n.file-input {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n\r\n    width: 100%;\r\n    height: 100%;\r\n\r\n    border: 0;\r\n    outline: none;\r\n\r\n    cursor: pointer;\r\n}\r\n\r\n.file-input::-webkit-file-upload-button {\r\n    visibility: hidden;\r\n}\r\n\r\n.file-input::before {\r\n    content: '';\r\n\r\n    display: block;\r\n\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n";
+	var style$6 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    line-height: var(--input-height);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.image-container {\n    position: relative;\n\n    width: 100%;\n    aspect-ratio: 16 / 9;\n\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    transition: var(--input-background-color-transition);\n}\n\n.image-container:hover,\n.image-container.drop-area {\n    background-color: var(--input-background-color-hover);\n}\n\n.image-container img {\n    object-fit: cover;\n\n    width: 100%;\n    height: 100%;\n}\n\n.locked .image-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.contain .image-container img {\n    object-fit: contain;\n}\n\n.file-input {\n    position: absolute;\n    top: 0;\n    left: 0;\n\n    width: 100%;\n    height: 100%;\n\n    border: 0;\n    outline: none;\n\n    cursor: pointer;\n}\n\n.file-input::-webkit-file-upload-button {\n    visibility: hidden;\n}\n\n.file-input::before {\n    content: '';\n\n    display: block;\n\n    width: 100%;\n    height: 100%;\n}\n";
 
-	var template$8 = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Image -->\r\n    <div class=\"image-container\" ref=\"imageContainer\">\r\n\r\n        <!-- File input -->\r\n        <input type=\"file\" ref=\"fileInput\" class=\"file-input\" accept=\".jpg,.png,.gif\">\r\n\r\n    </div>\r\n\r\n</div>";
+	var template$6 = "<div class=\"component\">\n    \n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Image -->\n    <div class=\"image-container\" ref=\"imageContainer\">\n\n        <!-- File input -->\n        <input type=\"file\" ref=\"fileInput\" class=\"file-input\" accept=\".jpg,.png,.gif\">\n\n    </div>\n\n</div>";
 
 	// Base class
 
 	// Constants
 	const CLASS_DROP_AREA = 'drop-area';
-	const TYPE_THREE = 'TYPE_THREE';
+	const TYPE_THREE$1 = 'TYPE_THREE';
 	const TYPE_IMAGE = 'TYPE_IMAGE';
 
 	class ImageComponent extends Component {
 	    constructor(root, model) {
-	        super({ root, style: style$8, template: template$8, model });
+	        super({ root, style: style$6, template: template$6, model });
 
 	        // Data
 	        this._contain = this.model.options.contain;
@@ -45580,7 +45764,7 @@
 	    _getType() {
 	        const value = this.model.value;
 	        if (value.isTexture) {
-	            return TYPE_THREE;
+	            return TYPE_THREE$1;
 	        } else {
 	            return TYPE_IMAGE;
 	        }
@@ -45602,7 +45786,7 @@
 	    _addPreviewImage(image) {
 	        if (!image) return;
 
-	        if (this._type === TYPE_THREE) {
+	        if (this._type === TYPE_THREE$1) {
 	            if (this.model.value.image) {
 	                this._previewImage = document.createElement('img');
 	                this._previewImage.src = this.model.value.image.src;
@@ -45651,7 +45835,7 @@
 
 	    _fileLoadedHandler(e) {
 	        const image = e.target.result;
-	        if (this._type === TYPE_THREE) {
+	        if (this._type === TYPE_THREE$1) {
 	            if (this.model.value.image) {
 	                this.model.value.image.src = image;
 	            } else {
@@ -45676,15 +45860,15 @@
 
 	window.customElements.define('dddd-image', ImageComponent);
 
-	var style$9 = ".component {\r\n    display: grid;\r\n\r\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\r\n    align-items: center;\r\n}\r\n\r\n.label {\r\n    overflow: hidden;\r\n\r\n    padding: var(--label-padding);\r\n\r\n    font-size: var(--label-font-size);\r\n    font-weight: var(--label-font-weight);\r\n    color: var(--label-color);\r\n    white-space: nowrap;\r\n    text-overflow: ellipsis;\r\n}\r\n\r\n.input-container {\r\n    position: relative;\r\n\r\n    height: var(--input-height);\r\n    overflow: hidden;\r\n\r\n    background-color: var(--input-background-color);\r\n\r\n    border-radius: var(--input-border-radius);\r\n\r\n    user-select: none;\r\n\r\n    transition: var(--input-background-color-transition);\r\n}\r\n\r\n.input-container:hover {\r\n    background-color: var(--input-background-color-hover);\r\n}\r\n\r\n.locked .input-container {\r\n    opacity: 0.6;\r\n\r\n    pointer-events: none;\r\n}\r\n\r\n.select {\r\n    width: 100%;\r\n    height: 100%;\r\n\r\n    border: 0;\r\n    outline: 0;\r\n\r\n    padding: 0 var(--input-padding);\r\n\r\n    background: transparent;\r\n\r\n    font-family: var(--font);\r\n    font-size: var(--input-font-size);\r\n    font-weight: var(--input-font-weight);\r\n    color: var(--input-text-color);\r\n\r\n    appearance: none;\r\n}\r\n\r\n.select option {\r\n    color: black;\r\n}\r\n\r\n.arrow {\r\n    position: absolute;\r\n    top: 0;\r\n    right: var(--input-padding);\r\n    bottom: 0;\r\n\r\n    margin: auto 0;\r\n}\r\n";
+	var style$5 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    position: relative;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    user-select: none;\n\n    transition: var(--input-background-color-transition);\n}\n\n.input-container:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.select {\n    width: 100%;\n    height: 100%;\n\n    border: 0;\n    outline: 0;\n\n    padding: 0 var(--input-padding);\n\n    background: transparent;\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    appearance: none;\n}\n\n.select option {\n    color: black;\n}\n\n.arrow {\n    position: absolute;\n    top: 0;\n    right: var(--input-padding);\n    bottom: 0;\n\n    margin: auto 0;\n}\n";
 
-	var template$9 = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input container  -->\r\n    <div class=\"input-container\">\r\n\r\n        <!-- Arrow -->\r\n        <svg width=\"11\" height=\"6\" viewBox=\"0 0 11 6\" class=\"arrow\">\r\n            <path d=\"M1 1L4.83564 4.40945C5.21452 4.74624 5.78548 4.74624 6.16436 4.40945L10 1\" stroke=\"white\" fill=\"transparent\" stroke-opacity=\"0.74\" stroke-linecap=\"round\"/>\r\n        </svg>\r\n        \r\n        <!-- Select -->\r\n        <select class=\"select\" ref=\"select\"></select>\r\n\r\n    </div>\r\n\r\n</div>";
+	var template$5 = "<div class=\"component\">\n    \n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input container  -->\n    <div class=\"input-container\">\n\n        <!-- Arrow -->\n        <svg width=\"11\" height=\"6\" viewBox=\"0 0 11 6\" class=\"arrow\">\n            <path d=\"M1 1L4.83564 4.40945C5.21452 4.74624 5.78548 4.74624 6.16436 4.40945L10 1\" stroke=\"white\" fill=\"transparent\" stroke-opacity=\"0.74\" stroke-linecap=\"round\"/>\n        </svg>\n        \n        <!-- Select -->\n        <select class=\"select\" ref=\"select\"></select>\n\n    </div>\n\n</div>";
 
 	// Base component
 
 	class Dropdown extends Component {
 	    constructor(root, model) {
-	        super({ root, style: style$9, template: template$9, model });
+	        super({ root, style: style$5, template: template$5, model });
 
 	        // Setup
 	        this._isArray = Array.isArray(this.model.options.options);
@@ -45775,15 +45959,15 @@
 
 	window.customElements.define('dddd-dropdown', Dropdown);
 
-	var style$a = ".component {\r\n    display: grid;\r\n\r\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\r\n    align-items: center;\r\n}\r\n\r\n.label {\r\n    overflow: hidden;\r\n\r\n    padding: var(--label-padding);\r\n\r\n    font-size: var(--label-font-size);\r\n    font-weight: var(--label-font-weight);\r\n    color: var(--label-color);\r\n    white-space: nowrap;\r\n    text-overflow: ellipsis;\r\n}\r\n\r\n.input-container {\r\n    position: relative;\r\n\r\n    height: var(--input-height);\r\n    overflow: hidden;\r\n\r\n    background-color: var(--input-background-color);\r\n\r\n    border-radius: var(--input-border-radius);\r\n\r\n    user-select: none;\r\n\r\n    transition: var(--input-background-color-transition);\r\n}\r\n\r\n.input-container:hover {\r\n    background-color: var(--input-background-color-hover);\r\n}\r\n\r\n.locked .input-container {\r\n    opacity: 0.6;\r\n\r\n    pointer-events: none;\r\n}\r\n\r\n.checkbox {\r\n    appearance: none;\r\n\r\n    display: block;\r\n    position: relative;\r\n\r\n    width: 100%;\r\n    height: 100%;\r\n\r\n    margin: 0;\r\n    padding: 0 var(--input-padding);\r\n\r\n    outline: none;\r\n\r\n    cursor: pointer;\r\n}\r\n\r\n.checkbox:after {\r\n    content: '';\r\n\r\n    display: block;\r\n    box-sizing: border-box;\r\n\r\n    position: absolute;\r\n    top: 0;\r\n    bottom: 0;\r\n    left: 10px;\r\n\r\n    width: 16px;\r\n    height: 16px;\r\n\r\n    margin: auto 0;\r\n\r\n    border-radius: 50%;\r\n    border: 1px solid var(--input-highlight-color);\r\n}\r\n\r\n.checkbox:checked:after {\r\n    background: var(--input-highlight-color);\r\n\r\n    border: 0;\r\n}\r\n";
+	var style$4 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    position: relative;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    user-select: none;\n\n    transition: var(--input-background-color-transition);\n}\n\n.input-container:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.checkbox {\n    appearance: none;\n\n    display: block;\n    position: relative;\n\n    width: 100%;\n    height: 100%;\n\n    margin: 0;\n    padding: 0 var(--input-padding);\n\n    outline: none;\n\n    cursor: pointer;\n}\n\n.checkbox:after {\n    content: '';\n\n    display: block;\n    box-sizing: border-box;\n\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 10px;\n\n    width: 16px;\n    height: 16px;\n\n    margin: auto 0;\n\n    border-radius: 50%;\n    border: 1px solid var(--input-highlight-color);\n}\n\n.checkbox:checked:after {\n    background: var(--input-highlight-color);\n\n    border: 0;\n}\n";
 
-	var template$a = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input container  -->\r\n    <div class=\"input-container\">\r\n\r\n        <!-- Checkbox -->\r\n        <input type=\"checkbox\" class=\"checkbox\" ref=\"checkbox\">\r\n\r\n    </div>\r\n\r\n</div>";
+	var template$4 = "<div class=\"component\">\n    \n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input container  -->\n    <div class=\"input-container\">\n\n        <!-- Checkbox -->\n        <input type=\"checkbox\" class=\"checkbox\" ref=\"checkbox\">\n\n    </div>\n\n</div>";
 
 	// Base component
 
 	class Checkbox extends Component {
 	    constructor(root, model) {
-	        super({ root, style: style$a, template: template$a, model });
+	        super({ root, style: style$4, template: template$4, model });
 
 	        // Setup
 	        this._bindHandlers();
@@ -45834,15 +46018,15 @@
 
 	window.customElements.define('dddd-checkbox', Checkbox);
 
-	var style$b = ".component {\r\n    transition: background-color 0.15s;\r\n}\r\n\r\n.button {\r\n    width: calc(100% - var(--label-width));\r\n    height: var(--input-height);\r\n\r\n    padding: 0 var(--input-padding);\r\n    margin-left: var(--label-width);\r\n\r\n    font-family: var(--font);\r\n    font-size: var(--input-font-size);\r\n    font-weight: var(--input-font-weight);\r\n    color: var(--input-text-color);\r\n\r\n    background-color: var(--input-highlight-color);\r\n\r\n    border: 0;\r\n    border-radius: var(--input-border-radius);\r\n    outline: none;\r\n\r\n    transition: var(--input-background-color-transition);\r\n\r\n    cursor: pointer;\r\n}\r\n\r\n.button:hover {\r\n    background-color: rgba(77, 83, 217, 1);\r\n    background-color: var(--input-highlight-color-hover);\r\n}\r\n\r\n.full-width .button {\r\n    width: 100%;\r\n\r\n    margin-left: 0;\r\n}\r\n";
+	var style$3 = ".component {\n    transition: background-color 0.15s;\n}\n\n.button {\n    width: calc(100% - var(--label-width));\n    height: var(--input-height);\n\n    padding: 0 var(--input-padding);\n    margin-left: var(--label-width);\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    background-color: var(--input-highlight-color);\n\n    border: 0;\n    border-radius: var(--input-border-radius);\n    outline: none;\n\n    transition: var(--input-background-color-transition);\n\n    cursor: pointer;\n}\n\n.button:hover {\n    background-color: rgba(77, 83, 217, 1);\n    background-color: var(--input-highlight-color-hover);\n}\n\n.full-width .button {\n    width: 100%;\n\n    margin-left: 0;\n}\n";
 
-	var template$b = "<div class=\"component\">\r\n    \r\n    <!-- Button -->\r\n    <button class=\"button\" ref=\"button\">{{ label }}</button>\r\n\r\n</div>";
+	var template$3 = "<div class=\"component\">\n    \n    <!-- Button -->\n    <button class=\"button\" ref=\"button\">{{ label }}</button>\n\n</div>";
 
 	// Base component
 
 	class Button extends Component {
 	    constructor(root, model) {
-	        super({ root, style: style$b, template: template$b, model });
+	        super({ root, style: style$3, template: template$3, model });
 
 	        // Options
 	        this._isFullWidth = this.model.options.fullWidth || false;
@@ -45896,21 +46080,21 @@
 
 	window.customElements.define('dddd-button', Button);
 
-	var style$c = ".component {\r\n    display: grid;\r\n\r\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\r\n    align-items: center;\r\n}\r\n\r\n.label {\r\n    overflow: hidden;\r\n\r\n    padding: var(--label-padding);\r\n\r\n    font-size: var(--label-font-size);\r\n    font-weight: var(--label-font-weight);\r\n    color: var(--label-color);\r\n    white-space: nowrap;\r\n    text-overflow: ellipsis;\r\n}\r\n\r\n.input-container {\r\n    display: grid;\r\n    position: relative;\r\n\r\n    grid-template-columns: 27px calc(100% - 20px);\r\n    align-items: center;\r\n\r\n    height: var(--input-height);\r\n    overflow: hidden;\r\n\r\n    padding: 0 var(--input-padding) 0 5px;\r\n\r\n    font-family: var(--font);\r\n    font-size: var(--input-font-size);\r\n    font-weight: var(--input-font-weight);\r\n\r\n    background-color: var(--input-background-color);\r\n\r\n    border-radius: var(--input-border-radius);\r\n\r\n    transition: var(--input-background-color-transition);\r\n}\r\n\r\n.input-container:hover {\r\n    background-color: var(--input-background-color-hover);\r\n}\r\n\r\n.component.error .input-container {\r\n    background-color: var(--input-background-color-error);\r\n}\r\n\r\n.color {\r\n    width: 20px;\r\n    height: 20px;\r\n\r\n    margin: 0;\r\n    padding: 0;\r\n\r\n    background: transparent;\r\n\r\n    border: 0;\r\n    outline: 0;\r\n\r\n    appearance: none;\r\n    cursor: pointer;\r\n}\r\n\r\n.color::-webkit-color-swatch-wrapper {\r\n    padding: 0;\r\n}\r\n\r\n.color::-webkit-color-swatch {\r\n    border: none;\r\n    border-radius: 4px;\r\n}\r\n\r\n.color-string {\r\n    background: transparent;\r\n\r\n    border: 0;\r\n    outline: 0;\r\n\r\n    color: var(--input-text-color);\r\n}\r\n\r\n/* .alpha {\r\n    color: var(--input-text-color);\r\n    text-align: right;\r\n} */\r\n";
+	var style$2 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    display: grid;\n    position: relative;\n\n    grid-template-columns: 27px calc(100% - 20px);\n    align-items: center;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: 0 var(--input-padding) 0 5px;\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    transition: var(--input-background-color-transition);\n}\n\n.input-container:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.component.error .input-container {\n    background-color: var(--input-background-color-error);\n}\n\n.color {\n    width: 20px;\n    height: 20px;\n\n    margin: 0;\n    padding: 0;\n\n    background: transparent;\n\n    border: 0;\n    outline: 0;\n\n    appearance: none;\n    cursor: pointer;\n}\n\n.color::-webkit-color-swatch-wrapper {\n    padding: 0;\n}\n\n.color::-webkit-color-swatch {\n    border: none;\n    border-radius: 4px;\n}\n\n.color-string {\n    background: transparent;\n\n    border: 0;\n    outline: 0;\n\n    color: var(--input-text-color);\n}\n\n/* .alpha {\n    color: var(--input-text-color);\n    text-align: right;\n} */\n";
 
-	var template$c = "<div class=\"component\">\n\n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input container  -->\n    <div class=\"input-container\">\n\n        <!-- Color input -->\n        <input type=\"color\" class=\"color\" ref=\"color\">\n\n        <!-- Color string -->\n        <input type=\"text\" class=\"color-string\" ref=\"colorString\">\n\n        <!-- Alpha -->\n        <!-- <span class=\"alpha\">100%</span> -->\n\n    </div>\n\n</div>\n";
+	var template$2 = "<div class=\"component\">\n\n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input container  -->\n    <div class=\"input-container\">\n\n        <!-- Color input -->\n        <input type=\"color\" class=\"color\" ref=\"color\">\n\n        <!-- Color string -->\n        <input type=\"text\" class=\"color-string\" ref=\"colorString\">\n\n        <!-- Alpha -->\n        <!-- <span class=\"alpha\">100%</span> -->\n\n    </div>\n\n</div>\n";
 
 	// Base component
 
 	// Constants
-	const TYPE_THREE$1 = 'TYPE_THREE';
+	const TYPE_THREE = 'TYPE_THREE';
 	const TYPE_STRING = 'TYPE_STRING';
 	const TYPE_HEX = 'TYPE_HEX';
 	const CLASS_NAME_ERROR = 'error';
 
-	class Color$1 extends Component {
+	class Color extends Component {
 	    constructor(root, model) {
-	        super({ root, style: style$c, template: template$c, model });
+	        super({ root, style: style$2, template: template$2, model });
 
 	        // Data
 	        this._type = this._getType();
@@ -45960,7 +46144,7 @@
 	    _getType() {
 	        const value = this.model.value;
 	        if (value.isColor) {
-	            return TYPE_THREE$1;
+	            return TYPE_THREE;
 	        } else if (this._isHex(value)) {
 	            return TYPE_HEX;
 	        } else {
@@ -45970,7 +46154,7 @@
 
 	    _getValue() {
 	        switch (this._type) {
-	            case TYPE_THREE$1:
+	            case TYPE_THREE:
 	                return `#${this.model.value.getHexString()}`;
 	            case TYPE_STRING:
 	                return this._convertColorNameToHex(this.model.value);
@@ -45988,7 +46172,7 @@
 	    }
 
 	    _setModelValue(value) {
-	        if (this._type === TYPE_THREE$1) {
+	        if (this._type === TYPE_THREE) {
 	            this.model.value.set(value);
 	            if (typeof this.model.options.onChange === 'function') {
 	                this.model.options.onChange(this._value);
@@ -46065,23 +46249,23 @@
 	    }
 	}
 
-	window.customElements.define('dddd-color', Color$1);
+	window.customElements.define('dddd-color', Color);
 
-	var style$d = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.component {\r\n    display: grid;\r\n\r\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\r\n    align-items: start;\r\n\r\n    transition: background-color 0.15s;\r\n}\r\n\r\n.label {\r\n    height: var(--input-height);\r\n    overflow: hidden;\r\n\r\n    padding: var(--label-padding);\r\n\r\n    font-size: var(--label-font-size);\r\n    line-height: var(--input-height);\r\n    font-weight: var(--label-font-weight);\r\n    color: var(--label-color);\r\n    white-space: nowrap;\r\n    text-overflow: ellipsis;\r\n}\r\n\r\n.input-container {\r\n    display: grid;\r\n\r\n    grid-template-columns: repeat(3, 1fr);\r\n    gap: var(--component-row-gap);\r\n}\r\n\r\n.input {\r\n    width: 100%;\r\n    height: var(--input-height);\r\n\r\n    padding: 0 var(--input-padding);\r\n\r\n    font-family: var(--font);\r\n    font-size: var(--input-font-size);\r\n    font-weight: var(--input-font-weight);\r\n    color: var(--input-text-color);\r\n\r\n    background-color: var(--input-background-color);\r\n\r\n    border: 0;\r\n    border-radius: var(--input-border-radius);\r\n    outline: none;\r\n\r\n    transition: var(--input-background-color-transition);\r\n\r\n    cursor: ew-resize;\r\n}\r\n\r\n.input:hover {\r\n    background-color: var(--input-background-color-hover);\r\n}\r\n\r\n\r\n.locked .input {\r\n    opacity: 0.6;\r\n\r\n    pointer-events: none;\r\n}\r\n";
+	var style$1 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n\n    transition: background-color 0.15s;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    line-height: var(--input-height);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    display: grid;\n\n    grid-template-columns: repeat(3, 1fr);\n    gap: var(--component-row-gap);\n}\n\n.input {\n    width: 100%;\n    height: var(--input-height);\n\n    padding: 0 var(--input-padding);\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    background-color: var(--input-background-color);\n\n    border: 0;\n    border-radius: var(--input-border-radius);\n    outline: none;\n\n    transition: var(--input-background-color-transition);\n\n    cursor: ew-resize;\n}\n\n.input:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n\n.locked .input {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n";
 
-	var template$d = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input container -->\r\n    <div class=\"input-container\" ref=\"inputContainer\"></div>\r\n\r\n</div>";
+	var template$1 = "<div class=\"component\">\n    \n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input container -->\n    <div class=\"input-container\" ref=\"inputContainer\"></div>\n\n</div>";
 
 	// Base component
 
 	// Constants
-	const DEFAULT_STEP_SIZE$2 = 0.01;
+	const DEFAULT_STEP_SIZE = 0.01;
 
 	class MultiInput extends Component {
 	    constructor(root, model) {
-	        super({ root, style: style$d, template: template$d, model });
+	        super({ root, style: style$1, template: template$1, model });
 
 	        // Options
-	        this._stepSize = this.model.options.stepSize || DEFAULT_STEP_SIZE$2;
+	        this._stepSize = this.model.options.stepSize || DEFAULT_STEP_SIZE;
 	        this._decimalPlaces = this._getDecimalPlaces(this._stepSize);
 
 	        // Data
@@ -46236,15 +46420,15 @@
 
 	window.customElements.define('dddd-multi-input', MultiInput);
 
-	var style$e = "*,\r\n*:before,\r\n*:after {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.component {\r\n    display: grid;\r\n\r\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\r\n    align-items: start;\r\n\r\n    transition: background-color 0.15s;\r\n}\r\n\r\n.label {\r\n    height: var(--input-height);\r\n    overflow: hidden;\r\n\r\n    padding: var(--label-padding);\r\n\r\n    font-size: var(--label-font-size);\r\n    line-height: var(--input-height);\r\n    font-weight: var(--label-font-weight);\r\n    color: var(--label-color);\r\n    white-space: nowrap;\r\n    text-overflow: ellipsis;\r\n}\r\n\r\n.input-container {\r\n    overflow: hidden;\r\n\r\n    text-align: center;\r\n\r\n    background-color: var(--input-background-color);\r\n    border-radius: var(--input-border-radius);\r\n}\r\n\r\n.input-container canvas {\r\n    max-width: 100%;\r\n}\r\n";
+	var style = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n\n    transition: background-color 0.15s;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    line-height: var(--input-height);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    overflow: hidden;\n\n    text-align: center;\n\n    background-color: var(--input-background-color);\n    border-radius: var(--input-border-radius);\n}\n\n.input-container canvas {\n    max-width: 100%;\n}\n";
 
-	var template$e = "<div class=\"component\">\r\n    \r\n    <!-- Label -->\r\n    <span class=\"label\">{{ label }}</span>\r\n\r\n    <!-- Input container -->\r\n    <div class=\"input-container\" ref=\"inputContainer\"></div>\r\n\r\n</div>";
+	var template = "<div class=\"component\">\n    \n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input container -->\n    <div class=\"input-container\" ref=\"inputContainer\"></div>\n\n</div>";
 
 	// Base component
 
 	class Canvas extends Component {
 	    constructor(root, model) {
-	        super({ root, style: style$e, template: template$e, model });
+	        super({ root, style, template, model });
 
 	        // Options
 
@@ -46300,7 +46484,7 @@
 	    dropdown: Dropdown,
 	    checkbox: Checkbox,
 	    button: Button,
-	    color: Color$1,
+	    color: Color,
 	    multiInput: MultiInput,
 	    canvas: Canvas,
 	};
@@ -46484,7 +46668,7 @@
 	        this._onChangeCallback = onChangeCallback;
 
 	        // TODO: Refactor
-	        if (this._options.container instanceof Group$1) {
+	        if (this._options.container instanceof Group) {
 	            this._options.container = this._options.container.label;
 	        }
 
@@ -46769,6 +46953,7 @@
 	     * Public
 	     */
 	    addLayer(label, group) {
+	        this._layers.remove('default');
 	        this._navigation.add(label, group);
 	        const layer = this._layers.add(label);
 	        this._layers.resize();
@@ -46799,7 +46984,7 @@
 	    addGroup(label, options = {}) {
 	        const parent = options.parent ? options.parent : this.getParent(options.container || 'default');
 
-	        const group = new Group$1({
+	        const group = new Group({
 	            root: this._root,
 	            layout: this,
 	            collapseGroups: this._collapseGroups,
@@ -46907,7 +47092,7 @@
 	    }
 
 	    _createGlobal() {
-	        const global = new Layer({
+	        const global = new Layer$1({
 	            root: this._root,
 	        });
 	        this._container.addElement(global);
@@ -46931,7 +47116,7 @@
 	    }
 
 	    _createLayers() {
-	        const layers = new Layers$1({
+	        const layers = new Layers({
 	            root: this._root,
 	        });
 	        this._container.addElement(layers);
@@ -47271,7 +47456,7 @@
 	});
 
 	const colorValues = {
-	    three: new Color(0xff0000),
+	    three: new Color$1(0xff0000),
 	    hex: '#00ff00',
 	    name: 'blue',
 	};
@@ -47490,9 +47675,9 @@
 	    value: 0.5,
 	};
 
-	const global$1 = dddd.addGroup('Global group', {
+	const global = dddd.addGroup('Global group', {
 	    container: 'Global',
 	});
-	global$1.add(globalValues, 'value');
+	global.add(globalValues, 'value');
 
-})));
+}));
