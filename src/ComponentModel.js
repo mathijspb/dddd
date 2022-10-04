@@ -107,9 +107,9 @@ export default class ComponentModel {
         // }
     }
 
-    triggerOnChange() {
+    triggerOnChange(data = undefined) {
         if (typeof this._options.onChange === 'function') {
-            this._options.onChange(this._value);
+            this._options.onChange(this._value, data);
         }
     }
 
@@ -153,6 +153,11 @@ export default class ComponentModel {
         // Canvas
         if (this._options.type === 'canvas') {
             return 'canvas';
+        }
+
+        // File
+        if (this._options.type === 'file') {
+            return 'file';
         }
 
         // Dropdown

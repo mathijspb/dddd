@@ -42977,6 +42977,8 @@
 
 	}
 
+	new Quaternion();
+
 	/*!
 	 * mustache.js - Logic-less {{mustache}} templates with JavaScript
 	 * http://github.com/janl/mustache.js
@@ -44019,15 +44021,15 @@
 
 	window.customElements.define('dddd-container', Container);
 
-	var style$e = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.header {\n    background-color: var(--panel-background-color);\n\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\n}\n";
+	var style$f = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.header {\n    background-color: var(--panel-background-color);\n\n    box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.05);\n}\n";
 
-	var template$e = "<div class=\"header\">\n\n</div>\n";
+	var template$f = "<div class=\"header\">\n\n</div>\n";
 
 	// Base class
 
 	class Header extends LayoutElement {
 	    constructor({ root, options }) {
-	        super({ root, style: style$e, template: template$e });
+	        super({ root, style: style$f, template: template$f });
 
 	        // Props
 	        this._options = options;
@@ -44265,15 +44267,15 @@
 
 	window.customElements.define('dddd-navigation', Navigation);
 
-	var style$d = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.global {\n    position: relative;\n\n    /* padding: var(--panel-spacing) var(--panel-spacing) 0 var(--panel-spacing); */\n    padding: 0 var(--panel-spacing) 1px;\n\n    -webkit-font-smoothing: antialiased;\n    font-family: var(--font);\n    font-weight: 300;\n    font-size: 13px;\n\n    background-color: var(--panel-background-color);\n}\n";
+	var style$e = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.global {\n    position: relative;\n\n    /* padding: var(--panel-spacing) var(--panel-spacing) 0 var(--panel-spacing); */\n    padding: 0 var(--panel-spacing) 1px;\n\n    -webkit-font-smoothing: antialiased;\n    font-family: var(--font);\n    font-weight: 300;\n    font-size: 13px;\n\n    background-color: var(--panel-background-color);\n}\n";
 
-	var template$d = "<div class=\"global\" ref=\"content\"></div>\n";
+	var template$e = "<div class=\"global\" ref=\"content\"></div>\n";
 
 	// Base class
 
 	class Layer$1 extends LayoutElement {
 	    constructor({ root }) {
-	        super({ root, style: style$d, template: template$d });
+	        super({ root, style: style$e, template: template$e });
 	    }
 
 	    /**
@@ -44368,15 +44370,15 @@
 
 	var Ticker$1 = new Ticker();
 
-	var style$c = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.stats {\n    padding: 0 var(--panel-spacing) var(--panel-spacing) var(--panel-spacing);\n}\n\n.content {\n    height: 100px;\n\n    border-radius: var(--input-border-radius);background-color: var(--input-background-color);\n\n    background-color: var(--input-background-color);\n}\n\n.canvas {\n    width: 100%;\n}\n";
+	var style$d = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.stats {\n    padding: 0 var(--panel-spacing) var(--panel-spacing) var(--panel-spacing);\n}\n\n.content {\n    height: 100px;\n\n    border-radius: var(--input-border-radius);background-color: var(--input-background-color);\n\n    background-color: var(--input-background-color);\n}\n\n.canvas {\n    width: 100%;\n}\n";
 
-	var template$c = "<div class=\"stats\">\n\n    <!-- Content -->\n    <div class=\"content\">\n\n        <!-- Canvas -->\n        <canvas class=\"canvas\" ref=\"canvas\"></canvas>\n\n    </div>\n\n</div>\n";
+	var template$d = "<div class=\"stats\">\n\n    <!-- Content -->\n    <div class=\"content\">\n\n        <!-- Canvas -->\n        <canvas class=\"canvas\" ref=\"canvas\"></canvas>\n\n    </div>\n\n</div>\n";
 
 	// Based on
 
 	class Stats extends LayoutElement {
 	    constructor({ root, options }) {
-	        super({ root, style: style$c, template: template$c });
+	        super({ root, style: style$d, template: template$d });
 
 	        // Props
 	        this._options = options;
@@ -44465,9 +44467,9 @@
 
 	window.customElements.define('dddd-stats', Stats);
 
-	var style$b = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.layer {\n    display: none;\n\n    position: relative;\n\n    width: 100%;\n    overflow: hidden;\n}\n\n.layer.active {\n    display: block;\n}\n";
+	var style$c = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.layer {\n    display: none;\n\n    position: relative;\n\n    width: 100%;\n    overflow: hidden;\n}\n\n.layer.active {\n    display: block;\n}\n";
 
-	var template$b = "<div class=\"layer\"></div>";
+	var template$c = "<div class=\"layer\"></div>";
 
 	// Base class
 
@@ -44477,7 +44479,7 @@
 
 	class Layer extends LayoutElement {
 	    constructor({ root, label }) {
-	        super({ root, style: style$b, template: template$b, templateData: { label } });
+	        super({ root, style: style$c, template: template$c, templateData: { label } });
 
 	        // Props
 	        this._label = label;
@@ -44628,15 +44630,15 @@
 
 	window.customElements.define('dddd-layer', Layer);
 
-	var style$a = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.layers {\n    position: relative;\n\n    width: 100%;\n    height: 100%;\n    overflow: auto;\n\n    /* padding: var(--panel-spacing) var(--panel-spacing) 0 var(--panel-spacing); */\n    padding: var(--panel-spacing);\n\n    -webkit-font-smoothing: antialiased;\n    font-family: var(--font);\n    font-weight: 300;\n    font-size: 13px;\n}\n";
+	var style$b = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.layers {\n    position: relative;\n\n    width: 100%;\n    height: 100%;\n    overflow: auto;\n\n    /* padding: var(--panel-spacing) var(--panel-spacing) 0 var(--panel-spacing); */\n    padding: var(--panel-spacing);\n\n    -webkit-font-smoothing: antialiased;\n    font-family: var(--font);\n    font-weight: 300;\n    font-size: 13px;\n}\n";
 
-	var template$a = "<div class=\"layers\"></div>";
+	var template$b = "<div class=\"layers\"></div>";
 
 	// Base class
 
 	class Layers extends LayoutElement {
 	    constructor({ root }) {
-	        super({ root, style: style$a, template: template$a });
+	        super({ root, style: style$b, template: template$b });
 
 	        // Options
 	        this._activeIndex = 0;
@@ -45187,9 +45189,9 @@
 	    }
 	}
 
-	var style$9 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    position: relative;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    user-select: none;\n\n    transition: var(--input-background-color-transition);\n\n    cursor: col-resize;\n}\n\n.input-container:hover,\n.input-container.active {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.scrubber {\n    position: absolute;\n    top: 0;\n    left: 0;\n\n    width: 100%;\n    height: 100%;\n\n    background: var(--input-highlight-color);\n\n    transform-origin: top left;\n}\n\n.input {\n    position: relative;\n    display: block;\n\n    width: 100%;\n    height: 100%;\n\n    padding: 0 var(--input-padding);\n\n    background-color: transparent;\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    line-height: var(--input-height);\n    color: var(--input-text-color);\n\n    outline: none;\n    border: 0;\n\n    pointer-events: none;\n}\n";
+	var style$a = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    position: relative;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    user-select: none;\n\n    transition: var(--input-background-color-transition);\n\n    cursor: col-resize;\n}\n\n.input-container:hover,\n.input-container.active {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.scrubber {\n    position: absolute;\n    top: 0;\n    left: 0;\n\n    width: 100%;\n    height: 100%;\n\n    background: var(--input-highlight-color);\n\n    transform-origin: top left;\n}\n\n.input {\n    position: relative;\n    display: block;\n\n    width: 100%;\n    height: 100%;\n\n    padding: 0 var(--input-padding);\n\n    background-color: transparent;\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    line-height: var(--input-height);\n    color: var(--input-text-color);\n\n    outline: none;\n    border: 0;\n\n    pointer-events: none;\n}\n";
 
-	var template$9 = "<div class=\"component\">\n    \n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input container -->\n    <div class=\"input-container\" ref=\"inputContainer\">\n\n        <!-- Scrubber -->\n        <div class=\"scrubber\" ref=\"scrubber\"></div>\n        \n        <!-- Input -->\n        <input class=\"input\" ref=\"input\">\n\n    </div>\n\n</div>";
+	var template$a = "<div class=\"component\">\n    \n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input container -->\n    <div class=\"input-container\" ref=\"inputContainer\">\n\n        <!-- Scrubber -->\n        <div class=\"scrubber\" ref=\"scrubber\"></div>\n        \n        <!-- Input -->\n        <input class=\"input\" ref=\"input\">\n\n    </div>\n\n</div>";
 
 	class ValueHover {
 	    constructor() {
@@ -45224,7 +45226,7 @@
 	// TODO: On change is triggered twice
 	class Slider extends Component {
 	    constructor(root, model) {
-	        super({ root, style: style$9, template: template$9, model });
+	        super({ root, style: style$a, template: template$a, model });
 
 	        // Options
 	        this._stepSize = this.model.options.stepSize || DEFAULT_STEP_SIZE$2;
@@ -45483,13 +45485,13 @@
 
 	window.customElements.define('dddd-slider', Slider);
 
-	var style$8 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n\n    transition: background-color 0.15s;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input {\n    height: var(--input-height);\n\n    padding: 0 var(--input-padding);\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    background-color: var(--input-background-color);\n\n    border: 0;\n    border-radius: var(--input-border-radius);\n    outline: none;\n\n    transition: var(--input-background-color-transition);\n}\n\n.input:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n";
+	var style$9 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n\n    transition: background-color 0.15s;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input {\n    height: var(--input-height);\n\n    padding: 0 var(--input-padding);\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    background-color: var(--input-background-color);\n\n    border: 0;\n    border-radius: var(--input-border-radius);\n    outline: none;\n\n    transition: var(--input-background-color-transition);\n}\n\n.input:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n";
 
-	var template$8 = "<div class=\"component\">\n    \n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input -->\n    <input class=\"input\" ref=\"input\">\n\n</div>";
+	var template$9 = "<div class=\"component\">\n    \n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input -->\n    <input class=\"input\" ref=\"input\">\n\n</div>";
 
 	class Text extends Component {
 	    constructor(root, model) {
-	        super({ root, style: style$8, template: template$8, model });
+	        super({ root, style: style$9, template: template$9, model });
 
 	        // Setup
 	        this._bindHandlers();
@@ -45540,9 +45542,9 @@
 
 	window.customElements.define('dddd-input', Text);
 
-	var style$7 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n\n    transition: background-color 0.15s;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    line-height: var(--input-height);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input {\n    width: 100%;\n    height: var(--input-height);\n\n    padding: 0 var(--input-padding);\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    background-color: var(--input-background-color);\n\n    border: 0;\n    border-radius: var(--input-border-radius);\n    outline: none;\n\n    transition: var(--input-background-color-transition);\n\n    cursor: ew-resize;\n}\n\n.input:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n";
+	var style$8 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n\n    transition: background-color 0.15s;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    line-height: var(--input-height);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input {\n    width: 100%;\n    height: var(--input-height);\n\n    padding: 0 var(--input-padding);\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    background-color: var(--input-background-color);\n\n    border: 0;\n    border-radius: var(--input-border-radius);\n    outline: none;\n\n    transition: var(--input-background-color-transition);\n\n    cursor: ew-resize;\n}\n\n.input:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n";
 
-	var template$7 = "<div class=\"component\">\n\n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input -->\n    <input class=\"input\" ref=\"input\">\n\n</div>\n";
+	var template$8 = "<div class=\"component\">\n\n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input -->\n    <input class=\"input\" ref=\"input\">\n\n</div>\n";
 
 	// Base component
 
@@ -45551,7 +45553,7 @@
 
 	class NumberComponent extends Component {
 	    constructor(root, model) {
-	        super({ root, style: style$7, template: template$7, model });
+	        super({ root, style: style$8, template: template$8, model });
 
 	        // Options
 	        this._stepSize = this.model.options.stepSize || DEFAULT_STEP_SIZE$1;
@@ -45698,20 +45700,20 @@
 
 	window.customElements.define('dddd-number', NumberComponent);
 
-	var style$6 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    line-height: var(--input-height);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.image-container {\n    position: relative;\n\n    width: 100%;\n    aspect-ratio: 16 / 9;\n\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    transition: var(--input-background-color-transition);\n}\n\n.image-container:hover,\n.image-container.drop-area {\n    background-color: var(--input-background-color-hover);\n}\n\n.image-container img {\n    object-fit: cover;\n\n    width: 100%;\n    height: 100%;\n}\n\n.locked .image-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.contain .image-container img {\n    object-fit: contain;\n}\n\n.file-input {\n    position: absolute;\n    top: 0;\n    left: 0;\n\n    width: 100%;\n    height: 100%;\n\n    border: 0;\n    outline: none;\n\n    cursor: pointer;\n}\n\n.file-input::-webkit-file-upload-button {\n    visibility: hidden;\n}\n\n.file-input::before {\n    content: '';\n\n    display: block;\n\n    width: 100%;\n    height: 100%;\n}\n";
+	var style$7 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    line-height: var(--input-height);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.image-container {\n    position: relative;\n\n    width: 100%;\n    aspect-ratio: 16 / 9;\n\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    transition: var(--input-background-color-transition);\n}\n\n.image-container:hover,\n.image-container.drop-area {\n    background-color: var(--input-background-color-hover);\n}\n\n.image-container img {\n    object-fit: cover;\n\n    width: 100%;\n    height: 100%;\n}\n\n.locked .image-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.contain .image-container img {\n    object-fit: contain;\n}\n\n.file-input {\n    position: absolute;\n    top: 0;\n    left: 0;\n\n    width: 100%;\n    height: 100%;\n\n    border: 0;\n    outline: none;\n\n    cursor: pointer;\n}\n\n.file-input::-webkit-file-upload-button {\n    visibility: hidden;\n}\n\n.file-input::before {\n    content: '';\n\n    display: block;\n\n    width: 100%;\n    height: 100%;\n}\n";
 
-	var template$6 = "<div class=\"component\">\n    \n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Image -->\n    <div class=\"image-container\" ref=\"imageContainer\">\n\n        <!-- File input -->\n        <input type=\"file\" ref=\"fileInput\" class=\"file-input\" accept=\".jpg,.png,.gif\">\n\n    </div>\n\n</div>";
+	var template$7 = "<div class=\"component\">\n    \n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Image -->\n    <div class=\"image-container\" ref=\"imageContainer\">\n\n        <!-- File input -->\n        <input type=\"file\" ref=\"fileInput\" class=\"file-input\" accept=\".jpg,.png,.gif\">\n\n    </div>\n\n</div>";
 
 	// Base class
 
 	// Constants
-	const CLASS_DROP_AREA = 'drop-area';
+	const CLASS_DROP_AREA$1 = 'drop-area';
 	const TYPE_THREE$1 = 'TYPE_THREE';
 	const TYPE_IMAGE = 'TYPE_IMAGE';
 
 	class ImageComponent extends Component {
 	    constructor(root, model) {
-	        super({ root, style: style$6, template: template$6, model });
+	        super({ root, style: style$7, template: template$7, model });
 
 	        // Data
 	        this._contain = this.model.options.contain;
@@ -45802,11 +45804,11 @@
 	    }
 
 	    _showDropArea() {
-	        this.$refs.imageContainer.classList.add(CLASS_DROP_AREA);
+	        this.$refs.imageContainer.classList.add(CLASS_DROP_AREA$1);
 	    }
 
 	    _hideDropArea() {
-	        this.$refs.imageContainer.classList.remove(CLASS_DROP_AREA);
+	        this.$refs.imageContainer.classList.remove(CLASS_DROP_AREA$1);
 	    }
 
 	    /**
@@ -45862,15 +45864,15 @@
 
 	window.customElements.define('dddd-image', ImageComponent);
 
-	var style$5 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    position: relative;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    user-select: none;\n\n    transition: var(--input-background-color-transition);\n}\n\n.input-container:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.select {\n    width: 100%;\n    height: 100%;\n\n    border: 0;\n    outline: 0;\n\n    padding: 0 var(--input-padding);\n\n    background: transparent;\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    appearance: none;\n}\n\n.select option {\n    color: black;\n}\n\n.arrow {\n    position: absolute;\n    top: 0;\n    right: var(--input-padding);\n    bottom: 0;\n\n    margin: auto 0;\n}\n";
+	var style$6 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    position: relative;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    user-select: none;\n\n    transition: var(--input-background-color-transition);\n}\n\n.input-container:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.select {\n    width: 100%;\n    height: 100%;\n\n    border: 0;\n    outline: 0;\n\n    padding: 0 var(--input-padding);\n\n    background: transparent;\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    appearance: none;\n}\n\n.select option {\n    color: black;\n}\n\n.arrow {\n    position: absolute;\n    top: 0;\n    right: var(--input-padding);\n    bottom: 0;\n\n    margin: auto 0;\n}\n";
 
-	var template$5 = "<div class=\"component\">\n    \n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input container  -->\n    <div class=\"input-container\">\n\n        <!-- Arrow -->\n        <svg width=\"11\" height=\"6\" viewBox=\"0 0 11 6\" class=\"arrow\">\n            <path d=\"M1 1L4.83564 4.40945C5.21452 4.74624 5.78548 4.74624 6.16436 4.40945L10 1\" stroke=\"white\" fill=\"transparent\" stroke-opacity=\"0.74\" stroke-linecap=\"round\"/>\n        </svg>\n        \n        <!-- Select -->\n        <select class=\"select\" ref=\"select\"></select>\n\n    </div>\n\n</div>";
+	var template$6 = "<div class=\"component\">\n    \n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input container  -->\n    <div class=\"input-container\">\n\n        <!-- Arrow -->\n        <svg width=\"11\" height=\"6\" viewBox=\"0 0 11 6\" class=\"arrow\">\n            <path d=\"M1 1L4.83564 4.40945C5.21452 4.74624 5.78548 4.74624 6.16436 4.40945L10 1\" stroke=\"white\" fill=\"transparent\" stroke-opacity=\"0.74\" stroke-linecap=\"round\"/>\n        </svg>\n        \n        <!-- Select -->\n        <select class=\"select\" ref=\"select\"></select>\n\n    </div>\n\n</div>";
 
 	// Base component
 
 	class Dropdown extends Component {
 	    constructor(root, model) {
-	        super({ root, style: style$5, template: template$5, model });
+	        super({ root, style: style$6, template: template$6, model });
 
 	        // Setup
 	        this._isArray = Array.isArray(this.model.options.options);
@@ -45961,15 +45963,15 @@
 
 	window.customElements.define('dddd-dropdown', Dropdown);
 
-	var style$4 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    position: relative;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    user-select: none;\n\n    transition: var(--input-background-color-transition);\n}\n\n.input-container:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.checkbox {\n    appearance: none;\n\n    display: block;\n    position: relative;\n\n    width: 100%;\n    height: 100%;\n\n    margin: 0;\n    padding: 0 var(--input-padding);\n\n    outline: none;\n\n    cursor: pointer;\n}\n\n.checkbox:after {\n    content: '';\n\n    display: block;\n    box-sizing: border-box;\n\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 10px;\n\n    width: 16px;\n    height: 16px;\n\n    margin: auto 0;\n\n    border-radius: 50%;\n    border: 1px solid var(--input-highlight-color);\n}\n\n.checkbox:checked:after {\n    background: var(--input-highlight-color);\n\n    border: 0;\n}\n";
+	var style$5 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    position: relative;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    user-select: none;\n\n    transition: var(--input-background-color-transition);\n}\n\n.input-container:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.checkbox {\n    appearance: none;\n\n    display: block;\n    position: relative;\n\n    width: 100%;\n    height: 100%;\n\n    margin: 0;\n    padding: 0 var(--input-padding);\n\n    outline: none;\n\n    cursor: pointer;\n}\n\n.checkbox:after {\n    content: '';\n\n    display: block;\n    box-sizing: border-box;\n\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 10px;\n\n    width: 16px;\n    height: 16px;\n\n    margin: auto 0;\n\n    border-radius: 50%;\n    border: 1px solid var(--input-highlight-color);\n}\n\n.checkbox:checked:after {\n    background: var(--input-highlight-color);\n\n    border: 0;\n}\n";
 
-	var template$4 = "<div class=\"component\">\n    \n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input container  -->\n    <div class=\"input-container\">\n\n        <!-- Checkbox -->\n        <input type=\"checkbox\" class=\"checkbox\" ref=\"checkbox\">\n\n    </div>\n\n</div>";
+	var template$5 = "<div class=\"component\">\n    \n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input container  -->\n    <div class=\"input-container\">\n\n        <!-- Checkbox -->\n        <input type=\"checkbox\" class=\"checkbox\" ref=\"checkbox\">\n\n    </div>\n\n</div>";
 
 	// Base component
 
 	class Checkbox extends Component {
 	    constructor(root, model) {
-	        super({ root, style: style$4, template: template$4, model });
+	        super({ root, style: style$5, template: template$5, model });
 
 	        // Setup
 	        this._bindHandlers();
@@ -46020,15 +46022,15 @@
 
 	window.customElements.define('dddd-checkbox', Checkbox);
 
-	var style$3 = ".component {\n    transition: background-color 0.15s;\n}\n\n.button {\n    width: calc(100% - var(--label-width));\n    height: var(--input-height);\n\n    padding: 0 var(--input-padding);\n    margin-left: var(--label-width);\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    background-color: var(--input-highlight-color);\n\n    border: 0;\n    border-radius: var(--input-border-radius);\n    outline: none;\n\n    transition: var(--input-background-color-transition);\n\n    cursor: pointer;\n}\n\n.button:hover {\n    background-color: rgba(77, 83, 217, 1);\n    background-color: var(--input-highlight-color-hover);\n}\n\n.full-width .button {\n    width: 100%;\n\n    margin-left: 0;\n}\n";
+	var style$4 = ".component {\n    transition: background-color 0.15s;\n}\n\n.button {\n    width: calc(100% - var(--label-width));\n    height: var(--input-height);\n\n    padding: 0 var(--input-padding);\n    margin-left: var(--label-width);\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    background-color: var(--input-highlight-color);\n\n    border: 0;\n    border-radius: var(--input-border-radius);\n    outline: none;\n\n    transition: var(--input-background-color-transition);\n\n    cursor: pointer;\n}\n\n.button:hover {\n    background-color: rgba(77, 83, 217, 1);\n    background-color: var(--input-highlight-color-hover);\n}\n\n.full-width .button {\n    width: 100%;\n\n    margin-left: 0;\n}\n";
 
-	var template$3 = "<div class=\"component\">\n    \n    <!-- Button -->\n    <button class=\"button\" ref=\"button\">{{ label }}</button>\n\n</div>";
+	var template$4 = "<div class=\"component\">\n    \n    <!-- Button -->\n    <button class=\"button\" ref=\"button\">{{ label }}</button>\n\n</div>";
 
 	// Base component
 
 	class Button extends Component {
 	    constructor(root, model) {
-	        super({ root, style: style$3, template: template$3, model });
+	        super({ root, style: style$4, template: template$4, model });
 
 	        // Options
 	        this._isFullWidth = this.model.options.fullWidth || false;
@@ -46082,9 +46084,9 @@
 
 	window.customElements.define('dddd-button', Button);
 
-	var style$2 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    display: grid;\n    position: relative;\n\n    grid-template-columns: 27px calc(100% - 20px);\n    align-items: center;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: 0 var(--input-padding) 0 5px;\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    transition: var(--input-background-color-transition);\n}\n\n.input-container:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.component.error .input-container {\n    background-color: var(--input-background-color-error);\n}\n\n.color {\n    width: 20px;\n    height: 20px;\n\n    margin: 0;\n    padding: 0;\n\n    background: transparent;\n\n    border: 0;\n    outline: 0;\n\n    appearance: none;\n    cursor: pointer;\n}\n\n.color::-webkit-color-swatch-wrapper {\n    padding: 0;\n}\n\n.color::-webkit-color-swatch {\n    border: none;\n    border-radius: 4px;\n}\n\n.color-string {\n    background: transparent;\n\n    border: 0;\n    outline: 0;\n\n    color: var(--input-text-color);\n}\n\n/* .alpha {\n    color: var(--input-text-color);\n    text-align: right;\n} */\n";
+	var style$3 = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: center;\n}\n\n.label {\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    display: grid;\n    position: relative;\n\n    grid-template-columns: 27px calc(100% - 20px);\n    align-items: center;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: 0 var(--input-padding) 0 5px;\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    transition: var(--input-background-color-transition);\n}\n\n.input-container:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n.component.error .input-container {\n    background-color: var(--input-background-color-error);\n}\n\n.color {\n    width: 20px;\n    height: 20px;\n\n    margin: 0;\n    padding: 0;\n\n    background: transparent;\n\n    border: 0;\n    outline: 0;\n\n    appearance: none;\n    cursor: pointer;\n}\n\n.color::-webkit-color-swatch-wrapper {\n    padding: 0;\n}\n\n.color::-webkit-color-swatch {\n    border: none;\n    border-radius: 4px;\n}\n\n.color-string {\n    background: transparent;\n\n    border: 0;\n    outline: 0;\n\n    color: var(--input-text-color);\n}\n\n/* .alpha {\n    color: var(--input-text-color);\n    text-align: right;\n} */\n";
 
-	var template$2 = "<div class=\"component\">\n\n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input container  -->\n    <div class=\"input-container\">\n\n        <!-- Color input -->\n        <input type=\"color\" class=\"color\" ref=\"color\">\n\n        <!-- Color string -->\n        <input type=\"text\" class=\"color-string\" ref=\"colorString\">\n\n        <!-- Alpha -->\n        <!-- <span class=\"alpha\">100%</span> -->\n\n    </div>\n\n</div>\n";
+	var template$3 = "<div class=\"component\">\n\n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input container  -->\n    <div class=\"input-container\">\n\n        <!-- Color input -->\n        <input type=\"color\" class=\"color\" ref=\"color\">\n\n        <!-- Color string -->\n        <input type=\"text\" class=\"color-string\" ref=\"colorString\">\n\n        <!-- Alpha -->\n        <!-- <span class=\"alpha\">100%</span> -->\n\n    </div>\n\n</div>\n";
 
 	// Base component
 
@@ -46096,7 +46098,7 @@
 
 	class Color extends Component {
 	    constructor(root, model) {
-	        super({ root, style: style$2, template: template$2, model });
+	        super({ root, style: style$3, template: template$3, model });
 
 	        // Data
 	        this._type = this._getType();
@@ -46253,9 +46255,9 @@
 
 	window.customElements.define('dddd-color', Color);
 
-	var style$1 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n\n    transition: background-color 0.15s;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    line-height: var(--input-height);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    display: grid;\n\n    grid-template-columns: repeat(3, 1fr);\n    gap: var(--component-row-gap);\n}\n\n.input {\n    width: 100%;\n    height: var(--input-height);\n\n    padding: 0 var(--input-padding);\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    background-color: var(--input-background-color);\n\n    border: 0;\n    border-radius: var(--input-border-radius);\n    outline: none;\n\n    transition: var(--input-background-color-transition);\n\n    cursor: ew-resize;\n}\n\n.input:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n\n.locked .input {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n";
+	var style$2 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n\n    transition: background-color 0.15s;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    line-height: var(--input-height);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    display: grid;\n\n    grid-template-columns: repeat(3, 1fr);\n    gap: var(--component-row-gap);\n}\n\n.input {\n    width: 100%;\n    height: var(--input-height);\n\n    padding: 0 var(--input-padding);\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n\n    background-color: var(--input-background-color);\n\n    border: 0;\n    border-radius: var(--input-border-radius);\n    outline: none;\n\n    transition: var(--input-background-color-transition);\n\n    cursor: ew-resize;\n}\n\n.input:hover {\n    background-color: var(--input-background-color-hover);\n}\n\n\n.locked .input {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n";
 
-	var template$1 = "<div class=\"component\">\n    \n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input container -->\n    <div class=\"input-container\" ref=\"inputContainer\"></div>\n\n</div>";
+	var template$2 = "<div class=\"component\">\n    \n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input container -->\n    <div class=\"input-container\" ref=\"inputContainer\"></div>\n\n</div>";
 
 	// Base component
 
@@ -46264,7 +46266,7 @@
 
 	class MultiInput extends Component {
 	    constructor(root, model) {
-	        super({ root, style: style$1, template: template$1, model });
+	        super({ root, style: style$2, template: template$2, model });
 
 	        // Options
 	        this._stepSize = this.model.options.stepSize || DEFAULT_STEP_SIZE;
@@ -46422,15 +46424,15 @@
 
 	window.customElements.define('dddd-multi-input', MultiInput);
 
-	var style = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n\n    transition: background-color 0.15s;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    line-height: var(--input-height);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    overflow: hidden;\n\n    text-align: center;\n\n    background-color: var(--input-background-color);\n    border-radius: var(--input-border-radius);\n}\n\n.input-container canvas {\n    max-width: 100%;\n}\n";
+	var style$1 = "*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\n\n.component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n\n    transition: background-color 0.15s;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    line-height: var(--input-height);\n    font-weight: var(--label-font-weight);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    overflow: hidden;\n\n    text-align: center;\n\n    background-color: var(--input-background-color);\n    border-radius: var(--input-border-radius);\n}\n\n.input-container canvas {\n    max-width: 100%;\n}\n";
 
-	var template = "<div class=\"component\">\n    \n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input container -->\n    <div class=\"input-container\" ref=\"inputContainer\"></div>\n\n</div>";
+	var template$1 = "<div class=\"component\">\n    \n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Input container -->\n    <div class=\"input-container\" ref=\"inputContainer\"></div>\n\n</div>";
 
 	// Base component
 
 	class Canvas extends Component {
 	    constructor(root, model) {
-	        super({ root, style, template, model });
+	        super({ root, style: style$1, template: template$1, model });
 
 	        // Options
 
@@ -46478,6 +46480,126 @@
 
 	window.customElements.define('dddd-canvas', Canvas);
 
+	var style = ".component {\n    display: grid;\n\n    grid-template-columns: var(--label-width) calc(100% - var(--label-width));\n    align-items: start;\n}\n\n.label {\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: var(--label-padding);\n\n    font-size: var(--label-font-size);\n    font-weight: var(--label-font-weight);\n    line-height: var(--input-height);\n    color: var(--label-color);\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.input-container {\n    display: grid;\n    position: relative;\n\n    grid-template-columns: 21px calc(100% - 20px);\n    align-items: center;\n\n    height: var(--input-height);\n    overflow: hidden;\n\n    padding: 0 var(--input-padding) 0 5px;\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n\n    background-color: var(--input-background-color);\n\n    border-radius: var(--input-border-radius);\n\n    transition: var(--input-background-color-transition);\n}\n\n.input-container:hover,\n.input-container.drop-area {\n    background-color: var(--input-background-color-hover);\n}\n\n.locked .input-container {\n    opacity: 0.6;\n\n    pointer-events: none;\n}\n\n.icon {\n    width: 20px;\n    height: 20px;\n}\n\n.icon svg {\n    opacity: 0.7;\n    position: relative;\n    top: 3px;\n\n    fill: white;\n\n    height: 17px;\n}\n\n.file-name {\n    white-space: nowrap;\n    overflow: hidden;\n\n    font-family: var(--font);\n    font-size: var(--input-font-size);\n    font-weight: var(--input-font-weight);\n    color: var(--input-text-color);\n    text-overflow: ellipsis;\n}\n\n.file-input {\n    position: absolute;\n    top: 0;\n    left: 0;\n\n    width: 100%;\n    height: 100%;\n\n    border: 0;\n    outline: none;\n\n    cursor: pointer;\n}\n\n.file-input::-webkit-file-upload-button {\n    visibility: hidden;\n}\n\n.file-input::before {\n    content: '';\n\n    display: block;\n\n    width: 100%;\n    height: 100%;\n}\n";
+
+	var template = "<div class=\"component\">\n\n    <!-- Label -->\n    <span class=\"label\">{{ label }}</span>\n\n    <!-- Image -->\n    <div class=\"input-container\" ref=\"inputContainer\">\n\n        <!-- Icon -->\n        <div class=\"icon\">\n            <svg version=\"1.1\" viewBox=\"0 0 700 700\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n                <path d=\"m165.2 22.402v515.2h369.6v-16.801-399c-34.379-34.379-69.875-69.875-99.398-99.398h-253.4zm33.602 33.602h212.8v89.602h89.602v358.4h-302.4zm246.4 23.625 32.375 32.375h-32.375z\"/>\n            </svg>\n        </div>\n\n        <!-- File name -->\n        <div class=\"file-name\" ref=\"fileName\"></div>\n\n        <!-- File input -->\n        <input type=\"file\" ref=\"fileInput\" class=\"file-input\">\n\n    </div>\n\n</div>\n";
+
+	// Base class
+
+	// Constants
+	const CLASS_DROP_AREA = 'drop-area';
+
+	class FileComponent extends Component {
+	    constructor(root, model) {
+	        super({ root, style, template, model });
+
+	        // Data
+	        this._contain = this.model.options.contain;
+
+	        // Setup
+	        this._bindHandlers();
+	    }
+
+	    connected() {
+	        this._setFileName(this.model.value);
+	        if (this._contain) this._addContainClass();
+	        this._setupEventListeners();
+	    }
+
+	    destroyed() {
+	        this._removeEventListeners();
+	    }
+
+	    /**
+	     * Private
+	     */
+	    _bindHandlers() {
+	        this._dropHandler = this._dropHandler.bind(this);
+	        this._dragEnterHandler = this._dragEnterHandler.bind(this);
+	        this._dragOverHandler = this._dragOverHandler.bind(this);
+	        this._dragLeaveHandler = this._dragLeaveHandler.bind(this);
+	        this._fileInputChangeHandler = this._fileInputChangeHandler.bind(this);
+	        this._fileLoadedHandler = this._fileLoadedHandler.bind(this);
+	    }
+
+	    _setupEventListeners() {
+	        this.$el.addEventListener('drop', this._dropHandler);
+	        this.$el.addEventListener('dragenter', this._dragEnterHandler);
+	        this.$el.addEventListener('dragover', this._dragOverHandler);
+	        this.$el.addEventListener('dragleave', this._dragLeaveHandler);
+	        this.$refs.fileInput.addEventListener('change', this._fileInputChangeHandler);
+	    }
+
+	    _removeEventListeners() {
+	        this.$el.removeEventListener('drop', this._dropHandler);
+	        this.$el.removeEventListener('dragenter', this._dragEnterHandler);
+	        this.$el.removeEventListener('dragover', this._dragOverHandler);
+	        this.$el.removeEventListener('dragleave', this._dragLeaveHandler);
+	    }
+
+	    _addContainClass() {
+	        this.$el.classList.add('contain');
+	    }
+
+	    _handleFile(file) {
+	        const reader = new FileReader();
+	        reader.onloadend = this._fileLoadedHandler;
+	        reader.readAsArrayBuffer(file);
+	    }
+
+	    _setFileName(name) {
+	        this.$refs.fileName.textContent = name;
+	    }
+
+	    _showDropArea() {
+	        this.$refs.inputContainer.classList.add(CLASS_DROP_AREA);
+	    }
+
+	    _hideDropArea() {
+	        this.$refs.inputContainer.classList.remove(CLASS_DROP_AREA);
+	    }
+
+	    /**
+	     * Handlers
+	     */
+	    _dropHandler(e) {
+	        e.preventDefault();
+
+	        const file = e.dataTransfer.files[0];
+	        this._handleFile(file);
+	        this._hideDropArea();
+	    }
+
+	    _dragEnterHandler(e) {
+	        e.preventDefault();
+	        this._showDropArea();
+	    }
+
+	    _dragOverHandler(e) {
+	        e.preventDefault();
+	    }
+
+	    _dragLeaveHandler(e) {
+	        if (!this.$el.contains(e.fromElement)) {
+	            this._hideDropArea();
+	        }
+	    }
+
+	    _fileLoadedHandler(e) {
+	        const file = e.target.result;
+	        this.model.triggerOnChange(file);
+	    }
+
+	    _fileInputChangeHandler(e) {
+	        const file = this.$refs.fileInput.files[0];
+	        this._handleFile(file);
+	        this._setFileName(file.name);
+	        this.model.value = file.name;
+	    }
+	}
+
+	window.customElements.define('dddd-file', FileComponent);
+
 	var componentTypes = {
 	    slider: Slider,
 	    text: Text,
@@ -46489,6 +46611,7 @@
 	    color: Color,
 	    multiInput: MultiInput,
 	    canvas: Canvas,
+	    file: FileComponent,
 	};
 
 	class Components {
@@ -46762,9 +46885,9 @@
 	        // }
 	    }
 
-	    triggerOnChange() {
+	    triggerOnChange(data = undefined) {
 	        if (typeof this._options.onChange === 'function') {
-	            this._options.onChange(this._value);
+	            this._options.onChange(this._value, data);
 	        }
 	    }
 
@@ -46807,6 +46930,11 @@
 	        // Canvas
 	        if (this._options.type === 'canvas') {
 	            return 'canvas';
+	        }
+
+	        // File
+	        if (this._options.type === 'file') {
+	            return 'file';
 	        }
 
 	        // Dropdown
@@ -47437,6 +47565,25 @@
 	dddd.addLayer('Layer #1', 'Group');
 	dddd.addLayer('Layer #2');
 	dddd.addLayer('Layer #3', 'Group');
+
+	/**
+	 * File
+	 */
+	const file = dddd.addGroup('File', {
+	    container: 'Layer #1',
+	});
+
+	const fileValues = {
+	    file: 'model.glb',
+	};
+
+	file.add(fileValues, 'file', {
+	    type: 'file',
+	    onChange: (value, data) => {
+	        if (!data) return;
+	        console.log(data);
+	    },
+	});
 
 	/**
 	 * Checkbox

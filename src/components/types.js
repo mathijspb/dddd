@@ -1,13 +1,14 @@
-import Slider from './Slider/index';
-import Text from './Text/index';
-import Number from './Number/index';
-import Image from './Image/index';
-import Dropdown from './Dropdown/index';
-import Checkbox from './Checkbox/index';
-import Button from './Button/index';
-import Color from './Color/index';
-import MultiInput from './MultiInput/index';
-import Canvas from './Canvas/index';
+import Slider from './Slider';
+import Text from './Text';
+import Number from './Number';
+import Image from './Image';
+import Dropdown from './Dropdown';
+import Checkbox from './Checkbox';
+import Button from './Button';
+import Color from './Color';
+import MultiInput from './MultiInput';
+import Canvas from './Canvas';
+import File from './File';
 
 export default {
     slider: Slider,
@@ -20,4 +21,5 @@ export default {
     color: Color,
     multiInput: MultiInput,
     canvas: Canvas,
+    file: File,
 };

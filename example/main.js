@@ -1,4 +1,5 @@
 import { Color, Texture, Scene, PerspectiveCamera, WebGLRenderer, BoxGeometry, MeshBasicMaterial, Mesh } from 'three';
+import { GLTFLoader } from './GLTFLoader';
 import DDDD from '../src/DDDD';
 
 const scene = new Scene();
@@ -37,6 +38,25 @@ window.dddd = dddd;
 dddd.addLayer('Layer #1', 'Group');
 dddd.addLayer('Layer #2');
 dddd.addLayer('Layer #3', 'Group');
+
+/**
+ * File
+ */
+const file = dddd.addGroup('File', {
+    container: 'Layer #1',
+});
+
+const fileValues = {
+    file: 'model.glb',
+};
+
+file.add(fileValues, 'file', {
+    type: 'file',
+    onChange: (value, data) => {
+        if (!data) return;
+        console.log(data);
+    },
+});
 
 /**
  * Checkbox
