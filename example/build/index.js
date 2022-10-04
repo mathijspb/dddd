@@ -46492,7 +46492,7 @@
 	        super({ root, style, template, model });
 
 	        // Data
-	        this._contain = this.model.options.contain;
+	        this._responseType = this.model.options.responseType || 'dataURL';
 
 	        // Setup
 	        this._bindHandlers();
@@ -46542,7 +46542,16 @@
 	    _handleFile(file) {
 	        const reader = new FileReader();
 	        reader.onloadend = this._fileLoadedHandler;
-	        reader.readAsArrayBuffer(file);
+	        reader[this._getReadAsFunction(this._responseType)](file);
+	    }
+
+	    _getReadAsFunction(responseType) {
+	        switch (responseType) {
+	            case 'arrayBuffer': return 'readAsArrayBuffer';
+	            case 'binaryString': return 'readAsBinaryString';
+	            case 'dataURL': return 'readAsDataURL';
+	            case 'text': return 'readAsText';
+	        }
 	    }
 
 	    _setFileName(name) {
@@ -46915,6 +46924,16 @@
 
 	        const value = this._getValue();
 
+	        // File
+	        if (this._options.type === 'file') {
+	            return 'file';
+	        }
+
+	        // Canvas
+	        if (this._options.type === 'canvas') {
+	            return 'canvas';
+	        }
+
 	        // Three.js Texture
 	        if (value.isTexture) {
 	            return 'image';
@@ -46925,13 +46944,8 @@
 	            return 'image';
 	        }
 
-	        // Canvas
-	        if (this._options.type === 'canvas') {
-	            return 'canvas';
-	        }
-
 	        // File
-	        if (this._options.type === 'file') {
+	        if ((/\.[a-z]+$/i).test(value)) {
 	            return 'file';
 	        }
 
@@ -47576,10 +47590,9 @@
 	};
 
 	file.add(fileValues, 'file', {
-	    type: 'file',
+	    responseType: 'arrayBuffer',
 	    onChange: (value, data) => {
-	        if (!data) return;
-	        console.log(data);
+	        if (data) console.log(data);
 	    },
 	});
 

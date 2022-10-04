@@ -15,7 +15,7 @@ export default class FileComponent extends Component {
         super({ root, style, template, model });
 
         // Data
-        this._contain = this.model.options.contain;
+        this._responseType = this.model.options.responseType || 'dataURL';
 
         // Setup
         this._bindHandlers();
@@ -65,7 +65,16 @@ export default class FileComponent extends Component {
     _handleFile(file) {
         const reader = new FileReader();
         reader.onloadend = this._fileLoadedHandler;
-        reader.readAsArrayBuffer(file);
+        reader[this._getReadAsFunction(this._responseType)](file);
+    }
+
+    _getReadAsFunction(responseType) {
+        switch (responseType) {
+            case 'arrayBuffer': return 'readAsArrayBuffer';
+            case 'binaryString': return 'readAsBinaryString';
+            case 'dataURL': return 'readAsDataURL';
+            case 'text': return 'readAsText';
+        }
     }
 
     _setFileName(name) {

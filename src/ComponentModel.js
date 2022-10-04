@@ -140,6 +140,16 @@ export default class ComponentModel {
         const value = this._getValue();
         const type = null;
 
+        // File
+        if (this._options.type === 'file') {
+            return 'file';
+        }
+
+        // Canvas
+        if (this._options.type === 'canvas') {
+            return 'canvas';
+        }
+
         // Three.js Texture
         if (value.isTexture) {
             return 'image';
@@ -150,13 +160,8 @@ export default class ComponentModel {
             return 'image';
         }
 
-        // Canvas
-        if (this._options.type === 'canvas') {
-            return 'canvas';
-        }
-
         // File
-        if (this._options.type === 'file') {
+        if ((/\.[a-z]+$/i).test(value)) {
             return 'file';
         }
 

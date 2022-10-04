@@ -50,10 +50,9 @@ const fileValues = {
 };
 
 file.add(fileValues, 'file', {
-    type: 'file',
+    responseType: 'arrayBuffer',
     onChange: (value, data) => {
-        if (!data) return;
-        console.log(data);
+        if (data) console.log(data);
     },
 });
 
