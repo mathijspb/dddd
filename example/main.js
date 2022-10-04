@@ -1,5 +1,4 @@
 import { Color, Texture, Scene, PerspectiveCamera, WebGLRenderer, BoxGeometry, MeshBasicMaterial, Mesh } from 'three';
-import { GLTFLoader } from './GLTFLoader';
 import DDDD from '../src/DDDD';
 
 const scene = new Scene();
